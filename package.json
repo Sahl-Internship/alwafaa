@@ -5,11 +5,14 @@
     "watch": "webpack --progress --watch"
   },
   "devDependencies": {
+    "@angular/animations": "^11.1.0",
+    "@angular/cdk": "^11.1.0",
+    "@angular/material": "^11.1.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-latest": "^6.24.0",
     "css-loader": "^3.2.0",
-    "less": "^3.10.3",
+    "less": "^3.13.1",
     "less-loader": "^3.0.0",
     "less-plugin-clean-css": "^1.5.1",
     "mini-css-extract-plugin": "^0.4.5",
