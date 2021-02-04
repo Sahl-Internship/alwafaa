@@ -40,9 +40,12 @@ class User extends ActiveRecord implements IdentityInterface
     const ROLE_USER = 'user';
     const ROLE_MANAGER = 'manager';
     const ROLE_ADMINISTRATOR = 'administrator';
+    const ROLE_TEACHER = 'teacher';
 
     const EVENT_AFTER_SIGNUP = 'afterSignup';
     const EVENT_AFTER_LOGIN = 'afterLogin';
+
+    public $user_rule;
 
     /**
      * @inheritdoc
@@ -168,6 +171,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'email'], 'unique'],
+            [['email'], 'email'],
             ['status', 'default', 'value' => self::STATUS_NOT_ACTIVE],
             ['status', 'in', 'range' => array_keys(self::statuses())],
             [['username'], 'filter', 'filter' => '\yii\helpers\Html::encode']
@@ -255,6 +259,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function afterSignup(array $profileData = [])
     {
         $this->refresh();
+        Yii::$app->commandBus->handle(new AddToTimelineCommand([
+            'category' => 'user',
+            'event' => 'signup',
+            'data' => [
+                'public_identity' => $this->getPublicIdentity(),
+                'user_id' => $this->getId(),
+                'created_at' => $this->created_at
+            ]
+        ]));
         $profile = new UserProfile();
         $profile->locale = Yii::$app->language;
         $profile->load($profileData, '');
@@ -265,7 +278,7 @@ class User extends ActiveRecord implements IdentityInterface
         $auth->assign($auth->getRole(User::ROLE_USER), $this->getId());
     }
 
-    public function notifySignup($event)
+    public function TeacherSignup(array $profileData = [])
     {
         $this->refresh();
         Yii::$app->commandBus->handle(new AddToTimelineCommand([
@@ -277,6 +290,20 @@ class User extends ActiveRecord implements IdentityInterface
                 'created_at' => $this->created_at
             ]
         ]));
+        $profile = new UserProfile();
+        $profile->locale = Yii::$app->language;
+        $profile->load($profileData, '');
+        $this->link('userProfile', $profile);
+        $this->trigger(self::EVENT_AFTER_SIGNUP);
+        // Default role
+        $auth = Yii::$app->authManager;
+//        var_dump($type);
+//        var_dump($profile);
+//        die;
+
+        //add user based on the comming request role
+        // $auth->assign($auth->getRole(User::ROLE_USER), $this->getId());
+        $auth->assign($auth->getRole(User::ROLE_TEACHER), $this->getId());
     }
 
     public function notifyDeletion($event)
