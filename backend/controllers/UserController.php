@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\search\UserSearch;
 use backend\models\UserForm;
+use backend\modules\rbac\models\RbacAuthAssignment;
 use common\models\User;
 use common\models\UserToken;
 use Yii;
@@ -41,6 +42,7 @@ class UserController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'title' =>Yii::t('backend', 'All Users') ,
         ]);
     }
 
@@ -142,5 +144,27 @@ class UserController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+
+    public function actionStudent()
+    {
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,'student');
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'title' =>Yii::t('backend', 'Students') ,
+        ]);
+    }
+    public function actionTeacher()
+    {
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,'teacher');
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'title' =>Yii::t('backend', 'Teachers') ,
+        ]);
     }
 }

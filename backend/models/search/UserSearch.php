@@ -2,6 +2,7 @@
 
 namespace backend\models\search;
 
+use backend\modules\rbac\models\RbacAuthAssignment;
 use common\models\User;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -36,9 +37,31 @@ class UserSearch extends User
      * Creates data provider instance with search query applied
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$qry=null)
     {
-        $query = User::find();
+//        echo $qry;
+//        die();
+        if(!$qry){
+            $query = User::find();
+              }elseif($qry=="student"){
+            $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'user'])->all();
+            $user_ids = [];
+            foreach ($role_user as $index =>$value){
+                $id = $value['user_id'];
+                array_push($user_ids,$id);
+            }
+            $query = User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',',array_map('intval',$user_ids)) . ")");
+        }else{
+            $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'teacher'])->all();
+            $teacher_ids = [];
+            foreach ($role_user as $index =>$value){
+                $id = $value['user_id'];
+                array_push($teacher_ids,$id);
+            }
+            $query = User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',',array_map('intval',$teacher_ids)) . ")");
+
+        }
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
