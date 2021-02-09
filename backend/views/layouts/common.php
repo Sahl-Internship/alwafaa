@@ -211,10 +211,24 @@ $logEntries[] = [
                             'badgeBgClass' => 'badge-success',
                         ],
                         [
-                            'label' => Yii::t('backend', 'Users'),
+                            'label' => Yii::t('backend', ' All Users'),
                             'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
                             'url' => ['/user/index'],
-                            'active' => Yii::$app->controller->id === 'user',
+                            'active' => Yii::$app->controller->action->id === 'index',
+                            'visible' => Yii::$app->user->can('administrator'),
+                        ],
+                        [
+                            'label' => Yii::t('backend', 'Students'),
+                            'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
+                            'url' => ['/user/student'],
+                            'active' => Yii::$app->controller->action->id === 'student',
+                            'visible' => Yii::$app->user->can('administrator'),
+                        ],
+                      [
+                            'label' => Yii::t('backend', 'Teachers'),
+                            'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
+                            'url' => ['/user/teacher'],
+                            'active' => Yii::$app->controller->action->id === 'teacher',
                             'visible' => Yii::$app->user->can('administrator'),
                         ],
                         [
