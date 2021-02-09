@@ -1,0 +1,22 @@
+
+@media (max-width: 1023px) {
+  .google-btn {
+    font-size: $breackpointSM;
+  }
+}
+
+@media (max-width: 599px) {
+  .google-btn {
+    font-size: $breackpointXS;
+  }
+}
+
+@media (max-width: 400px) {
+  .google-btn {
+    font-size: $breackpointXXS;
+  }
+
+  .google-icon {
+    display: none;
+  }
+}

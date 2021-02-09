@@ -1,4 +1,3 @@
-/*
-export function someGetter (state) {
+
+export default {
 }
-*/
