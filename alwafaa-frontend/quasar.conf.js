@@ -21,7 +21,8 @@ module.exports = function (/* ctx */) {
     boot: [
 
       'i18n',
-      'axios'
+      'axios',
+      'hello'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -33,7 +34,7 @@ module.exports = function (/* ctx */) {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v5',
-      // 'fontawesome-v5',
+       'fontawesome-v5',
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -45,8 +46,8 @@ module.exports = function (/* ctx */) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
-
+      // vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history',
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
@@ -83,7 +84,8 @@ module.exports = function (/* ctx */) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
-      iconSet: 'material-icons', // Quasar icon set
+      //iconSet: 'material-icons', // Quasar icon set
+      iconSet: 'fontawesome-v5',
       lang: 'en-us', // Quasar language pack
       config: {},
 
