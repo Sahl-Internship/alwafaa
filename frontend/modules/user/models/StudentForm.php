@@ -24,7 +24,8 @@ class StudentForm extends Model
     public $locale;
     public $gender;
     public $country;
-    public $birthday;
+    public $city;
+    public $birthdate;
 
     public $profile;
 
@@ -44,11 +45,11 @@ class StudentForm extends Model
 
             ['password', 'string', 'min' => 6],
 
-            ['country', 'string'],
+            [['country','city'], 'string'],
 
             ['phone', 'match', 'pattern' => '/^(01)[0-9]{9}$/'],
 
-            ['birthday', 'date'],
+            ['birthdate', 'integer'],
 
         ];
 
@@ -65,9 +66,8 @@ class StudentForm extends Model
             'phone' => Yii::t('common', 'Mobile'),
             'country' => Yii::t('common', 'Country'),
             'gender' => Yii::t('common', 'Gender'),
-            'birthday' => Yii::t('common', 'Birthdate'),
-
-
+            'birthdate' => Yii::t('common', 'Birth Date'),
+            'city' => Yii::t('common', 'City'),
         ];
     }
 
@@ -94,7 +94,8 @@ class StudentForm extends Model
             $user->userProfile->locale = 'ar-AR';
             $user->userProfile->gender = $this->gender;
             $user->userProfile->country = $this->country;
-            $user->userProfile->birthday = $this->birthday;
+            $user->userProfile->city = $this->city;
+            $user->userProfile->birthdate = $this->birthdate;
             $user->userProfile->save(false);
             //link to parent account
 //            $this->LinkParentAccount($user->userProfile);
