@@ -1,6 +1,6 @@
 <template>
   <div id="q-app">
-    <h3>Header Call</h3>
+    <!-- <h3>Header Call</h3> -->
     <router-view />
   </div>
 </template>
