@@ -32,7 +32,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->redirect(['site/docs']);
+//        return $this->redirect(['site/docs']);
+        return "Hello";
     }
 
     public function actionError()

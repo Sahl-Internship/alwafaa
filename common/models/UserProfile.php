@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use kartik\widgets\DatePicker;
 use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
 use yii\db\ActiveRecord;
@@ -10,15 +11,19 @@ use yii\db\ActiveRecord;
  * This is the model class for table "user_profile".
  *
  * @property integer $user_id
- * @property integer $locale
  * @property string $firstname
  * @property string $middlename
  * @property string $lastname
+ * @property string $phone
  * @property string $picture
  * @property string $avatar
  * @property string $avatar_path
  * @property string $avatar_base_url
+ * @property integer $locale
  * @property integer $gender
+ * @property string $country
+ * @property string $city
+ * @property DatePicker $birthdate
  *
  * @property User $user
  */
@@ -64,10 +69,12 @@ class UserProfile extends ActiveRecord
             [['user_id'], 'required'],
             [['user_id', 'gender'], 'integer'],
             [['gender'], 'in', 'range' => [NULL, self::GENDER_FEMALE, self::GENDER_MALE]],
-            [['firstname', 'middlename', 'lastname', 'avatar_path', 'avatar_base_url'], 'string', 'max' => 255],
+            [['firstname', 'middlename', 'lastname', 'avatar_path', 'avatar_base_url','country','city'], 'string', 'max' => 255],
             ['locale', 'default', 'value' => Yii::$app->language],
             ['locale', 'in', 'range' => array_keys(Yii::$app->params['availableLocales'])],
-            ['picture', 'safe']
+            ['picture', 'safe'],
+            ['phone', 'number'],
+            ['birthdate', 'date'],
         ];
     }
 
@@ -81,9 +88,13 @@ class UserProfile extends ActiveRecord
             'firstname' => Yii::t('common', 'Firstname'),
             'middlename' => Yii::t('common', 'Middlename'),
             'lastname' => Yii::t('common', 'Lastname'),
+            'phone' => Yii::t('common', 'Phone Number'),
             'locale' => Yii::t('common', 'Locale'),
             'picture' => Yii::t('common', 'Picture'),
             'gender' => Yii::t('common', 'Gender'),
+            'country' => Yii::t('common', 'Country'),
+            'city' => Yii::t('common', 'City'),
+            'birthdate' => Yii::t('common', 'Birth Date'),
         ];
     }
 

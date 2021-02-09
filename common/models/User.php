@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\modules\rbac\models\RbacAuthAssignment;
 use common\commands\AddToTimelineCommand;
 use common\models\query\UserQuery;
 use Yii;
@@ -33,6 +34,7 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public $profile;
     const STATUS_NOT_ACTIVE = 1;
     const STATUS_ACTIVE = 2;
     const STATUS_DELETED = 3;
@@ -60,8 +62,8 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function init()
     {
-        $this->on(self::EVENT_AFTER_INSERT, [$this, 'notifySignup']);
-        $this->on(self::EVENT_AFTER_DELETE, [$this, 'notifyDeletion']);
+//        $this->on(self::EVENT_AFTER_INSERT, [$this, 'notifySignup']);
+//        $this->on(self::EVENT_AFTER_DELETE, [$this, 'notifyDeletion']);
         parent::init();
     }
 
@@ -174,7 +176,8 @@ class User extends ActiveRecord implements IdentityInterface
             [['email'], 'email'],
             ['status', 'default', 'value' => self::STATUS_NOT_ACTIVE],
             ['status', 'in', 'range' => array_keys(self::statuses())],
-            [['username'], 'filter', 'filter' => '\yii\helpers\Html::encode']
+            [['username'], 'filter', 'filter' => '\yii\helpers\Html::encode'],
+            [['password_hash'],'string']
         ];
     }
 
@@ -340,4 +343,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->getPrimaryKey();
     }
+
+    public function userRole()
+    {
+        return $this->hasOne(RbacAuthAssignment::class, ['user_id' => 'id']);
+    }
+
 }
