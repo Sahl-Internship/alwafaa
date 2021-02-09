@@ -5,10 +5,7 @@ const authRoutes = [
   },
   {
     path: '/login',
-    component: () => import('src/modules/authentication/pages/Login.vue'),
-    childern: [
-      { path: '/profile', component: () => import('src/modules/authentication/pages/profile.vue') }
-    ]
+    component: () => import('src/modules/authentication/pages/Login.vue')
   }
 ]
 export default authRoutes
