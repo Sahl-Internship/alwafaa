@@ -8,7 +8,7 @@
             v-model="firstname"
             class="form-input"
             outlined dense
-            label="Firstname"
+            :label="$t('firstname')"
             color="secondary"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -20,7 +20,7 @@
             v-model="lastname"
             class="form-input"
             outlined dense
-            label="lastname"
+            :label="$t('lastname')"
             color="secondary"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -32,7 +32,7 @@
             v-model="username"
             class="form-input"
             outlined dense
-            label="username"
+            :label="$t('username')"
             color="secondary"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -45,7 +45,7 @@
             class="form-input"
             outlined dense
             type="email"
-            label="Email"
+            :label="$t('email')"
             color="secondary"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -58,7 +58,7 @@
             class="form-input"
             outlined dense
             type="tel"
-            label="Phone Number"
+            :label="$t('phoneNumber')"
             color="secondary"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -71,7 +71,7 @@
             outlined dense
             :type="isPwd ? 'password' : 'text'"
             class="form-input"
-            label="Password"
+            :label="$t('password')"
             color="secondary"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -92,7 +92,7 @@
             outlined dense
             :type="isCPwd ? 'password' : 'text'"
             class="form-input"
-            label="Confirm Password"
+            :label="$t('confirmPass')"
             color="secondary"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -112,7 +112,7 @@
             v-model="country"
             class="form-input"
             outlined dense
-            label="Country"
+            :label="$t('country')"
             color="secondary"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -124,7 +124,7 @@
             v-model="city"
             class="form-input"
             outlined dense
-            label="City"
+            :label="$t('city')"
             color="secondary"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -138,7 +138,7 @@
             class="form-input"
             type="date"
             color="secondary"
-            hint="BirthDate"
+            :hint="$t('birthdate')"
             :error="invalid && validated"
             :error-message="errors[0]"
           />
@@ -153,14 +153,14 @@
             :error="invalid && validated"
             :error-message="errors[0]"
           >
-            <q-radio keep-color v-model="gender" val="male" label="Male" color="secondary" />
-            <q-radio keep-color v-model="gender" val="female" label="Female" color="secondary" />
+            <q-radio keep-color v-model="gender" val="male" :label="$t('male')" color="secondary" />
+            <q-radio keep-color v-model="gender" val="female" :label="$t('female')" color="secondary" />
           </q-field>
         </ValidationProvider>
 
-        <q-btn label="Submit" type="submit" class="form-btn"></q-btn>
+        <q-btn :label="$t('submit')" type="submit" class="form-btn"></q-btn>
 
-        <p class="separator">OR USE SOCIAL</p>
+        <p class="separator">{{ $t('useSocial') }}</p>
         <google-btn></google-btn>
         <facebook-btn></facebook-btn>
       </q-form>

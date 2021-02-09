@@ -2,7 +2,7 @@
   <q-btn type="button" class="google-btn" @click="auth ('google')">
     <!-- <q-icon name="fab fa-google" size="md" class="google-icon" /> -->
     <i class="fab fa-google google-icon"></i>
-    Signup With Google
+    {{ $t('googleSignup') }}
   </q-btn>
 </template>
 
