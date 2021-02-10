@@ -1,31 +1,48 @@
 <template>
   <div class="q-pa-md">
-    <div class="row justify-around">
-
-      <div class="col">
+    <!-- <div class="row justify-around"> -->
+    <div class="row justify-between">
+      <div class="col right-section">
+        <!-- <div class="row justify-center"> -->
         <div class="row justify-center">
-          <slot></slot>
+          <q-img
+            alt="elearning-icon"
+            src="~assets/elearning-icon-4.svg"
+            class="fixed-bottom auth-page-img"
+            :class="checkDirection? 'flip-right' : ''"
+          />
         </div>
       </div>
-
-      <div class="col right-section">
-        <div class="row justify-center">
-          <img
-            alt="elearning-icon"
-            src="~assets/elearning-icon-3.jpeg"
-            class="fixed auth-page-img"
-          />
+      <div class="col">
+        <div class="row flex justify-start">
+          <slot></slot>
         </div>
       </div>
     </div>
   </div>
 </template>
 
+<script>
+export default {
+  computed: {
+    checkDirection () {
+      console.log(this.$q.lang)
+      return this.$q.lang.rtl
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   .auth-page-img {
-    width: 35%;
-    height: 70%;
-    margin-top: 60px;
+    width: 80%;
+  }
+
+  .flip-right {
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    float: none;
   }
 
   @media (max-width: 700px) {

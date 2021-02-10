@@ -25,17 +25,20 @@
 export default {
   name: 'TheHeader',
   methods: {
-    changeToEnglish () {
+    async changeToEnglish () {
       this.$i18n.locale = 'en-us'
       this.$i18n.fallbackLocale = 'ar'
       // set quasar's language too!!
-      // import(`quasar/lang/en-us`).then( language =>
-      //   {this.$q.lang.set(language.default)
-      // })
+      await import('quasar/lang/en-us').then(lang => {
+        this.$q.lang.set(lang.default)
+      })
     },
-    changeToArabic () {
+    async changeToArabic () {
       this.$i18n.locale = 'ar'
       this.$i18n.fallbackLocale = 'en-us'
+      await import('quasar/lang/ar').then(lang => {
+        this.$q.lang.set(lang.default)
+      })
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <auth-container>
-    <ValidationObserver v-slot="{ handleSubmit }">
+    <ValidationObserver v-slot="{ handleSubmit }" class="flex justify-center container">
       <q-form class="q-gutter-md flex justify-center signup" @submit.prevent="handleSubmit(submitForm)">
         <h3 class="title">{{ $t('signupTitle') }}</h3>
         <ValidationProvider class="input-validation" rules="required" v-slot="{ errors, invalid, validated }">
@@ -153,8 +153,8 @@
             :error="invalid && validated"
             :error-message="errors[0]"
           >
-            <q-radio keep-color v-model="gender" val="male" :label="$t('male')" color="secondary" />
-            <q-radio keep-color v-model="gender" val="female" :label="$t('female')" color="secondary" />
+            <q-radio keep-color v-model="gender" val="1" :label="$t('male')" color="secondary" />
+            <q-radio keep-color v-model="gender" val="2" :label="$t('female')" color="secondary" />
           </q-field>
         </ValidationProvider>
 
@@ -202,7 +202,7 @@ export default {
         email: this.email,
         phoneNumber: this.phoneNumber,
         password: this.password,
-        birthdate: this.birthdate,
+        birthdate: Math.round(new Date(this.birthdate).getTime() / 1000),
         gender: this.gender,
         country: this.country,
         city: this.city
@@ -214,11 +214,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  // .container {
+  //   margin-right: 20px;
+  //   margin-left: 20px;
+  // }
   .signup {
     width: 70%;
     border: solid 4px $primary;
     border-radius: 7px;
-    margin: 50px 0 0 50px;
+    margin: 20px 0 0 0;
     padding: 0 15px 30px 0;
     background-color: #fff;
 
