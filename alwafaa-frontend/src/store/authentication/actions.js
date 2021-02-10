@@ -3,7 +3,12 @@ import { handleSignup } from 'src/services/authApi'
 export default {
   async signup (context, user) {
     console.log(user)
-    const response = await handleSignup(user)
-    console.log(response)
+    try {
+      const response = await handleSignup(user)
+      console.log(response)
+    } catch (error) {
+      console.log('error')
+      console.log(error)
+    }
   }
 }

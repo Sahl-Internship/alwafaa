@@ -92,6 +92,8 @@ export default {
     margin-top: 30px;
     border-radius: 10px;
     border: 3px solid $primary;
+    background-color: #fff;
+    z-index: 100;
     h2 {
       margin: 0px 10%;
       padding-top: 10px;

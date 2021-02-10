@@ -1,7 +1,7 @@
 <template>
   <q-btn type="button" class="facebook-btn" @click="auth ('facebook')">
     <i class="fab fa-facebook-f facebook-icon"></i>
-    Signup With Facebook
+    {{ $t('facebookSignup') }}
   </q-btn>
 </template>
 

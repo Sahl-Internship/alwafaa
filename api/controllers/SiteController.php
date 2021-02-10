@@ -8,7 +8,6 @@ use Yii;
 use yii\rest\Controller;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
-
 class SiteController extends Controller
 {
         /**
@@ -31,7 +30,6 @@ class SiteController extends Controller
             ],
         ];
     }
-
     public function actionIndex()
     {
 //        return $this->redirect(['site/docs']);
