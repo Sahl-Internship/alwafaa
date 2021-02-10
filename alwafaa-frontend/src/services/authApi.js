@@ -1,9 +1,9 @@
 import { axios } from 'src/boot/axios'
 
-export const handleSignup = (userData) => {
+export const handleSignup = (data) => {
   return axios({
-    url: '',
+    url: 'http://endpoints.alwafaa.localhost/signup',
     method: 'POST',
-    userData
+    data
   })
 }

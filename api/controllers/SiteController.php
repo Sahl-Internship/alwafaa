@@ -2,8 +2,10 @@
 
 namespace api\controllers;
 
+use api\resources\User;
+//use common\models\User;
 use Yii;
-use yii\web\Controller;
+use yii\rest\Controller;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
 
@@ -33,8 +35,41 @@ class SiteController extends Controller
     public function actionIndex()
     {
 //        return $this->redirect(['site/docs']);
-        return "Hello";
+        return $this->redirect(\Yii::getAlias('@frontendUrl'));
     }
+
+    public function actionTest(){
+
+        return 'Test API...';
+        //return $this->redirect(\Yii::getAlias('@frontendUrl'));
+    }
+    public function actionLogin(){
+
+        $params = \Yii::$app->request->post();
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $user = User::find()
+            ->active()
+            ->andWhere(['or', ['username' => $params['identity'] ], ['email' => $params['identity']]])
+            ->one();
+
+        if(! $user){
+//            return $params['identity'];
+            return ['status'=>0 , 'message'=>'Invalid email'];
+        }
+
+        $valid_password = Yii::$app->getSecurity()->validatePassword($params['password'], $user->password_hash);
+
+        if($valid_password){
+            return ['status'=>1,  'profile'=> $user ];
+
+
+        }else{
+            return ['status'=>0 , 'message'=>'Invalid password'];
+
+        }
+
+    }
+
 
     public function actionError()
     {

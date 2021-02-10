@@ -4,9 +4,7 @@
 namespace api\controllers;
 
 
-use common\models\User;
 use frontend\modules\user\models\StudentForm;
-use Yii;
 use yii\rest\Controller;
 
 class SignupController extends Controller
@@ -33,13 +31,16 @@ class SignupController extends Controller
     public function actionCreate()
     {
         $params = \Yii::$app->request->post();
+//        return $params;
         $user = new StudentForm();
         $user->profile = [];
         $user->load(['StudentForm' => $params]);
         if ($user->validate() and $registerUser = $user->signup()) {
             return "success";
         }else{
-            return "failed";
+            return $user->errors;
+
+//        }
         }
 
     }

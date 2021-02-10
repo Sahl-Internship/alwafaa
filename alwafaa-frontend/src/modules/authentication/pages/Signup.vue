@@ -153,8 +153,8 @@
             :error="invalid && validated"
             :error-message="errors[0]"
           >
-            <q-radio keep-color v-model="gender" val="male" label="Male" color="secondary" />
-            <q-radio keep-color v-model="gender" val="female" label="Female" color="secondary" />
+            <q-radio keep-color v-model="gender" val="1" label="Male" color="secondary" />
+            <q-radio keep-color v-model="gender" val="2" label="Female" color="secondary" />
           </q-field>
         </ValidationProvider>
 
@@ -202,7 +202,7 @@ export default {
         email: this.email,
         phoneNumber: this.phoneNumber,
         password: this.password,
-        birthdate: this.birthdate,
+        birthdate: Math.round(new Date(this.birthdate).getTime() / 1000),
         gender: this.gender,
         country: this.country,
         city: this.city
