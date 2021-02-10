@@ -51,7 +51,6 @@ class SiteController extends Controller
             ->one();
 
         if(! $user){
-//            return $params['identity'];
             return ['status'=>0 , 'message'=>'Invalid email'];
         }
 
