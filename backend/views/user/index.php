@@ -11,8 +11,9 @@ use rmrevin\yii\fontawesome\FAS;
  * @var yii\web\View $this
  * @var backend\models\search\UserSearch $searchModel
  * @var yii\data\ActiveDataProvider $dataProvider
+ * @var $title
  */
-$this->title = Yii::t('backend', 'Users');
+$this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
