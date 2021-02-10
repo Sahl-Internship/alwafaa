@@ -9,10 +9,11 @@ export const handleLogin = (userData) => {
     userData
   })
 }
-export const handleSignup = (userData) => {
+// export const handleSignup = (userData) => {
+export const handleSignup = (data) => {
   return axios({
     url: 'http://endpoints.alwafaa.localhost/signup',
     method: 'POST',
-    userData
+    data
   })
 }

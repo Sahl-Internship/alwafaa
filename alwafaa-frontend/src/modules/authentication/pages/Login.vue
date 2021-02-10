@@ -9,7 +9,7 @@
         <q-input
           v-model="email"
           outlined
-          type="email"
+          type="text"
           :rules="[(val) => !!val || 'Field is required']"
           color="secondary"
           :label="$t('email_username')"
