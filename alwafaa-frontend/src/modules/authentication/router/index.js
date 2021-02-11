@@ -6,6 +6,10 @@ const authRoutes = [
   {
     path: '/login',
     component: () => import('src/modules/authentication/pages/Login.vue')
+  },
+  {
+    path: '/forgotPass',
+    component: () => import('src/modules/authentication/pages/ForgotPassword.vue')
   }
 ]
 export default authRoutes
