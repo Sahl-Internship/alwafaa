@@ -51,7 +51,7 @@
       <router-link to="/forgotPass">{{ $t("forgotPassword") }}</router-link>
       <hr />
       <h6>{{ $t("useSocial") }}</h6>
-      <google-btn class="social-button">{{ $t("forgotPassword") }}</google-btn>
+      <google-btn class="social-button"></google-btn>
       <facebook-btn class="social-button face"></facebook-btn>
     </form>
   </auth-container>
