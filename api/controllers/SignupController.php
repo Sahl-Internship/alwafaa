@@ -5,22 +5,12 @@ namespace api\controllers;
 
 
 use frontend\modules\user\models\StudentForm;
-use yii\rest\Controller;
+use yii\rest\ActiveController;
+//use yii\rest\Controller;
 
-class SignupController extends Controller
+class SignupController extends ApiController
 {
-    public function behaviors(){
-        $behaviors = parent::behaviors();
-        $behaviors['corsFilter'] = [
-            'class' => \yii\filters\Cors::className(),
-            'cors' => [
-                'Origin' => ['*'],
-                'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
-                'Access-Control-Request-Headers' => ['*'],
-            ],
-        ];
-        return $behaviors;
-    }
+
     public function actions()
     {
         $actions = parent::actions();
@@ -31,6 +21,10 @@ class SignupController extends Controller
     public function actionCreate()
     {
         $params = \Yii::$app->request->post();
+
+//        return $params;
+
+				// return $params;
         $user = new StudentForm();
         $user->profile = [];
         $user->load(['StudentForm' => $params]);
@@ -41,6 +35,7 @@ class SignupController extends Controller
             return $user->errors;
 
 //        }
+
 //            return "failedgggg";
         }
 
