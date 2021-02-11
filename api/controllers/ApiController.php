@@ -26,6 +26,7 @@ class ApiController extends Controller
         return [
             //  '*', // star allows all domains
             'http://localhost:4000',
+            'http://localhost:4001',
             'https://jquery.com',
 //            'http://booking.yaschools.localhost',
 //            "http://booking.yaschools.localhost",

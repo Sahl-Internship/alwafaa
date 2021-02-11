@@ -50,7 +50,7 @@ class SiteController extends ApiController
             ->andWhere(['or', ['username' => $params['identity'] ], ['email' => $params['identity']]])
             ->one();
 
-        if(! $user){
+        if(!$user){
             return ['status'=>0 , 'message'=>'Invalid email'];
         }
 
