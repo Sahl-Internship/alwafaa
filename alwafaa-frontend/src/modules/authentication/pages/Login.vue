@@ -36,8 +36,8 @@
             <h6>Login with Google</h6>
           </button>
         </div> -->
-        <google-btn class="social-button"></google-btn>
-        <facebook-btn class="social-button face"></facebook-btn>
+        <google-btn class="social-button" status="login"></google-btn>
+        <facebook-btn class="social-button face" status="login"></facebook-btn>
         <!-- </div> -->
     </form>
 

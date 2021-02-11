@@ -14,6 +14,8 @@ export default {
   female: 'انثي',
   submit: 'ارسال',
   useSocial: 'أو استخدم',
-  googleSignup: 'التسجيل بواسطة جوجل',
-  facebookSignup: 'التسجيل بواسطة فيسبوك'
+  googleSignup: 'بواسطة جوجل',
+  facebookSignup: 'بواسطة فيسبوك',
+  signup: 'التسجيل',
+  login: 'الدخول'
 }

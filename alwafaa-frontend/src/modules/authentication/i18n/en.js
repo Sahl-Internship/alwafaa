@@ -14,6 +14,8 @@ export default {
   female: 'Female',
   submit: 'Submit',
   useSocial: 'OR USE SOCIAL',
-  googleSignup: 'Signup With Google',
-  facebookSignup: 'Signup With Facebook'
+  googleSignup: 'With Google',
+  facebookSignup: 'With Facebook',
+  signup: 'Signup',
+  login: 'Login'
 }

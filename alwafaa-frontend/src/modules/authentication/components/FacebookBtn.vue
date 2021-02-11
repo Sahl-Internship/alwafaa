@@ -1,7 +1,7 @@
 <template>
   <q-btn type="button" class="facebook-btn" @click="auth ('facebook')">
     <i class="fab fa-facebook-f facebook-icon"></i>
-    {{ $t('facebookSignup') }}
+    {{ $t(status) }} {{$t('facebookSignup') }}
   </q-btn>
 </template>
 
@@ -9,6 +9,7 @@
 
 export default {
   name: 'FacebookBtn',
+  props: ['status'],
   methods: {
     auth (network) {
       this.$hello(network).login({ scope: 'email' })

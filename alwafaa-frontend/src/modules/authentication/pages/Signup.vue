@@ -161,8 +161,8 @@
         <q-btn :label="$t('submit')" type="submit" class="form-btn"></q-btn>
 
         <p class="separator">{{ $t('useSocial') }}</p>
-        <google-btn></google-btn>
-        <facebook-btn></facebook-btn>
+        <google-btn status="signup"></google-btn>
+        <facebook-btn status="signup"></facebook-btn>
       </q-form>
     </ValidationObserver>
   </auth-container>
@@ -200,7 +200,7 @@ export default {
         lastname: this.lastname,
         username: this.username,
         email: this.email,
-        phoneNumber: this.phoneNumber,
+        phone: this.phoneNumber,
         password: this.password,
         birthdate: Math.round(new Date(this.birthdate).getTime() / 1000),
         gender: this.gender,
