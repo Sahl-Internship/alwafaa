@@ -15,10 +15,18 @@ $config = [
         'authClientCollection' => [
             'class' => yii\authclient\Collection::class,
             'clients' => [
-                'github' => [
-                    'class' => yii\authclient\clients\GitHub::class,
-                    'clientId' => env('GITHUB_CLIENT_ID'),
-                    'clientSecret' => env('GITHUB_CLIENT_SECRET')
+//                'github' => [
+//                    'class' => yii\authclient\clients\GitHub::class,
+//                    'clientId' => env('GITHUB_CLIENT_ID'),
+//                    'clientSecret' => env('GITHUB_CLIENT_SECRET')
+//                ],
+                'google' => [
+                    'class' => 'yii\authclient\clients\Google',
+                    'clientId' => env('GOOGLE_ACCOUNT_ID'), //'869245447404-cbbprcvnudt17b7k5fmt5j0ca3fkrqra.apps.googleusercontent.com',
+                    'clientSecret' => env('GOOGLE_CLIENT_SECRET'), //'9eaZAOF-yKnx9ytWX6IvBnTX',
+                    'returnUrl' => (isset($_SERVER['HTTPS']) ? "https://" : "http://" ).$_SERVER['SERVER_NAME'].'/user/sign-in/oauth?authclient=google',
+
+
                 ],
                 'facebook' => [
                     'class' => yii\authclient\clients\Facebook::class,
