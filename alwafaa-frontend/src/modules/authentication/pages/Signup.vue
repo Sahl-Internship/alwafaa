@@ -227,7 +227,7 @@ export default {
     background-color: #fff;
 
     .title {
-      color: $secondary;
+      color: $primary;
       margin: 20px 0;
     }
 
