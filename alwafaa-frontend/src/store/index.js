@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 // import example from './module-example'
 import AuthModule from './authentication'
+import studentModule from './student'
 
 Vue.use(Vuex)
 
@@ -15,10 +16,11 @@ Vue.use(Vuex)
  * with the Store instance.
  */
 
-export default function (/* { ssrContext } */) {
+export default function(/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      auth: AuthModule
+      auth: AuthModule,
+      student: studentModule
     },
 
     // enable strict mode (adds overhead!)

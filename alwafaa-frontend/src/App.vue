@@ -6,12 +6,12 @@
 </template>
 <script>
 export default {
-  name: 'App'
-}
+  name: "App",
+};
 </script>
 
 <style lang="scss" scoped>
-  div {
-    background-image: linear-gradient(to right, #fff, #f2f2f2);
-  }
+div {
+  background-image: linear-gradient(to right, #fff, #f2f2f2);
+}
 </style>

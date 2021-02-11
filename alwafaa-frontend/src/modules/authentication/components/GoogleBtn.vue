@@ -2,7 +2,7 @@
   <q-btn type="button" class="google-btn" @click="auth ('google')">
     <!-- <q-icon name="fab fa-google" size="md" class="google-icon" /> -->
     <i class="fab fa-google google-icon"></i>
-    {{ $t('googleSignup') }}
+    {{ $t(status) }} {{ $t('googleSignup') }}
   </q-btn>
 </template>
 
@@ -10,6 +10,7 @@
 
 export default {
   name: 'GoogleBtn',
+  props: ['status'],
   methods: {
     auth (network) {
       this.$hello(network).login({ scope: 'email' })

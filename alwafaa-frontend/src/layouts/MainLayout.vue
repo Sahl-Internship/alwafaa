@@ -10,10 +10,7 @@
       v-if="false"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
+        <q-item-label header class="text-grey-8">
           Essential Links
         </q-item-label>
       </q-list>
@@ -26,25 +23,25 @@
 </template>
 
 <script>
-import TheHeader from 'src/UI/TheHeader.vue'
+import TheHeader from "src/UI/TheHeader.vue";
 
 export default {
-  name: 'MainLayout',
+  name: "MainLayout",
   components: {
-    TheHeader
+    TheHeader,
   },
-  data () {
+  data() {
     return {
-      leftDrawerOpen: false
-    }
-  }
-}
+      leftDrawerOpen: false,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .main-layout {
-    height: 100% !important;
-    padding: 0;
-    margin: 0;
-  }
+.main-layout {
+  height: 100% !important;
+  padding: 0;
+  margin: 0;
+}
 </style>

@@ -1,9 +1,16 @@
 export default {
+  brand: 'Alwafaa',
   signupTitle: 'SIGNUP',
+  loginTitle: 'LOGIN',
+  forgotPassword: 'Forgot Password ?',
+  rememberMe: 'Remember Me',
+  verifyEmail: 'VERIFY EMAIL',
+  sendVerification: 'SEND VERIFICATION',
   username: 'Username',
   firstname: 'Firstname',
   lastname: 'Lastname',
   email: 'email',
+  email_username: 'Email or Username',
   phoneNumber: 'Phone Number',
   password: 'Password',
   confirmPass: 'Confirm Password',
@@ -14,6 +21,8 @@ export default {
   female: 'Female',
   submit: 'Submit',
   useSocial: 'OR USE SOCIAL',
-  googleSignup: 'Signup With Google',
-  facebookSignup: 'Signup With Facebook'
+  googleSignup: 'With Google',
+  facebookSignup: 'With Facebook',
+  signup: 'Signup',
+  login: 'Login'
 }
