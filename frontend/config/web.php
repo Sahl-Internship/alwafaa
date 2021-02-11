@@ -22,8 +22,8 @@ $config = [
 //                ],
                 'google' => [
                     'class' => 'yii\authclient\clients\Google',
-                    'clientId' => env('GOOGLE_ACCOUNT_ID'), //'869245447404-cbbprcvnudt17b7k5fmt5j0ca3fkrqra.apps.googleusercontent.com',
-                    'clientSecret' => env('GOOGLE_CLIENT_SECRET'), //'9eaZAOF-yKnx9ytWX6IvBnTX',
+                    'clientId' => '99108308871-4hkdlkgh9hcsdo3rnl8e144klbp3n5tu.apps.googleusercontent.com', //env('GOOGLE_ACCOUNT_ID'),
+                    'clientSecret' =>  'RzVgPDGZSDqWq6ofD3-tJZNN',//env('GOOGLE_CLIENT_SECRET'),
                     'returnUrl' => (isset($_SERVER['HTTPS']) ? "https://" : "http://" ).$_SERVER['SERVER_NAME'].'/user/sign-in/oauth?authclient=google',
 
 
