@@ -153,13 +153,8 @@
             :error="invalid && validated"
             :error-message="errors[0]"
           >
-<<<<<<< HEAD
             <q-radio keep-color v-model="gender" val="1" label="Male" color="secondary" />
             <q-radio keep-color v-model="gender" val="2" label="Female" color="secondary" />
-=======
-            <q-radio keep-color v-model="gender" val="1" :label="$t('male')" color="secondary" />
-            <q-radio keep-color v-model="gender" val="2" :label="$t('female')" color="secondary" />
->>>>>>> cce2b880d93f76308e41bd8eaa944208e86f9d0d
           </q-field>
         </ValidationProvider>
 
