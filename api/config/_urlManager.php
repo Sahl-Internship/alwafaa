@@ -11,5 +11,21 @@ return [
         ['class' => 'yii\rest\UrlRule', 'controller' => 'user', 'pluralize' => false],
         ['class' => 'yii\rest\UrlRule', 'controller' => 'signup', 'pluralize' => false],
         ['class' => 'yii\rest\UrlRule', 'controller' => 'site', 'pluralize' => false],
+        ['class' =>'yii\rest\UrlRule','controller'=>'site'
+            ,'only'=>['login']
+            ,'extraPatterns'=>[
+            'Post login' => 'login' ,
+
+        ]
+            , 'pluralize'=>false
+        ],
+        ['class' =>'yii\rest\UrlRule','controller'=>'signup'
+            ,'only'=>['create']
+            ,'extraPatterns'=>[
+            'Post create' => 'create' ,
+
+        ]
+            , 'pluralize'=>false
+        ],
     ],
 ];
