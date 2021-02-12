@@ -16,10 +16,16 @@ export default {
   },
   async login(context, user) {
     console.log(user);
-    const response = await handleLogin(user);
-    console.log(response);
-    const token = response.data.access_token;
-    localStorage.setItem('access_token', token)
-    context.commit('loginState', token)
+    try {
+      const response = await handleLogin(user);
+      console.log(response);
+      const token = response.data.access_token;
+      localStorage.setItem('access_token', token)
+      context.commit('loginState', token)
+    } catch (error) {
+      console.log('error')
+      console.log(error)
+    }
+
   },
 };

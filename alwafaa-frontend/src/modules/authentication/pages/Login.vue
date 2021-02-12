@@ -2,7 +2,7 @@
   <auth-container>
     <form
       class="form-container login-show col-12 col-md"
-      @submit.prevent="login"
+      @submit.prevent="login()"
     >
       <h2>{{ $t("loginTitle") }}</h2>
       <validation-provider v-slot="v">
@@ -47,7 +47,9 @@
       <p v-if="!formIsValid">
         *Enter valid email and password more than 6 characters
       </p>
-      <button type="submit" class="login">{{ $t("loginTitle") }}</button>
+      <button type="submit" class="login">
+        {{ $t("loginTitle") }}
+      </button>
       <router-link to="/forgotPass">{{ $t("forgotPassword") }}</router-link>
       <hr />
       <h6>{{ $t("useSocial") }}</h6>
@@ -89,12 +91,15 @@ export default {
       this.formIsValid = true;
       if (this.email === "" || this.password.length < 6) {
         this.formIsValid = false;
+        return;
       }
       const user = {
         email: this.email,
         password: this.password,
       };
-      this.$store.dispatch("auth/login", user);
+      this.$store.dispatch("auth/login", user).then(() => {
+        this.$router.replace("/");
+      });
     },
   },
 };

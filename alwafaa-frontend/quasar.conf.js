@@ -79,7 +79,7 @@ module.exports = function ( /* ctx */ ) {
     devServer: {
       https: false,
       port: 4000,
-      open: true // opens browser window automatically
+      open: true, // opens browser window automatically
     },
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
