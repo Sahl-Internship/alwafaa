@@ -36,10 +36,7 @@ class SignupController extends ApiController
             return ['status'=>0,  'message'=> $user->errors ];
 
 //        }
-
-//            return "failedgggg";
         }
-
     }
 
 
