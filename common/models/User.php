@@ -309,6 +309,7 @@ class User extends ActiveRecord implements IdentityInterface
         $auth->assign($auth->getRole(User::ROLE_TEACHER), $this->getId());
     }
 
+
     public function notifyDeletion($event)
     {
         Yii::$app->commandBus->handle(new AddToTimelineCommand([

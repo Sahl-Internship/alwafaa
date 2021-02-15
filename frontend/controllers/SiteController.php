@@ -3,12 +3,14 @@
 namespace frontend\controllers;
 
 use cheatsheet\Time;
+use common\commands\SendEmailCommand;
 use common\sitemap\UrlsIterator;
 use frontend\models\ContactForm;
 use Sitemaped\Element\Urlset\Urlset;
 use Sitemaped\Sitemap;
 use Yii;
 use yii\filters\PageCache;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\Response;
@@ -119,5 +121,23 @@ class SiteController extends Controller
         }
 
         return $content;
+    }
+
+    public function actionSend()
+    {
+//        Yii::$app->commandBus->handle(new SendEmailCommand([
+//            'subject' => Yii::t('frontend', 'Activation email'),
+//            'view' => 'activation',
+//            'to' => '3baa2y@gmail.com',
+//            'params' => [
+//                'url' => Url::to(['/user/sign-in/activation', 'token' => "hdhgfhf"], true)
+//            ]
+//        ]));
+        return \Yii::$app->mailer->compose('activation', ['token' => "hdhgfhf"])
+            ->setFrom('tvvunion@gmail.com')
+            ->setTo('3baa2y@gmail.com')
+            ->setReplyTo('tvvunion@gmail.com')
+            ->setSubject("Hello")
+            ->send();
     }
 }
