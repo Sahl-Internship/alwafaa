@@ -26,7 +26,6 @@
 export default {
   computed: {
     checkDirection() {
-      console.log(this.$q.lang);
       return this.$q.lang.rtl;
     },
   },
