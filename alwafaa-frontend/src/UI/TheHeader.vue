@@ -15,6 +15,30 @@
         {{ $t("brand") }}
       </q-toolbar-title>
 
+      <q-input
+        outlined
+        dense
+        type="search"
+        label="Search For a Course"
+        label-color="secondary"
+        bg-color="gray"
+        color="white"
+        v-model="text"
+        input-class="text-right"
+        class="q-ml-md search-input"
+      >
+        <template v-slot:append>
+          <q-separator vertical inset color="white" />
+          <q-icon v-if="text === ''" name="search" color="white" />
+          <q-icon
+            v-else
+            name="clear"
+            class="cursor-pointer"
+            @click="text = ''"
+          />
+        </template>
+      </q-input>
+
       <q-btn flat round dense label="En" @click="changeToEnglish" />
       <q-btn flat round dense label="Ar" @click="changeToArabic" />
     </q-toolbar>
@@ -24,6 +48,11 @@
 <script>
 export default {
   name: "TheHeader",
+  data() {
+    return {
+      text: "",
+    };
+  },
   methods: {
     async changeToEnglish() {
       this.$i18n.locale = "en-us";
@@ -43,3 +72,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+// .search-input {
+//   background-color: $ground;
+// }
+</style>

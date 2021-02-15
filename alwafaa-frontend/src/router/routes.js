@@ -1,22 +1,23 @@
-import authRoutes from 'src/modules/authentication/router'
-import studentRoutes from 'src/modules/student/router'
+import authRoutes from "src/modules/authentication/router";
+import studentRoutes from "src/modules/student/router";
 
-const routes = [{
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+const routes = [
+  {
+    path: "/",
+    component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: '', component: () => import('pages/Home.vue') },
+      { path: "", component: () => import("pages/Home.vue") },
       ...authRoutes,
-      ...studentRoutes
-    ]
+      ...studentRoutes,
+    ],
   },
 
   // Always leave this as last one,
   // but you can also remove it
   {
-    path: '*',
-    component: () => import('pages/Error404.vue')
-  }
-]
+    path: "*",
+    component: () => import("pages/Error404.vue"),
+  },
+];
 
-export default routes
+export default routes;

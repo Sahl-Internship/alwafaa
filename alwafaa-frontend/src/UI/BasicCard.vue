@@ -1,35 +1,62 @@
 <template>
-  <q-card class="basic-card">
-    <img src="https://cdn.quasar.dev/img/mountains.jpg">
+  <q-card
+    :class="{
+      border: borderPrimary || borderSecondary,
+      borderedPrimary: borderPrimary,
+      borderedSecondary: borderSecondary,
+    }"
+  >
+    <slot name="cardImg"></slot>
 
     <q-card-section>
-      <div class="text-h6">Course Name</div>
-      <div class="text-subtitle2">By Teacher</div>
+      <slot name="cardHeader"></slot>
     </q-card-section>
 
-    <q-card-section class="q-pt-none">
-      Deascription
+    <q-card-section
+      :class="{
+        'q-pt-none': true,
+        column: borderPrimary || borderSecondary,
+        'q-gutter-y-sm': borderPrimary || borderSecondary,
+      }"
+    >
+      <slot name="cardDescription"></slot>
     </q-card-section>
 
-    <q-separator />
+    <q-separator v-if="!(borderPrimary || borderSecondary)" />
 
     <q-card-actions class="q-pa-none justify-center">
-      <q-btn flat color="secondary">
-        Register
-        <q-btn flat round icon="add" />
-      </q-btn>
+      <slot name="cardAction"></slot>
     </q-card-actions>
   </q-card>
 </template>
 
 <script>
 export default {
-  name: 'BasicCard'
-}
+  name: "BasicCard",
+  props: ["borderPrimary", "borderSecondary"],
+};
 </script>
 
 <style lang="scss" scoped>
-  // .basic-card {
-  //   width: 200px
-  // }
+.border {
+  border-radius: 5px;
+}
+.borderedPrimary {
+  border: solid 2px $primary;
+  height: 180px;
+  margin-top: 15px;
+  &:hover {
+    background-color: $ground;
+  }
+}
+
+.borderedSecondary {
+  border: solid 2px $orange-1;
+  background-color: $ground;
+  border-radius: 5px;
+  height: 210px;
+  &:hover {
+    background-color: $gray;
+  }
+}
 </style>

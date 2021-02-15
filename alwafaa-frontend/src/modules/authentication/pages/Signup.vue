@@ -15,10 +15,10 @@
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
-            v-model="firstname"
-            class="form-input"
             outlined
             dense
+            v-model="firstname"
+            class="form-input"
             :label="$t('firstname')"
             color="secondary"
             :error="invalid && validated"
@@ -214,14 +214,26 @@
             :error="invalid && validated"
             :error-message="errors[0]"
           >
-            <q-radio keep-color v-model="gender" val="1" label="Male" color="secondary" />
-            <q-radio keep-color v-model="gender" val="2" label="Female" color="secondary" />
+            <q-radio
+              keep-color
+              v-model="gender"
+              val="1"
+              label="Male"
+              color="secondary"
+            />
+            <q-radio
+              keep-color
+              v-model="gender"
+              val="2"
+              label="Female"
+              color="secondary"
+            />
           </q-field>
         </ValidationProvider>
 
         <q-btn :label="$t('submit')" type="submit" class="form-btn"></q-btn>
 
-        <p class="separator">{{ $t('useSocial') }}</p>
+        <p class="separator">{{ $t("useSocial") }}</p>
         <google-btn status="signup"></google-btn>
         <facebook-btn status="signup"></facebook-btn>
       </q-form>
@@ -275,27 +287,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .container {
-//   margin-right: 20px;
-//   margin-left: 20px;
-// }
 .signup {
   width: 70%;
-  border: solid 4px $primary;
+  border: solid 3px $primary;
   border-radius: 7px;
   margin: 20px 0 0 0;
   padding: 0 15px 30px 0;
   background-color: #fff;
 
-    .title {
-      color: $primary;
-      margin: 20px 0;
-    }
+  .title {
+    color: $secondary;
+    margin: 20px 0;
+  }
 
-    .input-validation {
-      width: 85%;
-      margin-bottom: 10px;
-    }
+  .input-validation {
+    width: 85%;
+    margin-bottom: 10px;
+  }
 
   .input-validation {
     width: 85%;
@@ -308,7 +316,7 @@ export default {
   }
 
   .form-btn {
-    background-color: $secondary;
+    background-color: $primary;
     width: 85%;
     height: 45px;
     color: #fff;

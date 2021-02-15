@@ -7,9 +7,9 @@
         <div class="row justify-center">
           <q-img
             alt="elearning-icon"
-            src="~assets/elearning-icon-4.svg"
+            src="~assets/About-Arabic-Quran-Tutor.jpg"
             class="fixed-bottom auth-page-img"
-            :class="checkDirection? 'flip-right' : ''"
+            :class="checkDirection ? 'flip-right' : ''"
           />
         </div>
       </div>
@@ -25,29 +25,30 @@
 <script>
 export default {
   computed: {
-    checkDirection () {
-      console.log(this.$q.lang)
-      return this.$q.lang.rtl
-    }
-  }
-}
+    checkDirection() {
+      console.log(this.$q.lang);
+      return this.$q.lang.rtl;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .auth-page-img {
-    width: 80%;
-  }
+.auth-page-img {
+  width: 45%;
+  // margin-bottom: 50px;
+}
 
-  .flip-right {
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
-    float: none;
-  }
+// .flip-right {
+//   transform: scaleX(-1);
+//   filter: FlipH;
+//   -ms-filter: "FlipH";
+//   float: none;
+// }
 
-  @media (max-width: 700px) {
-    .right-section {
-      display: none;
-    }
+@media (max-width: 700px) {
+  .right-section {
+    display: none;
   }
+}
 </style>

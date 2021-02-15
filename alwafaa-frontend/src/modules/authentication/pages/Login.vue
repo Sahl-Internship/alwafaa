@@ -91,7 +91,7 @@ export default {
         this.formIsValid = false;
       }
       const user = {
-        email: this.email,
+        identity: this.email,
         password: this.password,
       };
       this.$store.dispatch("auth/login", user);
