@@ -197,7 +197,9 @@ class SignInController extends \yii\web\Controller
         ]);
 
         return $this->goHome();
+
     }
+
 
     /**
      * @return string|Response

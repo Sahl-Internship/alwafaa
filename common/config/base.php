@@ -50,11 +50,24 @@ $config = [
 
         'mailer' => [
             'class' => yii\swiftmailer\Mailer::class,
+            'viewPath'=>Yii::getAlias('@frontend') . '/mail',
             'messageConfig' => [
                 'charset' => 'UTF-8',
                 'from' => env('ADMIN_EMAIL')
             ]
         ],
+
+//        'mail' => [
+//            'class' => 'yii\swiftmailer\Mailer',
+//            'transport' => [
+//                'class' => 'Swift_SmtpTransport',
+//                'host' => 'smtp.mailtrap.io',
+//                'username' => 'b59ad7fa075e5f',
+//                'password' => '309659d7bd3270',
+//                'port' => '2525',
+//                'encryption' => 'tls',
+//            ],
+//        ],
 
 //        'mailer' => [
 //            'class' => 'yii\swiftmailer\Mailer',
@@ -62,8 +75,8 @@ $config = [
 //            'transport' => [
 //                'class' => 'Swift_SmtpTransport',
 //                'host' => 'smtp.mailtrap.io',
-//                'username' => 'ef33cea4c17f22',
-//                'password' => 'e2a67b49353bb2',
+//                'username' => 'b59ad7fa075e5f',
+//                'password' => '309659d7bd3270',
 //                'port' => '2525',
 //                'encryption' => 'tls',
 //            ],
@@ -196,7 +209,15 @@ if (YII_ENV_PROD) {
         'message' => ['from' => env('ROBOT_EMAIL'), 'to' => env('ADMIN_EMAIL')]
     ];
 }
-
+//always send emails
+$config['components']['mailer']['transport'] = [
+    'class' => 'Swift_SmtpTransport',
+    'host' => 'smtp.gmail.com',
+    'port' => '587',
+    'username' => 'tvvunion@gmail.com',
+    'password' => 'Door@#2020',
+    'encryption' => 'tls',
+];
 if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
@@ -206,11 +227,12 @@ if (YII_ENV_DEV) {
     $config['components']['cache'] = [
         'class' => yii\caching\DummyCache::class
     ];
-    $config['components']['mailer']['transport'] = [
-        'class' => 'Swift_SmtpTransport',
-        'host' => env('SMTP_HOST'),
-        'port' => env('SMTP_PORT'),
-    ];
+
+//    $config['components']['mailer']['transport'] = [
+//        'class' => 'Swift_SmtpTransport',
+//        'host' => env('SMTP_HOST'),
+//        'port' => env('SMTP_PORT'),
+//    ];
 }
 
 return $config;

@@ -157,7 +157,8 @@ $logEntries[] = [
         <a href="/" class="brand-link text-center <?php echo $keyStorage->get('adminlte.brand-text-small') ? 'text-sm' : null ?>">
             <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                 style="opacity: .8"> -->
-            <span class="brand-text font-weight-bold"><?php echo Yii::$app->name ?></span>
+            <span class="fas fa-school"></span>
+            <span class="brand-text font-weight-bold "><?php echo Yii::$app->name ?></span>
         </a>
         <!-- /brand logo -->
 
@@ -214,23 +215,31 @@ $logEntries[] = [
                             'label' => Yii::t('backend', ' All Users'),
                             'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
                             'url' => ['/user/index'],
-                            'active' => Yii::$app->controller->action->id === 'index',
+                            'active' => Yii::$app->controller->id === 'user' && Yii::$app->controller->action->id === 'index' ,
                             'visible' => Yii::$app->user->can('administrator'),
                         ],
                         [
                             'label' => Yii::t('backend', 'Students'),
-                            'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
+                            'icon' => FAS::icon('fas fa-user-graduate', ['class' => ['nav-icon']]),
                             'url' => ['/user/student'],
                             'active' => Yii::$app->controller->action->id === 'student',
                             'visible' => Yii::$app->user->can('administrator'),
                         ],
                       [
                             'label' => Yii::t('backend', 'Teachers'),
-                            'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
+                            'icon' => FAS::icon('fas fa-chalkboard-teacher', ['class' => ['nav-icon']]),
                             'url' => ['/user/teacher'],
                             'active' => Yii::$app->controller->action->id === 'teacher',
                             'visible' => Yii::$app->user->can('administrator'),
                         ],
+                        [
+                            'label' => Yii::t('backend', 'Sections'),
+                            'icon' => FAS::icon('fad fa-stream', ['class' => ['nav-icon']]),
+                            'url' => ['/section/index'],
+                            'active' => Yii::$app->controller->id === 'section',
+                            'visible' => Yii::$app->user->can('administrator'),
+                        ],
+
                         [
                             'label' => Yii::t('backend', 'Content'),
                             'options' => ['class' => 'nav-header'],
