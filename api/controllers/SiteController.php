@@ -46,12 +46,15 @@ class SiteController extends ApiController
         $params = \Yii::$app->request->post();
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $user = User::find()
-            ->active()
+//            ->active()
             ->andWhere(['or', ['username' => $params['identity'] ], ['email' => $params['identity']]])
             ->one();
 
         if(!$user){
             return ['status'=>0 , 'message'=>'Email not found'];
+        }
+        if($user->status == User::STATUS_NOT_ACTIVE){
+            return ['status'=>0 , 'message'=>'You must verify your email first'];
         }
 
         $valid_password = Yii::$app->getSecurity()->validatePassword($params['password'], $user->password_hash);
