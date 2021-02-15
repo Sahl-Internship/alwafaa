@@ -51,7 +51,7 @@ class SiteController extends ApiController
             ->one();
 
         if(!$user){
-            return ['status'=>0 , 'message'=>'Invalid email'];
+            return ['status'=>0 , 'message'=>'Email not found'];
         }
 
         $valid_password = Yii::$app->getSecurity()->validatePassword($params['password'], $user->password_hash);
