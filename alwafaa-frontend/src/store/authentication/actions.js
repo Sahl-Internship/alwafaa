@@ -7,51 +7,51 @@ export default {
     Loading.show();
     try {
       const response = await handleSignup(user);
-      console.log(response);
-      if (response.statusText !== "OK") {
-        const error = new Error({
-          message: "Error while registering, Try Again",
-        });
+      if (response.data.status !== 1) {
+        const messages = Object.keys(response.data.message);
+        const errors = messages.map((item) => `${item} not valid`);
+        const errorMessage = errors.join(", ");
+        const error = new Error(errorMessage);
         throw error;
       }
+
       Notify.create({
         type: "positive",
         message: "You registered successfully, confirm your email to login",
       });
     } catch (error) {
       Loading.hide();
-      console.log("error", error);
+
       Notify.create({
         type: "negative",
-        message: "Error while registering, Try Again",
+        message: error.message
+          ? error.message
+          : "Error while registering, Try Again",
       });
     }
+
     Loading.hide();
   },
   async login(context, userData) {
     Loading.show();
     try {
       const response = await handleLogin(userData);
-      console.log(response);
-      if (response.statusText !== "OK") {
-        const error = new Error({
-          message: "Error while registering, Try Again",
-        });
-        throw error;
+
+      if (response.data.status !== 1) {
+        const err = new Error(response.data.message);
+        throw err;
       }
 
       const { token, ...user } = response.data.profile;
-
       localStorage.setItem("token", token);
       context.commit("loginState", { token, user });
 
-      router().push("/");
+      router().push({ path: "/signup" });
     } catch (error) {
       Loading.hide();
-      console.log("error", error);
       Notify.create({
         type: "negative",
-        message: "Error while registering, Try Again",
+        message: error.message ? error.message : "Invalid Data",
       });
     }
     Loading.hide();
