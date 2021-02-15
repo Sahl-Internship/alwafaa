@@ -33,7 +33,7 @@ class SignupController extends ApiController
         }else{
 
 //            return $user->errors;
-            return ['status'=>0, $user->errors ];
+            return ['status'=>0,  'message'=> $user->errors ];
 
 //        }
 
