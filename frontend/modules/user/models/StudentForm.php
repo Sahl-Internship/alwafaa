@@ -111,7 +111,6 @@ class StudentForm extends Model
                 Yii::$app->commandBus->handle(new SendEmailCommand([
                     'subject' => Yii::t('frontend', 'Activation email'),
                     'view' => 'activation',
-//                    'view' => 'activation',
                     'to' => 'tvvunion@gmail.com',
                     'params' => [
                         'url' => Url::to(['@frontendUrl/user/sign-in/activation', 'token' => $token->token], true)
