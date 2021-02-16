@@ -20,16 +20,16 @@ class User extends \common\models\User
             'id'=>function($model){
                 return $model->id;
             },
-
-            'username',
+            'full_name'=>function($model){
+                return $model->getPublicIdentity();
+            },
+//            'username',
+              'email',
             'token'=>function($model){
 
                 return $model->access_token;
             },
-            'full_name'=>function($model){
-                return $model->getPublicIdentity();
-            },
-            'email',
+
             'image'=>function($model){
                 return   $model->userProfile->avatar?: \Yii::getAlias('@backendUrl'). "/img/anonymous.jpg" ;
             },
