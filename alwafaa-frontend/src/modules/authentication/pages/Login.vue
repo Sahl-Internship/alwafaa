@@ -20,7 +20,7 @@
             outlined
             type="email"
             :label="$t('email')"
-            color="grey"
+            color="blue-1"
             bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -39,7 +39,7 @@
             outlined
             :type="isPwd ? 'password' : 'text'"
             :label="$t('password')"
-            color="grey"
+            color="blue-1"
             bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -125,7 +125,7 @@ export default {
   box-shadow: 1px 10px 10px 5px $grey-3;
 
   .title {
-    color: $secondary;
+    color: $grey;
     text-align: center;
   }
 

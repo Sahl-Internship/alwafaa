@@ -37,7 +37,7 @@
             outlined
             dense
             :label="$t('lastname')"
-            color="grey"
+            color="blue-1"
             bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -55,7 +55,7 @@
             dense
             type="email"
             :label="$t('email')"
-            color="grey"
+            color="blue-1"
             bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -73,7 +73,7 @@
             dense
             type="tel"
             :label="$t('phoneNumber')"
-            color="grey"
+            color="blue-1"
             bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -92,7 +92,7 @@
             dense
             :type="isPwd ? 'password' : 'text'"
             :label="$t('password')"
-            color="grey"
+            color="blue-1"
             bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -118,7 +118,7 @@
             dense
             :type="isCPwd ? 'password' : 'text'"
             :label="$t('confirmPass')"
-            color="grey"
+            color="blue-1"
             bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -143,7 +143,7 @@
             outlined
             dense
             :label="$t('country')"
-            color="grey"
+            color="blue-1"
             bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
@@ -160,7 +160,7 @@
             outlined
             dense
             type="date"
-            color="grey"
+            color="blue-1"
             bg-color="grey-1"
             :hint="$t('birthdate')"
             :error="invalid && validated"
@@ -262,7 +262,7 @@ export default {
   box-shadow: 1px 10px 10px 5px $grey-3;
 
   .title {
-    color: $secondary;
+    color: $grey;
     text-align: center;
   }
 
