@@ -4,7 +4,6 @@ import {
   handleLogin,
   handleForgotPass,
 } from "src/services/authApi";
-// import router from "../../router";
 
 export default {
   async signup(context, user) {
@@ -75,5 +74,10 @@ export default {
       console.log(error);
     }
     Loading.hide();
+  },
+  logout({ commit }) {
+    commit("logout");
+    localStorage.removeItem("token");
+    this.$router.push({ name: "login" });
   },
 };
