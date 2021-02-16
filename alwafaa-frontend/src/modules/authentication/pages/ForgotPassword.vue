@@ -1,113 +1,95 @@
 <template>
   <auth-container>
-    <form
-      class="form-container login-show col-12 col-md"
-      @submit.prevent="verify"
+    <ValidationObserver
+      v-slot="{ handleSubmit }"
+      class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-9 q-my-md"
     >
-      <h2>Verify Email</h2>
-      <validation-provider v-slot="v">
-        <q-input
-          v-model="email"
-          outlined
-          type="email"
-          :rules="[(val) => !!val || 'Field is required']"
-          color="secondary"
-          label="Email"
-          class="e-mail"
+      <q-form
+        class="row q-gutter-x-xs q-pb-lg justify-center reset-pass-form"
+        @submit.prevent="handleSubmit(submitForm)"
+      >
+        <h4 class="col-12 q-my-lg title">Verify Email</h4>
+
+        <ValidationProvider
+          class="col-10"
+          rules="required|email"
+          v-slot="{ errors, invalid, validated }"
         >
-          <span>{{ v.errors[0] }}</span>
-        </q-input>
-      </validation-provider>
-      <p v-if="!formIsValid">*Enter valid email</p>
-      <button class="login">Send verification</button>
-    </form>
+          <q-input
+            v-model="email"
+            outlined
+            type="email"
+            :label="$t('email')"
+            color="blue-1"
+            bg-color="grey-1"
+            :error="invalid && validated"
+            :error-message="errors[0]"
+          >
+          </q-input>
+        </ValidationProvider>
+
+        <q-btn
+          dense
+          no-caps
+          label="Reset Password"
+          type="submit"
+          color="primary"
+          text-color="white"
+          class="col-10 form-btn"
+        ></q-btn>
+      </q-form>
+    </ValidationObserver>
   </auth-container>
 </template>
 
 <script>
-import { ValidationProvider, extend } from "vee-validate";
 import AuthContainer from "../layout/AuthContainer.vue";
-
-extend("val", (value) => {
-  return value === "";
-});
 
 export default {
   components: {
-    "validation-provider": ValidationProvider,
     AuthContainer,
   },
   data() {
     return {
       email: "",
-      formIsValid: true,
     };
   },
   methods: {
-    verify() {
-      this.formIsValid = true;
-      if (
-        this.email === "" ||
-        !this.email.includes("@") ||
-        this.password.length < 6
-      ) {
-        this.formIsValid = false;
-        return;
-      }
+    submitForm() {
+      const email = {
+        email: this.email,
+      };
+      this.$store.dispatch("auth/forgotPassword", email);
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-.form-container {
-  width: 70%;
-  margin: 0px 15%;
-  margin-top: 30px;
-  border-radius: 10px;
-  border: 3px solid $primary;
-  background: #fff;
-  z-index: 3;
-  transform: translate(0, 50%);
-  h2 {
-    margin: 0px 10%;
-    padding-top: 10px;
-    width: 80%;
-    font-size: 35px;
-    font-weight: normal;
+.reset-pass-form {
+  border: solid 1px $grey-2;
+  border-radius: 7px;
+  background-color: #fff;
+  box-shadow: 1px 10px 10px 5px $grey-3;
+
+  .title {
+    color: $grey;
     text-align: center;
-    color: $secondary;
-    @media screen and (max-width: 992px) {
-      font-size: 25px;
-    }
   }
-  .e-mail {
-    width: 80%;
-    margin: 20px 10%;
-    background: #eee;
-    padding-bottom: 0;
-  }
-  p {
-    width: 80%;
-    margin: 0 10%;
-    color: $negative;
-  }
-  .login {
-    width: 80%;
-    margin: 20px 10%;
-    margin-top: 10px;
-    padding: 10px;
-    background: $secondary;
+
+  .form-btn {
     font-size: 20px;
-    font-weight: normal;
-    color: #f9f9f9;
-    border: none;
-    outline: none;
-    text-transform: uppercase;
-    border-radius: 2px;
-    cursor: pointer;
-    @media screen and (max-width: 992px) {
-      font-size: 15px;
-    }
+  }
+}
+
+@media (max-width: 860px) and(min-width: 700px) {
+  .title {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 30px;
   }
 }
 </style>

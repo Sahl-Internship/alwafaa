@@ -5,12 +5,14 @@ namespace frontend\modules\user\models;
 
 
 use cheatsheet\Time;
+use common\commands\SendEmailCommand;
 use common\models\User;
 use common\models\UserToken;
 use frontend\modules\user\Module;
 use Yii;
 use yii\base\Exception;
 use yii\base\Model;
+use yii\helpers\Url;
 
 class StudentForm extends Model
 {
@@ -99,35 +101,44 @@ class StudentForm extends Model
             $user->userProfile->save(false);
             //link to parent account
 //            $this->LinkParentAccount($user->userProfile);
+
             if ($shouldBeActivated) {
                 $token = UserToken::create(
                     $user->id,
                     UserToken::TYPE_ACTIVATION,
                     Time::SECONDS_IN_A_DAY
                 );
-//                Yii::$app->commandBus->handle(new SendEmailCommand([
-//                    'subject' => Yii::t('frontend', 'Activation email'),
-//                    'view' => 'activation',
-//                    'to' => $this->email,
-//                    'params' => [
-//                        'url' => Url::to(['/user/sign-in/activation', 'token' => $token->token], true)
-//                    ]
-//                ]));
+                Yii::$app->commandBus->handle(new SendEmailCommand([
+                    'subject' => Yii::t('frontend', 'Activation email'),
+                    'view' => 'activation',
+                    'to' => 'tvvunion@gmail.com',
+                    'params' => [
+                        'url' => Url::to(['@frontendUrl/user/sign-in/activation', 'token' => $token->token], true)
+                    ]
+                ]));
             }
             return $user;
         }
+        return null;
     }
+    /**
+     * Sends confirmation email to user
+     * @param User $user user model to with email should be send
+     * @return bool whether the email was sent
+     */
+
     public function shouldBeActivated()
     {
-        /** @var Module $userModule */
-        $userModule = Yii::$app->getModule('user');
-        if (!$userModule) {
-            return false;
-        } elseif ($userModule->shouldBeActivated) {
-            return true;
-        } else {
-            return false;
-        }
+        return true;
+//        /** @var Module $userModule */
+//        $userModule = Yii::$app->getModule('user');
+//        if (!$userModule) {
+//            return false;
+//        } elseif ($userModule->shouldBeActivated) {
+//            return true;
+//        } else {
+//            return false;
+//        }
     }
 
 

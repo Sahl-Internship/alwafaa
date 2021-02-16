@@ -1,54 +1,61 @@
 <template>
   <auth-container>
-    <form
-      class="form-container login-show col-12 col-md"
-      @submit.prevent="reset"
+    <ValidationObserver
+      v-slot="{ handleSubmit }"
+      class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-9 q-my-md"
     >
-      <h2>{{ $t("resetPass") }}</h2>
-      <validation-provider v-slot="v">
-        <q-input
-          v-model="password"
-          outlined
-          type="password"
-          :rules="[(val) => !!val || 'Field is required']"
-          color="secondary"
-          :label="$t('password')"
-          class="input-field"
+      <q-form
+        class="row q-gutter-x-xs q-pb-lg justify-center reset-pass-form"
+        @submit.prevent="handleSubmit(submitForm)"
+      >
+        <h4 class="col-12 q-my-lg title">{{ $t("resetPass") }}</h4>
+
+        <ValidationProvider
+          class="col-10"
+          rules="required|password"
+          v-slot="{ errors, invalid, validated }"
         >
-          <span>{{ v.errors[0] }}</span>
-        </q-input>
-      </validation-provider>
-      <button class="reset">{{ $t("change") }}</button>
-    </form>
+          <q-input
+            v-model="password"
+            outlined
+            type="password"
+            :label="$t('password')"
+            color="blue-1"
+            bg-color="grey-1"
+            :error="invalid && validated"
+            :error-message="errors[0]"
+          >
+          </q-input>
+        </ValidationProvider>
+
+        <q-btn
+          dense
+          no-caps
+          :label="$t('change')"
+          type="submit"
+          color="primary"
+          text-color="white"
+          class="col-10 form-btn"
+        ></q-btn>
+      </q-form>
+    </ValidationObserver>
   </auth-container>
 </template>
 
 <script>
-import { ValidationProvider, extend } from "vee-validate";
 import AuthContainer from "../layout/AuthContainer.vue";
-
-extend("val", (value) => {
-  return value === "";
-});
 
 export default {
   components: {
-    "validation-provider": ValidationProvider,
     AuthContainer,
   },
   data() {
     return {
       password: "",
-      formIsValid: true,
     };
   },
   methods: {
-    reset() {
-      this.formIsValid = true;
-      if (this.password.length < 6) {
-        this.formIsValid = false;
-        return;
-      }
+    submitForm() {
       const password = {
         password: this.password,
       };
@@ -58,55 +65,31 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.form-container {
-  width: 70%;
-  margin: 0px 15%;
-  margin-top: 30px;
-  border-radius: 10px;
-  border: 3px solid $ground;
-  background: #fff;
-  z-index: 3;
-  transform: translate(0, 50%);
-  h2 {
-    margin: 0px 10%;
-    padding-top: 10px;
-    width: 80%;
-    font-size: 35px;
-    font-weight: normal;
+.reset-pass-form {
+  border: solid 1px $grey-2;
+  border-radius: 7px;
+  background-color: #fff;
+  box-shadow: 1px 10px 10px 5px $grey-3;
+
+  .title {
+    color: $grey;
     text-align: center;
-    color: $secondary;
-    @media screen and (max-width: 992px) {
-      font-size: 25px;
-    }
   }
-  .input-field {
-    width: 80%;
-    margin: 20px 10%;
-    background: #eee;
-    padding-bottom: 0;
-  }
-  p {
-    width: 80%;
-    margin: 0 10%;
-    color: $negative;
-  }
-  .reset {
-    width: 80%;
-    margin: 20px 10%;
-    margin-top: 10px;
-    padding: 10px;
-    background: $secondary;
+
+  .form-btn {
     font-size: 20px;
-    font-weight: normal;
-    color: #f9f9f9;
-    border: none;
-    outline: none;
-    text-transform: uppercase;
-    border-radius: 2px;
-    cursor: pointer;
-    @media screen and (max-width: 992px) {
-      font-size: 15px;
-    }
+  }
+}
+
+@media (max-width: 860px) and(min-width: 700px) {
+  .title {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 30px;
   }
 }
 </style>

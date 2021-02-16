@@ -1,10 +1,9 @@
-import store from 'src/store/authentication'
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-import routes from './routes'
+import routes from "./routes";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 /*
  * If not building with SSR mode, you can
@@ -21,9 +20,7 @@ export default function ( /* { store, ssrContext } */ ) {
       x: 0,
       y: 0
     }),
-    routes: [
-      ...routes
-    ],
+    routes: [...routes],
 
     // Leave these as they are and change in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
@@ -31,20 +28,8 @@ export default function ( /* { store, ssrContext } */ ) {
 
 
     mode: process.env.VUE_ROUTER_MODE,
-    base: process.env.VUE_ROUTER_BASE
-  })
-  Router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-      // this route requires auth, check if logged in
-      // if not, redirect to login page.
-      if (!store.getters.isAuthenticated) {
-        next()
-      } else {
-        next('/login')
-      }
-    } else {
-      next() // make sure to always call next()!
-    }
-  })
-  return Router
+    base: process.env.VUE_ROUTER_BASE,
+  });
+
+  return Router;
 }

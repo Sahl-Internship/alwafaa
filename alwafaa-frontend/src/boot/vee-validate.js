@@ -13,8 +13,8 @@ import {
   email
 } from 'vee-validate/dist/rules'
 
-Vue.component('ValidationObserver', ValidationObserver)
-Vue.component('ValidationProvider', ValidationProvider)
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.component("ValidationProvider", ValidationProvider);
 
 const i18n = new VueI18n({
   // locale: 'en',
@@ -39,7 +39,7 @@ extend('required', {
 
 })
 
-extend('email', {
+extend("email", {
   ...email,
   // message: 'This field must be a valid email'
   message() {

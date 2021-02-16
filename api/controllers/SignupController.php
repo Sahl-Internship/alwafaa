@@ -29,16 +29,14 @@ class SignupController extends ApiController
         $user->profile = [];
         $user->load(['StudentForm' => $params]);
         if ($user->validate() and $registerUser = $user->signup()) {
-            return "success";
+            return ['status'=>1, 'message'=>'Successfully Registration'];
         }else{
 
-            return $user->errors;
+//            return $user->errors;
+            return ['status'=>0,  'message'=> $user->errors ];
 
 //        }
-
-//            return "failedgggg";
         }
-
     }
 
 
