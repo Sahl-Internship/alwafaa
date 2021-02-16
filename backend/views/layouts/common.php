@@ -84,7 +84,7 @@ $logEntries[] = [
             ]
         ]); ?>
         <!-- /left navbar links -->
-
+    <img src="/img/2.svg" alt="Iqraa Logo" class="brand-image" style="width:80px;height:50px;margin-left:auto">
         <!-- right navbar links -->
         <?php echo Nav::widget([
             'options' => ['class' => ['navbar-nav', 'ml-auto']],
@@ -155,9 +155,8 @@ $logEntries[] = [
     <aside class="main-sidebar sidebar-dark-primary elevation-4 <?php echo $keyStorage->get('adminlte.sidebar-no-expand') ? 'sidebar-no-expand' : null ?>">
         <!-- brand logo -->
         <a href="/" class="brand-link text-center <?php echo $keyStorage->get('adminlte.brand-text-small') ? 'text-sm' : null ?>">
-            <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                style="opacity: .8"> -->
-            <span class="fas fa-school"></span>
+
+<!--            <span class="fas fa-school"></span>-->
             <span class="brand-text font-weight-bold "><?php echo Yii::$app->name ?></span>
         </a>
         <!-- /brand logo -->
@@ -239,7 +238,7 @@ $logEntries[] = [
                             'active' => Yii::$app->controller->id === 'section',
                             'visible' => Yii::$app->user->can('administrator'),
                         ],
-
+/*
                         [
                             'label' => Yii::t('backend', 'Content'),
                             'options' => ['class' => 'nav-header'],
@@ -388,6 +387,7 @@ $logEntries[] = [
                             'badge' => SystemLog::find()->count(),
                             'badgeBgClass' => 'badge-danger',
                         ],
+   */
                     ],
                 ]) ?>
             </nav>
