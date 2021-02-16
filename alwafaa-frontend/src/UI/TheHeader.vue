@@ -17,23 +17,6 @@
 
       <q-space />
 
-<!-- ======================================= -->
-
-      </q-toolbar-title>
-      <q-btn squared flat
-        ><router-link to="/login" class="link">{{
-          $t("loginTitle")
-        }}</router-link></q-btn
-      >
-      <q-btn squared flat
-        ><router-link to="/signup" flat squeard class="link">{{
-          $t("signupTitle")
-        }}</router-link></q-btn
-      >
-
-<!-- ======================================= -->
-      
-
       <!-- <q-toolbar-title>
         {{ $t("brand") }}
       </q-toolbar-title> -->

@@ -37,8 +37,7 @@ export default {
       Notify.create({
         type: "negative",
         message: error.message ?
-          error.message :
-          "Error while registering, Try Again",
+          error.message : "Error while registering, Try Again",
       });
     }
 

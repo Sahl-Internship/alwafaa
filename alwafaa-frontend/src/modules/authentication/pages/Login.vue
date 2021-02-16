@@ -112,19 +112,7 @@ export default {
         identity: this.email,
         password: this.password,
       };
-      this.$store
-        .dispatch("auth/login", user)
-        .then(() => {
-          this.$router.replace("/");
-        })
-        .catch((error) => {
-          console.log("Error", error);
-        });
-    },
-  },
-  computed: {
-    loggedIn() {
-      this.$store.getters.isAuthenticated;
+      this.$store.dispatch("auth/login", user);
     },
   },
 };
