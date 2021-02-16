@@ -1,5 +1,6 @@
 export default {
-  loginState(state, token) {
-    state.token = token
-  }
-}
+  loginState(state, authedUser) {
+    state.token = authedUser.token;
+    state.user = authedUser.user;
+  },
+};

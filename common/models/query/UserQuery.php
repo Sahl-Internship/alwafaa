@@ -26,6 +26,7 @@ class UserQuery extends ActiveQuery
      */
     public function active()
     {
+
         $this->andWhere(['status' => User::STATUS_ACTIVE]);
         return $this;
     }

@@ -11,12 +11,16 @@ return [
         ['class' => 'yii\rest\UrlRule', 'controller' => 'user', 'pluralize' => false],
         ['class' => 'yii\rest\UrlRule', 'controller' => 'signup', 'pluralize' => false],
         ['pattern' => 'site/login', 'route' => 'site/login'],
+        ['pattern' => 'site/request-password-reset', 'route' => 'site/request-password-reset'],
+        ['pattern' => 'site/reset-password', 'route' => 'site/reset-password'],
         ['class' => 'yii\rest\UrlRule', 'controller' => 'site', 'pluralize' => false],
-//        ['class' => 'yii\rest\UrlRule', 'controller' => 'site/login', 'pluralize' => false],
+
         ['class' =>'yii\rest\UrlRule','controller'=>'site'
-            ,'only'=>['login']
+            ,'only'=>['login','request-password-reset','reset-password']
             ,'extraPatterns'=>[
             'Post login' => 'login' ,
+            'Post request-password-reset' => 'request-password-reset' ,
+            'Post reset-password' => 'reset-password' ,
 
         ]
             , 'pluralize'=>false

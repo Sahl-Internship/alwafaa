@@ -4,6 +4,8 @@ namespace api\controllers;
 
 use api\resources\User;
 //use common\models\User;
+use frontend\modules\user\models\PasswordResetRequestForm;
+use frontend\modules\user\models\ResetPasswordForm;
 use Yii;
 use yii\rest\Controller;
 use yii\web\NotFoundHttpException;
@@ -41,25 +43,23 @@ class SiteController extends ApiController
         return 'Test API...';
         //return $this->redirect(\Yii::getAlias('@frontendUrl'));
     }
-    public function actionLogin(){
 
+    public function actionLogin(){
         $params = \Yii::$app->request->post();
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $user = User::find()
-            ->active()
+//            ->active()
             ->andWhere(['or', ['username' => $params['identity'] ], ['email' => $params['identity']]])
             ->one();
-
         if(!$user){
-            return ['status'=>0 , 'message'=>'Invalid email'];
+            return ['status'=>0 , 'message'=>'Email not found'];
         }
-
+        if($user->status == User::STATUS_NOT_ACTIVE){
+            return ['status'=>0 , 'message'=>'You must verify your email first'];
+        }
         $valid_password = Yii::$app->getSecurity()->validatePassword($params['password'], $user->password_hash);
-
         if($valid_password){
             return ['status'=>1,  'profile'=> $user ];
-
-
         }else{
             return ['status'=>0 , 'message'=>'Invalid password'];
 
@@ -67,19 +67,42 @@ class SiteController extends ApiController
 
     }
 
+    public function actionRequestPasswordReset()
+    {
+        $params = \Yii::$app->request->post();
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = new PasswordResetRequestForm();
+        $model->load(['PasswordResetRequestForm' => $params]);
+        if ($model->validate() and $registerUser = $model->sendEmail()){
+            return ['status'=>1, 'message'=>'Check your email for further instructions'];
+        }else{
+            return ['status'=>0,  'message'=> $model->errors ];
+        }
+    }
+
+    public function actionResetPassword($token)
+    {
+        $params = \Yii::$app->request->post();
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model = new ResetPasswordForm($token);
+        $model->load(['ResetPasswordForm' => $params]);
+        if($model->validate() && $model->resetPassword()){
+            return ['status'=>1,'message'=>'New password was saved'];
+        }else{
+            return ['status'=>0,'message'=>'something error, plz try again later'];
+        }
+    }
 
     public function actionError()
     {
         if (($exception = Yii::$app->getErrorHandler()->exception) === null) {
             $exception = new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
         }
-
         if ($exception instanceof \HttpException) {
             Yii::$app->response->setStatusCode($exception->getCode());
         } else {
             Yii::$app->response->setStatusCode(500);
         }
-
         return $this->asJson(['error' => $exception->getMessage(), 'code' => $exception->getCode()]);
     }
 }
