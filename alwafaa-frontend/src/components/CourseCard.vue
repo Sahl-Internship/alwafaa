@@ -1,7 +1,7 @@
 <template>
   <basic-card>
     <template #cardImg>
-      <img src="https://cdn.quasar.dev/img/mountains.jpg" />
+      <img src="~assets/course-img.jpg" />
     </template>
 
     <template #cardHeader>

@@ -2,16 +2,16 @@
   <auth-container>
     <ValidationObserver
       v-slot="{ handleSubmit }"
-      class="flex justify-center container"
+      class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-9 q-my-md"
     >
       <q-form
-        class="q-gutter-md flex justify-center signup"
+        class="row q-gutter-x-xs q-pb-lg justify-center signup"
         @submit.prevent="handleSubmit(submitForm)"
-        ref="signupForm"
       >
-        <h3 class="title">{{ $t("signupTitle") }}</h3>
+        <h4 class="col-12 q-my-lg title">{{ $t("signupTitle") }}</h4>
+
         <ValidationProvider
-          class="input-validation"
+          class="col-5"
           rules="required"
           v-slot="{ errors, invalid, validated }"
         >
@@ -19,86 +19,69 @@
             outlined
             dense
             v-model="firstname"
-            class="form-input"
             :label="$t('firstname')"
-            color="secondary"
+            color="blue-1"
+            bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
           />
         </ValidationProvider>
 
         <ValidationProvider
-          class="input-validation"
+          class="col-5"
           rules="required"
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
             v-model="lastname"
-            class="form-input"
             outlined
             dense
             :label="$t('lastname')"
-            color="secondary"
+            color="grey"
+            bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
           />
         </ValidationProvider>
 
         <ValidationProvider
-          class="input-validation"
-          rules="required"
-          v-slot="{ errors, invalid, validated }"
-        >
-          <q-input
-            v-model="username"
-            class="form-input"
-            outlined
-            dense
-            :label="$t('username')"
-            color="secondary"
-            :error="invalid && validated"
-            :error-message="errors[0]"
-          />
-        </ValidationProvider>
-
-        <ValidationProvider
-          class="input-validation"
+          class="col-10"
           rules="required|email"
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
             v-model="email"
-            class="form-input"
             outlined
             dense
             type="email"
             :label="$t('email')"
-            color="secondary"
+            color="grey"
+            bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
           />
         </ValidationProvider>
 
         <ValidationProvider
-          class="input-validation"
+          class="col-10"
           rules="required"
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
             v-model="phoneNumber"
-            class="form-input"
             outlined
             dense
             type="tel"
             :label="$t('phoneNumber')"
-            color="secondary"
+            color="grey"
+            bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
           />
         </ValidationProvider>
 
         <ValidationProvider
-          class="input-validation"
+          class="col-10"
           name="confirm"
           rules="required|pass"
           v-slot="{ errors, invalid, validated }"
@@ -108,9 +91,9 @@
             outlined
             dense
             :type="isPwd ? 'password' : 'text'"
-            class="form-input"
             :label="$t('password')"
-            color="secondary"
+            color="grey"
+            bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
           >
@@ -125,7 +108,7 @@
         </ValidationProvider>
 
         <ValidationProvider
-          class="input-validation"
+          class="col-10 input-validation"
           rules="required|confirmPass:@confirm"
           v-slot="{ errors, invalid, validated }"
         >
@@ -134,9 +117,9 @@
             outlined
             dense
             :type="isCPwd ? 'password' : 'text'"
-            class="form-input"
             :label="$t('confirmPass')"
-            color="secondary"
+            color="grey"
+            bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
           >
@@ -151,41 +134,24 @@
         </ValidationProvider>
 
         <ValidationProvider
-          class="input-validation"
+          class="col-5"
           rules="required"
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
             v-model="country"
-            class="form-input"
             outlined
             dense
             :label="$t('country')"
-            color="secondary"
+            color="grey"
+            bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
           />
         </ValidationProvider>
 
         <ValidationProvider
-          class="input-validation"
-          rules="required"
-          v-slot="{ errors, invalid, validated }"
-        >
-          <q-input
-            v-model="city"
-            class="form-input"
-            outlined
-            dense
-            :label="$t('city')"
-            color="secondary"
-            :error="invalid && validated"
-            :error-message="errors[0]"
-          />
-        </ValidationProvider>
-
-        <ValidationProvider
-          class="input-validation"
+          class="col-5"
           rules="required"
           v-slot="{ errors, invalid, validated }"
         >
@@ -193,18 +159,17 @@
             v-model="birthdate"
             outlined
             dense
-            class="form-input"
             type="date"
-            color="secondary"
+            color="grey"
+            bg-color="grey-1"
             :hint="$t('birthdate')"
             :error="invalid && validated"
             :error-message="errors[0]"
           />
-          <!-- <q-date v-model="birthdate" /> -->
         </ValidationProvider>
 
         <ValidationProvider
-          class="input-validation"
+          class="col-10"
           rules="required"
           v-slot="{ errors, invalid, validated }"
         >
@@ -220,23 +185,30 @@
               v-model="gender"
               val="1"
               label="Male"
-              color="secondary"
+              color="grey"
             />
             <q-radio
               keep-color
               v-model="gender"
               val="2"
               label="Female"
-              color="secondary"
+              color="grey"
             />
           </q-field>
         </ValidationProvider>
 
-        <q-btn :label="$t('submit')" type="submit" class="form-btn"></q-btn>
+        <q-btn
+          dense
+          no-caps
+          :label="$t('submit')"
+          type="submit"
+          color="primary"
+          text-color="white"
+          class="col-10 form-btn"
+        ></q-btn>
 
-        <p class="separator">{{ $t("useSocial") }}</p>
-        <google-btn status="signup"></google-btn>
-        <facebook-btn status="signup"></facebook-btn>
+        <!-- <google-btn status="signup"></google-btn> -->
+        <!-- <facebook-btn status="signup"></facebook-btn> -->
       </q-form>
     </ValidationObserver>
   </auth-container>
@@ -244,17 +216,14 @@
 
 <script>
 import AuthContainer from "../layout/AuthContainer.vue";
-import GoogleBtn from "../components/GoogleBtn";
-import FacebookBtn from "../components/FacebookBtn.vue";
 
 export default {
-  components: { AuthContainer, GoogleBtn, FacebookBtn },
+  components: { AuthContainer },
   name: "Signup",
   data() {
     return {
       firstname: "",
       lastname: "",
-      username: "",
       email: "",
       phoneNumber: "",
       password: "",
@@ -262,48 +231,24 @@ export default {
       birthdate: "",
       gender: "",
       country: "",
-      city: "",
       isPwd: true,
       isCPwd: true,
     };
   },
   methods: {
-    async submitForm() {
-      this.$q.loading.show();
-
+    submitForm() {
       const user = {
         firstname: this.firstname,
         lastname: this.lastname,
-        username: this.username,
         email: this.email,
         phone: this.phoneNumber,
         password: this.password,
         birthdate: Math.round(new Date(this.birthdate).getTime() / 1000),
         gender: this.gender,
         country: this.country,
-        city: this.city,
       };
 
-      try {
-        await this.$store.dispatch("auth/signup", user);
-
-        this.$router.push({ name: "login" });
-
-        this.$q.notify({
-          type: "positive",
-          message: "You registered successfully, confirm your email to login",
-        });
-      } catch (error) {
-        this.$q.loading.hide();
-
-        this.$q.notify({
-          type: "negative",
-          message: error.message
-            ? error.message
-            : "Error while registering, Try Again",
-        });
-      }
-      this.$q.loading.hide();
+      this.$store.dispatch("auth/signup", user);
     },
   },
 };
@@ -311,46 +256,18 @@ export default {
 
 <style lang="scss" scoped>
 .signup {
-  width: 70%;
-  border: solid 3px $primary;
+  border: solid 1px $grey-2;
   border-radius: 7px;
-  margin: 20px 0 0 0;
-  padding: 0 15px 30px 0;
   background-color: #fff;
+  box-shadow: 1px 10px 10px 5px $grey-3;
 
   .title {
     color: $secondary;
-    margin: 20px 0;
-  }
-
-  .input-validation {
-    width: 85%;
-    margin-bottom: 10px;
-  }
-
-  .input-validation {
-    width: 85%;
-    margin-bottom: 10px;
-  }
-
-  .form-input {
-    background-color: $ground;
-    padding-bottom: 0;
+    text-align: center;
   }
 
   .form-btn {
-    background-color: $primary;
-    width: 85%;
-    height: 45px;
-    color: #fff;
     font-size: 20px;
-    margin-top: 10px;
-  }
-
-  .separator {
-    color: rgb(192, 192, 192);
-    margin-bottom: 0;
-    padding-bottom: 0;
   }
 }
 

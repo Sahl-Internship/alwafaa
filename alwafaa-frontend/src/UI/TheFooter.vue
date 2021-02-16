@@ -21,7 +21,7 @@
 
 <style lang="scss" scoped>
 .footer {
-  background-color: $gray;
+  background-color: $grey;
   margin-top: 50px;
 
   .copy-rights {

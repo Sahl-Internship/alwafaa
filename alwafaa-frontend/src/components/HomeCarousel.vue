@@ -9,22 +9,13 @@
       arrows
       transition-prev="slide-right"
       transition-next="slide-left"
-      control-text-color="orange-1"
+      control-text-color="primary"
       @mouseenter="autoplay = false"
       @mouseleave="autoplay = true"
     >
-      <q-carousel-slide
-        :name="1"
-        img-src="https://cdn.quasar.dev/img/parallax1.jpg"
-      />
-      <q-carousel-slide
-        :name="2"
-        img-src="https://cdn.quasar.dev/img/parallax1.jpg"
-      />
-      <q-carousel-slide
-        :name="3"
-        img-src="https://cdn.quasar.dev/img/parallax1.jpg"
-      />
+      <q-carousel-slide :name="1" img-src="~assets/slider-img.jpg" />
+      <q-carousel-slide :name="2" img-src="~assets/slider-img.jpg" />
+      <q-carousel-slide :name="3" img-src="~assets/slider-img.jpg" />
     </q-carousel>
   </div>
 </template>

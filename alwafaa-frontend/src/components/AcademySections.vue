@@ -116,6 +116,6 @@ export default {
 
 <style lang="scss" scoped>
 .academy-sections {
-  background-color: $ground;
+  background-color: $grey-1;
 }
 </style>

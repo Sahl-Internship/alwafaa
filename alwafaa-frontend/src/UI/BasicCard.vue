@@ -46,17 +46,17 @@ export default {
   height: 180px;
   margin-top: 15px;
   &:hover {
-    background-color: $ground;
+    background-color: $grey-1;
   }
 }
 
 .borderedSecondary {
   border: solid 2px $orange-1;
-  background-color: $ground;
+  background-color: $grey-1;
   border-radius: 5px;
   height: 210px;
   &:hover {
-    background-color: $gray;
+    background-color: $grey;
   }
 }
 </style>

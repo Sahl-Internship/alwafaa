@@ -11,11 +11,17 @@
         v-if="false"
       />
 
-      <q-toolbar-title>
-        {{ $t("brand") }}
-      </q-toolbar-title>
+      <q-avatar>
+        <img src="~/assets/logo.png" />
+      </q-avatar>
 
-      <q-input
+      <q-space />
+
+      <!-- <q-toolbar-title>
+        {{ $t("brand") }}
+      </q-toolbar-title> -->
+
+      <!-- <q-input
         outlined
         dense
         type="search"
@@ -37,7 +43,7 @@
             @click="text = ''"
           />
         </template>
-      </q-input>
+      </q-input> -->
 
       <q-btn flat round dense label="En" @click="changeToEnglish" />
       <q-btn flat round dense label="Ar" @click="changeToArabic" />

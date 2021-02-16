@@ -115,7 +115,7 @@ export default {
 
 <style lang="scss" scoped>
 .courses-sections {
-  background-color: $ground;
+  background-color: $grey-1;
   margin-top: 80px;
 }
 </style>

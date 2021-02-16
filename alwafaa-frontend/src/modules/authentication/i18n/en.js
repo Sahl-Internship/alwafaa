@@ -20,7 +20,7 @@ export default {
   male: "Male",
   female: "Female",
   submit: "Submit",
-  useSocial: "OR USE SOCIAL",
+  // useSocial: "OR USE SOCIAL",
   googleSignup: "With Google",
   facebookSignup: "With Facebook",
   signup: "Signup",

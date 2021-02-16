@@ -1,36 +1,43 @@
 import { Notify, Loading } from "quasar";
-import { handleSignup, handleLogin } from "src/services/authApi";
+import {
+  handleSignup,
+  handleLogin,
+  handleForgotPass,
+} from "src/services/authApi";
 // import router from "../../router";
 
 export default {
   async signup(context, user) {
-    // Loading.show();
-    // try {
-    const response = await handleSignup(user);
-    if (response.data.status !== 1) {
-      const messages = Object.keys(response.data.message);
-      const errors = messages.map((item) => `${item} not valid`);
-      const errorMessage = errors.join(", ");
-      const error = new Error(errorMessage);
-      throw error;
+    Loading.show();
+
+    try {
+      const response = await handleSignup(user);
+      if (response.data.status !== 1) {
+        const messages = Object.keys(response.data.message);
+        const errors = messages.map((item) => `${item} not valid`);
+        const errorMessage = errors.join(", ");
+        const error = new Error(errorMessage);
+        throw error;
+      }
+
+      this.$router.push({ name: "login" });
+
+      Notify.create({
+        type: "positive",
+        message: "You registered successfully, confirm your email to login",
+      });
+    } catch (error) {
+      Loading.hide();
+
+      Notify.create({
+        type: "negative",
+        message: error.message
+          ? error.message
+          : "Error while registering, Try Again",
+      });
     }
 
-    //   Notify.create({
-    //     type: "positive",
-    //     message: "You registered successfully, confirm your email to login",
-    //   });
-    // } catch (error) {
-    //   Loading.hide();
-
-    //   Notify.create({
-    //     type: "negative",
-    //     message: error.message
-    //       ? error.message
-    //       : "Error while registering, Try Again",
-    //   });
-    // }
-
-    // Loading.hide();
+    Loading.hide();
   },
   async login(context, userData) {
     Loading.show();
@@ -54,6 +61,18 @@ export default {
         type: "negative",
         message: error.message ? error.message : "Invalid Data",
       });
+    }
+    Loading.hide();
+  },
+  async forgotPassword(context, email) {
+    Loading.show();
+
+    try {
+      const response = await handleForgotPass(email);
+      console.log(response);
+    } catch (error) {
+      Loading.hide();
+      console.log(error);
     }
     Loading.hide();
   },
