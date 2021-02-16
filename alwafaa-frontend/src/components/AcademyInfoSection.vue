@@ -37,8 +37,8 @@
           borderPrimary="true"
           :class="{
             'col-3': !$q.screen.lt.xl,
-            'col-4': $q.screen.lt.xl && $q.screen.gt.xs,
-            'col-6': $q.screen.lt.xs,
+            'col-4': $q.screen.lt.xl && $q.screen.gt.sm,
+            'col-6': $q.screen.lt.sm,
             'q-ma-xs': $q.screen.lt.xl,
           }"
         >
@@ -55,13 +55,12 @@
         </basic-card>
 
         <basic-card
-          borderSecondary="true"
+          borderPrimary="true"
           :class="{
             'col-3': !$q.screen.lt.xl,
-            'col-4': $q.screen.lt.xl && $q.screen.gt.xs,
-            'col-6': $q.screen.lt.xs,
+            'col-4': $q.screen.lt.xl && $q.screen.gt.sm,
+            'col-6': $q.screen.lt.sm,
             'q-ma-xs': $q.screen.lt.xl,
-            'order-last': $q.screen.lt.xl,
           }"
         >
           <template #cardDescription>
@@ -80,8 +79,8 @@
           borderPrimary="true"
           :class="{
             'col-3': !$q.screen.lt.xl,
-            'col-4': $q.screen.lt.xl && $q.screen.gt.xs,
-            'col-6': $q.screen.lt.xs,
+            'col-4': $q.screen.lt.xl && $q.screen.gt.sm,
+            'col-6': $q.screen.lt.sm,
             'q-ma-xs': $q.screen.lt.xl,
           }"
         >

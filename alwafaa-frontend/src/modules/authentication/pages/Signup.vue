@@ -7,6 +7,7 @@
       <q-form
         class="q-gutter-md flex justify-center signup"
         @submit.prevent="handleSubmit(submitForm)"
+        ref="signupForm"
       >
         <h3 class="title">{{ $t("signupTitle") }}</h3>
         <ValidationProvider
@@ -267,7 +268,9 @@ export default {
     };
   },
   methods: {
-    submitForm() {
+    async submitForm() {
+      this.$q.loading.show();
+
       const user = {
         firstname: this.firstname,
         lastname: this.lastname,
@@ -280,7 +283,27 @@ export default {
         country: this.country,
         city: this.city,
       };
-      this.$store.dispatch("auth/signup", user);
+
+      try {
+        await this.$store.dispatch("auth/signup", user);
+
+        this.$router.push({ name: "login" });
+
+        this.$q.notify({
+          type: "positive",
+          message: "You registered successfully, confirm your email to login",
+        });
+      } catch (error) {
+        this.$q.loading.hide();
+
+        this.$q.notify({
+          type: "negative",
+          message: error.message
+            ? error.message
+            : "Error while registering, Try Again",
+        });
+      }
+      this.$q.loading.hide();
     },
   },
 };

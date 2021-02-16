@@ -6,7 +6,12 @@ const routes = [
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "home", component: () => import("pages/Home.vue") },
+      {
+        path: "",
+        name: "home",
+        component: () => import("pages/Home.vue"),
+      },
+      { path: "home", redirect: "/" },
       ...authRoutes,
       ...studentRoutes,
     ],

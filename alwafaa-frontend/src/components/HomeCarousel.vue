@@ -9,7 +9,7 @@
       arrows
       transition-prev="slide-right"
       transition-next="slide-left"
-      control-text-color="orange"
+      control-text-color="orange-1"
       @mouseenter="autoplay = false"
       @mouseleave="autoplay = true"
     >

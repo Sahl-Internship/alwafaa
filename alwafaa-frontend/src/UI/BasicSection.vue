@@ -1,7 +1,12 @@
 <template>
   <div class="section-container">
     <div class="row q-px-xl q-my-lg" v-if="title">
-      <h4 class="col q-my-none section-title">{{ title }}</h4>
+      <div
+        class="col q-my-none section-title"
+        :class="!$q.screen.lt.md ? 'text-h4' : 'text-h5'"
+      >
+        {{ title }}
+      </div>
       <div class="column items-end">
         <q-btn dense flat color="primary" :label="link" />
       </div>

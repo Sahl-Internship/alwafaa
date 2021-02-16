@@ -4,22 +4,56 @@
 
     <courses-section class="q-mt-xl"></courses-section>
 
-    <div class="flex justify-center items-center register-section">
-      <q-img
-        src="~/assets/registerBlockImg.png"
-        style="height: 220px; max-width: 200px"
-      />
-      <div class="q-mx-xl q-px-lg column items-center">
-        <div class="text-h5">Gain More Experience</div>
-        <div class="text-h3 ready-text">Are you Ready?</div>
+    <!-- <div class="flex justify-center items-center register-section"> -->
+    <div
+      class="row justify-center items-center q-py-xl q-px-xl wrap register-section"
+      :class="!$q.screen.lt.xl ? 'register-section-height' : ''"
+    >
+      <div class="col-3 column">
+        <q-img
+          src="~/assets/registerBlockImg.png"
+          class="register-section-img self-end"
+        />
       </div>
-      <q-btn
-        type="button"
-        label="Register"
-        to="/signup"
-        color="secondary"
-        class="register-btn"
-      />
+      <div
+        :class="{
+          'col-9': !$q.screen.lt.xl,
+          'col-12': $q.screen.lt.xl,
+        }"
+      >
+        <div class="row justify-center items-center wrap">
+          <div
+            class="column items-center"
+            :class="$q.screen.lt.md ? 'col-12' : 'col-7'"
+          >
+            <div
+              :class="{
+                'text-h5': !$q.screen.lt.sm,
+                'text-h6': $q.screen.lt.sm,
+              }"
+            >
+              Gain More Experience
+            </div>
+            <div
+              :class="{
+                'text-h3': !$q.screen.lt.xl,
+                'text-h4': $q.screen.lt.xl && !$q.screen.lt.sm,
+                'text-h5': $q.screen.lt.sm,
+                'ready-text': true,
+              }"
+            >
+              Are you Ready?
+            </div>
+          </div>
+          <q-btn
+            type="button"
+            label="Register"
+            to="/signup"
+            color="secondary"
+            class="col-2 register-btn"
+          />
+        </div>
+      </div>
     </div>
 
     <academy-info-section></academy-info-section>
@@ -32,7 +66,7 @@
           <div
             class="column register-text"
             :class="{
-              'text-h3': !$q.screen.gt.xl,
+              'text-h3': !$q.screen.lt.xl,
               'text-h4': $q.screen.lt.xl && !$q.screen.lt.sm,
               'text-h5': $q.screen.lt.sm,
             }"
@@ -70,13 +104,24 @@ export default {
     AcademyInfoSection,
     HomeCarousel,
   },
+  mounted() {
+    console.log("home");
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .register-section {
   background-color: $orange-1;
-  height: 350px;
+  &.register-section-height {
+    height: 350px;
+  }
+  .register-section-img {
+    min-height: 116px;
+    min-width: 100px;
+    max-width: 250px;
+    max-height: 270px;
+  }
   .ready-text {
     color: $secondary;
   }
