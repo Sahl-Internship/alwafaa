@@ -4,8 +4,13 @@ import studentRoutes from 'src/modules/student/router'
 const routes = [{
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Home.vue') },
+    children: [{
+        path: '',
+        component: () => import('pages/Home.vue'),
+        // meta: {
+        //   requiresAuth: true
+        // }
+      },
       ...authRoutes,
       ...studentRoutes
     ]

@@ -19,9 +19,20 @@ export default {
     try {
       const response = await handleLogin(user);
       console.log(response);
-      const token = response.data.access_token;
-      // localStorage.setItem('access_token', token)
+      const token = response.data.token;
+      console.log('token', token);
+      console.log('data', response.data)
+      localStorage.setItem('access_token', token)
       context.commit('loginState', token)
+    } catch (error) {
+      console.log('error')
+      console.log(error)
+    }
+  },
+  async resetPass(context, password) {
+    try {
+      const response = await handleResetPass(password)
+      console.log(response)
     } catch (error) {
       console.log('error')
       console.log(error)

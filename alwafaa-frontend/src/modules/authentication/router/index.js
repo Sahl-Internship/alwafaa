@@ -1,5 +1,4 @@
-const authRoutes = [
-  {
+const authRoutes = [{
     path: '/signup',
     component: () => import('src/modules/authentication/pages/Signup.vue')
   },
@@ -10,6 +9,10 @@ const authRoutes = [
   {
     path: '/forgotPass',
     component: () => import('src/modules/authentication/pages/ForgotPassword.vue')
+  },
+  {
+    path: '/reset-pass',
+    component: () => import('src/modules/authentication/pages/ResetPassword.vue')
   }
 ]
 export default authRoutes

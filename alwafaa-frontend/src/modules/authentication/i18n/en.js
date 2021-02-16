@@ -1,5 +1,5 @@
 export default {
-  brand: 'Alwafaa',
+  brand: 'Iqraa',
   signupTitle: 'SIGNUP',
   loginTitle: 'LOGIN',
   forgotPassword: 'Forgot Password ?',
@@ -24,5 +24,7 @@ export default {
   googleSignup: 'With Google',
   facebookSignup: 'With Facebook',
   signup: 'Signup',
-  login: 'Login'
+  login: 'Login',
+  resetPass: 'Reset your password',
+  change: 'Reset',
 }

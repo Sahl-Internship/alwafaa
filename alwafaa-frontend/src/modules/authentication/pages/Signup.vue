@@ -214,14 +214,26 @@
             :error="invalid && validated"
             :error-message="errors[0]"
           >
-            <q-radio keep-color v-model="gender" val="1" label="Male" color="secondary" />
-            <q-radio keep-color v-model="gender" val="2" label="Female" color="secondary" />
+            <q-radio
+              keep-color
+              v-model="gender"
+              val="1"
+              label="Male"
+              color="secondary"
+            />
+            <q-radio
+              keep-color
+              v-model="gender"
+              val="2"
+              label="Female"
+              color="secondary"
+            />
           </q-field>
         </ValidationProvider>
 
         <q-btn :label="$t('submit')" type="submit" class="form-btn"></q-btn>
 
-        <p class="separator">{{ $t('useSocial') }}</p>
+        <p class="separator">{{ $t("useSocial") }}</p>
         <google-btn status="signup"></google-btn>
         <facebook-btn status="signup"></facebook-btn>
       </q-form>
@@ -281,21 +293,21 @@ export default {
 // }
 .signup {
   width: 70%;
-  border: solid 4px $primary;
+  border: solid 4px $ground;
   border-radius: 7px;
   margin: 20px 0 0 0;
   padding: 0 15px 30px 0;
   background-color: #fff;
 
-    .title {
-      color: $primary;
-      margin: 20px 0;
-    }
+  .title {
+    color: $primary;
+    margin: 20px 0;
+  }
 
-    .input-validation {
-      width: 85%;
-      margin-bottom: 10px;
-    }
+  .input-validation {
+    width: 85%;
+    margin-bottom: 10px;
+  }
 
   .input-validation {
     width: 85%;
@@ -303,7 +315,7 @@ export default {
   }
 
   .form-input {
-    background-color: $ground;
+    background-color: #ddd;
     padding-bottom: 0;
   }
 

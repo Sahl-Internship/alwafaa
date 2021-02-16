@@ -94,7 +94,19 @@ export default {
         email: this.email,
         password: this.password,
       };
-      this.$store.dispatch("auth/login", user);
+      this.$store
+        .dispatch("auth/login", user)
+        .then(() => {
+          this.$router.replace("/");
+        })
+        .catch((error) => {
+          console.log("Error", error);
+        });
+    },
+  },
+  computed: {
+    loggedIn() {
+      this.$store.getters.isAuthenticated;
     },
   },
 };
@@ -105,7 +117,7 @@ export default {
   margin: 0px 15%;
   margin-top: 30px;
   border-radius: 10px;
-  border: 3px solid $primary;
+  border: 3px solid $ground;
   background-color: #fff;
   z-index: 100;
   h2 {

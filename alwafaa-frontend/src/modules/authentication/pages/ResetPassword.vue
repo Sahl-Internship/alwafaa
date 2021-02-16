@@ -2,24 +2,23 @@
   <auth-container>
     <form
       class="form-container login-show col-12 col-md"
-      @submit.prevent="verify"
+      @submit.prevent="reset"
     >
-      <h2>Verify Email</h2>
+      <h2>{{ $t("resetPass") }}</h2>
       <validation-provider v-slot="v">
         <q-input
-          v-model="email"
+          v-model="password"
           outlined
-          type="email"
+          type="password"
           :rules="[(val) => !!val || 'Field is required']"
           color="secondary"
-          label="Email"
-          class="e-mail"
+          :label="$t('password')"
+          class="input-field"
         >
           <span>{{ v.errors[0] }}</span>
         </q-input>
       </validation-provider>
-      <p v-if="!formIsValid">*Enter valid email</p>
-      <button class="login">Send verification</button>
+      <button class="reset">{{ $t("change") }}</button>
     </form>
   </auth-container>
 </template>
@@ -39,21 +38,21 @@ export default {
   },
   data() {
     return {
-      email: "",
+      password: "",
       formIsValid: true,
     };
   },
   methods: {
-    verify() {
+    reset() {
       this.formIsValid = true;
-      if (
-        this.email === "" ||
-        !this.email.includes("@") ||
-        this.password.length < 6
-      ) {
+      if (this.password.length < 6) {
         this.formIsValid = false;
         return;
       }
+      const password = {
+        password: this.password,
+      };
+      this.$store.dispatch("auth/resetPass", password);
     },
   },
 };
@@ -64,7 +63,7 @@ export default {
   margin: 0px 15%;
   margin-top: 30px;
   border-radius: 10px;
-  border: 3px solid $primary;
+  border: 3px solid $ground;
   background: #fff;
   z-index: 3;
   transform: translate(0, 50%);
@@ -80,7 +79,7 @@ export default {
       font-size: 25px;
     }
   }
-  .e-mail {
+  .input-field {
     width: 80%;
     margin: 20px 10%;
     background: #eee;
@@ -91,7 +90,7 @@ export default {
     margin: 0 10%;
     color: $negative;
   }
-  .login {
+  .reset {
     width: 80%;
     margin: 20px 10%;
     margin-top: 10px;

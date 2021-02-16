@@ -1,5 +1,5 @@
 export default {
-  brand: 'الوفاء',
+  brand: 'اقرأ',
   signupTitle: 'تسجيل',
   loginTitle: 'تسجيل الدخول',
   forgotPassword: 'نسيت كلمة المرور؟',
@@ -27,5 +27,7 @@ export default {
   facebookSignup: 'بواسطة فيسبوك',
   signup: 'التسجيل',
   login: 'الدخول',
+  resetPass: 'تغير كلمة السر',
+  change: 'تغير',
   or: 'او',
 }

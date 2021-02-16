@@ -1,3 +1,4 @@
+import store from 'src/store/authentication'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -14,9 +15,12 @@ Vue.use(VueRouter)
  * with the Router instance.
  */
 
-export default function (/* { store, ssrContext } */) {
+export default function ( /* { store, ssrContext } */ ) {
   const Router = new VueRouter({
-    scrollBehavior: () => ({ x: 0, y: 0 }),
+    scrollBehavior: () => ({
+      x: 0,
+      y: 0
+    }),
     routes: [
       ...routes
     ],
@@ -24,9 +28,23 @@ export default function (/* { store, ssrContext } */) {
     // Leave these as they are and change in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
+
+
     mode: process.env.VUE_ROUTER_MODE,
     base: process.env.VUE_ROUTER_BASE
   })
-
+  Router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      // this route requires auth, check if logged in
+      // if not, redirect to login page.
+      if (!store.getters.isAuthenticated) {
+        next()
+      } else {
+        next('/login')
+      }
+    } else {
+      next() // make sure to always call next()!
+    }
+  })
   return Router
 }
