@@ -1,22 +1,21 @@
 <template>
-  <div class="q-pa-md">
-    <!-- <div class="row justify-around"> -->
-    <div class="row justify-between">
-      <div class="col right-section">
-        <!-- <div class="row justify-center"> -->
-        <div class="row justify-center">
-          <q-img
-            alt="elearning-icon"
-            src="~assets/elearning-icon-4.svg"
-            class="fixed-bottom auth-page-img"
-            :class="checkDirection? 'flip-right' : ''"
-          />
-        </div>
-      </div>
-      <div class="col">
-        <div class="row flex justify-start">
-          <slot></slot>
-        </div>
+  <div class="row justify-center items-center auth-container">
+    <div
+      class="col-6 column justify-center"
+      :class="{
+        'right-section': $q.screen.lt.sm,
+      }"
+    >
+      <q-img
+        alt="elearning-icon"
+        src="~assets/auth-logo.png"
+        class="self-center auth-page-img"
+      />
+    </div>
+
+    <div class="col-xs-9 col-sm-6 col-md-6 col-lg-6">
+      <div class="row flex justify-start">
+        <slot></slot>
       </div>
     </div>
   </div>
@@ -24,30 +23,33 @@
 
 <script>
 export default {
-  computed: {
-    checkDirection () {
-      console.log(this.$q.lang)
-      return this.$q.lang.rtl
-    }
-  }
-}
+  name: "AuthContainer",
+};
 </script>
 
 <style lang="scss" scoped>
-  .auth-page-img {
-    width: 80%;
-  }
+.auth-container {
+  height: calc(100vh - 50px);
+}
 
-  .flip-right {
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
-    float: none;
-  }
+.auth-page-img {
+  width: 40%;
+}
 
-  @media (max-width: 700px) {
-    .right-section {
-      display: none;
-    }
-  }
+.right-section {
+  display: none;
+}
+
+// .flip-right {
+//   transform: scaleX(-1);
+//   filter: FlipH;
+//   -ms-filter: "FlipH";
+//   float: none;
+// }
+
+// @media (max-width: 700px) {
+//   .right-section {
+//     display: none;
+//   }
+// }
 </style>

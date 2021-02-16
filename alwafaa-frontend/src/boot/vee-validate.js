@@ -1,36 +1,33 @@
-import Vue from 'vue'
+import Vue from "vue";
 
-import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
+import { ValidationProvider, ValidationObserver, extend } from "vee-validate";
 
-import {
-  required,
-  email
-} from 'vee-validate/dist/rules'
+import { required, email } from "vee-validate/dist/rules";
 
-Vue.component('ValidationObserver', ValidationObserver)
-Vue.component('ValidationProvider', ValidationProvider)
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.component("ValidationProvider", ValidationProvider);
 
-extend('required', {
+extend("required", {
   ...required,
-  message: 'This field is required'
-})
+  message: "This field is required",
+});
 
-extend('email', {
+extend("email", {
   ...email,
-  message: 'This field must be a valid email'
-})
+  message: "This field must be a valid email",
+});
 
-extend('confirmPass', {
-  params: ['target'],
-  validate (value, { target }) {
-    return value === target
+extend("confirmPass", {
+  params: ["target"],
+  validate(value, { target }) {
+    return value === target;
   },
-  message: 'Password confirmation does not match'
-})
+  message: "Password confirmation does not match",
+});
 
-extend('pass', {
-  validate (value) {
-    return value.length > 6
+extend("pass", {
+  validate(value) {
+    return value.length > 6;
   },
-  message: 'Password must have minimum 6 characters'
-})
+  message: "Password must have minimum 6 characters",
+});
