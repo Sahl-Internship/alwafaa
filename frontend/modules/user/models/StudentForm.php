@@ -34,7 +34,8 @@ class StudentForm extends Model
     public function rules()
     {
         return [
-            [['firstname','lastname','username','email','password','phone','gender'],'required'],
+            [['firstname','lastname','email','password','phone','gender'],'required'],
+//            [['username'],'required'],
 
             [['firstname','middlename','lastname'],'string','min'=>2,'max'=>15],
 
@@ -59,7 +60,7 @@ class StudentForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Yii::t('frontend', 'Username'),
+//            'username' => Yii::t('frontend', 'Username'),
             'email' => Yii::t('frontend', 'E-mail'),
             'password' => Yii::t('frontend', 'Password'),
             'firstname' => Yii::t('common', 'Firstname'),
@@ -79,7 +80,7 @@ class StudentForm extends Model
         if ($this->validate()) {
             $shouldBeActivated = $this->shouldBeActivated();
             $user = new User();
-            $user->username = $this->username;
+            $user->username = $this->username ?? strstr($this->email, '@', true);
             $user->email = $this->email;
             $user->status = $shouldBeActivated ? User::STATUS_NOT_ACTIVE : User::STATUS_ACTIVE;
             $user->setPassword($this->password);
@@ -96,7 +97,7 @@ class StudentForm extends Model
             $user->userProfile->locale = 'ar-AR';
             $user->userProfile->gender = $this->gender;
             $user->userProfile->country = $this->country;
-            $user->userProfile->city = $this->city;
+//            $user->userProfile->city = $this->city;
             $user->userProfile->birthdate = $this->birthdate;
             $user->userProfile->save(false);
             //link to parent account

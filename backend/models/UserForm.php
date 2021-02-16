@@ -28,7 +28,7 @@ class UserForm extends Model
     {
         return [
             ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'required'],
+//            ['username', 'required'],
             ['username', 'unique', 'targetClass' => User::class, 'filter' => function ($query) {
                 if (!$this->getModel()->isNewRecord) {
                     $query->andWhere(['not', ['id' => $this->getModel()->id]]);
