@@ -19,19 +19,20 @@ class BackendAsset extends AssetBundle
     /**
      * @var string
      */
-    public $sourcePath = '@backend/web/bundle';
-
+//    public $sourcePath = '@backend/web/bundle';
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
     /**
      * @var array
      */
     public $css = [
-        'style.css'
+        'css/style.css'
     ];
     /**
      * @var array
      */
     public $js = [
-        'app.js'
+        'js/app.js'
     ];
 
     public $publishOptions = [

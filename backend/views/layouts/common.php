@@ -30,8 +30,6 @@ if(Yii::$app->user->identity->userProfile->locale == 'en-US') {
 
 }else{
     $bundle = BackendArabic::register($this);
-//    $bundle = BackendAsset::register($this);
-
 }
 
 Yii::info(Yii::$app->components["i18n"]["translations"]['*']['class'], 'test');
