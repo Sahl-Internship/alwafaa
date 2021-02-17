@@ -16,7 +16,7 @@
               to="/profile"
               class="link"
               :class="{ active: isSamePage }"
-              >MY INFO</router-link
+              >My Info</router-link
             >
           </li>
           <li class="user-item" @click="toggle('course')">
@@ -24,7 +24,7 @@
               to="/profile/my_courses"
               class="link"
               :class="{ active: isCourse }"
-              >MY COURSES</router-link
+              >My Courses</router-link
             >
           </li>
           <li class="user-item" @click="toggle('setting')">
@@ -32,7 +32,7 @@
               to="/profile/pre-courses"
               class="link"
               :class="{ active: isPreCourse }"
-              >PRE COURSES</router-link
+              >Pre Courses</router-link
             >
           </li>
         </ul>
@@ -55,7 +55,7 @@
                   <q-input
                     outlined
                     v-model="username"
-                    label="Username"
+                    :label="$t('username')"
                     :dense="dense"
                     class="input-field col-12 col-md"
                     color="secondary"
@@ -71,7 +71,7 @@
                   <q-input
                     outlined
                     v-model="email"
-                    label="Email"
+                    :label="$t('email')"
                     :dense="dense"
                     class="input-field col-12 col-md email"
                     color="secondary"
@@ -83,17 +83,16 @@
               <div class="password">
                 <ValidationProvider
                   class="input-validation"
-                  name="confirm"
                   rules="required|pass"
                   v-slot="{ errors, invalid, validated }"
                 >
                   <q-input
-                    v-model="password"
+                    v-model="currentPass"
                     outlined
                     dense
-                    :type="isPwd ? 'password' : 'text'"
+                    :type="isCPwd ? 'password' : 'text'"
                     class="form-input col-12 col-md"
-                    label="Current Password"
+                    :label="$t('currentPass')"
                     color="secondary"
                     :error="invalid && validated"
                     :error-message="errors[0]"
@@ -120,7 +119,7 @@
                     dense
                     :type="isPwd ? 'password' : 'text'"
                     class="form-input col-12 col-md"
-                    :label="$t('password')"
+                    :label="$t('newPass')"
                     color="secondary"
                     :error="invalid && validated"
                     :error-message="errors[0]"
@@ -151,7 +150,7 @@
             </form>
           </ValidationObserver>
         </div>
-        <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400">
+        <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="600">
           <q-scroll-area
             style="
               height: calc(100% - 150px);
@@ -170,18 +169,18 @@
 
               <q-item active clickable v-ripple>
                 <q-item-section avatar>
-                  <q-icon name="star" />
+                  <q-icon name="ring" />
                 </q-item-section>
 
-                <q-item-section> Star </q-item-section>
+                <q-item-section> Notification </q-item-section>
               </q-item>
 
               <q-item clickable v-ripple>
                 <q-item-section avatar>
-                  <q-icon name="send" />
+                  <q-icon name="message" />
                 </q-item-section>
 
-                <q-item-section> Send </q-item-section>
+                <q-item-section> Messages </q-item-section>
               </q-item>
 
               <q-item clickable v-ripple>
@@ -222,8 +221,8 @@ export default {
       isPreCourse: false,
       username: "",
       email: "",
+      currentPass: "",
       password: "",
-      confirmPass: "",
       isPwd: true,
       isCPwd: true,
       dense: true,
@@ -256,12 +255,12 @@ export default {
       if (
         this.username === "" ||
         this.email === "" ||
-        this.password === "" ||
-        this.confirmPass === ""
+        this.currentPass === "" ||
+        this.password === ""
       ) {
         return;
       }
-      console.log("clicke");
+      console.log("click");
     },
   },
 };
