@@ -23,6 +23,7 @@ use rmrevin\yii\fontawesome\FAS;
 use common\components\keyStorage\FormModel;
 use common\components\keyStorage\FormWidget;
 
+
 $bundle = BackendAsset::register($this);
 Yii::info(Yii::$app->components["i18n"]["translations"]['*']['class'], 'test');
 
