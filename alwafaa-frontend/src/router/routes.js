@@ -1,17 +1,18 @@
 import authRoutes from "src/modules/authentication/router";
 import studentRoutes from "src/modules/student/router";
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
-    children: [
-      {
+    children: [{
         path: "",
         name: "home",
         component: () => import("pages/Home.vue"),
       },
-      { path: "home", redirect: "/" },
+      {
+        path: "home",
+        redirect: "/"
+      },
       ...authRoutes,
       ...studentRoutes,
     ],

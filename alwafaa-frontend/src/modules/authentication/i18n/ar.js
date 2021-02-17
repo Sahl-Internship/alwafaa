@@ -27,5 +27,7 @@ export default {
   facebookSignup: "بواسطة فيسبوك",
   signup: "التسجيل",
   login: "الدخول",
+  resetPass: 'تغير كلمة السر',
+  change: 'تغير',
   or: "او",
 };

@@ -78,9 +78,9 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
-// .search-input {
-//   background-color: $ground;
-// }
+.link {
+  color: #fff;
+  text-decoration: none;
+}
 </style>

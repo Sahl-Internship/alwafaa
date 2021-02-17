@@ -25,4 +25,6 @@ export default {
   facebookSignup: "With Facebook",
   signup: "Signup",
   login: "Login",
+  resetPass: 'Reset password',
+  change: 'Reset',
 };

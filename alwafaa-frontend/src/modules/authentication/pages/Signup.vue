@@ -184,14 +184,14 @@
               keep-color
               v-model="gender"
               val="1"
-              label="Male"
+              :label="$t('male')"
               color="grey"
             />
             <q-radio
               keep-color
               v-model="gender"
               val="2"
-              label="Female"
+              :label="$t('female')"
               color="grey"
             />
           </q-field>
