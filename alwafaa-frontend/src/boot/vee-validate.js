@@ -1,71 +1,55 @@
-import Vue from 'vue'
+import Vue from "vue";
 import {
-
   ValidationProvider,
   ValidationObserver,
-  extend
-} from 'vee-validate'
-import VueI18n from 'vue-i18n'
-import validationMessagesEn from 'vee-validate/dist/locale/en.json';
-import validationMessagesAr from 'vee-validate/dist/locale/ar.json'
-import {
-  required,
-  email
-} from 'vee-validate/dist/rules'
+  extend,
+  localize,
+} from "vee-validate";
+import { required, email, min, confirmed } from "vee-validate/dist/rules";
 
 Vue.component("ValidationObserver", ValidationObserver);
 Vue.component("ValidationProvider", ValidationProvider);
 
-const i18n = new VueI18n({
-  // locale: 'en',
-  messages: {
-    en: {
-      validation: validationMessagesEn
+const dictionary = {
+  en: {
+    messages: {
+      required: "*This field is required",
+      email: "*not valid email",
+      min: "*Password must have minimum 6 characters",
+      confirmed: "*Password confirmation does not match",
     },
-    ar: {
-      validation: validationMessagesAr
-    }
-  }
-});
-i18n.locale = 'en'
-
-extend('required', {
-  ...required,
-
-  // message: 'This field is required'
-  message() {
-    return i18n.t('validation.messages.required')
-  }
-
-})
-
-extend("email", {
-  ...email,
-  // message: 'This field must be a valid email'
-  message() {
-    return i18n.t('validation.messages.email')
-  }
-})
-
-extend('confirmPass', {
-  params: ['target'],
-  validate(value, {
-    target
-  }) {
-    return value === target
   },
-  // message: 'Password confirmation does not match'
-  message() {
-    return i18n.t('validation.messages.confirmed')
-  }
-})
-
-extend('pass', {
-  validate(value) {
-    return value.length > 6
+  ar: {
+    messages: {
+      required: "*مطلوب",
+      email: "*بريد إلكتروني غير صحيح",
+      min: "*كلمة المرور لا تقل عن 7 حروف",
+      confirmed: "*كلمة المرور غير متطابقة",
+    },
   },
-  // message: 'Password must have minimum 6 characters'
-  message() {
-    return i18n.t('validation.messages.min')
-  }
-})
+};
+
+extend("required", required);
+
+extend("email", email);
+
+extend("min", min);
+
+extend("confirmed", confirmed);
+
+// extend("confirmPass", {
+//   params: ["target"],
+//   validate(value, { target }) {
+//     return value === target;
+//   },
+// });
+
+// extend("pass", {
+//   validate(value) {
+//     return value.length > 6;
+//   },
+//   // message: i18n.t("formValidation.passLengthErr"),
+// });
+
+localize("ar");
+localize(dictionary);

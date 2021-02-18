@@ -248,6 +248,7 @@ export default {
       }
     },
     submitForm() {
+      // eslint-disable-next-line no-unused-vars
       const user = {
         username: this.username,
         email: this.email,

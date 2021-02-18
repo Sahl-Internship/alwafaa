@@ -11,6 +11,7 @@
         <h4 class="col-12 q-my-lg title">{{ $t("resetPass") }}</h4>
 
         <ValidationProvider
+          name="password"
           class="col-10"
           rules="required|password"
           v-slot="{ errors, invalid, validated }"
@@ -34,7 +35,7 @@
           :label="$t('change')"
           type="submit"
           color="primary"
-          text-color="white"
+          text-color="grey-1"
           class="col-10 form-btn"
         ></q-btn>
       </q-form>

@@ -25,6 +25,12 @@ export default {
   facebookSignup: "With Facebook",
   signup: "Signup",
   login: "Login",
-  resetPass: 'Reset password',
-  change: 'Reset',
+  resetPass: "Reset password",
+  change: "Reset",
+  formValidation: {
+    requiredErr: "*This field is required",
+    emailErr: "*not valid email",
+    confirmPassErr: "*Password confirmation does not match",
+    passLengthErr: "*Password must have minimum 6 characters",
+  },
 };

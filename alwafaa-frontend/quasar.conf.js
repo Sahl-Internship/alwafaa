@@ -7,7 +7,7 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
 
-module.exports = function ( /* ctx */ ) {
+module.exports = function (/* ctx */) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -18,7 +18,14 @@ module.exports = function ( /* ctx */ ) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
-    boot: ["i18n", "axios", "vee-validate", "hello", "notify-defaults"],
+    boot: [
+      "i18n",
+      "axios",
+      "vee-validate",
+      "hello",
+      "notify-defaults",
+      "flag-icons",
+    ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ["app.scss"],
@@ -66,6 +73,15 @@ module.exports = function ( /* ctx */ ) {
           exclude: /node_modules/,
         });
       },
+      chainWebpack(chain) {
+        chain.module
+          .rule("images")
+          .use("url-loader")
+          .tap((options) => {
+            options.name = "img/[path][name].[ext]";
+            return options;
+          });
+      },
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
@@ -79,7 +95,7 @@ module.exports = function ( /* ctx */ ) {
     framework: {
       // iconSet: 'material-icons', // Quasar icon set
       iconSet: "fontawesome-v5",
-      lang: "en-us", // Quasar language pack
+      lang: "ar", // Quasar language pack
       config: {
         screen: {
           bodyClasses: true, // <<< add this
@@ -123,7 +139,8 @@ module.exports = function ( /* ctx */ ) {
         orientation: "portrait",
         background_color: "#ffffff",
         theme_color: "#027be3",
-        icons: [{
+        icons: [
+          {
             src: "icons/icon-128x128.png",
             sizes: "128x128",
             type: "image/png",
@@ -186,7 +203,7 @@ module.exports = function ( /* ctx */ ) {
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
       nodeIntegration: true,
 
-      extendWebpack( /* cfg */ ) {
+      extendWebpack(/* cfg */) {
         // do something with Electron main process Webpack cfg
         // chainWebpack also available besides this extendWebpack
       },
