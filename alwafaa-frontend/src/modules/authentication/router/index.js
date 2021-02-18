@@ -10,6 +10,7 @@ const authRoutes = [
     name: "login",
     component: () => import("src/modules/authentication/pages/Login.vue"),
     meta: { requiresUnAuth: true },
+    props: true,
   },
   {
     path: "/forgotPass",
