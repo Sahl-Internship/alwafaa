@@ -1,9 +1,9 @@
 <template>
   <div class="column footer">
-    <!-- <q-avatar size="90px" class="self-center logo"> -->
-    <!-- eslint-disable-next-line prettier/prettier -->
-      <!-- <img src="~assets/logo.png">
-    </q-avatar> -->
+    <q-avatar size="xl" class="self-center q-mt-md logo">
+      <!-- eslint-disable-next-line prettier/prettier -->
+      <img src="~assets/logo.png">
+    </q-avatar>
 
     <p class="q-mt-sm self-center copy-rights">
       © 2021 Iqraaelearning.com, All Rights Reserved.
@@ -21,7 +21,7 @@
 
 <style lang="scss" scoped>
 .footer {
-  background-color: $grey;
+  background-color: $grey-3;
   margin-top: 50px;
 
   .copy-rights {

@@ -21,7 +21,10 @@
           'col-12': $q.screen.lt.xl,
         }"
       >
-        <div class="row justify-center items-center wrap">
+        <div
+          class="row items-center wrap"
+          :class="$q.screen.lt.md ? 'justify-center' : 'justify-start'"
+        >
           <div
             class="column items-center"
             :class="$q.screen.lt.md ? 'col-12' : 'col-7'"
@@ -30,6 +33,7 @@
               :class="{
                 'text-h5': !$q.screen.lt.sm,
                 'text-h6': $q.screen.lt.sm,
+                'exp-text': true,
               }"
             >
               Gain More Experience
@@ -49,8 +53,8 @@
             type="button"
             label="Register"
             to="/signup"
-            color="secondary"
-            class="col-2 register-btn"
+            color="primary"
+            class="col-2 self-center register-btn"
           />
         </div>
       </div>
@@ -112,7 +116,7 @@ export default {
 
 <style lang="scss" scoped>
 .register-section {
-  background-color: $orange-1;
+  background-color: $green;
   &.register-section-height {
     height: 350px;
   }
@@ -124,6 +128,10 @@ export default {
   }
   .ready-text {
     color: $secondary;
+  }
+
+  .exp-text {
+    color: $grey-4;
   }
 }
 

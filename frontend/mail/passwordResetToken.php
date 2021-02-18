@@ -7,32 +7,29 @@ use yii\helpers\Html;
 /* @var $token string */
 
 //$resetLink = Yii::$app->urlManager->createAbsoluteUrl(['@frontendUrl/user/sign-in/reset-password', 'token' => $token]);
-
+$link = \yii\helpers\Url::to(['http://localhost:4000/reset-password','token' => $token]);
 ?>
-
-<!--Hello --><?php //echo Html::encode($user->username) ?><!--,-->
-<!---->
-<!--Follow the link below to reset your password:-->
 <div class="root">
-    <h2 class="brand">Iqraa</h2>
+    <div class="logo-container">
+<!--        <div class="logo"></div>-->
+        <img src="layouts/img/2.svg" alt="Email">
+    </div>
     <div class="container">
-        <div class="icon">
-            <i class="fas fa-user-check"></i>
-        </div>
+        <img src="layouts/img/header.png" alt="Email">
+        <!-- <div class="logo-container">
+            <div class="logo"></div>
+        </div> -->
         <div class="content">
-            <h4>Email Verification</h4>
-            <h5>Hello, <?php echo Html::encode($user->username) ?> </h5>
-            <h5>Welcome to Iqraa</h5>
-            <p>Please Follow the link below to reset your password:</p>
-            <?php echo \yii\helpers\Url::to(['@frontendUrl/user/sign-in/reset-password','token' => $token]) ?>
-            <p>If you didn't signup to Iqraa please ignore this email</p>
-            <div>
-                <span>Iqraa support Team</span>
-            </div>
-            <!--            <div class="button">-->
-            <!--                <a href="--><?php //echo $content ?><!--">Verify Email</a>-->
-            <!--            --><?php //echo Html::a('Verify Email',$url) ?>
-            <!--            </div>-->
+            <h4>تغيير كلمة المرور</h4>
+
+            <?php echo '<h5> اهلا بك'. Html::encode($user->username) . '</h5>في اكاديمية اقرأ' ?>
+            <p>من فضلك اضغط على الزر التالي لتغيير كلمة المرور</p>
+            <div class="link"><a href=" <?php echo substr($link,1) ?>">تغيير</a></div>
+
+            <p> إذا لم تقم بالتسجيل في اكاديمية اقرأ من فضلك تجاهل هذا البريد الإلكتروني</p>
+            <p>شكراً لك.</p>
+            <hr>
+            <p class="p-footer">فريق دعم اقرأ <span>&copy;٢٠٢١</span></p>
         </div>
     </div>
 </div>
