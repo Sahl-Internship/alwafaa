@@ -5,11 +5,7 @@ import {
 export const handleLogin = (userData) => {
   return axios.post('http://endpoints.alwafaa.localhost/site/login', userData)
 }
-export const handleResetPass = (password) => {
-  return axios.post('', password)
-}
 
-// export const handleSignup = (userData) => {
 export const handleSignup = (data) => {
   return axios({
     url: "http://endpoints.alwafaa.localhost/signup",
@@ -24,3 +20,6 @@ export const handleForgotPass = (email) => {
     email
   );
 };
+export const handleResetPassword = (password) => {
+  return axios.post('', password)
+}

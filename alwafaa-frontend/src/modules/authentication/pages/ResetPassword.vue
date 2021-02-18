@@ -59,7 +59,7 @@ export default {
       const password = {
         password: this.password,
       };
-      this.$store.dispatch("auth/resetPass", password);
+      this.$store.dispatch("auth/resetPassword", password);
     },
   },
 };
