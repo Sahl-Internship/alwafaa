@@ -8,19 +8,19 @@
         class="row q-gutter-x-xs q-pb-lg justify-center reset-pass-form"
         @submit.prevent="handleSubmit(submitForm)"
       >
-        <h4 class="col-12 q-my-lg title">Verify Email</h4>
+        <h4 class="col-12 q-my-lg title">{{ $t("resetPass") }}</h4>
 
         <ValidationProvider
-          name="email"
+          name="password"
           class="col-10"
-          rules="required|email"
+          rules="required|password"
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
-            v-model="email"
+            v-model="password"
             outlined
-            type="email"
-            :label="$t('email')"
+            type="password"
+            :label="$t('password')"
             color="blue-1"
             bg-color="grey-1"
             :error="invalid && validated"
@@ -32,7 +32,7 @@
         <q-btn
           dense
           no-caps
-          label="Reset Password"
+          :label="$t('change')"
           type="submit"
           color="primary"
           text-color="grey-1"
@@ -52,15 +52,15 @@ export default {
   },
   data() {
     return {
-      email: "",
+      password: "",
     };
   },
   methods: {
     submitForm() {
-      const email = {
-        email: this.email,
+      const password = {
+        password: this.password,
       };
-      this.$store.dispatch("auth/forgotPassword", email);
+      this.$store.dispatch("auth/resetPass", password);
     },
   },
 };

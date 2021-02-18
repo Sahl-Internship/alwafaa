@@ -1,5 +1,5 @@
 <template>
-  <q-header elevated>
+  <q-header elevated class="header">
     <q-toolbar>
       <q-btn
         flat
@@ -11,15 +11,13 @@
         v-if="false"
       />
 
-      <q-avatar>
-        <img src="~/assets/logo.png" />
-      </q-avatar>
+      <q-btn flat round to="/home" class="avatar">
+        <q-avatar>
+          <img src="~/assets/logo.png" />
+        </q-avatar>
+      </q-btn>
 
       <q-space />
-
-      <!-- <q-toolbar-title>
-        {{ $t("brand") }}
-      </q-toolbar-title> -->
 
       <!-- <q-input
         outlined
@@ -45,8 +43,12 @@
         </template>
       </q-input> -->
 
-      <q-btn flat round dense label="En" @click="changeToEnglish" />
-      <q-btn flat round dense label="Ar" @click="changeToArabic" />
+      <q-btn flat round dense @click="changeLanguage('en-us', 'ar')">
+        <flag iso="us" />
+      </q-btn>
+      <q-btn flat round dense @click="changeLanguage('ar', 'en-us')">
+        <flag iso="eg" />
+      </q-btn>
 
       <q-btn
         v-if="isAuthed"
@@ -54,7 +56,8 @@
         no-caps
         label="Logout"
         type="button"
-        text-color="white"
+        text-color="grey-1"
+        size="17px"
         @click="handleLogout"
       />
       <q-btn
@@ -63,7 +66,8 @@
         no-caps
         :label="$t('login')"
         type="button"
-        text-color="white"
+        text-color="grey-1"
+        size="17px"
         to="/login"
       />
       <q-btn
@@ -72,7 +76,8 @@
         no-caps
         :label="$t('signup')"
         type="button"
-        text-color="white"
+        text-color="grey-1"
+        size="17px"
         to="/signup"
       />
     </q-toolbar>
@@ -80,6 +85,8 @@
 </template>
 
 <script>
+import { localize } from "vee-validate";
+
 export default {
   name: "TheHeader",
   data() {
@@ -93,18 +100,12 @@ export default {
     },
   },
   methods: {
-    async changeToEnglish() {
-      this.$i18n.locale = "en-us";
-      this.$i18n.fallbackLocale = "ar";
+    async changeLanguage(language, prevLang) {
+      this.$i18n.locale = language;
+      localize(language);
+      this.$i18n.fallbackLocale = prevLang;
       // set quasar's language too!!
-      await import("quasar/lang/en-us").then((lang) => {
-        this.$q.lang.set(lang.default);
-      });
-    },
-    async changeToArabic() {
-      this.$i18n.locale = "ar";
-      this.$i18n.fallbackLocale = "en-us";
-      await import("quasar/lang/ar").then((lang) => {
+      await import(`quasar/lang/${language}`).then((lang) => {
         this.$q.lang.set(lang.default);
       });
     },
@@ -114,9 +115,16 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
-// .search-input {
-//   background-color: $ground;
-// }
+.header {
+  // background-color: $grey-2;
+  .avatar {
+    background-color: $grey-1;
+    opacity: 0.7;
+  }
+  .link {
+    color: #fff;
+    text-decoration: none;
+  }
+}
 </style>

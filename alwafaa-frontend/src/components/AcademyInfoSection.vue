@@ -112,7 +112,7 @@ export default {
 
 <style lang="scss" scoped>
 .academy-info {
-  background-color: $secondary;
+  background-color: $grey-4;
   &.section-height {
     height: 350px;
   }

@@ -19,7 +19,9 @@ export default {
         throw error;
       }
 
-      this.$router.push({ name: "login" });
+      this.$router.push({
+        name: "login",
+      });
 
       Notify.create({
         type: "positive",
@@ -50,9 +52,14 @@ export default {
 
       const { token, ...user } = response.data.profile;
       localStorage.setItem("token", token);
-      context.commit("loginState", { token, user });
+      context.commit("loginState", {
+        token,
+        user,
+      });
 
-      this.$router.push({ name: "home" });
+      this.$router.push({
+        name: "home",
+      });
     } catch (error) {
       Loading.hide();
 

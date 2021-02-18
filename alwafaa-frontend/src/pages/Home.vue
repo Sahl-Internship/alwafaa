@@ -53,7 +53,7 @@
             type="button"
             label="Register"
             to="/signup"
-            color="secondary"
+            color="primary"
             class="col-2 self-center register-btn"
           />
         </div>

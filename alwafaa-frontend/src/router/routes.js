@@ -11,7 +11,10 @@ const routes = [
         name: "home",
         component: () => import("pages/Home.vue"),
       },
-      { path: "home", redirect: "/" },
+      {
+        path: "home",
+        redirect: "/",
+      },
       ...authRoutes,
       ...studentRoutes,
     ],

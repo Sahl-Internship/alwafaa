@@ -7,10 +7,12 @@
       <q-form
         class="row q-gutter-x-xs q-pb-lg justify-center signup"
         @submit.prevent="handleSubmit(submitForm)"
+        ref="signupForm"
       >
         <h4 class="col-12 q-my-lg title">{{ $t("signupTitle") }}</h4>
 
         <ValidationProvider
+          name="firstname"
           class="col-5"
           rules="required"
           v-slot="{ errors, invalid, validated }"
@@ -24,10 +26,12 @@
             bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
+            aria-errormessage=""
           />
         </ValidationProvider>
 
         <ValidationProvider
+          name="lastname"
           class="col-5"
           rules="required"
           v-slot="{ errors, invalid, validated }"
@@ -45,6 +49,7 @@
         </ValidationProvider>
 
         <ValidationProvider
+          name="email"
           class="col-10"
           rules="required|email"
           v-slot="{ errors, invalid, validated }"
@@ -81,9 +86,9 @@
         </ValidationProvider>
 
         <ValidationProvider
+          name="password"
           class="col-10"
-          name="confirm"
-          rules="required|pass"
+          rules="required|min:7"
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
@@ -108,8 +113,9 @@
         </ValidationProvider>
 
         <ValidationProvider
+          name="confirm-password"
           class="col-10 input-validation"
-          rules="required|confirmPass:@confirm"
+          rules="required|confirmed:password"
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
@@ -134,6 +140,7 @@
         </ValidationProvider>
 
         <ValidationProvider
+          name="countary"
           class="col-5"
           rules="required"
           v-slot="{ errors, invalid, validated }"
@@ -151,11 +158,12 @@
         </ValidationProvider>
 
         <ValidationProvider
+          name="birthdate"
           class="col-5"
           rules="required"
           v-slot="{ errors, invalid, validated }"
         >
-          <q-input
+          <!-- <q-input
             v-model="birthdate"
             outlined
             dense
@@ -165,15 +173,42 @@
             :hint="$t('birthdate')"
             :error="invalid && validated"
             :error-message="errors[0]"
-          />
+          /> -->
+          <q-input
+            outlined
+            dense
+            v-model="birthdate"
+            :label="$t('birthdate')"
+            mask="date"
+            :error="invalid && validated"
+            :error-message="errors[0]"
+          >
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-popup-proxy
+                  ref="qDateProxy"
+                  transition-show="scale"
+                  transition-hide="scale"
+                >
+                  <q-date v-model="birthdate">
+                    <div class="row items-center justify-end">
+                      <q-btn v-close-popup label="Close" color="primary" flat />
+                    </div>
+                  </q-date>
+                </q-popup-proxy>
+              </q-icon>
+            </template>
+          </q-input>
         </ValidationProvider>
 
         <ValidationProvider
+          name="gender"
           class="col-10"
           rules="required"
           v-slot="{ errors, invalid, validated }"
         >
           <q-field
+            dense
             :value="gender"
             hide-bottom-space
             borderless
@@ -184,14 +219,14 @@
               keep-color
               v-model="gender"
               val="1"
-              label="Male"
+              :label="$t('male')"
               color="grey"
             />
             <q-radio
               keep-color
               v-model="gender"
               val="2"
-              label="Female"
+              :label="$t('female')"
               color="grey"
             />
           </q-field>
@@ -203,8 +238,8 @@
           :label="$t('submit')"
           type="submit"
           color="primary"
-          text-color="white"
-          class="col-10 form-btn"
+          text-color="grey-1"
+          class="col-10 q-mt-md form-btn"
         ></q-btn>
 
         <!-- <google-btn status="signup"></google-btn> -->
@@ -250,6 +285,9 @@ export default {
 
       this.$store.dispatch("auth/signup", user);
     },
+  },
+  mounted() {
+    this.$refs.signupForm.validate();
   },
 };
 </script>
