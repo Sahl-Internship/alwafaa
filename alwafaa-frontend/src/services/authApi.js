@@ -22,3 +22,10 @@ export const handleForgotPass = (email) => {
     email
   );
 };
+
+export const handleResetPassword = (password) => {
+  return axios.post(
+    "http://endpoints.alwafaa.localhost/site/request-password-reset ",
+    password
+  );
+};

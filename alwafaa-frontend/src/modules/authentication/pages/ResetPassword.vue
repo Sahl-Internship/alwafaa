@@ -13,7 +13,7 @@
         <ValidationProvider
           name="password"
           class="col-10"
-          rules="required|password"
+          rules="required|min:7"
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
@@ -60,7 +60,7 @@ export default {
       const password = {
         password: this.password,
       };
-      this.$store.dispatch("auth/resetPass", password);
+      this.$store.dispatch("auth/resetPassword", password);
     },
   },
 };

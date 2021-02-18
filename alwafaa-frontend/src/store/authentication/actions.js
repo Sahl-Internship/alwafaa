@@ -3,6 +3,7 @@ import {
   handleSignup,
   handleLogin,
   handleForgotPass,
+  handleResetPassword,
 } from "src/services/authApi";
 
 export default {
@@ -75,6 +76,19 @@ export default {
 
     try {
       const response = await handleForgotPass(email);
+      console.log(response);
+    } catch (error) {
+      Loading.hide();
+      console.log(error);
+    }
+    Loading.hide();
+  },
+  async resetPassword(context, password) {
+    console.log(this.$route);
+    Loading.show();
+
+    try {
+      const response = await handleResetPassword(password);
       console.log(response);
     } catch (error) {
       Loading.hide();

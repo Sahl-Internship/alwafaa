@@ -19,10 +19,11 @@ const authRoutes = [
     meta: { requiresUnAuth: true },
   },
   {
-    path: "/reset-pass",
+    path: "/reset-password",
     name: "resetPass",
     component: () =>
       import("src/modules/authentication/pages/ResetPassword.vue"),
+    props: true,
   },
 ];
 export default authRoutes;
