@@ -39,7 +39,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 2;
     const STATUS_DELETED = 3;
 
-    const ROLE_USER = 'user';
+    const ROLE_STUDENT = 'student';
     const ROLE_MANAGER = 'manager';
     const ROLE_ADMINISTRATOR = 'administrator';
     const ROLE_TEACHER = 'teacher';
@@ -264,7 +264,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->refresh();
         Yii::$app->commandBus->handle(new AddToTimelineCommand([
-            'category' => 'user',
+            'category' => 'student',
             'event' => 'signup',
             'data' => [
                 'public_identity' => $this->getPublicIdentity(),
@@ -279,14 +279,14 @@ class User extends ActiveRecord implements IdentityInterface
         $this->trigger(self::EVENT_AFTER_SIGNUP);
         // Default role
         $auth = Yii::$app->authManager;
-        $auth->assign($auth->getRole(User::ROLE_USER), $this->getId());
+        $auth->assign($auth->getRole(User::ROLE_STUDENT), $this->getId());
     }
 
     public function TeacherSignup(array $profileData = [])
     {
         $this->refresh();
         Yii::$app->commandBus->handle(new AddToTimelineCommand([
-            'category' => 'user',
+            'category' => 'teacher',
             'event' => 'signup',
             'data' => [
                 'public_identity' => $this->getPublicIdentity(),
@@ -306,7 +306,7 @@ class User extends ActiveRecord implements IdentityInterface
 //        die;
 
         //add user based on the comming request role
-        // $auth->assign($auth->getRole(User::ROLE_USER), $this->getId());
+        // $auth->assign($auth->getRole(User::ROLE_STUDENT), $this->getId());
         $auth->assign($auth->getRole(User::ROLE_TEACHER), $this->getId());
     }
 

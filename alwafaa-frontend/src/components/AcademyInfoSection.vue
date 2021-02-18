@@ -19,7 +19,7 @@
     <div class="col-1">
       <q-icon
         :name="$q.screen.lt.xl ? 'fas fa-chevron-down' : 'fas fa-chevron-right'"
-        color="orange-1"
+        color="green"
         size="50px"
         class="arrow-icon"
         :class="$q.screen.lt.xl ? 'arrow-icon-down' : 'arrow-icon-right'"
@@ -112,12 +112,12 @@ export default {
 
 <style lang="scss" scoped>
 .academy-info {
-  background-color: $secondary;
+  background-color: $grey-4;
   &.section-height {
     height: 350px;
   }
   .info-title {
-    color: $orange-1;
+    color: $green;
     margin: 20px 0 10px;
     text-align: center;
   }

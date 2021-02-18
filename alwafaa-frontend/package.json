@@ -17,6 +17,7 @@
     "hellojs": "^1.18.8",
     "quasar": "^1.0.0",
     "vee-validate": "^3.4.5",
+    "vue-flag-icon": "^1.0.6",
     "vue-i18n": "^8.0.0"
   },
   "devDependencies": {

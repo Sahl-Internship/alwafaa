@@ -23,7 +23,7 @@
         transition-next="slide-left"
         swipeable
         animated
-        control-color="primary"
+        control-color="green"
         navigation
         padding
         arrows

@@ -11,6 +11,7 @@
         <h4 class="col-12 q-my-lg title">Verify Email</h4>
 
         <ValidationProvider
+          name="email"
           class="col-10"
           rules="required|email"
           v-slot="{ errors, invalid, validated }"
@@ -34,7 +35,7 @@
           label="Reset Password"
           type="submit"
           color="primary"
-          text-color="white"
+          text-color="grey-1"
           class="col-10 form-btn"
         ></q-btn>
       </q-form>

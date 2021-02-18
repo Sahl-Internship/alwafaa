@@ -14,7 +14,7 @@ use yii\web\AssetBundle;
 use yii\web\YiiAsset;
 use rmrevin\yii\fontawesome\NpmFreeAssetBundle;
 
-class BackendAsset extends AssetBundle
+class BackendArabic extends AssetBundle
 {
     /**
      * @var string
@@ -26,7 +26,7 @@ class BackendAsset extends AssetBundle
      * @var array
      */
     public $css = [
-        'css/style.css'
+        'css-ar/style.css'
     ];
     /**
      * @var array

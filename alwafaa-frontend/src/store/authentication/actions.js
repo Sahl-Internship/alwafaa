@@ -1,13 +1,9 @@
-import {
-  Notify,
-  Loading
-} from "quasar";
+import { Notify, Loading } from "quasar";
 import {
   handleSignup,
   handleLogin,
   handleForgotPass,
 } from "src/services/authApi";
-// import router from "../../router";
 
 export default {
   async signup(context, user) {
@@ -24,7 +20,7 @@ export default {
       }
 
       this.$router.push({
-        name: "login"
+        name: "login",
       });
 
       Notify.create({
@@ -36,8 +32,9 @@ export default {
 
       Notify.create({
         type: "negative",
-        message: error.message ?
-          error.message : "Error while registering, Try Again",
+        message: error.message
+          ? error.message
+          : "Error while registering, Try Again",
       });
     }
 
@@ -53,18 +50,15 @@ export default {
         throw err;
       }
 
-      const {
-        token,
-        ...user
-      } = response.data.profile;
+      const { token, ...user } = response.data.profile;
       localStorage.setItem("token", token);
       context.commit("loginState", {
         token,
-        user
+        user,
       });
 
       this.$router.push({
-        name: "home"
+        name: "home",
       });
     } catch (error) {
       Loading.hide();
@@ -87,5 +81,10 @@ export default {
       console.log(error);
     }
     Loading.hide();
+  },
+  logout({ commit }) {
+    commit("logout");
+    localStorage.removeItem("token");
+    this.$router.push({ name: "login" });
   },
 };

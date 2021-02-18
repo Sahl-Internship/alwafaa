@@ -11,6 +11,7 @@
         <h4 class="col-12 q-my-lg title">{{ $t("loginTitle") }}</h4>
 
         <ValidationProvider
+          name="email"
           class="col-10"
           rules="required|email"
           v-slot="{ errors, invalid, validated }"
@@ -29,9 +30,9 @@
         </ValidationProvider>
 
         <ValidationProvider
+          name="password"
           class="col-10"
-          name="confirm"
-          rules="required|pass"
+          rules="required|min:7"
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
@@ -67,7 +68,7 @@
           :label="$t('login')"
           type="submit"
           color="primary"
-          text-color="white"
+          text-color="grey-1"
           class="col-10 form-btn"
         ></q-btn>
 

@@ -74,7 +74,7 @@ class StudentForm extends Model
         ];
     }
 
-    public function signup($type=User::ROLE_USER)
+    public function signup($type=User::ROLE_STUDENT)
     {
 
         if ($this->validate()) {
