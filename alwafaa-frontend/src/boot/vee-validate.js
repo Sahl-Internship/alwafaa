@@ -13,18 +13,18 @@ Vue.component("ValidationProvider", ValidationProvider);
 const dictionary = {
   en: {
     messages: {
-      required: "*This field is required",
-      email: "*not valid email",
-      min: "*Password must have minimum 6 characters",
-      confirmed: "*Password confirmation does not match",
+      required: "This field is required",
+      email: "not valid email",
+      min: "Password must have minimum 6 characters",
+      confirmed: "Password confirmation does not match",
     },
   },
   ar: {
     messages: {
-      required: "*مطلوب",
-      email: "*بريد إلكتروني غير صحيح",
-      min: "*كلمة المرور لا تقل عن 7 حروف",
-      confirmed: "*كلمة المرور غير متطابقة",
+      required: "مطلوب",
+      email: "بريد إلكتروني غير صحيح",
+      min: "كلمة المرور لا تقل عن 7 حروف",
+      confirmed: "كلمة المرور غير متطابقة",
     },
   },
 };
