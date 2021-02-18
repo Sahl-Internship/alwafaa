@@ -39,7 +39,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 2;
     const STATUS_DELETED = 3;
 
-    const ROLE_STUDENT = 'user';
+    const ROLE_STUDENT = 'student';
     const ROLE_MANAGER = 'manager';
     const ROLE_ADMINISTRATOR = 'administrator';
     const ROLE_TEACHER = 'teacher';
@@ -264,7 +264,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->refresh();
         Yii::$app->commandBus->handle(new AddToTimelineCommand([
-            'category' => 'user',
+            'category' => 'student',
             'event' => 'signup',
             'data' => [
                 'public_identity' => $this->getPublicIdentity(),
@@ -286,7 +286,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->refresh();
         Yii::$app->commandBus->handle(new AddToTimelineCommand([
-            'category' => 'user',
+            'category' => 'teacher',
             'event' => 'signup',
             'data' => [
                 'public_identity' => $this->getPublicIdentity(),
