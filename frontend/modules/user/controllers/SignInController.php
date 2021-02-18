@@ -17,6 +17,7 @@ use yii\base\InvalidArgumentException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -196,8 +197,8 @@ class SignInController extends \yii\web\Controller
             'options' => ['class' => 'alert-success']
         ]);
 
-        return $this->goHome();
-
+//        return $this->goHome();
+        return redirect('http://localhost:4000');
     }
 
 

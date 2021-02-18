@@ -13,22 +13,23 @@ use yii\bootstrap4\Html;
 <?php //echo $url ?>
 
 
+
 <div class="root">
+    <div class="logo-container">
+<!--        <div class="logo"></div>-->
+        <img src="layouts/img/2.svg" alt="Email">
+    </div>
     <div class="container">
-        <div class="logo-container">
-            <div class="logo"></div>
-        </div>
+        <img src="layouts/img/header.png" alt="Email">
         <div class="content">
-            <h4>Email Verification</h4>
-            <h5>Hello,</h5>
-            <h5>Welcome to Iqraa</h5>
-            <p>Please click the below button to verify your email address</p>
-            <?php echo $url ?>
-            <p>If you didn't signup to Iqraa please ignore this email</p>
-            <p>Thank you</p>
+            <h4>تأكيد البريد الإلكتروني</h4>
+            <h5> اهلا بك في اكاديمية اقرأ</h5>
+            <p>من فضلك اضغط على الزر التالي لتاكيد بريدك الإلكتروني</p>
+            <div class="link"><a href=" <?php echo substr($url,1) ?>">تأكيد</a></div>
+            <p> إذا لم تقم بالتسجيل في اكاديمية اقرأ من فضلك تجاهل هذا البريد الإلكتروني</p>
+            <p>شكراً لك.</p>
             <hr>
-            <p class="p-footer">Iqraa support Team <span>copyright&copy;2021</span></p>
-            <!-- <span>copyright&copy;2021</span> -->
+            <p class="p-footer">فريق دعم اقرأ <span>&copy;٢٠٢١</span></p>
         </div>
     </div>
 </div>
