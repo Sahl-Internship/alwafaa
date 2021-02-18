@@ -28,11 +28,17 @@ if(Yii::$app->controller->action->id === 'student'){
 }
 
 ?>
+
 <div class="card">
     <div class="card-header">
-        <?php echo Html::a(FAS::icon('user-plus').' '.Yii::t('backend', $createMsg, [
-            'modelClass' => 'User',
-        ]), ['create'], ['class' => 'btn btn-success']) ?>
+
+        <?php
+        if(Yii::$app->controller->id === 'user' && Yii::$app->controller->action->id === 'index') {
+            echo Html::a(FAS::icon('user-plus').' '.Yii::t('backend', $createMsg, [
+                    'modelClass' => 'User',
+                ]), ['create'], ['class' => 'btn btn-success']);
+        }
+         ?>
     </div>
 
     <div class="card-body p-0">
