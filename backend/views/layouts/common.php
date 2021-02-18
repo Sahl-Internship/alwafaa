@@ -6,6 +6,7 @@
  * @var string $content
  */
 
+use backend\assets\BackendArabic;
 use backend\assets\BackendAsset;
 use backend\modules\system\models\SystemLog;
 use backend\widgets\MainSidebarMenu;
@@ -23,7 +24,14 @@ use rmrevin\yii\fontawesome\FAS;
 use common\components\keyStorage\FormModel;
 use common\components\keyStorage\FormWidget;
 
-$bundle = BackendAsset::register($this);
+
+if(Yii::$app->user->identity->userProfile->locale == 'en-US') {
+    $bundle = BackendAsset::register($this);
+
+}else{
+    $bundle = BackendArabic::register($this);
+}
+
 Yii::info(Yii::$app->components["i18n"]["translations"]['*']['class'], 'test');
 
 $keyStorage = Yii::$app->keyStorage;
@@ -61,6 +69,7 @@ $logEntries[] = [
                 'navbar',
                 'navbar-expand',
                 'navbar-dark',
+//                'navbar-iqraa',
                 $keyStorage->get('adminlte.navbar-no-border') ? 'border-bottom-0' : null,
                 $keyStorage->get('adminlte.navbar-small-text') ? 'text-sm' : null,
             ],
@@ -211,7 +220,7 @@ $logEntries[] = [
                             'badgeBgClass' => 'badge-success',
                         ],
                         [
-                            'label' => Yii::t('backend', ' All Users'),
+                            'label' => Yii::t('backend', 'All Users'),
                             'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
                             'url' => ['/user/index'],
                             'active' => Yii::$app->controller->id === 'user' && Yii::$app->controller->action->id === 'index' ,
