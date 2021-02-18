@@ -1,0 +1,162 @@
+@font-face {
+  font-family: HelveticaNeueLTArabicLight;
+  src: url(fonts/HelveticaNeueLTArabicLight.eot);
+  src: url(fonts/HelveticaNeueLTArabicLight.eot) format("embedded-opentype"),
+    url(fonts/HelveticaNeueLTArabicLight.woff2) format("woff2"),
+    url(fonts/HelveticaNeueLTArabicLight.woff) format("woff"),
+    url(fonts/HelveticaNeueLTArabicLight.ttf) format("truetype"),
+    url(fonts/HelveticaNeueLTArabicLight.svg#HelveticaNeueLTArabicLight)
+      format("svg");
+}
+
+@font-face {
+  font-family: HelveticaNeueW23Bd;
+  src: url(fonts/HelveticaNeueW23Bd.eot);
+  src: url(fonts/HelveticaNeueW23Bd.eot) format("embedded-opentype"),
+    url(fonts/HelveticaNeueW23Bd.woff2) format("woff2"),
+    url(fonts/HelveticaNeueW23Bd.woff) format("woff"),
+    url(fonts/HelveticaNeueW23Bd.ttf) format("truetype"),
+    url(fonts/HelveticaNeueW23Bd.svg#HelveticaNeueW23Bd) format("svg");
+}
+
+@font-face {
+  font-family: HelveticaNeueW23Reg;
+  src: url(fonts/HelveticaNeueW23Reg.eot);
+  src: url(fonts/HelveticaNeueW23Reg.eot) format("embedded-opentype"),
+    url(fonts/HelveticaNeueW23Reg.woff2) format("woff2"),
+    url(fonts/HelveticaNeueW23Reg.woff) format("woff"),
+    url(fonts/HelveticaNeueW23Reg.ttf) format("truetype"),
+    url(fonts/HelveticaNeueW23Reg.svg#HelveticaNeueW23Reg) format("svg");
+}
+
+body {
+  font-family: HelveticaNeueW23Reg;
+}
+
+@media (max-width: 768px) {
+  .main-sidebar {
+    display: none;
+  }
+  html[lang="ar-AR"] body.sidebar-open .main-sidebar {
+    display: block;
+  }
+}
+
+.wrapper {
+  height: auto;
+  display: contents;
+}
+
+.pull-left {
+  float: right !important;
+}
+
+.upload-kit .upload-kit-input,
+.upload-kit .upload-kit-item {
+  float: right !important;
+}
+
+.pull-right-container {
+  float: left;
+}
+
+.sidebar-menu > li a i,
+.sidebar-menu > li > a > .glyphicon,
+.sidebar-menu > li > a > .ion {
+  width: 25px !important;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > .user-footer .btn-default {
+  color: #666666;
+  font-size: 12px;
+}
+
+.sidebar-menu li > a > .pull-right-container {
+  right: 0;
+  top: 18px;
+  left: 10px;
+}
+
+.sidebar-menu > li .badge,
+.sidebar-menu > li .label {
+  float: left !important;
+  line-height: 15px;
+}
+
+.sidebar-menu li > a > .fa-angle-left,
+.sidebar-menu li > a > .pull-right-container > .fa-angle-left {
+  float: left !important;
+}
+
+.viewactions .btn {
+  margin-left: 0;
+  margin-right: 15px;
+}
+
+.viewactions .btn {
+  float: left;
+}
+
+.nav-tabs li.pull-left.header {
+  float: right !important;
+}
+
+.upload-kit .files {
+  float: right;
+}
+
+.kv-tree li {
+  padding-left: 0;
+  border: dotted #333;
+  border-width: 0px 1px 1px 0px;
+  line-height: 1.9;
+  padding-right: 0.75em;
+}
+
+.kv-tree li ul {
+  border-top: 1px dotted #333;
+  margin-left: 0;
+  padding-left: 0;
+  margin-right: -0.75em;
+  padding-right: 1.4em;
+}
+
+ul.kv-tree,
+.kv-tree ul {
+  padding-left: 0;
+  padding-right: 0.73em;
+}
+
+.kv-detail-heading .pull-right {
+  float: left !important;
+}
+
+.kv-detail-heading {
+  padding: 5px 15px 5px 5px;
+}
+
+@media (min-width: 768px) {
+  .sidebar-collapse .main-sidebar,
+  .sidebar-collapse .left-side {
+    -webkit-transform: translate(-230px, 0);
+    -ms-transform: translate(-230px, 0);
+    -o-transform: translate(-230px, 0);
+    transform: translate(230px, 0);
+  }
+}
+.table > thead > tr > th {
+  background: #222d32;
+  color: #fff;
+  font-size: 14px;
+  font-weight: normal;
+}
+.table > thead > tr > th a {
+  color: #fff;
+}
+
+.schoolname {
+  color: #fff;
+  font-size: 18px;
+  margin: 13px 10px;
+  display: inline-block;
+}

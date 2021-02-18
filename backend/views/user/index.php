@@ -16,10 +16,21 @@ use rmrevin\yii\fontawesome\FAS;
 $this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php
+if(Yii::$app->controller->action->id === 'student'){
+    $createMsg = 'Create New Student';
+}elseif(Yii::$app->controller->action->id === 'teacher'){
+    $createMsg = 'Create New Teacher';
+}elseif(Yii::$app->controller->action->id === 'manager'){
+    $createMsg = 'Create New Manager';
+}else{
+    $createMsg = 'Create New User';
+}
 
+?>
 <div class="card">
     <div class="card-header">
-        <?php echo Html::a(FAS::icon('user-plus').' '.Yii::t('backend', 'Add New {modelClass}', [
+        <?php echo Html::a(FAS::icon('user-plus').' '.Yii::t('backend', $createMsg, [
             'modelClass' => 'User',
         ]), ['create'], ['class' => 'btn btn-success']) ?>
     </div>
