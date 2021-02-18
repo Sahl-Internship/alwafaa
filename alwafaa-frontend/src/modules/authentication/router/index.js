@@ -10,6 +10,7 @@ const authRoutes = [
     name: "login",
     component: () => import("src/modules/authentication/pages/Login.vue"),
     meta: { requiresUnAuth: true },
+    props: true,
   },
   {
     path: "/forgotPass",
@@ -19,10 +20,11 @@ const authRoutes = [
     meta: { requiresUnAuth: true },
   },
   {
-    path: "/reset-pass",
+    path: "/reset-password",
     name: "resetPass",
     component: () =>
       import("src/modules/authentication/pages/ResetPassword.vue"),
+    props: true,
   },
 ];
 export default authRoutes;
