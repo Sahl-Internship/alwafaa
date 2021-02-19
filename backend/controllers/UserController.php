@@ -107,7 +107,10 @@ class UserController extends Controller
         $model = new UserForm();
         $model->setModel($this->findModel($id));
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->render('view',[
+                'id'=>$id,
+                'model' => $this->findModel($id),
+            ]);
         }
 
         return $this->render('update', [

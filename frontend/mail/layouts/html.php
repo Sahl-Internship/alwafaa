@@ -25,7 +25,7 @@ use yii\helpers\Html;
 
     <?php $this->head() ?>
     <style>
-
+        @import url('https://fonts.googleapis.com/css2?family=Almarai&display=swap');
         body {
             margin: 0;
             padding: 0;
@@ -64,6 +64,15 @@ use yii\helpers\Html;
             padding: 6px 0%;
             /* background: #fff; */
             border-radius: 6px;
+            text-align: center;
+        }
+        .logo{
+            height: 100%;
+
+        }
+        .logo-image{
+            height: 100%;
+            width: 100px;
         }
 
         img {
@@ -169,7 +178,19 @@ use yii\helpers\Html;
 <body>
 <?php $this->beginBody() ?>
 
-<?php echo $content ?>
+<div class="root">
+    <div class="logo-container">
+        <div class="logo">
+            <img class="logo-image" src="https://i.ibb.co/0qjQ2gz/e9864908-03d5-47ff-b933-fcb3ba3d41ca.jpg" alt="Email">
+        </div>
+    </div>
+    <div class="container">
+        <img src="https://i.ibb.co/QJ6ZWYk/header.png" alt="Email">
+        <!--        <img src="https://svgshare.com/i/U9v.svg" alt="Email">-->
+        <?php echo $content ?>
+    </div>
+</div>
+
 
 <?php $this->endBody() ?>
 </body>

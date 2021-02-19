@@ -1,8 +1,11 @@
 import { Notify, Loading } from "quasar";
+import { i18n } from "src/boot/i18n";
+
 import {
   handleSignup,
   handleLogin,
   handleForgotPass,
+  handleResetPassword,
 } from "src/services/authApi";
 
 export default {
@@ -13,19 +16,21 @@ export default {
       const response = await handleSignup(user);
       if (response.data.status !== 1) {
         const messages = Object.keys(response.data.message);
-        const errors = messages.map((item) => `${item} not valid`);
+        // const errors = messages.map((item) => `${item} not valid`);
+        const errors = messages.map(
+          (item) => i18n.t(item) + i18n.t("authNotification.notvalid")
+        );
         const errorMessage = errors.join(", ");
         const error = new Error(errorMessage);
         throw error;
       }
 
-      this.$router.push({
-        name: "login",
-      });
+      this.$router.push({ name: "login" });
 
       Notify.create({
         type: "positive",
-        message: "You registered successfully, confirm your email to login",
+        // message: "You registered successfully, confirm your email to login",
+        message: i18n.t("authNotification.registerSuccess"),
       });
     } catch (error) {
       Loading.hide();
@@ -34,7 +39,7 @@ export default {
         type: "negative",
         message: error.message
           ? error.message
-          : "Error while registering, Try Again",
+          : i18n.t("authNotification.registerdefaultError"),
       });
     }
 
@@ -46,7 +51,8 @@ export default {
       const response = await handleLogin(userData);
 
       if (response.data.status !== 1) {
-        const err = new Error(response.data.message);
+        // const err = new Error(response.data.message);
+        const err = new Error(i18n.t("authNotification.loginError"));
         throw err;
       }
 
@@ -75,10 +81,53 @@ export default {
 
     try {
       const response = await handleForgotPass(email);
-      console.log(response);
+      if (response.data.status !== 1) {
+        console.log(response.data.message);
+        const err = new Error(i18n.t("authNotification.verfiyEmailError"));
+        throw err;
+      }
+
+      this.$router.push({ name: "login" });
+
+      Notify.create({
+        type: "positive",
+        message: i18n.t("authNotification.verfiyEmailMes"),
+      });
     } catch (error) {
       Loading.hide();
-      console.log(error);
+      Notify.create({
+        type: "negative",
+        message: error.message ? error.message : "Error, Try Again",
+      });
+    }
+    Loading.hide();
+  },
+  async resetPassword(context, password) {
+    // console.log(this.$router.app._route.query.token);
+    const { token } = this.$router.app._route.query;
+    Loading.show();
+
+    try {
+      const response = await handleResetPassword(password, token);
+
+      if (response.data.status !== 1) {
+        const err = new Error(i18n.t("authNotification.resetError"));
+        throw err;
+      }
+
+      this.$router.push({ name: "login" });
+
+      Notify.create({
+        type: "positive",
+        message: i18n.t("authNotification.resetSuccess"),
+      });
+    } catch (error) {
+      Loading.hide();
+
+      Notify.create({
+        type: "negative",
+        message: error.message ? error.message : "Error While reset, Try Again",
+      });
     }
     Loading.hide();
   },

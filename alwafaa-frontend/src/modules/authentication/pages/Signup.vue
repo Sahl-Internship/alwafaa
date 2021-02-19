@@ -180,6 +180,7 @@
             v-model="birthdate"
             :label="$t('birthdate')"
             mask="date"
+            bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
           >
