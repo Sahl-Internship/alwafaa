@@ -96,7 +96,8 @@ $logEntries[] = [
     <img src="/img/2.svg" alt="Iqraa Logo" class="brand-image" style="width:80px;height:50px;margin-left:auto">
         <!-- right navbar links -->
         <?php echo Nav::widget([
-            'options' => ['class' => ['navbar-nav', 'ml-auto']],
+//            'options' => ['class' => ['navbar-nav', 'ml-auto']],
+            'options' => ['class' => ['navbar-nav']],
             'encodeLabels' => false,
             'items' => [
                 [
@@ -165,8 +166,12 @@ $logEntries[] = [
         <!-- brand logo -->
         <a href="/" class="brand-link text-center <?php echo $keyStorage->get('adminlte.brand-text-small') ? 'text-sm' : null ?>">
 
-<!--            <span class="fas fa-school"></span>-->
-            <span class="brand-text font-weight-bold "><?php echo Yii::$app->name ?></span>
+<!--         <span class="fas fa-school"></span>-->
+            <div class="sidebar-logo">
+                <img src="/img/2.svg" alt="logo">
+            </div>
+            <span class="brand-text font-weight-bold "><?php echo Yii::t('backend',Yii::$app->name) ?></span>
+
         </a>
         <!-- /brand logo -->
 
