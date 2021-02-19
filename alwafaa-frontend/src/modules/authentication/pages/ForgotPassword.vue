@@ -8,7 +8,7 @@
         class="row q-gutter-x-xs q-pb-lg justify-center reset-pass-form"
         @submit.prevent="handleSubmit(submitForm)"
       >
-        <h4 class="col-12 q-my-lg title">Verify Email</h4>
+        <h4 class="col-12 q-my-lg title">{{ $t("verifyEmailTitle") }}</h4>
 
         <ValidationProvider
           name="email"
@@ -32,7 +32,7 @@
         <q-btn
           dense
           no-caps
-          label="Reset Password"
+          :label="$t('submit')"
           type="submit"
           color="primary"
           text-color="grey-1"

@@ -15,7 +15,7 @@ $link = \yii\helpers\Url::to(['http://localhost:4000/reset-password','token' => 
         <img src="layouts/img/2.svg" alt="Email">
     </div>
     <div class="container">
-        <img src="layouts/img/header.png" alt="Email">
+        <img src="layouts/img/header.jpg" alt="Email">
         <!-- <div class="logo-container">
             <div class="logo"></div>
         </div> -->

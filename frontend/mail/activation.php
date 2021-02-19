@@ -14,13 +14,6 @@ use yii\bootstrap4\Html;
 
 
 
-<div class="root">
-    <div class="logo-container">
-<!--        <div class="logo"></div>-->
-        <img src="layouts/img/2.svg" alt="Email">
-    </div>
-    <div class="container">
-        <img src="layouts/img/header.png" alt="Email">
         <div class="content">
             <h4>تأكيد البريد الإلكتروني</h4>
             <h5> اهلا بك في اكاديمية اقرأ</h5>
@@ -31,6 +24,5 @@ use yii\bootstrap4\Html;
             <hr>
             <p class="p-footer">فريق دعم اقرأ <span>&copy;٢٠٢١</span></p>
         </div>
-    </div>
-</div>
+
 

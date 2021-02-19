@@ -13,7 +13,7 @@
         <ValidationProvider
           name="password"
           class="col-10"
-          rules="required|password"
+          rules="required|min:7"
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
