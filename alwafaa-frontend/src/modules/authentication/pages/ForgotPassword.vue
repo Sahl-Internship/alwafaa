@@ -48,22 +48,22 @@ import AuthContainer from "../layout/AuthContainer.vue";
 
 export default {
   components: {
-    AuthContainer,
+    AuthContainer
   },
-  data() {
+  data () {
     return {
-      email: "",
-    };
+      email: ""
+    }
   },
   methods: {
-    submitForm() {
+    submitForm () {
       const email = {
         email: this.email,
-      };
-      this.$store.dispatch("auth/forgotPassword", email);
-    },
-  },
-};
+      }
+      this.$store.dispatch("auth/forgotPassword", email)
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .reset-pass-form {

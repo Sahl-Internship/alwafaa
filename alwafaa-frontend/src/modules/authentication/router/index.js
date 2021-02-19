@@ -1,34 +1,34 @@
 const authRoutes = [{
-    path: "/signup",
-    name: "signup",
-    component: () => import("src/modules/authentication/pages/Signup.vue"),
+    path: '/signup',
+    name: 'signup',
+    component: () => import('src/modules/authentication/pages/Signup.vue'),
     meta: {
       requiresUnAuth: true
     },
   },
   {
-    path: "/login",
-    name: "login",
-    component: () => import("src/modules/authentication/pages/Login.vue"),
+    path: '/login',
+    name: 'login',
+    component: () => import('src/modules/authentication/pages/Login.vue'),
     meta: {
       requiresUnAuth: true
     },
     props: true,
   },
   {
-    path: "/forgotPass",
-    name: "forgotPass",
+    path: '/forgotPass',
+    name: 'forgotPass',
     component: () =>
-      import("src/modules/authentication/pages/ForgotPassword.vue"),
+      import('src/modules/authentication/pages/ForgotPassword.vue'),
     meta: {
       requiresUnAuth: true
     },
   },
   {
-    path: "/reset-password",
-    name: "resetPass",
+    path: '/reset-password',
+    name: 'resetPass',
     component: () =>
-      import("src/modules/authentication/pages/ResetPassword.vue"),
+      import('src/modules/authentication/pages/ResetPassword.vue'),
     props: true,
   },
 ];

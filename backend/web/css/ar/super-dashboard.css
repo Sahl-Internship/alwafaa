@@ -1,0 +1,485 @@
+
+html,body{
+    font-family: 'Cairo', sans-serif !important;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Cairo', sans-serif !important;
+    font-weight: 700;
+}
+.navbar-static-top {
+    background-color: #222d32 !important;
+}
+
+.logo {
+    background-color: white !important;
+    color: #222d32 !important;
+}
+
+.logo-lg {
+    font-size: 15px;
+    color: #222d32;
+    font-family: "Cairo";
+}
+
+.tech-support {
+    margin: 7px 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color: white;
+}
+
+.content-header h1 {
+    font-family: "Cairo";
+}
+
+.navbar-static-top {
+    background-color: #222d32 !important;
+}
+
+.logo {
+    background-color: white !important;
+}
+
+.logo-lg {
+    font-size: 15px;
+    color: #222d32;
+    font-family: "Cairo";
+}
+
+.tech-support {
+    margin: 7px 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color: white;
+}
+
+.content-header h1 {
+    font-family: "Cairo";
+}
+
+.unread-messages {
+    display: flex;
+    justify-content: space-around;
+}
+
+.bug-reports {
+    text-align: center;
+    display: block;
+}
+
+.super-dashboard .highcharts-credits {
+    display: none;
+}
+
+.super-dashboard .small-box.one {
+    background-color: #337ab7;
+}
+
+.super-dashboard .small-box.one .inner h3 {
+    color: #337ab7;
+}
+
+.super-dashboard .small-box.two {
+    background-color: #5cb85c;
+}
+
+.super-dashboard .small-box.two .inner h3 {
+    color: #5cb85c;
+}
+
+.super-dashboard .small-box.three {
+    background-color: #5bc0de;
+}
+
+.super-dashboard .small-box.three .inner h3 {
+    color: #5bc0de;
+}
+
+.super-dashboard .small-box.four {
+    background-color: #34495e;
+}
+
+.super-dashboard .small-box.four .inner h3 {
+    color: #34495e;
+}
+
+.super-dashboard .small-box.five {
+    background-color: #d9534f;
+}
+
+.super-dashboard .small-box.five .inner h3 {
+    color: #d9534f;
+}
+
+.super-dashboard .small-box.six {
+    background-color: #f0ad4e;
+}
+
+.super-dashboard .small-box.six .inner h3 {
+    color: #f0ad4e;
+}
+
+.super-dashboard .small-box:hover .content {
+    color: #34495e;
+}
+
+.super-dashboard .small-box {
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.super-dashboard .small-box .inner h3 {
+    background-color: white;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    color: #56a75b;
+    padding: 38px 0;
+    text-align: center;
+    font-size: 30px;
+}
+
+.super-dashboard .small-box .inner p {
+    font-size: 25px;
+    color: white;
+}
+
+.super-dashboard .small-box .inner i {
+    color: white;
+    font-size: 20px;
+}
+
+.super-dashboard .small-box #headingOne a {
+    display: flex;
+    align-items: center;
+}
+
+.super-dashboard .small-box #headingOne p {
+    position: absolute;
+    right: 30px;
+    font-size: 30px;
+}
+
+.super-dashboard .small-box #headingOne i {
+    position: absolute;
+    left: 30px;
+    font-size: 30px;
+}
+
+.super-dashboard .small-box #collapseOne {
+    height: 100%;
+}
+
+.super-dashboard .small-box #collapseOne .col-lg-12 {
+    margin-bottom: 40px;
+}
+
+.super-dashboard .small-box #collapseFour,
+.super-dashboard .small-box #collapseThree {
+    height: 500px;
+}
+
+.super-dashboard .small-box .content {
+    background-color: white;
+    padding: 0 20px;
+    margin: 0 10px;
+    border: 1px dashed #dddddd;
+    color: #34495e;
+    padding-top: 50px;
+    min-height: 450px;
+    height: 990px;
+}
+
+.super-dashboard .small-box .content #month-comp-schools .highcharts-container {
+    height: 310px !important;
+}
+
+.super-dashboard .small-box .content svg {
+    font-family: "Cairo" !important;
+    width: 100% !important;
+    height: 280px !important;
+}
+
+.super-dashboard .small-box .content svg .highcharts-tooltip-box {
+    fill: black !important;
+    stroke-width: 0 !important;
+    opacity: 0.3 !important;
+}
+
+.super-dashboard .small-box .content svg .highcharts-tooltip text {
+    fill: white !important;
+    text-shadow: 0 0 3px black !important;
+    font-size: 20px !important;
+}
+
+.super-dashboard .small-box .content svg text {
+    font-size: 19px !important;
+}
+
+.super-dashboard .small-box .content svg text.highcharts-title {
+    font-size: 25px !important;
+    font-weight: bold !important;
+}
+
+.super-dashboard .small-box .content .highcharts-container {
+    text-align: center !important;
+    width: 90% !important;
+    margin: auto !important;
+}
+
+@media screen and (max-width: 1500px) {}
+
+.super-dashboard .small-box .small-box-footer {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 20px 0;
+}
+
+.unread-messages {
+    display: flex;
+    justify-content: space-around;
+}
+
+.bug-reports {
+    text-align: center;
+    display: block;
+}
+
+.super-dashboard .highcharts-credits {
+    display: none;
+}
+
+.super-dashboard .small-box.one {
+    background-color: #337ab7;
+}
+
+.super-dashboard .small-box.one .inner h3 {
+    color: #337ab7;
+}
+
+.super-dashboard .small-box.two {
+    background-color: #5cb85c;
+}
+
+.super-dashboard .small-box.two .inner h3 {
+    color: #5cb85c;
+}
+
+.super-dashboard .small-box.three {
+    background-color: #5bc0de;
+}
+
+.super-dashboard .small-box.three .inner h3 {
+    color: #5bc0de;
+}
+
+.super-dashboard .small-box.four {
+    background-color: #34495e;
+}
+
+.super-dashboard .small-box.four .inner h3 {
+    color: #34495e;
+}
+
+.super-dashboard .small-box.five {
+    background-color: #d9534f;
+}
+
+.super-dashboard .small-box.five .inner h3 {
+    color: #d9534f;
+}
+
+.super-dashboard .small-box.six {
+    background-color: #f0ad4e;
+}
+
+.super-dashboard .small-box.six .inner h3 {
+    color: #f0ad4e;
+}
+
+.super-dashboard .small-box:hover .content {
+    color: #34495e;
+}
+
+.super-dashboard .small-box {
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.super-dashboard .small-box .inner h3 {
+    background-color: white;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    color: #56a75b;
+    padding: 38px 0;
+    text-align: center;
+    font-size: 30px;
+}
+
+.super-dashboard .small-box .inner p {
+    font-size: 25px;
+    color: white;
+}
+
+.super-dashboard .small-box .inner i {
+    color: white;
+    font-size: 20px;
+}
+
+.super-dashboard .small-box #headingOne a {
+    display: flex;
+    align-items: center;
+}
+
+.super-dashboard .small-box #headingOne p {
+    position: absolute;
+    right: 30px;
+    font-size: 30px;
+}
+
+.super-dashboard .small-box #headingOne i {
+    position: absolute;
+    left: 30px;
+    font-size: 30px;
+}
+
+.super-dashboard .small-box #collapseOne {
+    height: 100%;
+}
+
+.super-dashboard .small-box #collapseOne .col-lg-12 {
+    margin-bottom: 40px;
+}
+
+.super-dashboard .small-box #collapseFour,
+.super-dashboard .small-box #collapseThree {
+    height: 500px;
+}
+
+.super-dashboard .small-box .content {
+    background-color: white;
+    padding: 0 20px;
+    margin: 0 10px;
+    border: 1px dashed #dddddd;
+    color: #34495e;
+    padding-top: 50px;
+    min-height: 450px;
+    height: 990px;
+}
+
+.super-dashboard .small-box .content #month-comp-schools .highcharts-container {
+    height: 310px !important;
+}
+
+.super-dashboard .small-box .content svg {
+    font-family: "Cairo" !important;
+    width: 100% !important;
+    height: 280px !important;
+}
+
+.super-dashboard .small-box .content svg .highcharts-tooltip-box {
+    fill: black !important;
+    stroke-width: 0 !important;
+    opacity: 0.3 !important;
+}
+
+.super-dashboard .small-box .content svg .highcharts-tooltip text {
+    fill: white !important;
+    text-shadow: 0 0 3px black !important;
+    font-size: 20px !important;
+}
+
+.super-dashboard .small-box .content svg text {
+    font-size: 19px !important;
+}
+
+.super-dashboard .small-box .content svg text.highcharts-title {
+    font-size: 25px !important;
+    font-weight: bold !important;
+}
+
+.super-dashboard .small-box .content .highcharts-container {
+    text-align: center !important;
+    width: 90% !important;
+    margin: auto !important;
+}
+
+@media screen and (max-width: 1500px) {}
+
+.super-dashboard .small-box .small-box-footer {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 20px 0;
+}
+
+.small-box .icon {
+    top: 15px;
+    font-size: 62px;
+}
+
+.small-box:hover .icon {
+    font-size: 75px;
+}
+
+.product-img {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-left: 15px;
+}
+
+.products-list .product-title {
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 13px;
+    display: block;
+}
+
+.products-list .product-title .label {
+    float: left !important;
+    padding: 8px 20px;
+    line-height: 18px;
+}
+
+.products-list .product-img img {
+    width: 33px;
+    height: 33px;
+}
+
+.noBooking {
+    text-align: center;
+    font-size: 16px;
+}
+
+.noBooking i {
+    font-size: 65px;
+    color: #b13c2e;
+    margin: 15px 0;
+}
+
+.noBooking .btn-primary {
+    background-color: #00a65a;
+    border-color: #00a65a;
+    margin-bottom: 50px;
+}
+
+.info-box-content {
+    padding: 22px 10px!important;
+}
+
+.nav-tabs-custom {
+    box-shadow: none;
+}
+.datepicker-dropdown{
+    z-index: 810000 !important;
+}
+
+.select2-container--krajee .select2-selection--single .select2-selection__clear {
+    position: absolute;
+    right: auto;
+    left: 1rem;
+}
