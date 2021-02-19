@@ -9,16 +9,7 @@ use yii\helpers\Html;
 //$resetLink = Yii::$app->urlManager->createAbsoluteUrl(['@frontendUrl/user/sign-in/reset-password', 'token' => $token]);
 $link = \yii\helpers\Url::to(['http://localhost:4000/reset-password','token' => $token]);
 ?>
-<div class="root">
-    <div class="logo-container">
-<!--        <div class="logo"></div>-->
-        <img src="layouts/img/2.svg" alt="Email">
-    </div>
-    <div class="container">
-        <img src="layouts/img/header.jpg" alt="Email">
-        <!-- <div class="logo-container">
-            <div class="logo"></div>
-        </div> -->
+
         <div class="content">
             <h4>تغيير كلمة المرور</h4>
 
@@ -31,8 +22,7 @@ $link = \yii\helpers\Url::to(['http://localhost:4000/reset-password','token' => 
             <hr>
             <p class="p-footer">فريق دعم اقرأ <span>&copy;٢٠٢١</span></p>
         </div>
-    </div>
-</div>
+
 <?php //echo Html::a(Html::encode($resetLink), $resetLink) ?>
 <?php //echo Html::a('reset', $resetLink) ?>
 <?php //echo \yii\helpers\Url::to(['@frontendUrl/user/sign-in/reset-password','token' => $token]) ?>
