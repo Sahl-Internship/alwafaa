@@ -39,6 +39,7 @@ body {
   }
   html[lang="ar-AR"] body.sidebar-open .main-sidebar {
     display: block;
+    
   }
 }
 
@@ -159,4 +160,140 @@ ul.kv-tree,
   font-size: 18px;
   margin: 13px 10px;
   display: inline-block;
+}
+/* Start Main Section Nav && Sidebar */
+body:not(.sidebar-mini-md) nav.main-header{
+  background-color: #26c5f9;
+  transition: margin-right .3s ease-in-out;
+  margin-right: 250px;
+  margin-left: 0px;
+}
+
+body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header{
+  margin-right: 0px;
+}
+nav.main-header .navbar-nav .nav-item a:hover,
+nav.main-header .navbar-nav .nav-item a:focus{
+  background-color: #383d47;
+  border-radius: 4px;
+}
+aside[class*=sidebar-dark] .brand-link{
+  background-color: #26c5f9;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  margin-top: -45px;
+} 
+aside.main-sidebar{
+  background-color: #26c5f9;
+}
+body.sidebar-collapse .main-sidebar{
+  margin-right: -250px;
+}
+aside[class*=sidebar-dark] .user-panel{
+  border-bottom: 1px solid #fff;
+}
+.sidebar .user-panel .info>a{
+  color: #fff;
+  font-size: 18px;
+}
+.sidebar .nav>li, li p{
+  color: #fff;
+}
+
+.nav-sidebar .nav-item>.nav-link {
+    position: relative;
+    width: 230px;
+    text-align: right;
+}
+.sidebar nav .nav-sidebar .nav-item .nav-link:hover,
+.sidebar nav .nav-sidebar .nav-item .nav-link.active{
+   background-color: #383d47; 
+}
+.sidebar .nav-item i{
+  color:#fff;
+}
+.sidebar .nav-header{
+  margin-left: 140px;
+}
+.sidebar .nav-item p>span{
+  background-color: #fff;
+  color: #000;
+  margin-right: 160px;
+}
+.navbar-collapse .navbar-nav .dropdown-menu .user-header{
+  background-color: #26c5f9 !important;
+}
+.card-footer button.btn-primary,
+.card-footer button.btn-primary:active{
+  background-color: #26c5f9;
+  border-color: #26c5f9;
+  float: right;
+}
+.content-header h1 {
+  float: right;
+  padding-right: 15px;
+}
+.content div.alert-success{
+  background-color: #636e7d !important;
+  border-color: #383d47;
+  text-align: right;
+}
+.container-fluid button.close{
+  left: 0;
+  color: #fff;
+  opacity: 0.8;
+}
+.form-group label{
+  float: right;
+}
+.form-group>div{
+width: 270px;
+}
+.form-group {
+  width: 300px;
+}
+/* End Main Section */
+/* Start Timeline Event */
+.timeline{
+  text-align: right;
+  width: 550px;
+}
+.content div.timeline>div>.timeline-item {
+  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+  border-radius: .25rem;
+  background: #fff;
+  margin-right: 45px;
+  width: 500px;
+}
+.content div.timeline>div>.fas{
+  border-radius: 50%;
+  font-size: 15px;
+  line-height: 30px;
+  position: absolute;
+  text-align: center;
+  margin-right: 7px;
+  right: 0px;
+  width: 30px;
+}
+/* End Timeline */
+/* Start All Users */
+.content .box-body .btn-success {
+  color: #fff;
+  background-color: #26c5f9;
+  border-color: #26c5f9;
+  box-shadow: none;
+  float: right;
+}
+.content .table > thead > tr > th{
+  text-align: center;
+  background-color: #26c5f9;
+  color: #fff;
+}
+.content .table-bordered>tbody>tr>td{
+  text-align: center;
+}
+/* End All Users */
+a.back-to-top{
+  background-color: #26c5f9;
+  border-color: #26c5f9;
 }

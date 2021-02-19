@@ -26,10 +26,10 @@ class BackendArabic extends AssetBundle
      * @var array
      */
     public $css = [
-        'css/ar/style.css',
+        
         '/css/super-dashboard.css',
         'https://use.fontawesome.com/releases/v5.7.2/css/all.css',
-
+        'css/ar/style.css',
     ];
     /**
      * @var array
