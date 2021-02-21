@@ -30,7 +30,7 @@ class AdminLteAr extends AssetBundle
         'yii\web\JqueryAsset',
         'yii\jui\JuiAsset',
         // 'yii\bootstrap\BootstrapPluginAsset',
-        'common\assets\bt\BootstrapPlugin',
+        // 'common\assets\bt\BootstrapPlugin',
         'common\assets\FontAwesome',
         'common\assets\JquerySlimScroll'
     ];

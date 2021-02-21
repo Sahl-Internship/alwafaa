@@ -8,7 +8,7 @@
         class="row q-gutter-x-xs q-pb-lg justify-center reset-pass-form"
         @submit.prevent="handleSubmit(submitForm)"
       >
-        <h4 class="col-12 q-my-lg title">{{ $t("resetPass") }}</h4>
+        <h4 class="col-12 q-my-lg title">{{ $t('resetPass') }}</h4>
 
         <ValidationProvider
           name="password"
@@ -44,26 +44,26 @@
 </template>
 
 <script>
-import AuthContainer from "../layout/AuthContainer.vue";
+import AuthContainer from '../layout/AuthContainer.vue'
 
 export default {
   components: {
-    AuthContainer,
+    AuthContainer
   },
-  data() {
+  data () {
     return {
-      password: "",
-    };
+      password: ''
+    }
   },
   methods: {
-    submitForm() {
+    submitForm () {
       const password = {
-        password: this.password,
-      };
-      this.$store.dispatch("auth/resetPassword", password);
-    },
-  },
-};
+        password: this.password
+      }
+      this.$store.dispatch('auth/resetPassword', password)
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .reset-pass-form {

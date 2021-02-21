@@ -1,159 +1,159 @@
 import {
   Notify,
   Loading
-} from "quasar";
+} from 'quasar'
 import {
   i18n
-} from "src/boot/i18n";
+} from 'src/boot/i18n'
 
 import {
   handleSignup,
   handleLogin,
   handleForgotPass,
-  handleResetPassword,
-} from "src/services/authApi";
+  handleResetPassword
+} from 'src/services/authApi'
 
 export default {
-  async signup(context, user) {
-    Loading.show();
+  async signup (context, user) {
+    Loading.show()
 
     try {
-      const response = await handleSignup(user);
+      const response = await handleSignup(user)
       if (response.data.status !== 1) {
-        const messages = Object.keys(response.data.message);
+        const messages = Object.keys(response.data.message)
         // const errors = messages.map((item) => `${item} not valid`);
         const errors = messages.map(
-          (item) => i18n.t(item) + i18n.t("authNotification.notvalid")
-        );
-        const errorMessage = errors.join(", ");
-        const error = new Error(errorMessage);
-        throw error;
+          (item) => i18n.t(item) + i18n.t('authNotification.notvalid')
+        )
+        const errorMessage = errors.join(', ')
+        const error = new Error(errorMessage)
+        throw error
       }
 
       this.$router.push({
-        name: "login"
-      });
+        name: 'login'
+      })
 
       Notify.create({
-        type: "positive",
+        type: 'positive',
         // message: "You registered successfully, confirm your email to login",
-        message: i18n.t("authNotification.registerSuccess"),
-      });
+        message: i18n.t('authNotification.registerSuccess')
+      })
     } catch (error) {
-      Loading.hide();
+      Loading.hide()
 
       Notify.create({
-        type: "negative",
-        message: error.message ?
-          error.message : i18n.t("authNotification.registerdefaultError"),
-      });
+        type: 'negative',
+        message: error.message
+          ? error.message : i18n.t('authNotification.registerdefaultError')
+      })
     }
 
-    Loading.hide();
+    Loading.hide()
   },
-  async login(context, userData) {
-    Loading.show();
+  async login (context, userData) {
+    Loading.show()
     try {
-      const response = await handleLogin(userData);
+      const response = await handleLogin(userData)
 
       if (response.data.status !== 1) {
         // const err = new Error(response.data.message);
-        const err = new Error(i18n.t("authNotification.loginError"));
-        throw err;
+        const err = new Error(i18n.t('authNotification.loginError'))
+        throw err
       }
 
       const {
         token,
         ...user
-      } = response.data.profile;
+      } = response.data.profile
       console.log(user)
-      localStorage.setItem("token", token);
-      context.commit("loginState", {
+      localStorage.setItem('token', token)
+      context.commit('loginState', {
         token,
-        user,
-      });
+        user
+      })
 
       this.$router.push({
-        name: "home",
-      });
+        name: 'home'
+      })
     } catch (error) {
-      Loading.hide();
+      Loading.hide()
 
       Notify.create({
-        type: "negative",
-        message: error.message ? error.message : "Invalid Data",
-      });
+        type: 'negative',
+        message: error.message ? error.message : 'Invalid Data'
+      })
     }
-    Loading.hide();
+    Loading.hide()
   },
-  async forgotPassword(context, email) {
-    Loading.show();
+  async forgotPassword (context, email) {
+    Loading.show()
 
     try {
-      const response = await handleForgotPass(email);
+      const response = await handleForgotPass(email)
       if (response.data.status !== 1) {
-        console.log(response.data.message);
-        const err = new Error(i18n.t("authNotification.verfiyEmailError"));
-        throw err;
+        console.log(response.data.message)
+        const err = new Error(i18n.t('authNotification.verfiyEmailError'))
+        throw err
       }
 
       this.$router.push({
-        name: "login"
-      });
+        name: 'login'
+      })
 
       Notify.create({
-        type: "positive",
-        message: i18n.t("authNotification.verfiyEmailMes"),
-      });
+        type: 'positive',
+        message: i18n.t('authNotification.verfiyEmailMes')
+      })
     } catch (error) {
-      Loading.hide();
+      Loading.hide()
       Notify.create({
-        type: "negative",
-        message: error.message ? error.message : "Error, Try Again",
-      });
+        type: 'negative',
+        message: error.message ? error.message : 'Error, Try Again'
+      })
     }
-    Loading.hide();
+    Loading.hide()
   },
-  async resetPassword(context, password) {
+  async resetPassword (context, password) {
     // console.log(this.$router.app._route.query.token);
     const {
       token
-    } = this.$router.app._route.query;
-    Loading.show();
+    } = this.$router.app._route.query
+    Loading.show()
 
     try {
-      const response = await handleResetPassword(password, token);
+      const response = await handleResetPassword(password, token)
 
       if (response.data.status !== 1) {
-        const err = new Error(i18n.t("authNotification.resetError"));
-        throw err;
+        const err = new Error(i18n.t('authNotification.resetError'))
+        throw err
       }
 
       this.$router.push({
-        name: "login"
-      });
+        name: 'login'
+      })
 
       Notify.create({
-        type: "positive",
-        message: i18n.t("authNotification.resetSuccess"),
-      });
+        type: 'positive',
+        message: i18n.t('authNotification.resetSuccess')
+      })
     } catch (error) {
-      Loading.hide();
+      Loading.hide()
 
       Notify.create({
-        type: "negative",
-        message: error.message ? error.message : "Error While reset, Try Again",
-      });
+        type: 'negative',
+        message: error.message ? error.message : 'Error While reset, Try Again'
+      })
     }
-    Loading.hide();
+    Loading.hide()
   },
-  logout({
+  logout ({
     commit
   }) {
-    commit("logout");
-    localStorage.removeItem("token");
+    commit('logout')
+    localStorage.removeItem('token')
     this.$router.push({
-      name: "login"
-    });
-  },
-};
+      name: 'login'
+    })
+  }
+}

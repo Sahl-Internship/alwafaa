@@ -3,11 +3,11 @@
 </template>
 <script>
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 <style lang="scss" scoped>
 .root {

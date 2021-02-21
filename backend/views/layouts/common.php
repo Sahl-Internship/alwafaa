@@ -93,11 +93,12 @@ $logEntries[] = [
             ]
         ]); ?>
         <!-- /left navbar links -->
-    <img src="/img/2.svg" alt="Iqraa Logo" class="brand-image" style="width:80px;height:50px;margin-left:auto">
+    <!-- <img src="/img/2.svg" alt="Iqraa Logo" class="brand-image" style="width:80px;height:50px;margin-left:auto"> -->
+    <img src="/img/2.svg" alt="Iqraa Logo" class="brand-image" style="width:50px;height:50px;">
         <!-- right navbar links -->
         <?php echo Nav::widget([
-//            'options' => ['class' => ['navbar-nav', 'ml-auto']],
-            'options' => ['class' => ['navbar-nav']],
+            //'options' => ['class' => ['navbar-nav', 'ml-auto']],
+            'options' => ['class' => ['navbar-nav','second-nav','second-navAr']],
             'encodeLabels' => false,
             'items' => [
                 [

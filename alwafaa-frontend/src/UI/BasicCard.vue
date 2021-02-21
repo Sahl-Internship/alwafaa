@@ -32,9 +32,9 @@
 
 <script>
 export default {
-  name: "BasicCard",
-  props: ["borderPrimary", "borderSecondary"],
-};
+  name: 'BasicCard',
+  props: ['borderPrimary', 'borderSecondary']
+}
 </script>
 
 <style lang="scss" scoped>

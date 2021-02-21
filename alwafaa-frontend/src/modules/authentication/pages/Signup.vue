@@ -251,28 +251,28 @@
 </template>
 
 <script>
-import AuthContainer from "../layout/AuthContainer.vue";
+import AuthContainer from '../layout/AuthContainer.vue'
 
 export default {
   components: { AuthContainer },
-  name: "Signup",
-  data() {
+  name: 'Signup',
+  data () {
     return {
-      firstname: "",
-      lastname: "",
-      email: "",
-      phoneNumber: "",
-      password: "",
-      confirmPass: "",
-      birthdate: "",
-      gender: "",
-      country: "",
+      firstname: '',
+      lastname: '',
+      email: '',
+      phoneNumber: '',
+      password: '',
+      confirmPass: '',
+      birthdate: '',
+      gender: '',
+      country: '',
       isPwd: true,
-      isCPwd: true,
-    };
+      isCPwd: true
+    }
   },
   methods: {
-    submitForm() {
+    submitForm () {
       const user = {
         firstname: this.firstname,
         lastname: this.lastname,
@@ -281,16 +281,16 @@ export default {
         password: this.password,
         birthdate: Math.round(new Date(this.birthdate).getTime() / 1000),
         gender: this.gender,
-        country: this.country,
-      };
+        country: this.country
+      }
 
-      this.$store.dispatch("auth/signup", user);
-    },
+      this.$store.dispatch('auth/signup', user)
+    }
   },
-  mounted() {
-    this.$refs.signupForm.validate();
-  },
-};
+  mounted () {
+    this.$refs.signupForm.validate()
+  }
+}
 </script>
 
 <style lang="scss" scoped>

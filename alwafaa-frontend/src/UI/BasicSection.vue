@@ -37,22 +37,22 @@
 
 <script>
 export default {
-  name: "HomeSection",
-  props: ["title", "link", "info"],
-  data() {
+  name: 'HomeSection',
+  props: ['title', 'link', 'info'],
+  data () {
     return {
-      slide: 1,
-    };
+      slide: 1
+    }
   },
-  mounted() {
+  mounted () {
     this.$q.screen.setSizes({
       sm: 380,
       md: 500,
       lg: 600,
-      xl: 980,
-    });
-  },
-};
+      xl: 980
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>

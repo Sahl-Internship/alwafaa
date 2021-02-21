@@ -1,10 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 // import example from './module-example'
-import AuthModule from './authentication';
-import studentModule from './student';
+import AuthModule from './authentication'
+import studentModule from './student'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 /*
  * If not building with SSR mode, you can
@@ -15,17 +15,17 @@ Vue.use(Vuex);
  * with the Store instance.
  */
 
-export default function ( /* { ssrContext } */ ) {
+export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       auth: AuthModule,
-      student: studentModule,
+      student: studentModule
     },
 
     // enable strict mode (adds overhead!)
     // for dev mode only
-    strict: process.env.DEBUGGING,
-  });
+    strict: process.env.DEBUGGING
+  })
 
-  return Store;
+  return Store
 }
