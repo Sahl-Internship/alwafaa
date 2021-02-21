@@ -38,8 +38,8 @@ class Section extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'description' => 'Description',
+            'title' => Yii::t('backend','Title'),
+            'description' => Yii::t('backend','Description'),
         ];
     }
 

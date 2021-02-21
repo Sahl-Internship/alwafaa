@@ -23,11 +23,10 @@ return [
     'Sections'=>'الاقسام',
     'Save Changes'=>'حفظ التغييرات',
     'Iqraa Academy'=>'اكاديمية إقرأ',
-    ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
-    ''=>'',
+    'Create Section'=>'انشاء قسم',
+    'Student Numbers'=>'عدد الطلاب',
+    'Teacher Numbers'=>'عدد المعلمين',
+    'Update Section'=>'تحديث قسم',
     ''=>'',
 
 
@@ -213,8 +212,7 @@ return [
     'Application' => 'التطبيق',
     'Application settings' => 'اعدادات',
     'Application timeline' => 'الجدول الزمنى',
-    'Are you sure you want to delete this item?' => 'هل أنت متأكد أنك تريد حذف هذا البند؟
-',
+    'Are you sure you want to delete this item?' => 'هل أنت متأكد أنك تريد حذف هذا البند؟',
     'Are you sure you want to flush this cache?' => 'هل أنت متأكد أنك تريد مسح ذاكرة التخزين المؤقت هذه؟',
     'Article Categories' => 'انواع المقاﻻت',
     'Articles' => 'المقاﻻت',

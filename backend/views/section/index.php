@@ -9,13 +9,14 @@ use yii\grid\GridView;
  * @var yii\data\ActiveDataProvider $dataProvider
  */
 
-$this->title = 'Sections';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Yii::t('backend','Sections');
+$this->params['breadcrumbs'][] = ' / '.$this->title;
 ?>
 <div class="section-index">
     <div class="card">
         <div class="card-header">
-            <?php echo Html::a('Create Section', ['create'], ['class' => 'btn btn-success']) ?>
+            <?php echo Html::a(Yii::t('backend','Create Section')
+                , ['create'], ['class' => 'btn btn-success']) ?>
         </div>
 
         <div class="card-body p-0">
@@ -32,13 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-
+//                    ['class' => 'yii\grid\SerialColumn'],
                     'id',
                     'title',
                     'description',
-                    'no.student',
-                    'teacher',
+                    Yii::t('backend','Student Numbers'),
+                    Yii::t('backend','Teacher Numbers'),
 
                     ['class' => \common\widgets\ActionColumn::class],
                 ],
