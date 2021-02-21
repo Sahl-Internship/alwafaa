@@ -93,25 +93,25 @@
 </template>
 
 <script>
-import HomeCarousel from "src/components/HomeCarousel.vue";
-import CoursesSection from "src/components/CoursesSection.vue";
-import AcademySections from "src/components/AcademySections.vue";
-import AcademyInfoSection from "src/components/AcademyInfoSection.vue";
-import TheFooter from "src/UI/TheFooter.vue";
+import HomeCarousel from 'src/components/HomeCarousel.vue'
+import CoursesSection from 'src/components/CoursesSection.vue'
+import AcademySections from 'src/components/AcademySections.vue'
+import AcademyInfoSection from 'src/components/AcademyInfoSection.vue'
+import TheFooter from 'src/UI/TheFooter.vue'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     TheFooter,
     CoursesSection,
     AcademySections,
     AcademyInfoSection,
-    HomeCarousel,
+    HomeCarousel
   },
-  mounted() {
-    console.log("home");
-  },
-};
+  mounted () {
+    console.log('home')
+  }
+}
 </script>
 
 <style lang="scss" scoped>

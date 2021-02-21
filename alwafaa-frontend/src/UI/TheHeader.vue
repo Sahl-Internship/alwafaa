@@ -85,35 +85,35 @@
 </template>
 
 <script>
-import { localize } from "vee-validate";
+import { localize } from 'vee-validate'
 
 export default {
-  name: "TheHeader",
-  data() {
+  name: 'TheHeader',
+  data () {
     return {
-      text: "",
-    };
+      text: ''
+    }
   },
   computed: {
-    isAuthed() {
-      return this.$store.getters["auth/isAuthenticated"];
-    },
+    isAuthed () {
+      return this.$store.getters['auth/isAuthenticated']
+    }
   },
   methods: {
-    async changeLanguage(language, prevLang) {
-      this.$i18n.locale = language;
-      localize(language);
-      this.$i18n.fallbackLocale = prevLang;
+    async changeLanguage (language, prevLang) {
+      this.$i18n.locale = language
+      localize(language)
+      this.$i18n.fallbackLocale = prevLang
       // set quasar's language too!!
       await import(`quasar/lang/${language}`).then((lang) => {
-        this.$q.lang.set(lang.default);
-      });
+        this.$q.lang.set(lang.default)
+      })
     },
-    handleLogout() {
-      this.$store.dispatch("auth/logout");
-    },
-  },
-};
+    handleLogout () {
+      this.$store.dispatch('auth/logout')
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .header {

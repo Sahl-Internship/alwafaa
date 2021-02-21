@@ -23,19 +23,19 @@
 </template>
 
 <script>
-import TheHeader from "src/UI/TheHeader.vue";
+import TheHeader from 'src/UI/TheHeader.vue'
 
 export default {
-  name: "MainLayout",
+  name: 'MainLayout',
   components: {
-    TheHeader,
+    TheHeader
   },
-  data() {
+  data () {
     return {
-      leftDrawerOpen: false,
-    };
-  },
-};
+      leftDrawerOpen: false
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

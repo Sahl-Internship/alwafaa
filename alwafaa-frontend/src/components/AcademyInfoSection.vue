@@ -102,12 +102,12 @@
 </template>
 
 <script>
-import BasicCard from "src/UI/BasicCard";
+import BasicCard from 'src/UI/BasicCard'
 
 export default {
-  name: "AcademyInfoSection",
-  components: { BasicCard },
-};
+  name: 'AcademyInfoSection',
+  components: { BasicCard }
+}
 </script>
 
 <style lang="scss" scoped>

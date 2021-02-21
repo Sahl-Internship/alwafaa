@@ -214,57 +214,57 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       isSamePage: true,
       isCourse: false,
       isPreCourse: false,
-      username: "",
-      email: "",
-      currentPass: "",
-      password: "",
+      username: '',
+      email: '',
+      currentPass: '',
+      password: '',
       isPwd: true,
       isCPwd: true,
       dense: true,
       loading4: false,
-      drawer: false,
-    };
+      drawer: false
+    }
   },
   methods: {
-    toggle(page) {
-      if (page === "info") {
-        this.isSamePage = true;
-        this.isCourse = false;
-        this.isPreCourse = false;
-      } else if (page === "course") {
-        this.isSamePage = false;
-        this.isCourse = true;
-        this.isPreCourse = false;
-      } else if (page === "setting") {
-        this.isSamePage = false;
-        this.isCourse = false;
-        this.isPreCourse = true;
+    toggle (page) {
+      if (page === 'info') {
+        this.isSamePage = true
+        this.isCourse = false
+        this.isPreCourse = false
+      } else if (page === 'course') {
+        this.isSamePage = false
+        this.isCourse = true
+        this.isPreCourse = false
+      } else if (page === 'setting') {
+        this.isSamePage = false
+        this.isCourse = false
+        this.isPreCourse = true
       }
     },
-    submitForm() {
+    submitForm () {
       // eslint-disable-next-line no-unused-vars
       const user = {
         username: this.username,
         email: this.email,
-        password: this.password,
-      };
-      if (
-        this.username === "" ||
-        this.email === "" ||
-        this.currentPass === "" ||
-        this.password === ""
-      ) {
-        return;
+        password: this.password
       }
-      console.log("click");
-    },
-  },
-};
+      if (
+        this.username === '' ||
+        this.email === '' ||
+        this.currentPass === '' ||
+        this.password === ''
+      ) {
+        return
+      }
+      console.log('click')
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .user-info {

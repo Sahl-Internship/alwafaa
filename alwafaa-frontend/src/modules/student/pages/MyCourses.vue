@@ -23,12 +23,12 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
-      enteredText: "",
-    };
-  },
-};
+      enteredText: ''
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 h1 {

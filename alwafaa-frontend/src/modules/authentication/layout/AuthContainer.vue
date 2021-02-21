@@ -23,8 +23,8 @@
 
 <script>
 export default {
-  name: "AuthContainer",
-};
+  name: 'AuthContainer'
+}
 </script>
 
 <style lang="scss" scoped>

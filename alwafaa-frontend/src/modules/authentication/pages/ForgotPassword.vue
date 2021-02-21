@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import AuthContainer from "../layout/AuthContainer.vue";
+import AuthContainer from '../layout/AuthContainer.vue'
 
 export default {
   components: {
@@ -52,15 +52,15 @@ export default {
   },
   data () {
     return {
-      email: ""
+      email: ''
     }
   },
   methods: {
     submitForm () {
       const email = {
-        email: this.email,
+        email: this.email
       }
-      this.$store.dispatch("auth/forgotPassword", email)
+      this.$store.dispatch('auth/forgotPassword', email)
     }
   }
 }

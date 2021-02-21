@@ -97,21 +97,21 @@
 </template>
 
 <script>
-import BasicSection from "src/UI/BasicSection.vue";
-import SectionCard from "./SectionCard.vue";
+import BasicSection from 'src/UI/BasicSection.vue'
+import SectionCard from './SectionCard.vue'
 
 export default {
-  name: "CoursesSection",
+  name: 'CoursesSection',
   components: { BasicSection, SectionCard },
-  mounted() {
+  mounted () {
     this.$q.screen.setSizes({
       sm: 380,
       md: 500,
       lg: 600,
-      xl: 980,
-    });
-  },
-};
+      xl: 980
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>
