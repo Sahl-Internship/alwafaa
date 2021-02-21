@@ -5,8 +5,8 @@
  * @var common\models\Section $model
  */
 
-$this->title = 'Create Section';
-$this->params['breadcrumbs'][] = ['label' => 'Sections', 'url' => ['index']];
+$this->title = Yii::t('backend','Create Section');
+$this->params['breadcrumbs'][] = ['label' => ' / '.Yii::t('backend','Sections'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="section-create">

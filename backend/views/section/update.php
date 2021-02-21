@@ -5,10 +5,10 @@
  * @var common\models\Section $model
  */
 
-$this->title = 'Update Section: ' . ' ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Sections', 'url' => ['index']];
+$this->title = Yii::t('backend','Update Section').': ' . ' ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => ' / '.Yii::t('backend','Sections'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('backend','Update');
 ?>
 <div class="section-update">
 
