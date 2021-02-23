@@ -1,5 +1,5 @@
 <template>
-  <auth-container>
+  <auth-layout>
     <ValidationObserver
       v-slot="{ handleSubmit }"
       class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-9 q-my-md"
@@ -247,14 +247,14 @@
         <!-- <facebook-btn status="signup"></facebook-btn> -->
       </q-form>
     </ValidationObserver>
-  </auth-container>
+  </auth-layout>
 </template>
 
 <script>
-import AuthContainer from '../layout/AuthContainer.vue'
+import AuthLayout from '../layout/AuthLayout.vue'
 
 export default {
-  components: { AuthContainer },
+  components: { AuthLayout },
   name: 'Signup',
   data () {
     return {

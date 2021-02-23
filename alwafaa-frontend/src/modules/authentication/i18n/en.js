@@ -24,6 +24,11 @@ export default {
   login: 'Login',
   resetPass: 'Reset password',
   change: 'Reset',
+  noAccount: 'Have no account?',
+  createAccount: 'Create account',
+  completeYourInfo: 'Enter your personal info and start your journey',
+  alreadyHaveAccount: 'Already have an account?',
+  signupDecisionText: 'If you already have an account, Login',
   formValidation: {
     requiredErr: '*This field is required',
     emailErr: '*not valid email',

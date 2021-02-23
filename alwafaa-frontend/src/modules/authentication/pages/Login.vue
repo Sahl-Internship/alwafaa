@@ -1,15 +1,16 @@
 <template>
-  <auth-container>
+  <auth-layout>
     <ValidationObserver
       v-slot="{ handleSubmit }"
-      class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-9 q-my-md"
+      class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-12 q-my-md validator"
     >
       <q-form
         class="row q-gutter-x-xs q-pb-lg justify-center login"
         @submit.prevent="handleSubmit(submitForm)"
       >
         <h4 class="col-12 q-my-lg title">{{ $t('loginTitle') }}</h4>
-
+        <hr>
+        <div class="input-container">
         <ValidationProvider
           name="email"
           class="col-10"
@@ -17,15 +18,20 @@
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
+            class="input-field"
             v-model="email"
             outlined
             type="email"
             :label="$t('email')"
+            label-color="dark"
             color="blue-1"
-            bg-color="grey-1"
+            bg-color="white"
             :error="invalid && validated"
             :error-message="errors[0]"
           >
+          <template v-slot:prepend>
+          <q-icon name="person" />
+        </template>
           </q-input>
         </ValidationProvider>
 
@@ -36,15 +42,21 @@
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
+            class="input-field"
+            borders-radius-inherit
             v-model="password"
             outlined
             :type="isPwd ? 'password' : 'text'"
             :label="$t('password')"
+            label-color="dark"
             color="blue-1"
-            bg-color="grey-1"
+            bg-color="white"
             :error="invalid && validated"
             :error-message="errors[0]"
           >
+          <template v-slot:prepend>
+          <q-icon name="vpn_key" />
+        </template>
             <template v-slot:append>
               <q-icon
                 :name="isPwd ? 'visibility_off' : 'visibility'"
@@ -54,49 +66,39 @@
             </template>
           </q-input>
         </ValidationProvider>
-
-        <q-checkbox
-          :label="$t('rememberMe')"
-          v-model="orange"
-          color="secondary"
-          class="col-10 check"
-        />
-
-        <q-btn
+        </div>
+        <div class="after-input row">
+          <q-checkbox
+            :label="$t('rememberMe')"
+            v-model="orange"
+            color="primary"
+            class="check col-6 col-md-6"
+          />
+          <router-link to="/forgotPass" class="link col-6 col-md-6">{{$t('forgotPassword')}}</router-link>
+        </div>
+          <q-btn
           dense
           no-caps
           :label="$t('login')"
           type="submit"
-          color="primary"
-          text-color="grey-1"
-          class="col-10 form-btn"
+          color="green"
+          text-color="dark"
+          class="form-btn"
         ></q-btn>
-
-        <q-btn
-          flat
-          unelevated
-          no-caps
-          :label="$t('forgotPassword')"
-          type="button"
-          class="col-10"
-          text-color="grey"
-          to="/forgotPass"
-        />
-
         <!-- <google-btn class="social-button" status="login"></google-btn> -->
         <!-- <facebook-btn class="social-button face" status="login"></facebook-btn> -->
       </q-form>
     </ValidationObserver>
-  </auth-container>
+  </auth-layout>
 </template>
 
 <script>
-import AuthContainer from '../layout/AuthContainer.vue'
+import AuthLayout from '../layout/AuthLayout.vue'
 
 export default {
   name: 'Login',
   components: {
-    AuthContainer
+    AuthLayout
   },
   data () {
     return {
@@ -119,31 +121,59 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.login {
-  border: solid 1px $grey-2;
-  border-radius: 7px;
-  background-color: #fff;
-  box-shadow: 1px 10px 10px 5px $grey-3;
-
+  .login {
+  width: 100%;
   .title {
-    color: $grey;
+    color: $dark;
     text-align: center;
+    margin-bottom: 70px;
+    font-weight: normal;
+    @media (max-width:480px) , (max-width:340px){
+      font-size: 20px;
+    }
   }
-
+  hr{
+    background: $grey-1;
+    height: 3px;
+    border: none;
+    width: 60%;
+    margin: -35px 20% 0px 20%;
+  }
+  .input-container{
+    width: 60%;
+    margin: 0px 20%;
+  }
+  .key{
+      position: absolute;
+      color: $dark;
+      font-size: 24px;
+      top: 18px;
+  }
+  .after-input{
+    margin: -5px 20%;
+    width: 60%;
+    .link{
+      text-decoration: none;
+      color:$dark;
+      text-align: right;
+      padding-top: 10px;
+      @media screen and (max-width: 480px),(max-width: 340px) {
+        text-align: left!important;
+        padding-top: 0px;
+        margin-left:10px;
+        font-size: 11px;
+        font-weight: bolder;
+      }
+    }
+  }
   .form-btn {
+    width:30%;
+    height: 45px;
     font-size: 20px;
+    border-radius: 30px;
+    margin: 0px 35%;
+    top: 30px;
   }
-}
 
-@media (max-width: 860px) and(min-width: 700px) {
-  .title {
-    font-size: 25px;
-  }
-}
-
-@media (max-width: 500px) {
-  .title {
-    font-size: 30px;
-  }
 }
 </style>

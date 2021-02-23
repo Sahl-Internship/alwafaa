@@ -1,5 +1,5 @@
 <template>
-  <auth-container>
+  <auth-layout>
     <ValidationObserver
       v-slot="{ handleSubmit }"
       class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-9 q-my-md"
@@ -16,39 +16,48 @@
           rules="required|min:7"
           v-slot="{ errors, invalid, validated }"
         >
-          <q-input
+        <div class="pass-container">
+                    <q-input
             v-model="password"
+            class="pass"
             outlined
             type="password"
             :label="$t('password')"
+            label-color="dark"
             color="blue-1"
-            bg-color="grey-1"
+            bg-color="white"
             :error="invalid && validated"
             :error-message="errors[0]"
           >
+          <template v-slot:prepend>
+          <q-icon name="vpn_key" />
+        </template>
           </q-input>
-        </ValidationProvider>
+        </div>
 
-        <q-btn
-          dense
-          no-caps
-          :label="$t('change')"
-          type="submit"
-          color="primary"
-          text-color="grey-1"
-          class="col-10 form-btn"
-        ></q-btn>
+        </ValidationProvider>
+        <div class="btn-container">
+          <q-btn
+            dense
+            no-caps
+            :label="$t('change')"
+            type="submit"
+            color="primary"
+            text-color="grey-1"
+            class="col-10 form-btn"
+          ></q-btn>
+        </div>
       </q-form>
     </ValidationObserver>
-  </auth-container>
+  </auth-layout>
 </template>
 
 <script>
-import AuthContainer from '../layout/AuthContainer.vue'
+import AuthLayout from '../layout/AuthLayout.vue'
 
 export default {
   components: {
-    AuthContainer
+    AuthLayout
   },
   data () {
     return {
@@ -67,18 +76,33 @@ export default {
 </script>
 <style lang="scss" scoped>
 .reset-pass-form {
-  border: solid 1px $grey-2;
-  border-radius: 7px;
-  background-color: #fff;
-  box-shadow: 1px 10px 10px 5px $grey-3;
+  // border: solid 1px $grey-2;
+  // border-radius: 7px;
+  // background-color: #fff;
+  // box-shadow: 1px 10px 10px 5px $grey-3;
 
   .title {
-    color: $grey;
+    color: $dark;
     text-align: center;
   }
-
-  .form-btn {
-    font-size: 20px;
+  .pass-container{
+    width: 70%;
+    margin: 0px 15%;
+  }
+.key{
+    position: absolute;
+    color: $dark;
+    font-size: 24px;
+    top: 18px;
+    }
+  .btn-container{
+    width: 83%;
+    .form-btn {
+      font-size: 20px;
+      width: 70%;
+      margin: 0px 15%;
+      margin-top: 17px;
+    }
   }
 }
 
