@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-// import example from "./module-example"
 import AuthModule from './authentication'
 import studentModule from './student'
 

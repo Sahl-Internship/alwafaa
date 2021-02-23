@@ -8,7 +8,7 @@
         class="row q-gutter-x-xs q-pb-lg justify-center login"
         @submit.prevent="handleSubmit(submitForm)"
       >
-        <h4 class="col-12 q-my-lg title">{{ $t("loginTitle") }}</h4>
+        <h4 class="col-12 q-my-lg title">{{ $t('loginTitle') }}</h4>
 
         <ValidationProvider
           name="email"

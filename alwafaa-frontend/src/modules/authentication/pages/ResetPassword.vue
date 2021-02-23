@@ -8,7 +8,7 @@
         class="row q-gutter-x-xs q-pb-lg justify-center reset-pass-form"
         @submit.prevent="handleSubmit(submitForm)"
       >
-        <h4 class="col-12 q-my-lg title">{{ $t("resetPass") }}</h4>
+        <h4 class="col-12 q-my-lg title">{{ $t('resetPass') }}</h4>
 
         <ValidationProvider
           name="password"

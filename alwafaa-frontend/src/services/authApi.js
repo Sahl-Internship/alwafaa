@@ -7,7 +7,6 @@ export const handleResetPass = (password) => {
   return axios.post('', password)
 }
 
-// export const handleSignup = (userData) => {
 export const handleSignup = (data) => {
   return axios({
     url: 'http://endpoints.alwafaa.localhost/signup',

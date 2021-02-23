@@ -26,7 +26,7 @@ class BackendAsset extends AssetBundle
      * @var array
      */
     public $css = [
-        'css/style.css'
+        'css/styleEn.css'
     ];
     /**
      * @var array
