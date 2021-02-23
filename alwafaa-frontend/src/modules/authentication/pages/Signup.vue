@@ -9,9 +9,10 @@
     >
       {{ $t("signup.title") }}
     </div>
-    <q-separator class="col-2" spaced="lg" size="3px" color="grey-2" />
 
-    <div class="col-12 q-mt-lg">
+    <q-separator class="col-7" spaced="md" size="2px" color="grey-1" />
+
+    <div class="col-12 q-mt-xl">
       <div class="row justify-center">
         <div class="col-xs-4 col-sm-3 text-subtitle1 text-bold text-center text-grey-4">
           {{ $t("signup.firstFormTitle") }}
@@ -152,11 +153,13 @@
 
               <q-btn
                 no-caps
+                rounded
                 type="submit"
                 :label="step === 3 ? $t('signup.finish') : $t('signup.continue')"
                 icon-right="fas fa-chevron-left"
                 class="col-5 q-mt-md"
-                color="primary"
+                color="green"
+                text-color="grey-5"
                 size="lg"
               />
             </q-form>
@@ -243,7 +246,7 @@
                 <q-input
                   v-model="password"
                   outlined
-                  type="password"
+                  :type="isPwd ? 'password' : 'text'"
                   :label="$t('formFields.password')"
                   color="primary"
                   :error="invalid && validated"
@@ -252,8 +255,12 @@
                   <template v-slot:prepend>
                     <q-icon name="mdi-key" />
                   </template>
-                  <template v-slot:append v-if="!!password && (!invalid || !validated)">
-                    <q-icon name="fas fa-check" color="green" size="xs" />
+                  <template v-slot:append>
+                    <q-icon
+                      :name="isPwd ? 'mdi-eye-off' : 'mdi-eye'"
+                      class="cursor-pointer"
+                      @click="isPwd = !isPwd"
+                    ></q-icon>
                   </template>
                 </q-input>
               </ValidationProvider>
@@ -267,7 +274,7 @@
                 <q-input
                   v-model="confirmPass"
                   outlined
-                  type="password"
+                  :type="isCPwd ? 'password' : 'text'"
                   :label="$t('formFields.confirmPass')"
                   color="primary"
                   :error="invalid && validated"
@@ -276,19 +283,25 @@
                   <template v-slot:prepend>
                     <q-icon name="mdi-key" />
                   </template>
-                  <template v-slot:append v-if="!!confirmPass && (!invalid || !validated)">
-                    <q-icon name="fas fa-check" color="green" size="xs" />
+                  <template v-slot:append>
+                    <q-icon
+                      :name="isCPwd ? 'mdi-eye-off' : 'mdi-eye'"
+                      class="cursor-pointer"
+                      @click="isCPwd = !isCPwd"
+                    ></q-icon>
                   </template>
                 </q-input>
               </ValidationProvider>
 
               <q-btn
                 no-caps
+                rounded
                 type="submit"
                 :label="step === 3 ? $t('signup.finish') : $t('signup.continue')"
                 icon-right="fas fa-chevron-left"
                 class="col-5 q-mt-md"
-                color="primary"
+                color="green"
+                text-color="grey-5"
                 size="lg"
               />
             </q-form>
@@ -372,11 +385,13 @@
 
               <q-btn
                 no-caps
+                rounded
                 type="submit"
                 :disable="!agree"
                 :label="step === 3 ? $t('signup.finish') : $t('signup.continue')"
                 class="col-6 q-mt-md"
-                color="primary"
+                color="green"
+                text-color="grey-5"
                 size="lg"
               />
             </q-form>
@@ -411,7 +426,9 @@ export default {
       genderOptions: ['Female', 'Male'],
       countriesNamesOptions: countriesNames,
       dialCodesOPtions: dialCodes,
-      isoCode: ''
+      isoCode: '',
+      isPwd: true,
+      isCPwd: true
     }
   },
   methods: {

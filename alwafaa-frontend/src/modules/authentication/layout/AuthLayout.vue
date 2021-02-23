@@ -9,11 +9,11 @@
   >
     <div
       v-if="!$q.screen.lt.sm"
-      class="col-sm-3 col-md-4 col-lg-5 login-section"
+      class="col-xs-1 col-sm-3 col-md-5 login-section"
     >
     </div>
 
-    <q-page-container class="col-xs-12 col-sm-9 col-md-8 col-lg-7">
+    <q-page-container class="col-xs-12 col-sm-9 col-md-7">
       <router-view />
     </q-page-container>
   </q-layout>
