@@ -54,7 +54,7 @@
         v-if="isAuthed"
         flat
         no-caps
-        label="Logout"
+        :label="$t('header.logout')"
         type="button"
         text-color="grey-1"
         size="17px"
@@ -64,56 +64,56 @@
         v-if="!isAuthed"
         flat
         no-caps
-        :label="$t('login')"
+        :label="$t('header.login')"
         type="button"
         text-color="grey-1"
         size="17px"
-        to="/login"
+        to="auth/login"
       />
       <q-btn
         v-if="!isAuthed"
         flat
         no-caps
-        :label="$t('signup')"
+        :label="$t('header.signup')"
         type="button"
         text-color="grey-1"
         size="17px"
-        to="/signup"
+        to="auth/signup"
       />
     </q-toolbar>
   </q-header>
 </template>
 
 <script>
-import { localize } from "vee-validate";
+import { localize } from 'vee-validate'
 
 export default {
-  name: "TheHeader",
-  data() {
+  name: 'TheHeader',
+  data () {
     return {
-      text: "",
-    };
+      text: ''
+    }
   },
   computed: {
-    isAuthed() {
-      return this.$store.getters["auth/isAuthenticated"];
-    },
+    isAuthed () {
+      return this.$store.getters['auth/isAuthenticated']
+    }
   },
   methods: {
-    async changeLanguage(language, prevLang) {
-      this.$i18n.locale = language;
-      localize(language);
-      this.$i18n.fallbackLocale = prevLang;
+    async changeLanguage (language, prevLang) {
+      this.$i18n.locale = language
+      localize(language)
+      this.$i18n.fallbackLocale = prevLang
       // set quasar's language too!!
       await import(`quasar/lang/${language}`).then((lang) => {
-        this.$q.lang.set(lang.default);
-      });
+        this.$q.lang.set(lang.default)
+      })
     },
-    handleLogout() {
-      this.$store.dispatch("auth/logout");
-    },
-  },
-};
+    handleLogout () {
+      this.$store.dispatch('auth/logout')
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .header {

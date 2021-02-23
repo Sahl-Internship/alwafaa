@@ -22,11 +22,11 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       slide: 1,
-      autoplay: true,
-    };
-  },
-};
+      autoplay: true
+    }
+  }
+}
 </script>

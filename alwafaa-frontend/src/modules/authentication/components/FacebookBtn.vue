@@ -7,27 +7,27 @@
 
 <script>
 export default {
-  name: "FacebookBtn",
-  props: ["status"],
+  name: 'FacebookBtn',
+  props: ['status'],
   methods: {
-    auth(network) {
+    auth (network) {
       this.$hello(network)
-        .login({ scope: "email" })
+        .login({ scope: 'email' })
         .then((res) => {
-          console.log(res);
+          console.log(res)
 
           if (this.$hello.getAuthResponse(network) == null) {
-            return;
+            return
           }
           this.$hello(network)
-            .api("me")
+            .api('me')
             .then((res2) => {
-              console.log(res2);
-            });
-        });
-    },
-  },
-};
+              console.log(res2)
+            })
+        })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

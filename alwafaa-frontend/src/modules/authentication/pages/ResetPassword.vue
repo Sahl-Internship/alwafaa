@@ -1,5 +1,5 @@
 <template>
-  <auth-container>
+  <!-- <auth-container> -->
     <ValidationObserver
       v-slot="{ handleSubmit }"
       class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-9 q-my-md"
@@ -40,30 +40,30 @@
         ></q-btn>
       </q-form>
     </ValidationObserver>
-  </auth-container>
+  <!-- </auth-container> -->
 </template>
 
 <script>
-import AuthContainer from "../layout/AuthContainer.vue";
+// import AuthContainer from '../layout/AuthContainer.vue'
 
 export default {
-  components: {
-    AuthContainer,
-  },
-  data() {
+  // components: {
+  //   AuthContainer
+  // },
+  data () {
     return {
-      password: "",
-    };
+      password: ''
+    }
   },
   methods: {
-    submitForm() {
+    submitForm () {
       const password = {
-        password: this.password,
-      };
-      this.$store.dispatch("auth/resetPassword", password);
-    },
-  },
-};
+        password: this.password
+      }
+      this.$store.dispatch('auth/resetPassword', password)
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .reset-pass-form {

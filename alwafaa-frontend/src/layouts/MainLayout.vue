@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <the-header></the-header>
+    <the-header v-if="headerVisibility"></the-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
@@ -23,19 +23,25 @@
 </template>
 
 <script>
-import TheHeader from "src/UI/TheHeader.vue";
+import TheHeader from 'src/UI/TheHeader.vue'
 
 export default {
-  name: "MainLayout",
+  name: 'MainLayout',
   components: {
-    TheHeader,
+    TheHeader
   },
-  data() {
+  data () {
     return {
-      leftDrawerOpen: false,
-    };
+      leftDrawerOpen: false
+    }
   },
-};
+  computed: {
+    headerVisibility () {
+      const { name } = this.$route
+      return !(name === 'signup' || name === 'login')
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

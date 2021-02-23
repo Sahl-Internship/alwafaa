@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import BasicCard from "src/UI/BasicCard.vue";
+import BasicCard from 'src/UI/BasicCard.vue'
 
 export default {
-  name: "CourseCard",
-  components: { BasicCard },
-};
+  name: 'CourseCard',
+  components: { BasicCard }
+}
 </script>

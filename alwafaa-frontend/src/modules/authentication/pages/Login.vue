@@ -1,5 +1,5 @@
 <template>
-  <auth-container>
+  <!-- <auth-container> -->
     <ValidationObserver
       v-slot="{ handleSubmit }"
       class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-9 q-my-md"
@@ -87,36 +87,36 @@
         <!-- <facebook-btn class="social-button face" status="login"></facebook-btn> -->
       </q-form>
     </ValidationObserver>
-  </auth-container>
+  <!-- </auth-container> -->
 </template>
 
 <script>
-import AuthContainer from "../layout/AuthContainer.vue";
+// import AuthContainer from '../layout/AuthContainer.vue'
 
 export default {
-  name: "Login",
-  components: {
-    AuthContainer,
-  },
-  data() {
+  name: 'Login',
+  // components: {
+  //   AuthContainer
+  // },
+  data () {
     return {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       isPwd: true,
       formIsValid: true,
-      orange: false,
-    };
+      orange: false
+    }
   },
   methods: {
-    submitForm() {
+    submitForm () {
       const user = {
         identity: this.email,
-        password: this.password,
-      };
-      this.$store.dispatch("auth/login", user);
-    },
-  },
-};
+        password: this.password
+      }
+      this.$store.dispatch('auth/login', user)
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .login {
