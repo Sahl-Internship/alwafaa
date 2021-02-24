@@ -17,7 +17,6 @@
         class="row justify-center"
       >
         <div
-          v-if="step === 1"
           class="step1 row"
         >
           <h4
@@ -29,28 +28,6 @@
             {{ $t('resetPass.enterEmail') }}
           </p>
         </div>
-        <div
-          v-if="step === 2"
-          class="step2 row"
-        >
-          <h4
-            class="col-12 q-my-lg title text-center">
-            {{ $t('resetPass.verifyEmailTitle') }}
-          </h4>
-          <q-field
-            standout="bg-green text-white"
-            class="self-center col-7 q-my-lg"
-          >
-            <template
-              v-slot:control
-            >
-              <div
-                class="self-center text-center full-width no-outline">
-                {{$t('resetPass.emailVerifyLink')}}
-              </div>
-            </template>
-          </q-field>
-        </div>
         <ValidationProvider
           name="email"
           class="col-7"
@@ -58,7 +35,6 @@
           v-slot="{ errors, invalid, validated }"
         >
           <q-input
-            v-if="step === 1"
             v-model="email"
             outlined
             type="email"
@@ -86,7 +62,6 @@
         <q-btn
           class="form-btn"
           type="submit"
-          v-if="step === 1"
           @click="submitForm"
           color="green"
           :label="$t('submit')"
@@ -107,7 +82,6 @@ export default {
   },
   methods: {
     submitForm () {
-      this.step = 2
       const email = {
         email: this.email
       }
@@ -120,7 +94,7 @@ export default {
 .title {
   color: $dark;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 60px;
 }
 
 .form-title{

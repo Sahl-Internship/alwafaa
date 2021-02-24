@@ -136,7 +136,7 @@ export default {
     height: 3px;
     border: none;
     width: 60%;
-    margin: -35px 20% 0px 20%;
+    margin: -60px 20% 0px 20%;
   }
   .input-container{
     width: 60%;

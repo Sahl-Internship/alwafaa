@@ -50,7 +50,7 @@ export default {
       return this.$route.name === 'login' ? 'completeYourInfo' : 'signupDecisionText'
     },
     buttonLabel () {
-      return this.$route.name === 'login' ? 'createAccount' : 'loginTitle'
+      return this.$route.name === 'login' ? 'createAccount' : 'header.login'
     },
     goTo () {
       return this.$route.name === 'login' ? '/auth/signup' : '/auth/login'

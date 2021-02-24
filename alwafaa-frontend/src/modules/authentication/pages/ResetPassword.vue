@@ -18,7 +18,8 @@
         class="row justify-center"
       >
         <h4
-          class="col-7 q-my-lg title text-center">
+          class="col-7 q-my-lg form-title text-center">
+          <i class="far fa-check-circle"></i>
           {{ $t('resetPass.verifyFinished') }}
         </h4>
         <p
@@ -40,17 +41,17 @@
             :error="invalid && validated"
             :error-message="errors[0]"
           >
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-key" />
-                  </template>
-                  <template v-slot:append>
-                    <q-icon
-                      :name="isPwd ? 'mdi-eye-off' : 'mdi-eye'"
-                      class="cursor-pointer"
-                      @click="isPwd = !isPwd"
-                    ></q-icon>
-                  </template>
-                </q-input>
+            <template v-slot:prepend>
+              <q-icon name="mdi-key" />
+            </template>
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'mdi-eye-off' : 'mdi-eye'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              ></q-icon>
+            </template>
+          </q-input>
         </ValidationProvider>
 
         <ValidationProvider
@@ -120,24 +121,17 @@ export default {
   .title {
     color: $dark;
     text-align: center;
-    margin-top: 80px;
-    width: 60%;
+    margin-top: 40px;
+  }
+  .form-title{
+    height: 0;
+    margin-bottom: 40px;
+    font-size: 25px;
   }
   .separator{
-    margin-bottom: 80px !important;
-  }
-  .q-stepper__header{
-    &::v-deep {
-      .q-stepper__tab{
-        display: none;
-      }
-    }
-  }
-  .key{
-    position: absolute;
-    color: $dark;
-    font-size: 24px;
-    top: 18px;
+    margin-bottom: 30px !important;
+    width: 60%;
+    margin: 0px 20%;
   }
   .q-input {
     &::v-deep {
