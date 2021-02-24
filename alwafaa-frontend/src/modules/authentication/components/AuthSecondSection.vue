@@ -61,7 +61,8 @@ export default {
 
 <style lang="scss" scoped>
 .second-section {
-  background-image: linear-gradient($primary, $green);
+  background-image: url('~assets/second-section-auth.png'), linear-gradient($primary, $green);
+  background-size: cover;
 
   .auth-page-img {
     width: 40%;
