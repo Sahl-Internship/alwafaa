@@ -44,7 +44,7 @@ class UserSearch extends User
         if(!$qry){
             $query = User::find();
               }elseif($qry=="student"){
-            $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'user'])->all();
+            $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'student'])->all();
             $user_ids = [];
             foreach ($role_user as $index =>$value){
                 $id = $value['user_id'];

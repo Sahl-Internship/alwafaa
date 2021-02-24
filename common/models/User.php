@@ -351,4 +351,28 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(RbacAuthAssignment::class, ['user_id' => 'id']);
     }
 
+    public function getTeacher()
+    {
+        $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'teacher'])->all();
+        $teacher_ids = [];
+        foreach ($role_user as $index =>$value){
+            $id = $value['user_id'];
+            array_push($teacher_ids,$id);
+        }
+       return $this::findBySql("SELECT * FROM user WHERE id IN (" . implode(',',array_map('intval',$teacher_ids)) . ")")->all();
+
+    }
+
+    public function getStudent()
+    {
+        $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'user'])->all();
+        $user_ids = [];
+        foreach ($role_user as $index =>$value){
+            $id = $value['user_id'];
+            array_push($user_ids,$id);
+        }
+       return $this::findBySql("SELECT * FROM user WHERE id IN (" . implode(',',array_map('intval',$user_ids)) . ")")->all();
+
+    }
+
 }
