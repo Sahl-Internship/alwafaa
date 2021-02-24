@@ -1,12 +1,18 @@
 <template>
-  <q-layout view="hHh Lpr fFf" class="row justify-center items-center layout" :class="{'reverse':loginRoute}">
+  <q-layout
+    view="hHh Lpr fFf"
+    :class="{
+      row: true,
+      reverse: reverseRow,
+      'justify-center': $q.screen.lt.sm
+    }"
+  >
     <div
-      class="col-5 column justify-center right-section"
-      :class="{
-        'right-section': $q.screen.lt.sm,
-      }"
+      v-if="!$q.screen.lt.sm"
+      class="col-5 login-section"
     >
-      <div class="row justify-center">
+    <!-- class="col-sm-3 col-md-4 col-lg-5 login-section" -->
+          <div class="row justify-center">
         <q-img
           alt="elearning-icon"
           src="~assets/auth-logo.png"
@@ -26,9 +32,10 @@
 
       </div>
     </div>
-    <div class="col-xs-9 col-sm-7 col-md-7 col-lg-7 left-section" >
-      <slot></slot>
-    </div>
+<!-- col-xs-12 col-sm-9 col-md-8 col-lg-7 -->
+    <q-page-container class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+      <router-view />
+    </q-page-container>
   </q-layout>
 </template>
 
@@ -41,12 +48,13 @@ export default {
       title: 'alreadyHaveAccount',
       text: 'signupDecisionText',
       buttonTitle: 'loginTitle',
-      goTo: '/login'
+      goTo: '/auth/login'
     }
   },
   computed: {
-    loginRoute () {
-      return this.$route.name === 'login'
+    reverseRow () {
+      const { name } = this.$route
+      return name === 'login'
     }
   },
   mounted () {
@@ -54,32 +62,30 @@ export default {
       this.title = 'noAccount'
       this.text = 'completeYourInfo'
       this.buttonTitle = 'createAccount'
-      this.goTo = '/signup'
+      this.goTo = '/auth/signup'
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.layout{
-  background-color: #fff;
   .auth-page-img {
     width: 40%;
-    top: -80px;
+    top: 50px;
   }
 
-  .right-section {
+  .login-section {
     background-image: linear-gradient($primary, $green);
-    height: calc(100vh );
-    @media screen and (max-width: 600px) {
+    @media (max-width: 600px) {
       display: none;
     }
   }
   .no-account{
     text-align: center;
     color: #fff;
-    margin: 25px 0px;
+    margin: 100px 0px 0px;
     height: 0px;
+    line-height: 3.5;
     font-weight: bold;
     @media (max-width: 767px),(max-width:992px){
       font-size: 25px;
@@ -88,8 +94,8 @@ export default {
   .complete-info{
     font-size: 17px;
     height: 0px;
-    line-height: 3.5;
-    margin:10px 0px 30px;
+    line-height: 9;
+    margin:25px 0px 70px;
     text-align: center;
     color: #fff;
     @media (max-width: 767px),(max-width:992px){
@@ -105,11 +111,10 @@ export default {
     margin: 0px 27%;
     text-align: center;
     height: 45px;
-    top: 60px;
+    top: 100px;
     @media (max-width: 767px),(max-width: 992px){
       top: 50px;
       font-size: 14px;
     }
-  }
 }
 </style>

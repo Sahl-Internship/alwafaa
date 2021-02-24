@@ -1,5 +1,4 @@
 <template>
-  <auth-layout>
     <ValidationObserver
       v-slot="{ handleSubmit }"
       class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-12 q-my-md validator"
@@ -74,7 +73,7 @@
             color="primary"
             class="check col-6 col-md-6"
           />
-          <router-link to="/forgotPass" class="link col-6 col-md-6">{{$t('forgotPassword')}}</router-link>
+          <router-link to="/auth/forgotPass" class="link col-6 col-md-6">{{$t('forgotPassword')}}</router-link>
         </div>
           <q-btn
           dense
@@ -89,17 +88,12 @@
         <!-- <facebook-btn class="social-button face" status="login"></facebook-btn> -->
       </q-form>
     </ValidationObserver>
-  </auth-layout>
 </template>
 
 <script>
-import AuthLayout from '../layout/AuthLayout.vue'
 
 export default {
   name: 'Login',
-  components: {
-    AuthLayout
-  },
   data () {
     return {
       email: '',

@@ -19,7 +19,6 @@ const routes = [
     ]
   },
   ...authRoutes,
-
   // Always leave this as last one,
   // but you can also remove it
   {

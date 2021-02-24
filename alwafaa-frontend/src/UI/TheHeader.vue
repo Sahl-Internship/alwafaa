@@ -54,7 +54,7 @@
         v-if="isAuthed"
         flat
         no-caps
-        label="Logout"
+        :label="$t('header.logout')"
         type="button"
         text-color="grey-1"
         size="17px"
@@ -64,21 +64,21 @@
         v-if="!isAuthed"
         flat
         no-caps
-        :label="$t('login')"
+        :label="$t('header.login')"
         type="button"
         text-color="grey-1"
         size="17px"
-        to="/login"
+        to="auth/login"
       />
       <q-btn
         v-if="!isAuthed"
         flat
         no-caps
-        :label="$t('signup')"
+        :label="$t('header.signup')"
         type="button"
         text-color="grey-1"
         size="17px"
-        to="/signup"
+        to="auth/signup"
       />
     </q-toolbar>
   </q-header>

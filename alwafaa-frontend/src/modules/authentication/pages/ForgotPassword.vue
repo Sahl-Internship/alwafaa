@@ -1,5 +1,4 @@
 <template>
-  <auth-layout>
     <ValidationObserver
       v-slot="{ handleSubmit }"
       class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-9 q-my-md"
@@ -49,16 +48,11 @@
         </div>
       </q-form>
     </ValidationObserver>
-  </auth-layout>
 </template>
 
 <script>
-import AuthLayout from '../layout/AuthLayout.vue'
 
 export default {
-  components: {
-    AuthLayout
-  },
   data () {
     return {
       email: ''

@@ -1,10 +1,5 @@
-import {
-  Notify,
-  Loading
-} from 'quasar'
-import {
-  i18n
-} from 'src/boot/i18n'
+import { Notify, Loading } from 'quasar'
+import { i18n } from 'src/boot/i18n'
 
 import {
   handleSignup,
@@ -30,9 +25,7 @@ export default {
         throw error
       }
 
-      this.$router.push({
-        name: 'login'
-      })
+      this.$router.push({ name: 'login' })
 
       Notify.create({
         type: 'positive',
@@ -45,7 +38,8 @@ export default {
       Notify.create({
         type: 'negative',
         message: error.message
-          ? error.message : i18n.t('authNotification.registerdefaultError')
+          ? error.message
+          : i18n.t('authNotification.registerdefaultError')
       })
     }
 
@@ -62,11 +56,7 @@ export default {
         throw err
       }
 
-      const {
-        token,
-        ...user
-      } = response.data.profile
-      console.log(user)
+      const { token, ...user } = response.data.profile
       localStorage.setItem('token', token)
       context.commit('loginState', {
         token,
@@ -97,9 +87,7 @@ export default {
         throw err
       }
 
-      this.$router.push({
-        name: 'login'
-      })
+      this.$router.push({ name: 'login' })
 
       Notify.create({
         type: 'positive',
@@ -116,9 +104,7 @@ export default {
   },
   async resetPassword (context, password) {
     // console.log(this.$router.app._route.query.token);
-    const {
-      token
-    } = this.$router.app._route.query
+    const { token } = this.$router.app._route.query
     Loading.show()
 
     try {
@@ -129,9 +115,7 @@ export default {
         throw err
       }
 
-      this.$router.push({
-        name: 'login'
-      })
+      this.$router.push({ name: 'login' })
 
       Notify.create({
         type: 'positive',
@@ -147,13 +131,9 @@ export default {
     }
     Loading.hide()
   },
-  logout ({
-    commit
-  }) {
+  logout ({ commit }) {
     commit('logout')
     localStorage.removeItem('token')
-    this.$router.push({
-      name: 'login'
-    })
+    this.$router.push({ name: 'login' })
   }
 }

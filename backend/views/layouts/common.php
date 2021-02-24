@@ -253,7 +253,7 @@ $logEntries[] = [
                             'active' => Yii::$app->controller->id === 'section',
                             'visible' => Yii::$app->user->can('administrator'),
                         ],
-/*
+
                         [
                             'label' => Yii::t('backend', 'Content'),
                             'options' => ['class' => 'nav-header'],
@@ -402,7 +402,6 @@ $logEntries[] = [
                             'badge' => SystemLog::find()->count(),
                             'badgeBgClass' => 'badge-danger',
                         ],
-   */
                     ],
                 ]) ?>
             </nav>
