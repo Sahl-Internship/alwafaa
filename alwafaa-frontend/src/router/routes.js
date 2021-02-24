@@ -15,11 +15,10 @@ const routes = [
         path: 'home',
         redirect: '/'
       },
-      ...authRoutes,
       ...studentRoutes
     ]
   },
-
+  ...authRoutes,
   // Always leave this as last one,
   // but you can also remove it
   {

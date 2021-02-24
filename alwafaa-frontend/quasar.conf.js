@@ -33,7 +33,7 @@ module.exports = function (/* ctx */) {
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
       // 'ionicons-v4',
-      // 'mdi-v5',
+      'mdi-v5',
       'fontawesome-v5',
       // 'eva-icons',
       // 'themify',
@@ -94,7 +94,7 @@ module.exports = function (/* ctx */) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       // iconSet: 'material-icons', // Quasar icon set
-      iconSet: 'fontawesome-v5',
+      iconSet: 'mdi-v5',
       lang: 'ar', // Quasar language pack
       config: {
         screen: {

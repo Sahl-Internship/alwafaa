@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <the-header></the-header>
+    <the-header v-if="headerVisibility"></the-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
@@ -34,6 +34,12 @@ export default {
     return {
       leftDrawerOpen: false
     }
+  },
+  computed: {
+    headerVisibility () {
+      const { name } = this.$route
+      return !(name === 'signup' || name === 'login')
+    }
   }
 }
 </script>
@@ -44,4 +50,5 @@ export default {
   padding: 0;
   margin: 0;
 }
+
 </style>
