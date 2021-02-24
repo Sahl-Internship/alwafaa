@@ -9,31 +9,31 @@
   >
     <div
       v-if="!$q.screen.lt.sm"
-      class="col-5 login-section"
+      class="col-xs-1 col-sm-3 col-md-5 login-section"
     >
-    <!-- class="col-sm-3 col-md-4 col-lg-5 login-section" -->
-          <div class="row justify-center">
-        <q-img
-          alt="elearning-icon"
-          src="~assets/auth-logo.png"
-          class="self-center auth-page-img col-12"
-        />
-        <h4
-          class="no-account col-12">
-          {{$t(title)}}
-        </h4>
-        <h6 class="complete-info col-12">{{$t(text)}}</h6>
+        <!-- my responsive class="col-5 login-section" -->
+        <!-- class="col-sm-3 col-md-4 col-lg-5 login-section" -->
+        <div class="row justify-center">
+          <q-img
+            alt="elearning-icon"
+            src="~assets/auth-logo.png"
+            class="self-center auth-page-img col-12"
+          />
+          <h4
+            class="no-account col-12">
+            {{$t(title)}}
+          </h4>
+          <h6 class="complete-info col-12">{{$t(text)}}</h6>
 
-        <q-btn type='button'
-          class='create-btn col-12'
-          :label='$t(buttonTitle)'
-          :to='goTo'
-        />
-
+          <q-btn type='button'
+            class='create-btn col-12'
+            :label='$t(buttonTitle)'
+            :to='goTo'
+          />
+        </div>
       </div>
-    </div>
-<!-- col-xs-12 col-sm-9 col-md-8 col-lg-7 -->
-    <q-page-container class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+    <q-page-container class="col-xs-12 col-sm-9 col-md-7">
+      <!-- my responsive  <q-page-container class="col-xs-12 col-sm-7 col-md-7 col-lg-7"> -->
       <router-view />
     </q-page-container>
   </q-layout>
