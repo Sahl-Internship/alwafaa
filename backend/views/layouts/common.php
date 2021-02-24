@@ -424,7 +424,7 @@ $logEntries[] = [
                         <?php echo Breadcrumbs::widget([
                             'tag' => 'ol',
                             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                            'options' => ['class' => ['breadcrumb', 'float-sm-right']]
+                            'options' => ['class' => ['breadcrumb']]
                         ]) ?>
                     </div>
                 </div>

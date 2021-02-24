@@ -50,7 +50,8 @@ class StudentForm extends Model
 
             [['country','city'], 'string'],
 
-            ['phone', 'match', 'pattern' => '/^(01)[0-9]{9}$/'],
+//            ['phone', 'match', 'pattern' => '/^(01)[0-9]{9}$/'],
+            ['phone', 'number'],
 
             ['birthdate', 'integer'],
 
