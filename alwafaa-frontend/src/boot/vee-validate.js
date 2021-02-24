@@ -22,7 +22,7 @@ const dictionary = {
   },
   ar: {
     messages: {
-      required: 'مطلوب',
+      required: 'هذا الحقل مطلوب',
       email: 'بريد إلكتروني غير صحيح',
       min: 'كلمة المرور لا تقل عن 7 حروف',
       confirmed: 'كلمة المرور غير متطابقة',
