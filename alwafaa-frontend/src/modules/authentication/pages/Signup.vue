@@ -14,19 +14,19 @@
 
     <div class="col-12 q-mt-xl">
       <div class="row justify-center">
-        <div class="col-xs-4 col-sm-3 text-subtitle1 text-bold text-center text-grey-4">
+        <div class="col-xs-6 col-sm-6 text-subtitle1 text-bold text-center text-grey-4">
           {{ $t("signup.firstFormTitle") }}
         </div>
-        <div class="col-xs-4 col-sm-3 text-subtitle1 text-bold text-center text-grey-4">
+        <div class="col-xs-6 col-sm-6 text-subtitle1 text-bold text-center text-grey-4">
           {{ $t("signup.secondFormTitle") }}
         </div>
-        <div class="col-xs-4 col-sm-3 text-subtitle1 text-bold text-center text-grey-4">
+        <!-- <div class="col-xs-4 col-sm-3 text-subtitle1 text-bold text-center text-grey-4">
           {{ $t("signup.thirdFormTitle") }}
-        </div>
+        </div> -->
       </div>
     </div>
 
-    <div class="col-xs-10 col-sm-7">
+    <div class="col-xs-8 col-sm-7">
       <q-stepper
         v-model="step"
         ref="stepper"
@@ -155,8 +155,8 @@
                 no-caps
                 rounded
                 type="submit"
-                :label="step === 3 ? $t('signup.finish') : $t('signup.continue')"
-                icon-right="fas fa-chevron-left"
+                :label="$t('signup.continue')"
+                :icon-right="checkDirection ? 'mdi-chevron-left' : 'mdi-chevron-right'"
                 :class="{
                   'col-5': !$q.screen.lt.md,
                   'col-6': $q.screen.lt.md,
@@ -204,7 +204,8 @@
                 </q-input>
               </ValidationProvider>
 
-              <div class="col-12 row phone">
+              <div class="col-12 row phone"
+              >
                 <ValidationProvider
                   name="phone"
                   class="col-xs-9 col-sm-9 col-md-10 col-lg-10 phone-input"
@@ -301,8 +302,7 @@
                 no-caps
                 rounded
                 type="submit"
-                :label="step === 3 ? $t('signup.finish') : $t('signup.continue')"
-                icon-right="fas fa-chevron-left"
+                :label="$t('signup.finish')"
                 class="col-5 q-mt-md"
                 color="green"
                 text-color="grey-5"
@@ -312,7 +312,7 @@
           </ValidationObserver>
         </q-step>
 
-        <q-step
+        <!-- <q-step
           :name="3"
           :title="$t('signup.thirdFormTitle')"
         >
@@ -392,7 +392,7 @@
                 rounded
                 type="submit"
                 :disable="!agree"
-                :label="step === 3 ? $t('signup.finish') : $t('signup.continue')"
+                :label="step === 2 ? $t('signup.finish') : $t('signup.continue')"
                 class="col-6 q-mt-md"
                 color="green"
                 text-color="grey-5"
@@ -400,7 +400,7 @@
               />
             </q-form>
           </ValidationObserver>
-        </q-step>
+        </q-step> -->
       </q-stepper>
     </div>
 
@@ -435,6 +435,11 @@ export default {
       isCPwd: true
     }
   },
+  computed: {
+    checkDirection () {
+      return this.$q.lang.rtl
+    }
+  },
   methods: {
     validateFirstForm () {
       console.log({
@@ -446,29 +451,20 @@ export default {
       })
       this.$refs.stepper.next()
     },
-    // submitForm () {
-    //   const user = {
-    //     firstname: this.firstname,
-    //     lastname: this.lastname,
-    //     email: this.email,
-    //     phone: this.phoneNumber,
-    //     password: this.password,
-    //     country: this.country,
-    //     city: this.city
-    //   }
-
-    //   this.$store.dispatch('auth/signup', user)
-    // },
     submitData () {
-      console.log({
+      const user = {
+        firstname: this.firstname,
+        lastname: this.lastname,
+        gender: this.gender === 'Male' ? '1' : '2',
+        country: this.country,
+        city: this.city,
         email: this.email,
         phone: `${this.phoneKey}${this.phoneNumber}`,
         password: this.password
-      })
-      this.$refs.stepper.next()
-    },
-    submitVerfication () {
-      // send code
+      }
+      console.log(user)
+      this.$store.dispatch('auth/signup', user)
+      // this.$refs.stepper.next()
     }
   },
   watch: {
@@ -527,7 +523,7 @@ export default {
   .q-btn {
     &::v-deep {
       .q-icon {
-        font-size: 17px;
+        font-size: 25px;
       }
     }
   }

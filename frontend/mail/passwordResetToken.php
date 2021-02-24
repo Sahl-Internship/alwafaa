@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $token string */
 
 //$resetLink = Yii::$app->urlManager->createAbsoluteUrl(['@frontendUrl/user/sign-in/reset-password', 'token' => $token]);
-$link = \yii\helpers\Url::to(['http://localhost:4000/reset-password','token' => $token]);
+$link = \yii\helpers\Url::to(['http://localhost:4000/auth/reset-password','token' => $token]);
 ?>
 
         <div class="content">
