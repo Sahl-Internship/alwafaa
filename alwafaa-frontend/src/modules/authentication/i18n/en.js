@@ -26,21 +26,22 @@ export default {
     verficationCode: 'Verfication Code'
   },
   resetPass: {
-    cancel: 'cancel',
+    back: 'Back',
     title: 'Reset Password',
     enterEmail: 'Please enter your email',
-    verifyEmail: 'Verify your email',
-    resetCode: 'Verification code sent to your email',
+    verifyEmailTitle: 'Verify your email',
+    emailVerifyLink: 'Verification link sent to your email',
     verifyFinished: 'well, verification Finished',
     enterNewPass: 'Enter new password',
     resetPassFinsished: 'Reset password finished'
   },
-  loginTitle: 'LOGIN',
-  forgotPassword: 'Forgot Password ?',
-  rememberMe: 'Remember Me',
-  verifyEmailTitle: 'VERIFY EMAIL',
-  sendVerification: 'SEND VERIFICATION',
+  login: {
+    title: 'Login',
+    forgotPassword: 'Forgot Password ?',
+    rememberMe: 'Remember Me'
+  },
   submit: 'Submit',
+  Login: 'Login',
   googleSignup: 'With Google',
   facebookSignup: 'With Facebook',
   noAccount: 'Have no account?',

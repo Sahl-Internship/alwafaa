@@ -7,7 +7,7 @@
         class="row q-gutter-x-xs q-pb-lg justify-center login"
         @submit.prevent="handleSubmit(submitForm)"
       >
-        <h4 class="col-12 q-my-lg title">{{ $t('loginTitle') }}</h4>
+        <h4 class="col-12 q-my-lg title">{{ $t('login.title') }}</h4>
         <hr>
         <div class="input-container">
         <ValidationProvider
@@ -21,7 +21,7 @@
             v-model="email"
             outlined
             type="email"
-            :label="$t('email')"
+            :label="$t('formFields.email')"
             label-color="dark"
             color="blue-1"
             bg-color="white"
@@ -46,7 +46,7 @@
             v-model="password"
             outlined
             :type="isPwd ? 'password' : 'text'"
-            :label="$t('password')"
+            :label="$t('formFields.password')"
             label-color="dark"
             color="blue-1"
             bg-color="white"
@@ -68,17 +68,22 @@
         </div>
         <div class="after-input row">
           <q-checkbox
-            :label="$t('rememberMe')"
+            :label="$t('login.rememberMe')"
             v-model="orange"
             color="primary"
             class="check col-6 col-md-6"
           />
-          <router-link to="/auth/forgotPass" class="link col-6 col-md-6">{{$t('forgotPassword')}}</router-link>
+          <router-link
+            to="/auth/forgotPass"
+            class="link col-6 col-md-6"
+          >
+            {{$t('login.forgotPassword')}}
+          </router-link>
         </div>
           <q-btn
           dense
           no-caps
-          :label="$t('login')"
+          :label="$t('header.login')"
           type="submit"
           color="green"
           text-color="dark"

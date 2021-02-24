@@ -47,7 +47,7 @@ export default {
     return {
       title: 'alreadyHaveAccount',
       text: 'signupDecisionText',
-      buttonTitle: 'loginTitle',
+      buttonTitle: 'Login',
       goTo: '/auth/login'
     }
   },

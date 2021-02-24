@@ -26,27 +26,29 @@ export default {
     verficationCode: 'كود التحقق'
   },
   resetPass: {
-    cancel: 'إلغاء',
+    back: 'رجوع',
     title: 'إعادة تعيين كلمة المرور',
     enterEmail: 'الرجاء إدخال البريد الإلكتروني الخاص بك',
-    verifyEmail: 'تحقق من بريدك الإلكتروني',
-    resetCodeSent: 'ارسلنا اليك كود إعادة تعيين كلمة المرور عبر بريدك الإلكتروني',
+    verifyEmailTitle: 'تحقق من بريدك الإلكتروني',
+    emailVerifyLink: 'ارسلنا اليك رابط للتحقق عبر بريدك الإلكتروني',
     verifyFinished: 'حسناً, تم التحقق',
     enterNewPass: 'ادخل كلمة المرور الجديدة',
-    resetPassFinsished: 'تم إعادة تعيين كلمة المرور'
+    resetPassFinsished: 'تم إعادة تعيين كلمة المرور',
+    change: 'تغيير'
   },
-  loginTitle: 'تسجيل الدخول',
-  forgotPassword: 'نسيت كلمة المرور؟',
-  rememberMe: 'البقاء متصلا',
+  login: {
+    title: 'تسجيل الدخول',
+    forgotPassword: 'نسيت كلمة المرور؟',
+    rememberMe: 'البقاء متصلا'
+  },
+  Login: 'دخول',
   byGoogle: 'الدخول بواسطة جوجل',
   byFacebook: 'الدخول بواسطة فيس بوك',
-  verifyEmailTitle: 'التحقق من البريد الإلكتروني',
   sendVerification: 'ارسال التحقق',
   submit: 'ارسال',
   useSocial: 'أو استخدم',
   googleSignup: 'بواسطة جوجل',
   facebookSignup: 'بواسطة فيسبوك',
-  change: 'تغيير',
   or: 'أو',
   noAccount: 'ليس لديك حساب؟',
   createAccount: 'إنشاء حساب',
