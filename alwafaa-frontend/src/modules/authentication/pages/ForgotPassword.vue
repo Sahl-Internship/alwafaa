@@ -1,9 +1,14 @@
 <template>
   <div class="q-pa-md">
-    <h4
-      class="col-12 q-my-lg title text-center">
+    <div
+      class="col-12 q-my-lg title text-center"
+      :class="{
+        'text-h4': !$q.screen.lt.md,
+        'text-h5': $q.screen.lt.md,
+      }"
+    >
       {{ $t('resetPass.title') }}
-    </h4>
+    </div>
 
     <q-separator
       color="grey-1"
@@ -158,15 +163,15 @@ export default {
     }
   }
 }
-@media (max-width: 860px) and(min-width: 700px) {
-  .title {
-    font-size: 25px;
-  }
-}
+// @media (max-width: 860px) and(min-width: 700px) {
+//   .title {
+//     font-size: 25px;
+//   }
+// }
 
-@media (max-width: 500px) {
-  .title {
-    font-size: 30px;
-  }
-}
+// @media (max-width: 500px) {
+//   .title {
+//     font-size: 30px;
+//   }
+// }
 </style>
