@@ -1,6 +1,6 @@
 <template>
   <div
-    class="row q-mt-none"
+    class="row q-mt-none auth-header"
     :class="{reverse: checkFlip}"
   >
     <div
@@ -82,10 +82,13 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+.auth-header {
+  height: 50px;
+}
 i{
-    font-size: 30px;
-    margin-left: 20px;
-    color: $green;
+  font-size: 30px;
+  margin-left: 20px;
+  color: $green;
 }
 // .lang-btn{
 //     float: right;

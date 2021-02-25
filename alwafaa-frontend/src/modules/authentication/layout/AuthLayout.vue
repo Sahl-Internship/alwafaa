@@ -9,7 +9,7 @@
   >
     <auth-second-section v-if="!$q.screen.lt.sm"></auth-second-section>
 
-    <q-page-container class="col-xs-12 col-sm-9 col-md-7 column justify-around">
+    <q-page-container class="col-xs-12 col-sm-9 col-md-7 column justify-start">
       <go-back class="align-start"></go-back>
       <router-view />
     </q-page-container>

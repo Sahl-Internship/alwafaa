@@ -1,8 +1,8 @@
 <template>
-  <div class="row justify-center">
+  <div class="row justify-center q-mt-xl">
     <ValidationObserver
       v-slot="{ handleSubmit }"
-      class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-12 q-my-md validator"
+      class="flex justify-center col-xs-11 col-sm-11 col-md-10 col-lg-12 q-my-md validator"
     >
       <q-form
         class="row q-gutter-x-xs q-pb-lg justify-center login"
@@ -13,7 +13,7 @@
         <div class="input-container">
         <ValidationProvider
           name="email"
-          class="col-10"
+          class="col-11"
           rules="required|email"
           v-slot="{ errors, invalid, validated }"
         >
@@ -37,7 +37,7 @@
 
         <ValidationProvider
           name="password"
-          class="col-10"
+          class="col-11"
           rules="required|min:7"
           v-slot="{ errors, invalid, validated }"
         >
@@ -67,7 +67,7 @@
           </q-input>
         </ValidationProvider>
         </div>
-        <div class="after-input row">
+        <div class="col-11 after-input row">
           <q-checkbox
             :label="$t('login.rememberMe')"
             v-model="orange"
@@ -175,6 +175,12 @@ export default {
     margin: 0px 35%;
     top: 30px;
   }
+
+   @media screen and (max-width: 480px) {
+     .check {
+       font-size: 10px;
+     }
+   }
 
 }
 </style>
