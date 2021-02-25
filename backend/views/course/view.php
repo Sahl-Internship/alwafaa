@@ -30,12 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'time:datetime',
+                    'time:date',
                     'duration',
                     'title',
-                    'description',
-                    'section_id',
-                    'teacher_id',
+                    'description:html',
+                    [
+                            'attribute'=>'teacher_id',
+                        'value'=>$model->teacher->username,
+                    ],
+                    [
+                        'attribute'=>'section_id',
+                        'value'=> $model->section->title,
+                    ],
                     'zoom_link',
                     
                 ],

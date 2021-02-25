@@ -40,8 +40,8 @@ return [
     'class Duration'=>'مدة الحصة',
     'Courses'=>'الدورات',
     'Update Course'=>'تحديث دورة',
-    ''=>'',
-    ''=>'',
+    'Duration By Weeks'=>'مدة الدورة بالاسبوع',
+    'Course starts in'=>'تاريخ بداية الدورة',
     ''=>'',
     ''=>'',
 

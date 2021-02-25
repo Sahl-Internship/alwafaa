@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\StringHelper;
 
 /**
  * @var yii\web\View $this
@@ -33,13 +34,30 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
 
-                    'id',
-                    'time:datetime',
-                    'duration',
-                    'title',
-                    'description',
+                    ['attribute'=>'id',
+                        'contentOptions'=>['style'=>'width:60px']
+                    ],
+
+                    ['attribute'=>'time',
+                        'format'=>'date',
+                        'contentOptions'=>['style'=>'width:60px']
+                    ],
+
+                    ['attribute'=>'duration',
+                        'contentOptions'=>['style'=>'width:60px']
+                    ],
+
+                    ['attribute'=>'title',
+                        'contentOptions'=>['style'=>'width:60px']
+                    ],
+
+                    [
+                        'attribute'=>'description',
+                        'content'=>function($model){
+                            return StringHelper::truncateWords($model->description,7);
+                        }
+                    ],
                     // 'section_id',
                     // 'teacher_id',
                     // 'zoom_link',

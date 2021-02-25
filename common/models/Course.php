@@ -77,8 +77,8 @@ class Course extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('backend', 'ID'),
-            'time' => Yii::t('backend', 'Time'),
-            'duration' => Yii::t('backend', 'Duration'),
+            'time' => Yii::t('backend', 'Course starts in'),
+            'duration' => Yii::t('backend', 'Duration By Weeks'),
             'title' => Yii::t('backend', 'Title'),
             'description' => Yii::t('backend', 'Description'),
             'section_id' => Yii::t('backend', 'Section'),
@@ -135,7 +135,10 @@ class Course extends \yii\db\ActiveRecord
     {
         return new \common\models\query\CourseQuery(get_called_class());
     }
-
+//    public function afterFind() {
+//        parent::afterFind ();
+//        $this->time=Yii::$app->formatter->asDate($this->time);
+//    }
 
     public function addCourseClasses()
     {
