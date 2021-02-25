@@ -1,4 +1,5 @@
 <template>
+  <div class="row justify-center">
     <ValidationObserver
       v-slot="{ handleSubmit }"
       class="flex justify-center col-xs-11 col-sm-11 col-md-9 col-lg-12 q-my-md validator"
@@ -93,6 +94,7 @@
         <!-- <facebook-btn class="social-button face" status="login"></facebook-btn> -->
       </q-form>
     </ValidationObserver>
+  </div>
 </template>
 
 <script>

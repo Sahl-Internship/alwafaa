@@ -15,16 +15,22 @@ use yii\bootstrap4\ActiveForm;
         <div class="card">
             <div class="card-body">
                 <?php echo $form->errorSummary($model); ?>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                    </div>
+                    <div class="col-sm-6">
+                        <?php echo $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+                    </div>
+                </div>
 
-                <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-                <?php echo $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
                 
             </div>
             <div class="card-footer">
                 <?php echo Html::submitButton(
                         $model->isNewRecord ? Yii::t('backend','Create')
                             : Yii::t('backend','Update'),
-                        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                        ['class' => $model->isNewRecord ? 'primary-btn' : 'btn btn-primary']) ?>
             </div>
         </div>
     <?php ActiveForm::end(); ?>

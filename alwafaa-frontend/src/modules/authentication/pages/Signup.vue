@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-center">
     <div
-      class="col-12 text-weight-bold text-center q-mt-xl text-grey-5"
+      class="col-12 text-weight-bold text-center q-mt-none text-grey-5"
       :class="{
         'text-h4': !$q.screen.lt.sm,
         'text-h5': $q.screen.lt.sm

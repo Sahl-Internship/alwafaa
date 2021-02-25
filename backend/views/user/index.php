@@ -36,7 +36,7 @@ if(Yii::$app->controller->action->id === 'student'){
         if(Yii::$app->controller->id === 'user' && Yii::$app->controller->action->id === 'index') {
             echo Html::a(FAS::icon('user-plus').' '.Yii::t('backend', $createMsg, [
                     'modelClass' => 'User',
-                ]), ['create'], ['class' => 'btn btn-success']);
+                ]), ['create'], ['class' => 'btn success-btn']);
         }
          ?>
     </div>

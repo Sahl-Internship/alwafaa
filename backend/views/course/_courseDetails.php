@@ -12,7 +12,33 @@ use kartik\datetime\DateTimePicker;
 
 ?>
 <?php echo $form->errorSummary($model); ?>
-<?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+<div class="row">
+    <div class="col-sm-4">
+        <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    </div>
+    <div class="col-sm-4">
+        <?php echo $form->field($model, 'section_id')->dropdownList($sectionList) ?>
+    </div>
+    <div class="col-sm-4">
+        <?php echo $form->field($model, 'teacher_id')->dropdownList($teacherList) ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+    <?php echo $form->field($model, 'duration')->textInput() ?>
+    </div>
+    <div class="col-sm-4">
+        <?php echo $form->field($model, 'zoom_link')->textInput(['maxlength' => true]) ?>
+    </div>
+    <div class="col-sm-4">
+            <?php
+        $model->time =  date('m/d/Y', $model->time);
+        echo $form->field($model, 'time')->widget(DatePicker::classname(), []);
+        ?>
+    </div>
+
+</div>
+
 <?php echo $form->field($model, 'description')->widget(
     \yii\imperavi\Widget::class,
     [
@@ -26,11 +52,8 @@ use kartik\datetime\DateTimePicker;
         ],
     ]
 ) ?>
-<?php echo $form->field($model, 'section_id')->dropdownList($sectionList) ?>
-<?php echo $form->field($model, 'teacher_id')->dropdownList($teacherList) ?>
-<?php echo $form->field($model, 'zoom_link')->textInput(['maxlength' => true]) ?>
-<?php
-$model->time =  date('m/d/Y', $model->time);
-echo $form->field($model, 'time')->widget(DatePicker::classname(), []);
-?>
-<?php echo $form->field($model, 'duration')->textInput() ?>
+ <?php //echo $form->field($model, 'section_id')->dropdownList($sectionList) ?>  
+<?php //echo $form->field($model, 'teacher_id')->dropdownList($teacherList) ?>
+<?php// echo $form->field($model, 'zoom_link')->textInput(['maxlength' => true]) ?> 
+
+<?php //echo $form->field($model, 'duration')->textInput() ?>
