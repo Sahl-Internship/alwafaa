@@ -12,7 +12,7 @@
 
     <q-separator class="col-7" spaced="md" size="2px" color="grey-1" />
 
-    <div class="col-12 q-mt-xl">
+    <div class="col-12 q-mt-lg">
       <div class="row justify-center">
         <div class="col-xs-6 col-sm-6 text-subtitle1 text-bold text-center text-grey-4">
           {{ $t("signup.firstFormTitle") }}
@@ -49,7 +49,7 @@
             >
               <ValidationProvider
                 name="firstname"
-                class="col-6 q-pr-xs"
+                class="col-xs-12 col-sm-6 col-md-6 q-pr-xs q-pb-xs"
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
@@ -60,7 +60,6 @@
                   color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
-                  aria-errormessage=""
                 >
                   <template v-slot:prepend>
                     <q-icon name="mdi-account" />
@@ -70,7 +69,7 @@
 
               <ValidationProvider
                 name="lastname"
-                class="col-6"
+                class="col-xs-12 col-sm-6 col-md-6 q-pb-xs"
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
@@ -90,7 +89,7 @@
 
               <ValidationProvider
                 name="gender"
-                class="col-12"
+                class="col-12 q-pb-xs"
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
@@ -111,7 +110,7 @@
 
               <ValidationProvider
                 name="countary"
-                class="col-12"
+                class="col-12 q-pb-xs"
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
@@ -133,7 +132,7 @@
 
               <ValidationProvider
                 name="city"
-                class="col-12"
+                class="col-12 q-pb-xs"
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
@@ -160,7 +159,7 @@
                 :class="{
                   'col-5': !$q.screen.lt.md,
                   'col-6': $q.screen.lt.md,
-                  'q-mt-md': true
+                  'q-mt-sm': true
                 }"
                 :size="$q.screen.lt.md? 'md' : 'lg'"
                 color="green"
@@ -182,7 +181,7 @@
             >
               <ValidationProvider
                 name="email"
-                class="col-12"
+                class="col-12 q-pb-xs"
                 rules="required|email"
                 v-slot="{ errors, invalid, validated }"
               >
@@ -208,7 +207,7 @@
               >
                 <ValidationProvider
                   name="phone"
-                  class="col-xs-9 col-sm-9 col-md-10 col-lg-10 phone-input"
+                  class="col-xs-9 col-sm-9 col-md-10 col-lg-10 q-pb-xs phone-input"
                   rules="required|numeric"
                   v-slot="{ errors, invalid, validated }"
                 >
@@ -228,7 +227,7 @@
 
                 <ValidationProvider
                   name="phone"
-                  class="col-xs-3 col-sm-3 col-md-2 col-lg-2 phone-select"
+                  class="col-xs-3 col-sm-3 col-md-2 col-lg-2 q-pb-xs phone-select"
                   rules="required"
                   v-slot="{ errors, invalid, validated }"
                 >
@@ -244,7 +243,7 @@
 
               <ValidationProvider
                 name="password"
-                class="col-12"
+                class="col-12 q-pb-xs"
                 rules="required|min:7"
                 v-slot="{ errors, invalid, validated }"
               >
@@ -272,7 +271,7 @@
 
               <ValidationProvider
                 name="confirm-password"
-                class="col-12"
+                class="col-12 q-pb-xs"
                 rules="required|confirmed:password"
                 v-slot="{ errors, invalid, validated }"
               >

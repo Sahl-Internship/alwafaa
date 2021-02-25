@@ -93,7 +93,6 @@
           </q-input>
         </ValidationProvider>
         <q-btn
-          @click="submitForm"
           type="submit"
           class="col-sm-9 col-md-7 form-btn"
           color="green"
