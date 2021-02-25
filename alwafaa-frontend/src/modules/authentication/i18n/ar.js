@@ -39,7 +39,8 @@ export default {
   login: {
     title: 'تسجيل الدخول',
     forgotPassword: 'نسيت كلمة المرور؟',
-    rememberMe: 'البقاء متصلا'
+    rememberMe: 'البقاء متصلا',
+    cancel: 'إلغاء'
   },
   Login: 'دخول',
   byGoogle: 'الدخول بواسطة جوجل',
@@ -67,10 +68,10 @@ export default {
     registerdefaultError: 'خطأ خلال التسجيل, حاول مرة اخري',
     notvalid: ' غير صحيح',
     loginError: 'خطأ في البريد الإلكتروني أو كلمة المرور',
-    verfiyEmailMes: 'تحقق من البريد اﻹلكتروني لتغيير كلمة المرور',
+    verfiyEmailSucess: 'تحقق من البريد اﻹلكتروني لتغيير كلمة المرور',
+    verfiyEmailError: 'خطأ, حاول مرة اخري',
     resetSuccess: 'تم حفظ كلمة المرور الجديدة بنجاح',
-    resetError: 'خطأ في تغيير كلمة المرور, حاول مرة اخري',
-    verfiyEmailError: 'خطأ, حاول مرة اخري'
+    resetError: 'خطأ في تغيير كلمة المرور, حاول مرة اخري'
   },
   header: {
     signup: 'تسجيل',

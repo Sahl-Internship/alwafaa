@@ -1,5 +1,10 @@
 <template>
-  <div class="col-sm-3 col-md-5 column justify-around second-section">
+  <div
+    class="col-sm-3 col-md-5 column justify-around second-section"
+    :class="{
+      'img-flip': checkFlip
+    }"
+  >
     <q-img
       alt="elearning-icon"
       src="~assets/auth-logo.png"
@@ -45,16 +50,19 @@ export default {
   name: 'SecondSection',
   computed: {
     title () {
-      return this.$route.name === 'login' ? 'noAccount' : 'alreadyHaveAccount'
+      return this.$route.name === 'signup' ? 'alreadyHaveAccount' : 'noAccount'
     },
     text () {
-      return this.$route.name === 'login' ? 'completeYourInfo' : 'signupDecisionText'
+      return this.$route.name === 'signup' ? 'signupDecisionText' : 'completeYourInfo'
     },
     buttonLabel () {
-      return this.$route.name === 'login' ? 'createAccount' : 'header.login'
+      return this.$route.name === 'signup' ? 'header.login' : 'createAccount'
     },
     goTo () {
-      return this.$route.name === 'login' ? '/auth/signup' : '/auth/login'
+      return this.$route.name === 'signup' ? '/auth/login' : '/auth/signup'
+    },
+    checkFlip () {
+      return this.$route.name !== 'login'
     }
   }
 }
@@ -64,6 +72,10 @@ export default {
 .second-section {
   background-image: url('~assets/second-section-auth.png'), linear-gradient($primary, $green);
   background-size: cover;
+
+  // &.img-flip {
+  //   transform: scaleX(-1);
+  // }
 
   .auth-page-img {
     width: 40%;

@@ -106,16 +106,16 @@ $logEntries[] = [
                     'label' => FAR::icon('bell').' <span class="badge badge-success navbar-badge">'.TimelineEvent::find()->today()->count().'</span>',
                     'url'  => ['/timeline-event/index']
                 ],
-                [
-                    // log events
-                    'label' => FAS::icon('clipboard-list').' <span class="badge badge-warning navbar-badge">'.SystemLog::find()->count().'</span>',
-                    'url' => '#',
-                    'linkOptions' => ['class' => ['no-caret']],
-                    'dropdownOptions' => [
-                        'class' => ['dropdown-menu', 'dropdown-menu-lg', 'dropdown-menu-right'],
-                    ],
-                    'items' => $logEntries,
-                ],
+//                [
+//                    // log events
+//                    'label' => FAS::icon('clipboard-list').' <span class="badge badge-warning navbar-badge">'.SystemLog::find()->count().'</span>',
+//                    'url' => '#',
+//                    'linkOptions' => ['class' => ['no-caret']],
+//                    'dropdownOptions' => [
+//                        'class' => ['dropdown-menu', 'dropdown-menu-lg', 'dropdown-menu-right'],
+//                    ],
+//                    'items' => $logEntries,
+//                ],
                 '<li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         '.Html::img(Yii::$app->user->identity->userProfile->getAvatar('/img/anonymous.png'), ['class' => ['img-circle', 'elevation-2', 'bg-white', 'user-image'], 'alt' => 'User image']).'
@@ -145,16 +145,16 @@ $logEntries[] = [
                     </ul>
                 </li>
                 ',
-                [
-                    // control sidebar button
-                    'label' => FAS::icon('th-large'),
-                    'url'  => '#',
-                    'linkOptions' => [
-                        'data' => ['widget' => 'control-sidebar', 'slide' => 'true'],
-                        'role' => 'button'
-                    ],
-                    'visible' => Yii::$app->user->can('administrator'),
-                ],
+//                [
+//                    // control sidebar button
+//                    'label' => FAS::icon('th-large'),
+//                    'url'  => '#',
+//                    'linkOptions' => [
+//                        'data' => ['widget' => 'control-sidebar', 'slide' => 'true'],
+//                        'role' => 'button'
+//                    ],
+//                    'visible' => Yii::$app->user->can('administrator'),
+//                ],
             ]
         ]); ?>
         <!-- /right navbar links -->
@@ -253,7 +253,14 @@ $logEntries[] = [
                             'active' => Yii::$app->controller->id === 'section',
                             'visible' => Yii::$app->user->can('administrator'),
                         ],
-
+                        [
+                            'label' => Yii::t('backend', 'Courses'),
+                            'icon' => FAS::icon('fas fa-book-open', ['class' => ['nav-icon']]),
+                            'url' => ['/course/index'],
+                            'active' => Yii::$app->controller->id === 'course',
+                            'visible' => Yii::$app->user->can('administrator'),
+                        ],
+/*
                         [
                             'label' => Yii::t('backend', 'Content'),
                             'options' => ['class' => 'nav-header'],
@@ -402,6 +409,8 @@ $logEntries[] = [
                             'badge' => SystemLog::find()->count(),
                             'badgeBgClass' => 'badge-danger',
                         ],
+
+                        */
                     ],
                 ]) ?>
             </nav>

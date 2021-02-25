@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-center">
     <div
-      class="col-12 text-weight-bold text-center q-mt-xl text-grey-5"
+      class="col-12 text-weight-bold text-center q-mt-none text-grey-5"
       :class="{
         'text-h4': !$q.screen.lt.sm,
         'text-h5': $q.screen.lt.sm
@@ -303,10 +303,14 @@
                 rounded
                 type="submit"
                 :label="$t('signup.finish')"
-                class="col-5 q-mt-md"
+                :class="{
+                  'col-5': !$q.screen.lt.md,
+                  'col-6': $q.screen.lt.md,
+                  'q-mt-md': true
+                }"
+                :size="$q.screen.lt.md? 'md' : 'lg'"
                 color="green"
                 text-color="grey-5"
-                size="lg"
               />
             </q-form>
           </ValidationObserver>

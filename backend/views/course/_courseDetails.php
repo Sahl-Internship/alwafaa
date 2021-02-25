@@ -1,12 +1,13 @@
 <?php
 /**
-* @var yii\web\View $this
-* @var common\models\Course $model
-* @var yii\bootstrap4\ActiveForm $form
-* @var common\models\Section $sectionList
-* @var common\models\User $teacherList
-*/
+ * @var yii\web\View $this
+ * @var common\models\Course $model
+ * @var yii\bootstrap4\ActiveForm $form
+ * @var common\models\Section $sectionList
+ * @var common\models\User $teacherList
+ */
 
+use kartik\date\DatePicker;
 use kartik\datetime\DateTimePicker;
 
 ?>
@@ -58,22 +59,11 @@ use kartik\datetime\DateTimePicker;
         ],
     ]
 ) ?>
-
-
-
-
-<!--    --><?php //echo $form->field($model, 'time')->widget(
-//        DateTimePicker::class,
-//        [
-//            'value' =>
-//                 date('Y-m-d H:i:s', $model->time),
-////            'type' => DateTimePicker::TYPE_INLINE,
-//            'pluginOptions' => [
-//                'format' => 'yyyy-mm-dd HH:mm:ss',
-//                'showMeridian' => true,
-//                'todayBtn' => true,
-//            ]
-//        ]
-//    ) ?>
-
-
+<?php echo $form->field($model, 'section_id')->dropdownList($sectionList) ?>
+<?php echo $form->field($model, 'teacher_id')->dropdownList($teacherList) ?>
+<?php echo $form->field($model, 'zoom_link')->textInput(['maxlength' => true]) ?>
+<?php
+$model->time =  date('m/d/Y', $model->time);
+echo $form->field($model, 'time')->widget(DatePicker::classname(), []);
+?>
+<?php echo $form->field($model, 'duration')->textInput() ?>

@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php echo Html::a(Yii::t('backend','Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
-                    'confirm' => 'Are you sure you want to delete this item?',
+                    'confirm' =>Yii::t('backend','Are you sure you want to delete this item?'),
                     'method' => 'post',
                 ],
             ]) ?>
@@ -30,12 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'time:datetime',
+                    'time:date',
                     'duration',
                     'title',
-                    'description',
-                    'section_id',
-                    'teacher_id',
+                    'description:html',
+                    [
+                            'attribute'=>'teacher_id',
+                        'value'=>$model->teacher->username,
+                    ],
+                    [
+                        'attribute'=>'section_id',
+                        'value'=> $model->section->title,
+                    ],
                     'zoom_link',
                     
                 ],

@@ -5,7 +5,11 @@ $config = [
             'class' => yii\web\AssetManager::class,
             'linkAssets' => env('LINK_ASSETS'),
             'appendTimestamp' => YII_ENV_DEV
-        ]
+        ],
+//        'formatter'=>[
+//            'dateFormat'=>'dd-MM-yyyy',
+//            'datetimeFormat'=>'yyyy-mm-dd HH:mm:ss'
+//        ],
     ],
     'as locale' => [
         'class' => common\behaviors\LocaleBehavior::class,

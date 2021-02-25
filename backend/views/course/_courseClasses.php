@@ -52,11 +52,11 @@ use yii\bootstrap4\Html;
     'enableGuessTitle'=>true,
     'addButtonPosition'=>MultipleInput::POS_HEADER,
 ])->label(false) ?>
-
-<div class="card-footer">
-    <?php echo Html::submitButton($model->isNewRecord ?
-        Yii::t('backend','Create') :
-        Yii::t('backend','Update') ,
-        ['class' => $model->isNewRecord ? 'btn success-btn' : 'btn btn-primary']) ?>
-</div>
+<!---->
+<!--<div class="card-footer">-->
+<!--    --><?php //echo Html::submitButton($model->isNewRecord ?
+//        Yii::t('backend','Create') :
+//        Yii::t('backend','Update') ,
+//        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+<!--</div>-->
 

@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = Yii::t('backend','Update');
         'model' => $model,
         'sectionList'=>$sectionList,
         'teacherList'=>$teacherList,
+//        'course_time'=>$course_time,
     ]) ?>
 
 </div>

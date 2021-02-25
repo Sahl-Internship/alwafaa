@@ -38,7 +38,8 @@ export default {
   login: {
     title: 'Login',
     forgotPassword: 'Forgot Password ?',
-    rememberMe: 'Remember Me'
+    rememberMe: 'Remember Me',
+    cancel: 'Cancel'
   },
   submit: 'Submit',
   Login: 'Login',
@@ -60,10 +61,10 @@ export default {
     registerdefaultError: 'Error while registering, Try Again',
     notvalid: ' not valid',
     loginError: 'Wrong Email or Password',
-    verfiyEmailMes: 'Check your email to reset password',
+    verfiyEmailSucess: 'Check your email to reset password',
+    verfiyEmailError: 'Error, try again',
     resetSuccess: 'New password saved successfully',
-    resetError: 'Error While reset password, Try Again',
-    verfiyEmailError: 'Error, try again'
+    resetError: 'Error While reset password, Try Again'
   },
   header: {
     signup: 'Signup',

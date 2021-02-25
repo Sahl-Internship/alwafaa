@@ -81,17 +81,16 @@ export default {
 
     try {
       const response = await handleForgotPass(email)
+
       if (response.data.status !== 1) {
-        console.log(response.data.message)
         const err = new Error(i18n.t('authNotification.verfiyEmailError'))
         throw err
       }
-
-      this.$router.push({ name: 'login' })
+      // this.$router.push({ name: 'login' })
 
       Notify.create({
         type: 'positive',
-        message: i18n.t('authNotification.verfiyEmailMes')
+        message: i18n.t('authNotification.verfiyEmailSucess')
       })
     } catch (error) {
       Loading.hide()
@@ -103,7 +102,6 @@ export default {
     Loading.hide()
   },
   async resetPassword (context, password) {
-    // console.log(this.$router.app._route.query.token);
     const { token } = this.$router.app._route.query
     Loading.show()
 

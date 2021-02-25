@@ -71,4 +71,8 @@ class CourseClasses extends \yii\db\ActiveRecord
     {
         return new \common\models\query\CourseClassesQuery(get_called_class());
     }
+//    public function afterFind() {
+//        parent::afterFind ();
+//        $this->time=Yii::$app->formatter->asDate($this->time);
+//    }
 }

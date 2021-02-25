@@ -34,6 +34,7 @@ export default function (/* { store, ssrContext } */) {
   Router.beforeEach(function (to, _, next) {
     const isAuthed = store().getters['auth/isAuthenticated']
     if (to.meta.requiresAuth && !isAuthed) {
+      console.log('here')
       next({ name: 'login' })
     } else if (to.meta.requiresUnAuth && isAuthed) {
       next({ name: 'home' })

@@ -102,7 +102,7 @@ class CourseController extends Controller
         $model = $this->findModel($id);
         $user = new User();
         $teacher = $user->getTeacher();
-
+//        return date('Y-m-d', $model->time);
         $model->classes = CourseClasses::find()->where('course_id=:id',['id'=>$id])->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
@@ -122,7 +122,8 @@ class CourseController extends Controller
         return $this->render('update', [
             'model' => $model,
             'sectionList'=>ArrayHelper::map(Section::find()->all(),'id','title'),
-            'teacherList'=>ArrayHelper::map($teacher,'id','username')
+            'teacherList'=>ArrayHelper::map($teacher,'id','username'),
+//            'course_time'=>date('Y-m-d H:i:s', $model->time),
         ]);
     }
 
