@@ -57,6 +57,6 @@ use yii\bootstrap4\Html;
     <?php echo Html::submitButton($model->isNewRecord ?
         Yii::t('backend','Create') :
         Yii::t('backend','Update') ,
-        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        ['class' => $model->isNewRecord ? 'btn success-btn' : 'btn btn-primary']) ?>
 </div>
 

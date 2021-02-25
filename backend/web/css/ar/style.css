@@ -49,10 +49,10 @@ body {
   border-color: #13A8E5;
 }
 
-.btn-primary:hover {
+/* .btn-primary:hover {
   background-color: #383d47;
   border-color: #383d47;
-}
+} */
 
 .btn-success,
 .btn-success:focus {
@@ -180,9 +180,9 @@ ul.kv-tree,
   margin-right: 5px;
 }
 
-/* .table>tbody>tr>th {
-  width: 200px;
-} */
+.table>tbody>tr>th {
+  text-align: right;
+}
 
 .table {
   border-spacing: 0px 5px;
@@ -340,12 +340,12 @@ li p {
   color: #fff;
 }
 
-.card-footer button.btn:hover,
+/* .card-footer button.btn:hover,
 .card-footer button.btn:focus,
 .card-footer button.btn:active {
   background-color: #383d47;
   border-color: #383d47;
-}
+} */
 
 div.card {
   margin-right: 10px;
@@ -483,10 +483,10 @@ div.card {
   padding: 0px 5px 0px 10px;
 }
 
-.content .box-body .success-btn:hover {
+/* .content .box-body .success-btn:hover {
   background-color: #383d47;
   border-color: #383d47;
-}
+} */
 
 .content .table>thead>tr>th {
   text-align: center;

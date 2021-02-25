@@ -34,7 +34,7 @@ use yii\bootstrap4\ActiveForm;
 
 
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-3">
                     <?php echo $form->field($model, 'roles')->checkboxList($roles) ?>
                     </div>
                 </div>

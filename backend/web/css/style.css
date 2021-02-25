@@ -23,6 +23,7 @@ nav.main-header .navbar-nav .nav-item a:focus {
     border-color: #13A8E5;
 }
 
+/* Start Sidebar */
 aside[class*=sidebar-dark] .brand-link {
     background-color: #13A8E5;
     color: #fff;
@@ -92,6 +93,11 @@ li p {
 
 }
 
+/* End Sidebar */
+.card-body {
+    padding-bottom: 0px !important;
+}
+
 .navbar-collapse .navbar-nav .dropdown-menu .user-header {
     background-color: #13A8E5 !important;
 }
@@ -120,12 +126,12 @@ li p {
     text-align: center;
 }
 
-.card-footer button.btn-primary:hover,
+/* .card-footer button.btn-primary:hover,
 .card-footer button.btn-primary:focus,
 .card-footer button.btn-primary:active {
     background-color: #383d47;
     border-color: #383d47;
-}
+} */
 
 
 
@@ -157,10 +163,6 @@ li p {
 .form-group input[type=file]::-webkit-file-upload-button:hover {
     background-color: #383d47;
 }
-
-/* .form-group>div {
-    width: 270px;
-} */
 
 
 /* End Main Section */
@@ -194,7 +196,8 @@ li p {
 
 /* End Timeline */
 /* Start All Users */
-.content .box-body .success-btn {
+.content .box-body .success-btn,
+.primary-btn {
     color: #fff;
     background-color: #2acc7b;
     border-color: #2acc7b;
@@ -216,6 +219,17 @@ li p {
     text-align: center;
 }
 
+.submit-btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    color: #fff;
+    padding: 7px 30px;
+}
+
+.submit-btn:hover {
+    background-color: #2acc7b;
+}
+
 /* user creation */
 .user-create .card-footer .submit-btn {
     background-color: #2acc7b !important;
@@ -224,6 +238,54 @@ li p {
 }
 
 /* End All Users */
+/* Start Sections */
+.section-create button.btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    color: #fff;
+    font-weight: bold;
+    padding: 7px 30px;
+}
+
+/* section view */
+.section-view .primary-btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    color: #fff;
+    padding: 7px 30px;
+}
+
+.section-create .card .primary-btn {
+    padding: 7px 30px;
+    outline: none;
+    border: none;
+}
+
+.section-view .btn-danger {
+    color: #fff;
+    padding: 7px 30px;
+}
+
+/* End Sections */
+/* Start Courses */
+.course-index .index-success-btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    color: #fff;
+    font-weight: bold;
+    padding: 7px 30px;
+}
+
+/* * * Course Creation * * */
+
+.course-create .card-footer .success-btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    padding: 7px 60px;
+    font-weight: bold;
+}
+
+/* End Courses */
 /* Start Footer */
 a.back-to-top {
     background-color: #13A8E5;

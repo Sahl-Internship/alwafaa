@@ -23,6 +23,7 @@
 
       <q-btn
         rounded
+        no-caps
         type='button'
         :label='$t(buttonLabel)'
         color="white"

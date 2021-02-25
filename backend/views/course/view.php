@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="course-view">
     <div class="card">
         <div class="card-header">
-            <?php echo Html::a(Yii::t('backend','Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?php echo Html::a(Yii::t('backend','Update'), ['update', 'id' => $model->id], ['class' => 'btn view-btn']) ?>
             <?php echo Html::a(Yii::t('backend','Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
