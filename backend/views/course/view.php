@@ -48,4 +48,33 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
         </div>
     </div>
+    <h4>Classes</h4>
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th>Day</th>
+            <th>date</th>
+            <th>hours</th>
+            <th>title</th>
+            <th>Duration</th>
+            <th>Teacher name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($model->courseClasses as $class): ?>
+            <tr>
+                <td>
+                    <?php echo date('D',$class->time) ?>
+                </td>
+                <td><?php echo date('d-m-Y',$class->time) ?></td>
+                <td><?php echo date('d-m-Y H:m',$class->time) ?></td>
+                <td><?php echo $class->title ?></td>
+                <td><?php echo $class->duration  . ' hours' ?></td>
+                <td><?php echo $model->teacher->username ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+
 </div>

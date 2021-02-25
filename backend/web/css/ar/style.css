@@ -399,10 +399,11 @@ div.card {
   outline: none;
 }
 
-.upload-kit .upload-kit-input {
+.upload-kit .upload-kit-input,
+.image {
   float: right !important;
-  margin-top: 35px;
-  margin-right: -45px;
+  margin-top: 35px !important;
+  margin-right: 10px;
   margin-bottom: 0px;
 }
 

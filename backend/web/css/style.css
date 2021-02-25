@@ -285,12 +285,16 @@ li p {
     font-weight: bold;
 }
 
-div.datepicker {
-    z-index: 1100 !important;
+/*     Course view */
+.course-view .view-btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    padding: 7px 30px;
+    color: #fff;
 }
 
-.course-create .card-body .redactor-toolbar {
-    /* z-index: -1; */
+div.datepicker {
+    z-index: 1100 !important;
 }
 
 /* End Courses */
