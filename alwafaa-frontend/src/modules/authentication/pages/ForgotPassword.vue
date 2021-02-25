@@ -76,7 +76,6 @@
             }"
             :size="$q.screen.lt.md? 'md' : 'lg'"
             type="submit"
-            @click="submitForm"
             color="green"
             text-color="grey-5"
           />

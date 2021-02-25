@@ -86,15 +86,17 @@ export default {
         const err = new Error(i18n.t('authNotification.verfiyEmailError'))
         throw err
       }
+      console.log('try')
       // console.log(this.$router.history.current.name)
       // this.$router.history.current.name !== 'login' && this.$router.push({ name: 'login' })
-      this.$router.push({ name: 'login' })
+      // this.$router.push({ name: 'login' })
 
       Notify.create({
         type: 'positive',
         message: i18n.t('authNotification.verfiyEmailSucess')
       })
     } catch (error) {
+      console.log('error')
       Loading.hide()
       Notify.create({
         type: 'negative',
