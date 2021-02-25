@@ -81,17 +81,18 @@ export default {
 
     try {
       const response = await handleForgotPass(email)
+
       if (response.data.status !== 1) {
-        console.log(response.data.message)
         const err = new Error(i18n.t('authNotification.verfiyEmailError'))
         throw err
       }
-
+      // console.log(this.$router.history.current.name)
+      // this.$router.history.current.name !== 'login' && this.$router.push({ name: 'login' })
       this.$router.push({ name: 'login' })
 
       Notify.create({
         type: 'positive',
-        message: i18n.t('authNotification.verfiyEmailMes')
+        message: i18n.t('authNotification.verfiyEmailSucess')
       })
     } catch (error) {
       Loading.hide()

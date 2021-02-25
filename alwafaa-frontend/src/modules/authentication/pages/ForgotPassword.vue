@@ -4,6 +4,7 @@
       class="col-12 q-my-lg title text-center">
       {{ $t('resetPass.title') }}
     </h4>
+
     <q-separator
       color="grey-1"
       size="3px"
@@ -11,13 +12,14 @@
       class="separator col-7"
       inset
     />
+
     <ValidationObserver v-slot="{ handleSubmit }">
       <q-form
         @submit.prevent="handleSubmit(submitForm)"
         class="row justify-center"
       >
         <div
-          class="step1 row"
+          class="step1 col-12 row"
         >
           <h4
             class="col-12 q-my-lg form-title text-center">
@@ -40,6 +42,7 @@
             type="email"
             :label="$t('formFields.email')"
             color="primary"
+            bg-color="grey-1"
             :error="invalid && validated"
             :error-message="errors[0]"
           >
@@ -59,13 +62,39 @@
           </q-input>
 
         </ValidationProvider>
-        <q-btn
-          class="form-btn"
-          type="submit"
-          @click="submitForm"
-          color="green"
-          :label="$t('submit')"
-        />
+        <div class="col-12 row justify-center">
+          <q-btn
+            no-caps
+            rounded
+            :icon-right="checkDirection ? 'mdi-chevron-left' : 'mdi-chevron-right'"
+            :label="$t('submit')"
+            :class="{
+              'col-3': !$q.screen.lt.md,
+              'col-4': $q.screen.lt.md && !$q.screen.lt.sm,
+              'col-5': $q.screen.lt.sm,
+              'q-mt-md': true
+            }"
+            :size="$q.screen.lt.md? 'md' : 'lg'"
+            type="submit"
+            @click="submitForm"
+            color="green"
+            text-color="grey-5"
+          />
+
+          <q-btn
+            v-if="!$q.screen.lt.sm"
+            no-caps
+            rounded
+            outline
+            type="button"
+            icon-right="mdi-window-close"
+            :label="$t('login.cancel')"
+            class="col-sm-3 col-md-3 col-lg-2 q-mt-md q-ml-md "
+            :size="$q.screen.lt.md? 'md' : 'lg'"
+            text-color="grey-5"
+            to="/auth/login"
+          />
+        </div>
       </q-form>
     </ValidationObserver>
   </div>
@@ -78,6 +107,11 @@ export default {
     return {
       email: '',
       step: 1
+    }
+  },
+  computed: {
+    checkDirection () {
+      return this.$q.lang.rtl
     }
   },
   methods: {
@@ -111,11 +145,19 @@ export default {
   width: 60%;
   margin: 0px 20%;
 }
-.form-btn{
-  width: 20%;
-  margin: 0px 40%;
-  border-radius: 25px;
-  font-size: 18px;
+// .form-btn{
+//   width: 20%;
+//   margin: 0px 40%;
+//   border-radius: 25px;
+//   font-size: 18px;
+// }
+
+.q-btn {
+  &::v-deep {
+    .q-icon {
+      font-size: 25px;
+    }
+  }
 }
 @media (max-width: 860px) and(min-width: 700px) {
   .title {

@@ -24,7 +24,7 @@ export default {
   computed: {
     reverseRow () {
       const { name } = this.$route
-      return name === 'login'
+      return name !== 'signup'
     }
   }
 }
