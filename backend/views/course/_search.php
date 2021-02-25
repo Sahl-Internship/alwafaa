@@ -27,8 +27,8 @@ use yii\bootstrap4\ActiveForm;
     <?php // echo $form->field($model, 'zoom_link') ?>
 
     <div class="form-group">
-        <?php echo Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::resetButton('Reset', ['class' => 'btn btn-secondary']) ?>
+        <?php echo Html::submitButton('Search', ['class' => 'btn search-btn-primary']) ?>
+        <?php echo Html::resetButton('Reset', ['class' => 'btn search-btn-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
