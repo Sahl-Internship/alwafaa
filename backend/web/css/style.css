@@ -285,6 +285,14 @@ li p {
     font-weight: bold;
 }
 
+div.datepicker {
+    z-index: 1100 !important;
+}
+
+.course-create .card-body .redactor-toolbar {
+    /* z-index: -1; */
+}
+
 /* End Courses */
 /* Start Footer */
 a.back-to-top {
