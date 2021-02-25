@@ -9,8 +9,8 @@
   >
     <auth-second-section v-if="!$q.screen.lt.sm"></auth-second-section>
 
-    <q-page-container class="col-xs-12 col-sm-9 col-md-7 column justify-center">
-      <go-back></go-back>
+    <q-page-container class="col-xs-12 col-sm-9 col-md-7 column justify-around">
+      <go-back class="align-start"></go-back>
       <router-view />
     </q-page-container>
   </q-layout>
