@@ -139,22 +139,7 @@ class Course extends \yii\db\ActiveRecord
 
     public function addCourseClasses()
     {
-        $this->refresh();
-//        Yii::$app->commandBus->handle(new AddToTimelineCommand([
-//            'category' => 'course',
-//            'event' => 'new course',
-//            'data' => [
-//                'public_identity' => $this->getPublicIdentity(),
-//                'user_id' => $this->getId(),
-//                'created_at' => $this->created_at
-//            ]
-//        ]));
-        $classes = new CourseClasses();
-        $classes->locale = Yii::$app->language;
-        $profile->load($profileData, '');
-        $this->link('userProfile', $profile);
-        $this->trigger(self::EVENT_AFTER_SIGNUP);
-        // Default role
+
 
 
     }
