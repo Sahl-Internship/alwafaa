@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php echo date('D',$class->time) ?>
                 </td>
                 <td><?php echo date('d-m-Y',$class->time) ?></td>
-                <td><?php echo date('d-m-Y H:m',$class->time) ?></td>
+                <td><?php echo date('H:m A',$class->time) ?></td>
                 <td><?php echo $class->title ?></td>
                 <td><?php echo $class->duration  . ' hours' ?></td>
                 <td><?php echo $model->teacher->username ?></td>

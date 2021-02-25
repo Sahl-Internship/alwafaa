@@ -32,7 +32,11 @@ use kartik\datetime\DateTimePicker;
     </div>
     <div class="col-sm-4">
             <?php
-        $model->time =  date('m/d/Y', $model->time);
+            if(Yii::$app->controller->action->id =='create')
+                $model->time = null;
+            else{
+                $model->time =  date('m/d/Y', $model->time);
+            }
         echo $form->field($model, 'time')->widget(DatePicker::classname(), []);
         ?>
     </div>
