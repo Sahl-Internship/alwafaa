@@ -29,6 +29,8 @@ use yii\bootstrap4\ActiveForm;
                                 'model' => $model,
                                 'sectionList' => $sectionList,
                                 'teacherList' => $teacherList,
+//                                'course_time'=>$course_time,
+
                             ]),
                         'active' => true
                     ],
@@ -53,9 +55,13 @@ use yii\bootstrap4\ActiveForm;
 
 
         </div>
-<!--        <div class="card-footer">-->
+        <div class="card-footer">
 <!--            --><?php //echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-<!--        </div>-->
+            <?php echo Html::submitButton($model->isNewRecord ?
+                    Yii::t('backend','Create') :
+                    Yii::t('backend','Update') ,
+                    ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
     <?php ActiveForm::end(); ?>
 </div>
