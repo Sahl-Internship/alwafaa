@@ -158,9 +158,9 @@ li p {
     background-color: #383d47;
 }
 
-.form-group>div {
+/* .form-group>div {
     width: 270px;
-}
+} */
 
 
 /* End Main Section */
@@ -178,13 +178,17 @@ li p {
     width: 500px;
 }
 
+.timeline .time-label>span.bg-blue {
+    background-color: #2acc7b !important;
+}
+
 .content div.timeline>div>.fas {
     border-radius: 50%;
     font-size: 15px;
     line-height: 30px;
     position: absolute;
     text-align: center;
-
+    background: #636e7d !important;
     width: 30px;
 }
 
@@ -192,8 +196,8 @@ li p {
 /* Start All Users */
 .content .box-body .success-btn {
     color: #fff;
-    background-color: #13A8E5;
-    border-color: #13A8E5;
+    background-color: #2acc7b;
+    border-color: #2acc7b;
     box-shadow: none;
     border-radius: 25px;
 }
@@ -210,6 +214,13 @@ li p {
 
 .content .table-bordered>tbody>tr>td {
     text-align: center;
+}
+
+/* user creation */
+.user-create .card-footer .submit-btn {
+    background-color: #2acc7b !important;
+    border-color: #2acc7b !important;
+    padding: 7px 30px;
 }
 
 /* End All Users */

@@ -56,8 +56,8 @@ body {
 
 .btn-success,
 .btn-success:focus {
-  background-color: #51e69b;
-  border-color: #51e69b;
+  background-color: #2acc7b;
+  border-color: #2acc7b;
 }
 
 .wrapper {
@@ -171,8 +171,7 @@ ul.kv-tree,
   }
 }
 
-.table>thead>tr>th,
-.table>tbody>tr>th {
+.table>thead>tr>th {
   background-color: #13A8E5;
   color: #fff;
   font-size: 14px;
@@ -181,9 +180,9 @@ ul.kv-tree,
   margin-right: 5px;
 }
 
-.table>tbody>tr>th {
+/* .table>tbody>tr>th {
   width: 200px;
-}
+} */
 
 .table {
   border-spacing: 0px 5px;
@@ -213,7 +212,7 @@ ul.kv-tree,
 }
 
 .success {
-  background-color: #51e69b;
+  background-color: #2acc7b;
 }
 
 .btn {
@@ -336,8 +335,8 @@ li p {
 }
 
 .card-footer button.btn-primary {
-  background-color: #51e69b;
-  border-color: #51e69b;
+  background-color: #2acc7b;
+  border-color: #2acc7b;
   color: #fff;
 }
 
@@ -411,9 +410,9 @@ div.card {
   background-color: #383d47;
 }
 
-.form-group>div {
+/* .form-group>div {
   width: 270px;
-}
+} */
 
 .field-userform-roles>label {
   float: inherit;
@@ -467,14 +466,21 @@ div.card {
 
 /* End Timeline */
 /* Start All Users */
+.breadcrumb .breadcrumb-item {
+  margin-left: 15px;
+}
+
 .content .box-body .success-btn,
 .content .box-body .success-btn:focus {
   color: #fff;
-  background-color: #13A8E5;
-  border-color: #13A8E5;
   box-shadow: none;
-  float: right;
+  float: left;
   border-radius: 25px;
+  padding: 7px 30px;
+}
+
+.content .box-body .success-btn>i {
+  padding: 0px 5px 0px 10px;
 }
 
 .content .box-body .success-btn:hover {
@@ -491,6 +497,9 @@ div.card {
 .content .table-bordered>tbody>tr>td {
   text-align: center;
 }
+
+/* user creation */
+
 
 /* End All Users */
 /* Start Footer */
@@ -518,6 +527,7 @@ a.back-to-top:hover {
 }
 
 /* End Footer  */
+
 /** start website pages **/
 .btn-box-tool {
   background-color: #13A8E5;
