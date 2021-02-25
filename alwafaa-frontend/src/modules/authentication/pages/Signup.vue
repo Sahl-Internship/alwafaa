@@ -303,10 +303,14 @@
                 rounded
                 type="submit"
                 :label="$t('signup.finish')"
-                class="col-5 q-mt-md"
+                :class="{
+                  'col-5': !$q.screen.lt.md,
+                  'col-6': $q.screen.lt.md,
+                  'q-mt-md': true
+                }"
+                :size="$q.screen.lt.md? 'md' : 'lg'"
                 color="green"
                 text-color="grey-5"
-                size="lg"
               />
             </q-form>
           </ValidationObserver>
