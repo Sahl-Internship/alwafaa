@@ -48,4 +48,31 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
         </div>
     </div>
+<!--    <h4>Order Items</h4>-->
+<!--    <table class="table table-sm">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Day</th>-->
+<!--            <th>date</th>-->
+<!--            <th>title</th>-->
+<!--            <th>Duration</th>-->
+<!--            <th>Teacher name</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        --><?php //foreach ($model->classes as $class): ?>
+<!--            <tr>-->
+<!--                <td>-->
+<!--                    --><?php //echo $class->time ?>
+<!--                </td>-->
+<!--                <td>--><?php ////echo $item->product_name ?><!--</td>-->
+<!--                <td>--><?php ////echo $item->quantity ?><!--</td>-->
+<!--                <td>--><?php ////echo Yii::$app->formatter->asCurrency( $item->unit_price)  ?><!--</td>-->
+<!--                <td>--><?php ////echo Yii::$app->formatter->asCurrency($item->quantity * $item->unit_price)  ?><!--</td>-->
+<!--            </tr>-->
+<!--        --><?php //endforeach; ?>
+<!--        </tbody>-->
+<!--    </table>-->
+
+
 </div>
