@@ -28,16 +28,29 @@ use kartik\datetime\DateTimePicker;
 <?php echo $form->field($model, 'section_id')->dropdownList($sectionList) ?>
 <?php echo $form->field($model, 'teacher_id')->dropdownList($teacherList) ?>
 <?php echo $form->field($model, 'zoom_link')->textInput(['maxlength' => true]) ?>
-    <?php echo $form->field($model, 'time')->widget(
-        DateTimePicker::class,
-        [
-//            'type' => DateTimePicker::TYPE_INLINE,
-            'pluginOptions' => [
-                'format' => 'yyyy-mm-dd HH:mm:ss',
-                'showMeridian' => true,
-                'todayBtn' => true,
-            ]
-        ]
-    ) ?>
+<?php echo DateTimePicker::widget([
+    'model'=>$model,
+    'attribute'=>'time',
+    'value'=> date('Y-m-d H:i:s', $model->time),
+//    'options'=>[],
+    'pluginOptions' => [
+        'format' => 'yyyy-mm-dd HH:mm:ss',
+        'showMeridian' => true,
+        'todayBtn' => true,
+    ]
+]); ?>
+<!--    --><?php //echo $form->field($model, 'time')->widget(
+//        DateTimePicker::class,
+//        [
+//            'value' =>
+//                 date('Y-m-d H:i:s', $model->time),
+////            'type' => DateTimePicker::TYPE_INLINE,
+//            'pluginOptions' => [
+//                'format' => 'yyyy-mm-dd HH:mm:ss',
+//                'showMeridian' => true,
+//                'todayBtn' => true,
+//            ]
+//        ]
+//    ) ?>
 
 <?php echo $form->field($model, 'duration')->textInput() ?>
