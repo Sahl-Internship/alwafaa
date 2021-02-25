@@ -16,10 +16,22 @@ $this->title = Yii::t('backend', 'Edit account')
 <?php $form = ActiveForm::begin() ?>
 <div class="user-profile-form card">
     <div class="card-body">
-        <?php echo $form->field($model, 'username') ?>
-        <?php echo $form->field($model, 'email')->input('email') ?>
-        <?php echo $form->field($model, 'password')->passwordInput() ?>
-        <?php echo $form->field($model, 'password_confirm')->passwordInput() ?>
+        <div class="row">
+            <div class="col-6">
+                <?php echo $form->field($model, 'username') ?>
+            </div>
+            <div class="col-6">
+                <?php echo $form->field($model, 'email')->input('email') ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <?php echo $form->field($model, 'password')->passwordInput() ?>
+            </div>
+            <div class="col-6">
+                <?php echo $form->field($model, 'password_confirm')->passwordInput() ?>
+            </div>
+        </div>
     </div>
     <div class="card-footer">
         <?php echo Html::submitButton(FAS::icon('save').' '.Yii::t('backend', 'Save Changes'), ['class' => 'btn btn-primary']) ?>
