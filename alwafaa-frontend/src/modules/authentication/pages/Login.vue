@@ -11,61 +11,60 @@
         <h4 class="col-12 q-my-lg title">{{ $t('login.title') }}</h4>
         <hr>
         <div class="input-container">
-        <ValidationProvider
-          name="email"
-          class="col-11"
-          rules="required|email"
-          v-slot="{ errors, invalid, validated }"
-        >
-          <q-input
-            class="input-field"
-            v-model="email"
-            outlined
-            type="email"
-            :label="$t('formFields.email')"
-            label-color="dark"
-            color="blue-1"
-            bg-color="white"
-            :error="invalid && validated"
-            :error-message="errors[0]"
+          <ValidationProvider
+            name="email"
+            class="col-11 q-pb-xl"
+            rules="required|email"
+            v-slot="{ errors, invalid, validated }"
           >
-          <template v-slot:prepend>
-          <q-icon name="person" />
-        </template>
-          </q-input>
-        </ValidationProvider>
+            <q-input
+              class="input-field q-pb-lg"
+              v-model="email"
+              outlined
+              type="email"
+              :label="$t('formFields.email')"
+              label-color="dark"
+              color="blue-1"
+              bg-color="white"
+              :error="invalid && validated"
+              :error-message="errors[0]"
+            >
+              <template v-slot:prepend>
+                <q-icon name="person" />
+              </template>
+            </q-input>
+          </ValidationProvider>
 
-        <ValidationProvider
-          name="password"
-          class="col-11"
-          rules="required|min:7"
-          v-slot="{ errors, invalid, validated }"
-        >
-          <q-input
-            class="input-field"
-            borders-radius-inherit
-            v-model="password"
-            outlined
-            :type="isPwd ? 'password' : 'text'"
-            :label="$t('formFields.password')"
-            label-color="dark"
-            color="blue-1"
-            bg-color="white"
-            :error="invalid && validated"
-            :error-message="errors[0]"
+          <ValidationProvider
+            name="password"
+            class="col-11 q-pb-xl"
+            rules="required|min:7"
+            v-slot="{ errors, invalid, validated }"
           >
-          <template v-slot:prepend>
-          <q-icon name="vpn_key" />
-        </template>
-            <template v-slot:append>
-              <q-icon
-                :name="isPwd ? 'visibility_off' : 'visibility'"
-                class="cursor-pointer"
-                @click="isPwd = !isPwd"
-              />
-            </template>
-          </q-input>
-        </ValidationProvider>
+            <q-input
+              class="input-field q-pb-lg"
+              v-model="password"
+              outlined
+              :type="isPwd ? 'password' : 'text'"
+              :label="$t('formFields.password')"
+              label-color="dark"
+              color="blue-1"
+              bg-color="white"
+              :error="invalid && validated"
+              :error-message="errors[0]"
+            >
+            <template v-slot:prepend>
+            <q-icon name="vpn_key" />
+          </template>
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
+          </ValidationProvider>
         </div>
         <div class="col-11 after-input row">
           <q-checkbox
