@@ -1,9 +1,14 @@
 <template>
   <div class="q-pa-md">
-    <h4
-      class="col-12 q-my-lg title text-center">
+    <div
+      class="col-12 q-my-lg title text-center"
+      :class="{
+        'text-h4': !$q.screen.lt.md,
+        'text-h5': $q.screen.lt.md,
+      }"
+    >
       {{ $t('resetPass.title') }}
-    </h4>
+    </div>
     <q-separator
       color="grey-1"
       size="3px"
@@ -17,11 +22,17 @@
         @submit.prevent="handleSubmit(submitForm)"
         class="row justify-center"
       >
-        <h4
-          class="col-7 q-my-lg form-title text-center">
+        <div
+          class="col-7 q-my-lg form-title text-center"
+          :class="{
+            'text-h4': !$q.screen.lt.md,
+            'text-h5': $q.screen.lt.md && !$q.screen.lt.sm,
+            'text-h6': $q.screen.lt.sm,
+          }"
+        >
           <i class="far fa-check-circle"></i>
           {{ $t('resetPass.verifyFinished') }}
-        </h4>
+        </div>
         <p
           class="col-12 q-my-md second-title text-center">
           {{ $t('resetPass.enterNewPass') }}
@@ -84,7 +95,7 @@
         <q-btn
           @click="submitForm"
           type="submit"
-          class="col-7 form-btn"
+          class="col-sm-9 col-md-7 form-btn"
           color="green"
           :label="$t('resetPass.change')"
         />
@@ -126,7 +137,7 @@ export default {
   .form-title{
     height: 0;
     margin-bottom: 40px;
-    font-size: 25px;
+    // font-size: 25px;
   }
   .separator{
     margin-bottom: 30px !important;
@@ -147,15 +158,15 @@ export default {
   font-size: 18px;
 }
 
-@media (max-width: 860px) and(min-width: 700px) {
-  .title {
-    font-size: 25px;
-  }
-}
+// @media (max-width: 860px) and(min-width: 700px) {
+//   .title {
+//     font-size: 25px;
+//   }
+// }
 
-@media (max-width: 500px) {
-  .title {
-    font-size: 30px;
-  }
-}
+// @media (max-width: 500px) {
+//   .title {
+//     font-size: 30px;
+//   }
+// }
 </style>
