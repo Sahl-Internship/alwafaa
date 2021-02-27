@@ -1,22 +1,5 @@
 <template>
-  <div class="q-pa-md">
-    <div
-      class="col-12 q-my-lg title text-center"
-      :class="{
-        'text-h4': !$q.screen.lt.md,
-        'text-h5': $q.screen.lt.md,
-      }"
-    >
-      {{ $t('resetPass.title') }}
-    </div>
-
-    <q-separator
-      color="grey-1"
-      size="3px"
-      spaced="lg"
-      class="separator col-7"
-      inset
-    />
+  <div class="q-pa-md q-mt-xl">
 
     <ValidationObserver v-slot="{ handleSubmit }">
       <q-form
@@ -24,14 +7,29 @@
         class="row justify-center"
       >
         <div
+          class="col-12 q-my-sm text-center"
+          :class="{
+            'text-h4': !$q.screen.lt.md,
+            'text-h5': $q.screen.lt.md,
+          }"
+        >
+          {{ $t('resetPass.title') }}
+        </div>
+        <q-separator
+          class="col-7 separator"
+          spaced="lg"
+          size="3px"
+          color="grey-1"
+        />
+        <div
           class="step1 col-12 row"
         >
           <h4
-            class="col-12 q-my-lg form-title text-center">
+            class="col-12 q-mt-xl q-mb-none title-2 text-center text-grey-4">
             {{ $t('resetPass.title') }}
           </h4>
           <p
-            class="col-12 q-my-md second-title text-center">
+            class="col-12 q-mb-lg second-title text-center text-grey-3">
             {{ $t('resetPass.enterEmail') }}
           </p>
         </div>
@@ -41,30 +39,21 @@
           rules="required|email"
           v-slot="{ errors, invalid, validated }"
         >
-          <q-input
+          <g-input
+            class="input-field q-pb-lg"
             v-model="email"
             outlined
             type="email"
             :label="$t('formFields.email')"
-            color="primary"
-            bg-color="grey-1"
+            color="blue-1"
+            bg-color="white"
             :error="invalid && validated"
             :error-message="errors[0]"
-          >
-            <template v-slot:prepend>
-              <q-icon name="mdi-account" />
-            </template>
-            <template
-              v-slot:append
-              v-if="!!email && (!invalid || !validated)"
-            >
-              <q-icon
-                name="fas fa-check"
-                color="green"
-                size="xs"
-              />
-            </template>
-          </q-input>
+            :appendIconName='!!email && (!invalid || !validated) ? "mdi-check" : null'
+            appendIconColor= 'green'
+            appendIconSize= 'sm'
+            prependIconName='person'
+          />
 
         </ValidationProvider>
         <div class="col-12 row justify-center">
@@ -129,32 +118,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.title {
-  color: $dark;
-  text-align: center;
-  margin-top: 60px;
-}
-
-.form-title{
-  font-weight: normal;
+.title-2{
   font-size: 17px;
-  height: 0;
-  color: $grey-4;
 }
-.second-title{
-  margin-bottom: 30px;
-  color: $grey-3;
-}
-.separator{
-  width: 60%;
-  margin: 0px 20%;
-}
-// .form-btn{
-//   width: 20%;
-//   margin: 0px 40%;
-//   border-radius: 25px;
-//   font-size: 18px;
-// }
 
 .q-btn {
   &::v-deep {
@@ -163,15 +129,5 @@ export default {
     }
   }
 }
-// @media (max-width: 860px) and(min-width: 700px) {
-//   .title {
-//     font-size: 25px;
-//   }
-// }
 
-// @media (max-width: 500px) {
-//   .title {
-//     font-size: 30px;
-//   }
-// }
 </style>

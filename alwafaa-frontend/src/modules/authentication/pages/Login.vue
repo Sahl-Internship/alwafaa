@@ -5,89 +5,85 @@
       class="flex justify-center col-xs-11 col-sm-11 col-md-10 col-lg-12 q-my-md validator"
     >
       <q-form
-        class="row q-gutter-x-xs q-pb-lg justify-center login"
+        class="row q-gutter-x-xs q-pb-lg justify-center"
         @submit.prevent="handleSubmit(submitForm)"
       >
-        <h4 class="col-12 q-my-lg title">{{ $t('login.title') }}</h4>
-        <hr>
-        <div class="input-container">
-          <ValidationProvider
-            name="email"
-            class="col-11 q-pb-xl"
-            rules="required|email"
-            v-slot="{ errors, invalid, validated }"
-          >
-            <q-input
-              class="input-field q-pb-lg"
-              v-model="email"
-              outlined
-              type="email"
-              :label="$t('formFields.email')"
-              label-color="dark"
-              color="blue-1"
-              bg-color="white"
-              :error="invalid && validated"
-              :error-message="errors[0]"
-            >
-              <template v-slot:prepend>
-                <q-icon name="person" />
-              </template>
-            </q-input>
-          </ValidationProvider>
+        <h4 class="col-12 q-my-sm text-center title">{{ $t('login.title') }}</h4>
+        <q-separator
+          class="col-7"
+          spaced="lg"
+          size="3px"
+          color="grey-1"
+        />
 
-          <ValidationProvider
-            name="password"
-            class="col-11 q-pb-xl"
-            rules="required"
-            v-slot="{ errors, invalid, validated }"
-          >
-            <q-input
-              class="input-field q-pb-lg"
-              v-model="password"
-              outlined
-              :type="isPwd ? 'password' : 'text'"
-              :label="$t('formFields.password')"
-              label-color="dark"
-              color="blue-1"
-              bg-color="white"
-              :error="invalid && validated"
-              :error-message="errors[0]"
-            >
-              <template v-slot:prepend>
-                <q-icon name="vpn_key" />
-              </template>
-              <template v-slot:append>
-                <q-icon
-                  :name="isPwd ? 'visibility_off' : 'visibility'"
-                  class="cursor-pointer"
-                  @click="isPwd = !isPwd"
-                />
-              </template>
-            </q-input>
-          </ValidationProvider>
-        </div>
-        <div class="col-11 after-input row">
+        <ValidationProvider
+          name="email"
+          class="col-7 q-mt-xl"
+          rules="required|email"
+          v-slot="{ errors, invalid, validated }"
+        >
+          <g-input
+            class="input-field q-pb-lg"
+            v-model="email"
+            outlined
+            type="email"
+            :label="$t('formFields.email')"
+            label-color="dark"
+            color="blue-1"
+            bg-color="white"
+            :error="invalid && validated"
+            :error-message="errors[0]"
+            prependIconName='person'
+            :appendIconName='!!email && (!invalid || !validated) ? "mdi-check" : null'
+            appendIconColor= 'green'
+            appendIconSize= 'sm'
+          />
+        </ValidationProvider>
+
+        <ValidationProvider
+          name="password"
+          class="col-7"
+          rules="required"
+          v-slot="{ errors, invalid, validated }"
+        >
+          <g-input
+            class="input-field q-pb-lg"
+            v-model="password"
+            outlined
+            type= 'password'
+            :label="$t('formFields.password')"
+            label-color="dark"
+            color="blue-1"
+            bg-color="white"
+            :error="invalid && validated"
+            :error-message="errors[0]"
+            prependIconName='vpn_key'
+            appendIconName='mdi-eye-off'
+          />
+        </ValidationProvider>
+        <div class="col-7 row">
           <q-checkbox
             :label="$t('login.rememberMe')"
             v-model="orange"
-            color="primary"
+            color="green"
             class="check col-6 col-md-6"
           />
           <router-link
             to="/auth/forgotPass"
-            class="link col-6 col-md-6"
+            class="link col-6 col-md-6 q-pt-sm text-right"
           >
             {{$t('login.forgotPassword')}}
           </router-link>
         </div>
           <q-btn
-          dense
-          no-caps
-          :label="$t('header.login')"
-          type="submit"
-          color="green"
-          text-color="dark"
-          class="form-btn"
+            dense
+            no-caps
+            rounded
+            :label="$t('header.login')"
+            type="submit"
+            color="green"
+            text-color="grey-5"
+            class="form-btn col-4 q-mx-xl"
         ></q-btn>
         <!-- <google-btn class="social-button" status="login"></google-btn> -->
         <!-- <facebook-btn class="social-button face" status="login"></facebook-btn> -->
@@ -121,65 +117,32 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  .login {
-  width: 100%;
-  .title {
-    color: $dark;
-    text-align: center;
-    margin-bottom: 70px;
-    font-weight: normal;
-    @media (max-width:480px) , (max-width:340px){
-      font-size: 20px;
-    }
-  }
-  hr{
-    background: $grey-1;
-    height: 3px;
-    border: none;
-    width: 60%;
-    margin: -60px 20% 0px 20%;
-  }
-  .input-container{
-    width: 60%;
-    margin: 0px 20%;
-  }
-  .key{
-      position: absolute;
-      color: $dark;
-      font-size: 24px;
-      top: 18px;
-  }
-  .after-input{
-    margin: -5px 20%;
-    width: 60%;
-    .link{
-      text-decoration: none;
-      color:$dark;
-      text-align: right;
-      padding-top: 10px;
-      @media screen and (max-width: 480px),(max-width: 340px) {
-        text-align: left!important;
-        padding-top: 0px;
-        margin-left:10px;
-        font-size: 11px;
-        font-weight: bolder;
-      }
-    }
-  }
-  .form-btn {
-    width:30%;
-    height: 45px;
+.title {
+  @media (max-width:480px) , (max-width:340px){
     font-size: 20px;
-    border-radius: 30px;
-    margin: 0px 35%;
-    top: 30px;
   }
-
-   @media screen and (max-width: 480px) {
-     .check {
-       font-size: 10px;
-     }
-   }
-
+}
+.check {
+  @media screen and (max-width: 480px) {
+    font-size: 11px;
+  }
+}
+.link{
+  text-decoration: none;
+  color:$dark;
+  @media (max-width: 480px ) {
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  @media (max-width: 340px) {
+    text-align: left!important;
+    padding-top: 0px;
+    margin-left:10px;
+    font-size: 11px;
+  }
+}
+.form-btn {
+  font-size: 20px;
+  top: 30px;
 }
 </style>

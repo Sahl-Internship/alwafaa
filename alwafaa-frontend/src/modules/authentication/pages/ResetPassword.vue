@@ -1,21 +1,5 @@
 <template>
   <div class="q-pa-md">
-    <div
-      class="col-12 q-my-lg title text-center"
-      :class="{
-        'text-h4': !$q.screen.lt.md,
-        'text-h5': $q.screen.lt.md,
-      }"
-    >
-      {{ $t('resetPass.title') }}
-    </div>
-    <q-separator
-      color="grey-1"
-      size="3px"
-      spaced="lg"
-      class="separator col-7"
-      inset
-    />
 
     <ValidationObserver v-slot="{ handleSubmit }">
       <q-form
@@ -23,81 +7,109 @@
         class="row justify-center"
       >
         <div
-          class="col-7 q-my-lg form-title text-center"
+          class="col-12 q-my-sm q-mt-xl text-center"
+          :class="{
+            'text-h4': !$q.screen.lt.md,
+            'text-h5': $q.screen.lt.md,
+          }"
+        >
+          {{ $t('resetPass.title') }}
+        </div>
+        <q-separator
+          color="grey-1"
+          size="3px"
+          spaced="lg"
+          class="separator col-7"
+          inset
+        />
+        <div
+          class="col-10 q-mb-md q-mt-lg text-center"
           :class="{
             'text-h4': !$q.screen.lt.md,
             'text-h5': $q.screen.lt.md && !$q.screen.lt.sm,
             'text-h6': $q.screen.lt.sm,
           }"
         >
-          <i class="far fa-check-circle"></i>
+          <i class="far fa-check-circle q-mr-md checked-icon"></i>
           {{ $t('resetPass.verifyFinished') }}
         </div>
-        <p
-          class="col-12 q-my-md second-title text-center">
+        <div
+          class="col-12 q-my-sm q-mb-xl title-3 text-center text-grey-4"
+          :class="{
+            'text-subtitle1': !$q.screen.lt.md,
+            'text-subtitle2': $q.screen.lt.md && !$q.screen.lt.sm,
+          }"
+        >
           {{ $t('resetPass.enterNewPass') }}
-        </p>
+        </div>
         <ValidationProvider
           name="password"
-          class="col-7"
+          class="col-7 q-mb-xs"
           rules="required|min:7"
           v-slot="{ errors, invalid, validated }"
         >
-          <q-input
+          <g-input
+            class="q-pb-lg"
             v-model="password"
             outlined
-            :type="isPwd ? 'password' : 'text'"
+            type='password'
             :label="$t('formFields.password')"
             color="primary"
             :error="invalid && validated"
             :error-message="errors[0]"
-          >
-            <template v-slot:prepend>
-              <q-icon name="mdi-key" />
-            </template>
-            <template v-slot:append>
-              <q-icon
-                :name="isPwd ? 'mdi-eye-off' : 'mdi-eye'"
-                class="cursor-pointer"
-                @click="isPwd = !isPwd"
-              ></q-icon>
-            </template>
-          </q-input>
+            appendIconName= 'mdi-eye-off'
+            prependIconName= 'mdi-key'
+          />
         </ValidationProvider>
 
         <ValidationProvider
           name="confirm-password"
-          class="col-7"
+          class="col-7 q-mb-sm"
           rules="required|confirmed:password"
           v-slot="{ errors, invalid, validated }"
         >
-          <q-input
+          <g-input
             v-model="confirmPass"
             outlined
             :type="isCPwd ? 'password' : 'text'"
             :label="$t('formFields.confirmPass')"
             color="primary"
+            class="q-pb-lg"
             :error="invalid && validated"
             :error-message="errors[0]"
-          >
-            <template v-slot:prepend>
-              <q-icon name="mdi-key" />
-            </template>
-            <template v-slot:append>
-              <q-icon
-                :name="isCPwd ? 'mdi-eye-off' : 'mdi-eye'"
-                class="cursor-pointer"
-                @click="isCPwd = !isCPwd"
-              ></q-icon>
-            </template>
-          </q-input>
+            prependIconName='mdi-key'
+            appendIconName='mdi-eye-off'
+          />
         </ValidationProvider>
-        <q-btn
-          type="submit"
-          class="col-sm-9 col-md-7 form-btn"
-          color="green"
-          :label="$t('resetPass.change')"
-        />
+        <div class="col-12 row justify-center">
+          <q-btn
+            type="submit"
+            rounded
+            no-caps
+            :class="{
+              'col-3': !$q.screen.lt.md,
+              'col-4': $q.screen.lt.md && !$q.screen.lt.sm,
+              'col-5': $q.screen.lt.sm,
+              'q-mt-md': true
+            }"
+            :size="$q.screen.lt.md? 'md' : 'lg'"
+            color="green"
+            :label="$t('resetPass.change')"
+          />
+          <q-btn
+            v-if="!$q.screen.lt.sm"
+            no-caps
+            rounded
+            outline
+            type="button"
+            icon-right="mdi-window-close"
+            :label="$t('login.cancel')"
+            class="col-sm-3 col-md-3 col-lg-2 q-mt-md q-ml-md "
+            :size="$q.screen.lt.md? 'md' : 'lg'"
+            text-color="grey-5"
+            to="/auth/login"
+          />
+        </div>
         </q-form>
     </ValidationObserver>
   </div>
@@ -130,31 +142,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  .title {
-    color: $dark;
-    text-align: center;
-    margin-top: 40px;
-  }
-  .form-title{
-    height: 0;
-    margin-bottom: 40px;
-  }
-  .separator{
-    margin-bottom: 30px !important;
-    width: 60%;
-    margin: 0px 20%;
-  }
-  .q-input {
-    &::v-deep {
-      .q-field__control{
-        border-radius: 7px;
-      }
-    }
-  }
-  .form-btn{
-  width: 20%;
-  margin: 0px 40%;
-  border-radius: 25px;
-  font-size: 18px;
-}
 </style>

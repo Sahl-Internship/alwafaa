@@ -43,8 +43,7 @@ export default {
   login: {
     title: 'Login',
     forgotPassword: 'Forgot Password ?',
-    rememberMe: 'Remember Me',
-    cancel: 'Cancel'
+    rememberMe: 'Remember Me'
   },
 
   forgotPass: {
