@@ -11,8 +11,11 @@ export default {
     resend: 'Resend',
     edit: 'Edit',
     read: 'I read',
-    rules: 'Rules and conditions'
+    rules: 'Rules and conditions',
+    female: 'Female',
+    male: 'Male'
   },
+
   formFields: {
     firstname: 'Firstname',
     lastname: 'Lastname',
@@ -25,6 +28,7 @@ export default {
     gender: 'Gender',
     verficationCode: 'Verfication Code'
   },
+
   resetPass: {
     back: 'Back',
     title: 'Reset Password',
@@ -35,27 +39,39 @@ export default {
     enterNewPass: 'Enter new password',
     resetPassFinsished: 'Reset password finished'
   },
+
   login: {
     title: 'Login',
     forgotPassword: 'Forgot Password ?',
     rememberMe: 'Remember Me',
     cancel: 'Cancel'
   },
-  submit: 'Submit',
-  Login: 'Login',
+
+  forgotPass: {
+    submit: 'Submit',
+    cancel: 'Cancel'
+  },
+
+  secondSection: {
+    noAccount: 'Have no account?',
+    createAccount: 'Create account',
+    completeYourInfo: 'Enter your personal info and start your journey',
+    alreadyHaveAccount: 'Already have an account?',
+    haveAccountLogin: 'If you already have an account, Login',
+    login: 'Login'
+  },
+
   googleSignup: 'With Google',
   facebookSignup: 'With Facebook',
-  noAccount: 'Have no account?',
-  createAccount: 'Create account',
-  completeYourInfo: 'Enter your personal info and start your journey',
-  alreadyHaveAccount: 'Already have an account?',
-  signupDecisionText: 'If you already have an account, Login',
+
   formValidation: {
-    requiredErr: '*This field is required',
-    emailErr: '*not valid email',
-    confirmPassErr: '*Password confirmation does not match',
-    passLengthErr: '*Password must have minimum 6 characters'
+    required: 'This field is required',
+    email: 'not valid email',
+    min: 'Password must have minimum 6 characters',
+    confirmed: 'Password confirmation does not match',
+    numeric: 'The field field may only contain numeric characters'
   },
+
   authNotification: {
     registerSuccess: 'You registered successfully, confirm your email to login',
     registerdefaultError: 'Error while registering, Try Again',
@@ -66,6 +82,7 @@ export default {
     resetSuccess: 'New password saved successfully',
     resetError: 'Error While reset password, Try Again'
   },
+
   header: {
     signup: 'Signup',
     login: 'Login',

@@ -10,7 +10,7 @@
       {{ $t("signup.title") }}
     </div>
 
-    <q-separator class="col-7" spaced="md" size="2px" color="grey-1" />
+    <q-separator class="col-2" spaced="md" size="2px" color="grey-1" />
 
     <div class="col-12 q-mt-lg">
       <div class="row justify-center">
@@ -56,9 +56,7 @@
                 <g-input
                   outlined
                   v-model="firstname"
-                  type="text"
                   :label="$t('formFields.firstname')"
-                  color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
                   prependIconName="mdi-account"
@@ -74,9 +72,7 @@
                 <g-input
                   outlined
                   v-model="lastname"
-                  type="text"
                   :label="$t('formFields.lastname')"
-                  color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
                   prependIconName="mdi-account"
@@ -94,7 +90,6 @@
                   v-model="gender"
                   :options="genderOptions"
                   :label="$t('formFields.gender')"
-                  color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
                   prependIconName="mdi-human-male-female"
@@ -112,7 +107,6 @@
                   v-model="country"
                   :options="countriesNamesOptions"
                   :label="$t('formFields.country')"
-                  color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
                   prependIconName="mdi-flag-variant"
@@ -129,29 +123,18 @@
                 <g-input
                   outlined
                   v-model="city"
-                  type="text"
                   :label="$t('formFields.city')"
-                  color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
                   prependIconName="mdi-city"
                 />
               </ValidationProvider>
 
-              <q-btn
-                no-caps
-                rounded
-                type="submit"
-                :label="$t('signup.continue')"
+              <g-btn
+                label="signup.continue"
                 :icon-right="checkDirection ? 'mdi-chevron-left' : 'mdi-chevron-right'"
-                :class="{
-                  'col-5': !$q.screen.lt.md,
-                  'col-6': $q.screen.lt.md,
-                  'q-mt-sm': true
-                }"
-                :size="$q.screen.lt.md? 'md' : 'lg'"
-                color="green"
-                text-color="grey-5"
+                :width="!$q.screen.lt.md ? 'col-5' : 'col-6'"
+                :margin="['q-mt-sm']"
               />
             </q-form>
           </ValidationObserver>
@@ -178,7 +161,6 @@
                   v-model="email"
                   type="email"
                   :label="$t('formFields.email')"
-                  color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
                   prependIconName="mdi-account"
@@ -199,9 +181,7 @@
                   <g-input
                     borderless
                     v-model="phoneNumber"
-                    type="text"
                     :label="$t('formFields.phone')"
-                    color="primary"
                     :error="invalid && validated"
                     :error-message="errors[0]"
                     prependIconName="mdi-phone"
@@ -235,7 +215,6 @@
                   outlined
                   type="password"
                   :label="$t('formFields.password')"
-                  color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
                   prependIconName="mdi-key"
@@ -250,11 +229,10 @@
                 v-slot="{ errors, invalid, validated }"
               >
                 <g-input
-                  v-model="confirmPass"
                   outlined
+                  v-model="confirmPass"
                   type="password"
                   :label="$t('formFields.confirmPass')"
-                  color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
                   prependIconName="mdi-key"
@@ -262,19 +240,10 @@
                 />
               </ValidationProvider>
 
-              <q-btn
-                no-caps
-                rounded
-                type="submit"
-                :label="$t('signup.finish')"
-                :class="{
-                  'col-5': !$q.screen.lt.md,
-                  'col-6': $q.screen.lt.md,
-                  'q-mt-md': true
-                }"
-                :size="$q.screen.lt.md? 'md' : 'lg'"
-                color="green"
-                text-color="grey-5"
+              <g-btn
+                label="signup.finish"
+                :width="!$q.screen.lt.md ? 'col-5' : 'col-6'"
+                :margin="['q-mt-sm']"
               />
             </q-form>
           </ValidationObserver>
@@ -377,6 +346,7 @@
 
 <script>
 import { dialCodes, countriesNames, getSelectedCountry } from 'src/utils/countries.js'
+import { i18n } from 'src/boot/i18n'
 
 export default {
   name: 'Signup',
@@ -393,8 +363,8 @@ export default {
       phoneKey: '',
       password: '',
       confirmPass: '',
-      genderOptions: ['Female', 'Male'],
-      countriesNamesOptions: countriesNames,
+      genderOptions: [i18n.t('signup.female'), i18n.t('signup.male')],
+      // countriesNamesOptions: countriesNames(this.checkLanguage),
       dialCodesOPtions: dialCodes,
       isoCode: ''
     }
@@ -402,6 +372,12 @@ export default {
   computed: {
     checkDirection () {
       return this.$q.lang.rtl
+    },
+    checkLanguage () {
+      return this.$q.lang.rtl ? 'ar' : 'en'
+    },
+    countriesNamesOptions () {
+      return countriesNames(this.checkLanguage)
     }
   },
   methods: {
@@ -409,7 +385,7 @@ export default {
       console.log({
         firstname: this.firstname,
         lastname: this.lastname,
-        gender: this.gender === 'Male' ? '1' : '2',
+        gender: this.gender === i18n.t('signup.male') ? '1' : '2',
         country: this.country,
         city: this.city
       })
@@ -419,21 +395,19 @@ export default {
       const user = {
         firstname: this.firstname,
         lastname: this.lastname,
-        gender: this.gender === 'Male' ? '1' : '2',
+        gender: this.gender === i18n.t('signup.male') ? '1' : '2',
         country: this.country,
         city: this.city,
         email: this.email,
         phone: `${this.phoneKey}${this.phoneNumber}`,
         password: this.password
       }
-      console.log(user)
       this.$store.dispatch('auth/signup', user)
-      // this.$refs.stepper.next()
     }
   },
   watch: {
     country (newVal) {
-      const selectedCountry = getSelectedCountry(newVal)
+      const selectedCountry = getSelectedCountry(newVal, this.checkLanguage)
       this.isoCode = selectedCountry.code
       this.phoneKey = selectedCountry.dial_code
     }
@@ -503,6 +477,9 @@ export default {
       .q-field__inner:hover {
         border-color: $grey-5;
       }
+      .q-field__prepend {
+        padding-left: 12px;
+      }
     }
   }
 
@@ -514,14 +491,11 @@ export default {
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
       }
-      .q-field__inner:hover {
-        border-color: $grey-5;
-        border-left-color: $grey-2;
+      .q-field__control-container {
+        padding-top: 10px;
       }
       .q-field__native {
-        // padding-left: 3px;
         direction: rtl;
-        text-align: center;
       }
       .q-field__append {
         padding-left: 5px;
@@ -535,55 +509,6 @@ export default {
         border-color: $grey-5;
         border-left-color: $grey-2;
       }
-    }
-  }
-
-  .email-sent {
-    font-size: 21px;
-  }
-  .text-line {
-    text-decoration: underline;
-  }
-
-  .flag-icon-circle {
-    border-radius: 30px;
-  }
-
-  @media (max-width: 900px) {
-    .text-font {
-      font-size: 12px;
-    }
-  }
-
-  @media (max-width: 850px) and (min-width: 730px) {
-    .email-sent {
-      font-size: 18px;
-    }
-  }
-
-  @media (max-width: 730px) and (min-width: 600px){
-    .email-sent {
-      font-size: 14px;
-    }
-
-    .text-font {
-      font-size: 9px;
-    }
-  }
-
-  @media (max-width: 599px) and (min-width: 400px) {
-    .email-sent {
-      font-size: 18px;
-    }
-  }
-
-   @media (max-width: 400px) {
-    .email-sent {
-      font-size: 15px;
-    }
-
-    .text-font {
-      font-size: 9px;
     }
   }
 }

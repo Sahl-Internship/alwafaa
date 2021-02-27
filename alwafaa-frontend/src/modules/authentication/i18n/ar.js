@@ -11,8 +11,11 @@ export default {
     resend: 'إعادة الارسال',
     edit: 'تعديل',
     read: 'لقد قرأت',
-    rules: 'اﻷحكام والشروط'
+    rules: 'اﻷحكام والشروط',
+    female: 'أنثي',
+    male: 'ذكر'
   },
+
   formFields: {
     firstname: 'اﻹسم الأول',
     lastname: 'اﻹسم اﻷخير',
@@ -25,6 +28,7 @@ export default {
     gender: 'النوع',
     verficationCode: 'كود التحقق'
   },
+
   resetPass: {
     back: 'رجوع',
     title: 'إعادة تعيين كلمة المرور',
@@ -36,33 +40,38 @@ export default {
     resetPassFinsished: 'تم إعادة تعيين كلمة المرور',
     change: 'تغيير'
   },
+
   login: {
     title: 'تسجيل الدخول',
     forgotPassword: 'نسيت كلمة المرور؟',
-    rememberMe: 'البقاء متصلا',
+    rememberMe: 'البقاء متصلا'
+  },
+
+  forgotPass: {
+    submit: 'ارسال',
     cancel: 'إلغاء'
   },
-  Login: 'دخول',
-  byGoogle: 'الدخول بواسطة جوجل',
-  byFacebook: 'الدخول بواسطة فيس بوك',
-  sendVerification: 'ارسال التحقق',
-  submit: 'ارسال',
-  useSocial: 'أو استخدم',
+
+  secondSection: {
+    noAccount: 'ليس لديك حساب؟',
+    createAccount: 'إنشاء حساب',
+    completeYourInfo: 'املأ المعلومات الشخصية وابدأ الرحلة معنا',
+    alreadyHaveAccount: 'لديك حساب بالفعل؟',
+    haveAccountLogin: 'إذا كان لديك حساب بالفعل, سجل الدخول',
+    login: 'دخول'
+  },
+
   googleSignup: 'بواسطة جوجل',
   facebookSignup: 'بواسطة فيسبوك',
-  or: 'أو',
-  noAccount: 'ليس لديك حساب؟',
-  createAccount: 'إنشاء حساب',
-  completeYourInfo: 'املأ المعلومات الشخصية وابدأ الرحلة معنا',
-  alreadyHaveAccount: 'لديك حساب بالفعل؟',
-  signupDecisionText: 'إذا كان لديك حساب بالفعل, سجل الدخول',
+
   formValidation: {
-    requiredErr: '*مطلوب',
-    emailErr: 'بريد إلكتروني غير صحيح*',
-    confirmPassErr: 'غير متطابق*',
-    passLengthErr: 'كلمة المرور لا تقل عن 7 حروف*',
-    wrongVerificationCode: 'الكود غير صحيح,رجاءً حاول مرةً أخرى'
+    required: 'هذا الحقل مطلوب',
+    email: 'بريد إلكتروني غير صحيح',
+    min: 'كلمة المرور لا تقل عن 7 حروف',
+    confirmed: 'كلمة المرور غير متطابقة',
+    numeric: 'رقم الهاتف يجب ان يكون أرقام فقط'
   },
+
   authNotification: {
     registerSuccess: 'تم التسجيل بنجاح, تحقق من البريد اﻹلكتروني لتسجيل الدخول',
     registerdefaultError: 'خطأ خلال التسجيل, حاول مرة اخري',
@@ -73,6 +82,7 @@ export default {
     resetSuccess: 'تم حفظ كلمة المرور الجديدة بنجاح',
     resetError: 'خطأ في تغيير كلمة المرور, حاول مرة اخري'
   },
+
   header: {
     signup: 'تسجيل',
     login: 'دخول',

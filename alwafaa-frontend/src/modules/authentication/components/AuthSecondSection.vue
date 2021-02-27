@@ -19,27 +19,20 @@
           'text-h5': $q.screen.lt.md
         }"
       >
-        {{$t(title)}}
+        {{$t(values.title)}}
       </div>
 
       <div class="col-12 text-h6 text-center text-white q-mt-md text">
-        {{$t(text)}}
+        {{$t(values.text)}}
       </div>
 
-      <q-btn
-        rounded
-        no-caps
+      <g-btn
         type='button'
-        :label='$t(buttonLabel)'
+        :label="values.buttonLabel"
         color="white"
-        text-color="grey-5"
-        :class="{
-          'col-5': !$q.screen.lt.md,
-          'col-10': $q.screen.lt.md,
-          'q-mt-xl': true
-        }"
-        :size="$q.screen.lt.md? 'md' : 'lg'"
-        :to='goTo'
+        :width="!$q.screen.lt.md ? 'col-5' : 'col-10'"
+        :margin="['q-mt-xl']"
+        :to='values.goToURL'
       />
     </div>
   </div>
@@ -47,22 +40,25 @@
 
 <script>
 export default {
-  name: 'SecondSection',
+  name: 'AuthSecondSection',
   computed: {
-    title () {
-      return this.$route.name === 'signup' ? 'alreadyHaveAccount' : 'noAccount'
-    },
-    text () {
-      return this.$route.name === 'signup' ? 'signupDecisionText' : 'completeYourInfo'
-    },
-    buttonLabel () {
-      return this.$route.name === 'signup' ? 'header.login' : 'createAccount'
-    },
-    goTo () {
-      return this.$route.name === 'signup' ? '/auth/login' : '/auth/signup'
+    values () {
+      return this.$route.name === 'signup'
+        ? {
+          title: 'secondSection.alreadyHaveAccount',
+          text: 'secondSection.haveAccountLogin',
+          buttonLabel: 'secondSection.login',
+          goToURL: '/auth/login'
+        }
+        : {
+          title: 'secondSection.noAccount',
+          text: 'secondSection.completeYourInfo',
+          buttonLabel: 'secondSection.createAccount',
+          goToURL: '/auth/signup'
+        }
     },
     checkFlip () {
-      return this.$route.name !== 'login'
+      return this.$route.name !== 'signup'
     }
   }
 }

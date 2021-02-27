@@ -58,3 +58,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.flag-icon-circle {
+  border-radius: 30px;
+}
+</style>

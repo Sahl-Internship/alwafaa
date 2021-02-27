@@ -10,24 +10,14 @@
         'justify-start': !checkFlip
       }"
     >
-      <q-btn
-        v-if="!checkFlip"
+      <g-btn
         flat
-        rounded
         dense
-        :icon="checkDirection? 'fas fa-arrow-circle-right' : 'fas fa-arrow-circle-left'"
-        color="green"
-        class="q-ml-md"
-        to="/"
-      />
-      <q-btn
-        v-else
-        flat
-        rounded
-        dense
-        :icon="checkDirection? 'fas fa-arrow-circle-left' : 'fas fa-arrow-circle-right'"
-        color="green"
-        class="q-mr-md"
+        type="button"
+        :icon="iconName"
+        textColor="green"
+        :margin="['q-ml-md']"
+        size="md"
         to="/"
       />
     </div>
@@ -39,21 +29,12 @@
         'justify-start': checkFlip
       }"
     >
-        <q-btn
-            class="lang-btn"
-            flat round dense
-            @click="changeLanguage('en-us', 'ar')"
-        >
-          <flag iso="us" />
-        </q-btn>
-
-        <q-btn
-            class="lang-btn"
-            flat round dense
-            @click="changeLanguage('ar', 'en-us')"
-        >
-          <flag iso="eg" />
-        </q-btn>
+      <q-btn flat round dense @click="changeLanguage('en-us', 'ar')">
+        <flag iso="us" />
+      </q-btn>
+      <q-btn flat round dense @click="changeLanguage('ar', 'en-us')">
+        <flag iso="eg" />
+      </q-btn>
     </div>
   </div>
 </template>
@@ -66,6 +47,11 @@ export default {
     },
     checkDirection () {
       return this.$q.lang.rtl
+    },
+    iconName () {
+      return this.checkFlip
+        ? this.checkDirection ? 'fas fa-arrow-circle-left' : 'fas fa-arrow-circle-right'
+        : this.checkDirection ? 'fas fa-arrow-circle-right' : 'fas fa-arrow-circle-left'
     }
   },
   methods: {
@@ -85,15 +71,4 @@ export default {
 .auth-header {
   height: 50px;
 }
-i{
-  font-size: 30px;
-  margin-left: 20px;
-  color: $green;
-}
-// .lang-btn{
-//     float: right;
-// }
-// .lang-btn:nth-child(1){
-//     margin-right: 10px;
-// }
 </style>

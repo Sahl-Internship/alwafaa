@@ -45,6 +45,7 @@ export default {
 
     Loading.hide()
   },
+
   async login (context, userData) {
     Loading.show()
     try {
@@ -76,6 +77,7 @@ export default {
     }
     Loading.hide()
   },
+
   async forgotPassword (context, email) {
     Loading.show()
 
@@ -101,12 +103,12 @@ export default {
     }
     Loading.hide()
   },
-  async resetPassword (context, password) {
-    const { token } = this.$router.app._route.query
+
+  async resetPassword (context, { password, token }) {
     Loading.show()
 
     try {
-      const response = await handleResetPassword(password, token)
+      const response = await handleResetPassword({ password }, token)
 
       if (response.data.status !== 1) {
         const err = new Error(i18n.t('authNotification.resetError'))
@@ -129,6 +131,7 @@ export default {
     }
     Loading.hide()
   },
+
   logout ({ commit }) {
     commit('logout')
     localStorage.removeItem('token')

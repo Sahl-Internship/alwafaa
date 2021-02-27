@@ -1,686 +1,823 @@
 export const countries = [
   {
     name: 'Afghanistan',
+    arName: 'أفغانستان',
     dial_code: '+93',
     code: 'AF'
   },
   {
     name: 'Aland Islands',
+    arName: 'جزيرة ألاند',
     dial_code: '+358',
     code: 'AX'
   },
   {
     name: 'Albania',
+    arName: 'ألبانيا',
     dial_code: '+355',
     code: 'AL'
   },
   {
     name: 'Algeria',
+    arName: 'الجيريا',
     dial_code: '+213',
     code: 'DZ'
   },
   {
     name: 'AmericanSamoa',
+    arName: 'امريكانساموا',
     dial_code: '+1684',
     code: 'AS'
   },
   {
     name: 'Andorra',
+    arName: 'اندورا',
     dial_code: '+376',
     code: 'AD'
   },
   {
     name: 'Angola',
+    arName: 'انجولا',
     dial_code: '+244',
     code: 'AO'
   },
   {
     name: 'Anguilla',
+    arName: 'انجويلا',
     dial_code: '+1264',
     code: 'AI'
   },
   {
     name: 'Antarctica',
+    arName: 'انتركاتيكا',
     dial_code: '+672',
     code: 'AQ'
   },
   {
     name: 'Antigua and Barbuda',
+    arName: 'انتيج و باربودا',
     dial_code: '+1268',
     code: 'AG'
   },
   {
     name: 'Argentina',
+    arName: 'ارجنتينا',
     dial_code: '+54',
     code: 'AR'
   },
   {
     name: 'Armenia',
+    arName: 'ارمينيا',
     dial_code: '+374',
     code: 'AM'
   },
   {
     name: 'Aruba',
+    arName: 'اروبا',
     dial_code: '+297',
     code: 'AW'
   },
   {
     name: 'Australia',
+    arName: 'استراليا',
     dial_code: '+61',
     code: 'AU'
   },
   {
     name: 'Austria',
+    arName: 'استريا',
     dial_code: '+43',
     code: 'AT'
   },
   {
     name: 'Azerbaijan',
+    arName: 'ازربيجان',
     dial_code: '+994',
     code: 'AZ'
   },
   {
     name: 'Bahamas',
+    arName: 'بهاما',
     dial_code: '+1242',
     code: 'BS'
   },
   {
     name: 'Bahrain',
+    arName: 'البحرين',
     dial_code: '+973',
     code: 'BH'
   },
   {
     name: 'Bangladesh',
+    arName: 'بنجلاديش',
     dial_code: '+880',
     code: 'BD'
   },
   {
     name: 'Barbados',
+    arName: 'بارابدوس',
     dial_code: '+1246',
     code: 'BB'
   },
   {
     name: 'Belarus',
+    arName: 'بيلاروس',
     dial_code: '+375',
     code: 'BY'
   },
   {
     name: 'Belgium',
+    arName: 'بلجيام',
     dial_code: '+32',
     code: 'BE'
   },
   {
     name: 'Belize',
+    arName: 'بليز',
     dial_code: '+501',
     code: 'BZ'
   },
   {
     name: 'Benin',
+    arName: 'بنين',
     dial_code: '+229',
     code: 'BJ'
   },
   {
     name: 'Bermuda',
+    arName: 'برمودا',
     dial_code: '+1441',
     code: 'BM'
   },
   {
     name: 'Bhutan',
+    arName: 'بوتان',
     dial_code: '+975',
     code: 'BT'
   },
   {
-    name: 'Bolivia, Plurinational State of',
+    name: 'Bolivia',
+    arName: 'بوليفيا',
     dial_code: '+591',
     code: 'BO'
   },
   {
     name: 'Bosnia and Herzegovina',
+    arName: 'بوسنيا',
     dial_code: '+387',
     code: 'BA'
   },
   {
     name: 'Botswana',
+    arName: 'بوتسوانا',
     dial_code: '+267',
     code: 'BW'
   },
   {
     name: 'Brazil',
+    arName: 'البرازيل',
     dial_code: '+55',
     code: 'BR'
   },
   {
     name: 'British Indian Ocean Territory',
+    arName: 'المحيط الهندي البريطاني',
     dial_code: '+246',
     code: 'IO'
   },
   {
     name: 'Brunei Darussalam',
+    arName: 'بروني',
     dial_code: '+673',
     code: 'BN'
   },
   {
     name: 'Bulgaria',
+    arName: 'بولحاريا',
     dial_code: '+359',
     code: 'BG'
   },
   {
     name: 'Burkina Faso',
+    arName: 'بوركينافاسو',
     dial_code: '+226',
     code: 'BF'
   },
   {
     name: 'Burundi',
+    arName: 'بوروندي',
     dial_code: '+257',
     code: 'BI'
   },
   {
     name: 'Cambodia',
+    arName: 'كامبوديا',
     dial_code: '+855',
     code: 'KH'
   },
   {
     name: 'Cameroon',
+    arName: 'الكامرون',
     dial_code: '+237',
     code: 'CM'
   },
   {
     name: 'Canada',
+    arName: 'كندا',
     dial_code: '+1',
     code: 'CA'
   },
   {
     name: 'Cape Verde',
+    arName: 'كاب فيرد',
     dial_code: '+238',
     code: 'CV'
   },
   {
     name: 'Cayman Islands',
+    arName: 'جزر الكايمن',
     dial_code: '+ 345',
     code: 'KY'
   },
   {
     name: 'Central African Republic',
+    arName: 'جمهورية افريقيا الوسطي',
     dial_code: '+236',
     code: 'CF'
   },
   {
     name: 'Chad',
+    arName: 'تشاد',
     dial_code: '+235',
     code: 'TD'
   },
   {
     name: 'Chile',
+    arName: 'تشيلي',
     dial_code: '+56',
     code: 'CL'
   },
   {
     name: 'China',
+    arName: 'الصين',
     dial_code: '+86',
     code: 'CN'
   },
   {
     name: 'Christmas Island',
+    arName: 'جزيرة الكريستماس',
     dial_code: '+61',
     code: 'CX'
   },
   {
     name: 'Cocos (Keeling) Islands',
+    arName: 'جزيرة الكوكوز',
     dial_code: '+61',
     code: 'CC'
   },
   {
     name: 'Colombia',
+    arName: 'كولومبيا',
     dial_code: '+57',
     code: 'CO'
   },
   {
     name: 'Comoros',
+    arName: 'كوموروس',
     dial_code: '+269',
     code: 'KM'
   },
   {
     name: 'Congo',
+    arName: 'الكونغو',
     dial_code: '+242',
     code: 'CG'
   },
   {
     name: 'Congo, The Democratic Republic of the Congo',
+    arName: 'جمهورية الكونغو الديموقراطية',
     dial_code: '+243',
     code: 'CD'
   },
   {
     name: 'Cook Islands',
+    arName: 'جزر الكوك',
     dial_code: '+682',
     code: 'CK'
   },
   {
     name: 'Costa Rica',
+    arName: 'كوستا ريكا',
     dial_code: '+506',
     code: 'CR'
   },
   {
     name: "Cote d'Ivoire",
+    arName: 'كوتفوار',
     dial_code: '+225',
     code: 'CI'
   },
   {
     name: 'Croatia',
+    arName: 'كرواتيا',
     dial_code: '+385',
     code: 'HR'
   },
   {
     name: 'Cuba',
+    arName: 'كوبا',
     dial_code: '+53',
     code: 'CU'
   },
   {
     name: 'Cyprus',
+    arName: 'سيبروس',
     dial_code: '+357',
     code: 'CY'
   },
   {
     name: 'Czech Republic',
+    arName: 'Czech Republic',
     dial_code: '+420',
     code: 'CZ'
   },
   {
     name: 'Denmark',
+    arName: 'الدينمارك',
     dial_code: '+45',
     code: 'DK'
   },
   {
     name: 'Djibouti',
+    arName: 'دجيبوتي',
     dial_code: '+253',
     code: 'DJ'
   },
   {
     name: 'Dominica',
+    arName: 'دومينيسيا',
     dial_code: '+1767',
     code: 'DM'
   },
   {
     name: 'Dominican Republic',
+    arName: 'جمهورية ديمونيسيا',
     dial_code: '+1849',
     code: 'DO'
   },
   {
     name: 'Ecuador',
+    arName: 'اكوادور',
     dial_code: '+593',
     code: 'EC'
   },
   {
     name: 'Egypt',
+    arName: 'مصر',
     dial_code: '+20',
     code: 'EG'
   },
   {
     name: 'El Salvador',
+    arName: 'السلفادزور',
     dial_code: '+503',
     code: 'SV'
   },
   {
     name: 'Equatorial Guinea',
+    arName: 'Equatorial Guinea',
     dial_code: '+240',
     code: 'GQ'
   },
   {
     name: 'Eritrea',
+    arName: 'اريتريا',
     dial_code: '+291',
     code: 'ER'
   },
   {
     name: 'Estonia',
+    arName: 'استونيا',
     dial_code: '+372',
     code: 'EE'
   },
   {
     name: 'Ethiopia',
+    arName: 'اثيوبيا',
     dial_code: '+251',
     code: 'ET'
   },
   {
     name: 'Falkland Islands (Malvinas)',
+    arName: 'مالفيناس',
     dial_code: '+500',
     code: 'FK'
   },
   {
     name: 'Faroe Islands',
+    arName: 'جزيرة فاريو',
     dial_code: '+298',
     code: 'FO'
   },
   {
     name: 'Fiji',
+    arName: '',
     dial_code: '+679',
     code: 'FJ'
   },
   {
     name: 'Finland',
+    arName: 'فينلاند',
     dial_code: '+358',
     code: 'FI'
   },
   {
     name: 'France',
+    arName: 'فرنسا',
     dial_code: '+33',
     code: 'FR'
   },
   {
     name: 'French Guiana',
+    arName: 'جواينا الفرنسية',
     dial_code: '+594',
     code: 'GF'
   },
   {
     name: 'French Polynesia',
+    arName: 'بولينسيا الفرنسية',
     dial_code: '+689',
     code: 'PF'
   },
   {
     name: 'Gabon',
+    arName: 'جابون',
     dial_code: '+241',
     code: 'GA'
   },
   {
     name: 'Gambia',
+    arName: 'جامبيا',
     dial_code: '+220',
     code: 'GM'
   },
   {
     name: 'Georgia',
+    arName: 'جورجيا',
     dial_code: '+995',
     code: 'GE'
   },
   {
     name: 'Germany',
+    arName: 'المانيا',
     dial_code: '+49',
     code: 'DE'
   },
   {
     name: 'Ghana',
+    arName: 'غانا',
     dial_code: '+233',
     code: 'GH'
   },
   {
     name: 'Gibraltar',
+    arName: 'جيبرالتار',
     dial_code: '+350',
     code: 'GI'
   },
   {
     name: 'Greece',
+    arName: 'اليونان',
     dial_code: '+30',
     code: 'GR'
   },
   {
     name: 'Greenland',
+    arName: 'جرينلاند',
     dial_code: '+299',
     code: 'GL'
   },
   {
     name: 'Grenada',
+    arName: 'جرينادا',
     dial_code: '+1473',
     code: 'GD'
   },
   {
     name: 'Guadeloupe',
+    arName: 'جوادلواب',
     dial_code: '+590',
     code: 'GP'
   },
   {
     name: 'Guam',
+    arName: 'جوام',
     dial_code: '+1671',
     code: 'GU'
   },
   {
     name: 'Guatemala',
+    arName: 'جواتمالا',
     dial_code: '+502',
     code: 'GT'
   },
   {
     name: 'Guernsey',
+    arName: 'جورنساي',
     dial_code: '+44',
     code: 'GG'
   },
   {
     name: 'Guinea',
+    arName: 'جويناي',
     dial_code: '+224',
     code: 'GN'
   },
   {
     name: 'Guinea-Bissau',
+    arName: 'جويناي-بيساو',
     dial_code: '+245',
     code: 'GW'
   },
   {
     name: 'Guyana',
+    arName: 'جويانا',
     dial_code: '+595',
     code: 'GY'
   },
   {
     name: 'Haiti',
+    arName: 'حيتاي',
     dial_code: '+509',
     code: 'HT'
   },
   {
     name: 'Holy See (Vatican City State)',
+    arName: 'ولاية الفاتيكان',
     dial_code: '+379',
     code: 'VA'
   },
   {
     name: 'Honduras',
+    arName: 'هوندوراس',
     dial_code: '+504',
     code: 'HN'
   },
   {
     name: 'Hong Kong',
+    arName: 'هونج كونج',
     dial_code: '+852',
     code: 'HK'
   },
   {
     name: 'Hungary',
+    arName: 'هانجاري',
     dial_code: '+36',
     code: 'HU'
   },
   {
     name: 'Iceland',
+    arName: 'ايسلاند',
     dial_code: '+354',
     code: 'IS'
   },
   {
     name: 'India',
+    arName: 'الهند',
     dial_code: '+91',
     code: 'IN'
   },
   {
     name: 'Indonesia',
+    arName: 'اندوينسيا',
     dial_code: '+62',
     code: 'ID'
   },
   {
     name: 'Iran, Islamic Republic of Persian Gulf',
+    arName: 'ايران',
     dial_code: '+98',
     code: 'IR'
   },
   {
     name: 'Iraq',
+    arName: 'العراق',
     dial_code: '+964',
     code: 'IQ'
   },
   {
     name: 'Ireland',
+    arName: 'ايرلاند',
     dial_code: '+353',
     code: 'IE'
   },
   {
     name: 'Isle of Man',
+    arName: 'ايسل',
     dial_code: '+44',
     code: 'IM'
   },
   {
     name: 'Israel',
+    arName: 'اسرائيل',
     dial_code: '+972',
     code: 'IL'
   },
   {
     name: 'Italy',
+    arName: 'ايطاليا',
     dial_code: '+39',
     code: 'IT'
   },
   {
     name: 'Jamaica',
+    arName: 'جاميكا',
     dial_code: '+1876',
     code: 'JM'
   },
   {
     name: 'Japan',
+    arName: 'اليابان',
     dial_code: '+81',
     code: 'JP'
   },
   {
     name: 'Jersey',
+    arName: 'جيرسي',
     dial_code: '+44',
     code: 'JE'
   },
   {
     name: 'Jordan',
+    arName: 'الاردن',
     dial_code: '+962',
     code: 'JO'
   },
   {
     name: 'Kazakhstan',
+    arName: 'كازاخستان',
     dial_code: '+77',
     code: 'KZ'
   },
   {
     name: 'Kenya',
+    arName: 'كينيا',
     dial_code: '+254',
     code: 'KE'
   },
   {
     name: 'Kiribati',
+    arName: 'كيراباتي',
     dial_code: '+686',
     code: 'KI'
   },
   {
     name: "Korea, Democratic People's Republic of Korea",
+    arName: 'كوريا الديموقراطية',
     dial_code: '+850',
     code: 'KP'
   },
   {
     name: 'Korea, Republic of South Korea',
+    arName: 'كوريا الشمالية',
     dial_code: '+82',
     code: 'KR'
   },
   {
     name: 'Kuwait',
+    arName: 'الكويت',
     dial_code: '+965',
     code: 'KW'
   },
   {
     name: 'Kyrgyzstan',
+    arName: 'كريجستان',
     dial_code: '+996',
     code: 'KG'
   },
   {
     name: 'Laos',
+    arName: 'لواس',
     dial_code: '+856',
     code: 'LA'
   },
   {
     name: 'Latvia',
+    arName: 'لاتفيا',
     dial_code: '+371',
     code: 'LV'
   },
   {
     name: 'Lebanon',
+    arName: 'لبنان',
     dial_code: '+961',
     code: 'LB'
   },
   {
     name: 'Lesotho',
+    arName: 'ليسوثو',
     dial_code: '+266',
     code: 'LS'
   },
   {
     name: 'Liberia',
+    arName: 'ليبريا',
     dial_code: '+231',
     code: 'LR'
   },
   {
     name: 'Libyan Arab Jamahiriya',
+    arName: 'جمهورية ليبيا',
     dial_code: '+218',
     code: 'LY'
   },
   {
     name: 'Liechtenstein',
+    arName: 'ليكتنستين',
     dial_code: '+423',
     code: 'LI'
   },
   {
     name: 'Lithuania',
+    arName: 'ليثونيا',
     dial_code: '+370',
     code: 'LT'
   },
   {
     name: 'Luxembourg',
+    arName: 'لوكسمبرج',
     dial_code: '+352',
     code: 'LU'
   },
   {
     name: 'Macao',
+    arName: 'ماكاو',
     dial_code: '+853',
     code: 'MO'
   },
   {
     name: 'Macedonia',
+    arName: 'ماكدونيا',
     dial_code: '+389',
     code: 'MK'
   },
   {
     name: 'Madagascar',
+    arName: 'مدغشقر',
     dial_code: '+261',
     code: 'MG'
   },
   {
     name: 'Malawi',
+    arName: 'مالواي',
     dial_code: '+265',
     code: 'MW'
   },
   {
     name: 'Malaysia',
+    arName: 'ماليزيا',
     dial_code: '+60',
     code: 'MY'
   },
   {
     name: 'Maldives',
+    arName: 'المالديف',
     dial_code: '+960',
     code: 'MV'
   },
   {
     name: 'Mali',
+    arName: 'مالي',
     dial_code: '+223',
     code: 'ML'
   },
   {
     name: 'Malta',
+    arName: 'مالطة',
     dial_code: '+356',
     code: 'MT'
   },
   {
     name: 'Marshall Islands',
+    arName: 'جزر مارشال',
     dial_code: '+692',
     code: 'MH'
   },
   {
     name: 'Martinique',
+    arName: 'مارتينيك',
     dial_code: '+596',
     code: 'MQ'
   },
   {
     name: 'Mauritania',
+    arName: 'موريتانيا',
     dial_code: '+222',
     code: 'MR'
   },
   {
     name: 'Mauritius',
+
     dial_code: '+230',
     code: 'MU'
   },
@@ -1213,9 +1350,14 @@ export const countries = [
 
 export const dialCodes = countries.map(country => country.dial_code)
 
-export const countriesNames = countries.map(country => country.name)
+export const countriesNames = (lang) => {
+  return countries.map(country => lang === 'ar' ? country.arName : country.name)
+}
 
-export const getSelectedCountry = (countryName) => {
-  const selectedCountry = countries.find(country => country.name === countryName)
+export const getSelectedCountry = (countryName, lang) => {
+  const selectedCountry = countries.find(country => lang === 'ar'
+    ? country.arName === countryName
+    : country.name === countryName
+  )
   return selectedCountry
 }

@@ -118,16 +118,18 @@ export default {
   },
   methods: {
     submitForm () {
-      const password = {
-        password: this.password
+      const { token } = this.$route.query
+      const data = {
+        password: this.password,
+        token
       }
-      this.$store.dispatch('auth/resetPassword', password)
+
+      this.$store.dispatch('auth/resetPassword', data)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-
   .title {
     color: $dark;
     text-align: center;
@@ -136,7 +138,6 @@ export default {
   .form-title{
     height: 0;
     margin-bottom: 40px;
-    // font-size: 25px;
   }
   .separator{
     margin-bottom: 30px !important;
@@ -156,16 +157,4 @@ export default {
   border-radius: 25px;
   font-size: 18px;
 }
-
-// @media (max-width: 860px) and(min-width: 700px) {
-//   .title {
-//     font-size: 25px;
-//   }
-// }
-
-// @media (max-width: 500px) {
-//   .title {
-//     font-size: 30px;
-//   }
-// }
 </style>

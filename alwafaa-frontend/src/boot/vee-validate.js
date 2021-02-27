@@ -6,28 +6,18 @@ import {
   localize
 } from 'vee-validate'
 import { required, email, min, confirmed, numeric } from 'vee-validate/dist/rules'
+import arMessages from 'src/modules/authentication/i18n/ar'
+import enMessages from 'src/modules/authentication/i18n/en'
 
 Vue.component('ValidationObserver', ValidationObserver)
 Vue.component('ValidationProvider', ValidationProvider)
 
 const dictionary = {
   en: {
-    messages: {
-      required: 'This field is required',
-      email: 'not valid email',
-      min: 'Password must have minimum 6 characters',
-      confirmed: 'Password confirmation does not match',
-      numeric: 'The field field may only contain numeric characters'
-    }
+    messages: enMessages.formValidation
   },
   ar: {
-    messages: {
-      required: 'هذا الحقل مطلوب',
-      email: 'بريد إلكتروني غير صحيح',
-      min: 'كلمة المرور لا تقل عن 7 حروف',
-      confirmed: 'كلمة المرور غير متطابقة',
-      numeric: 'رقم الهاتف يجب ان يكون أرقام فقط'
-    }
+    messages: arMessages.formValidation
   }
 }
 

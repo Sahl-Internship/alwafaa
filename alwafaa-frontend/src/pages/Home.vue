@@ -107,9 +107,6 @@ export default {
     AcademySections,
     AcademyInfoSection,
     HomeCarousel
-  },
-  mounted () {
-    console.log('home')
   }
 }
 </script>

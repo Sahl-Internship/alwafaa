@@ -44,12 +44,12 @@ export default {
     }
   },
   props: {
-    type: { type: String, required: true, default: 'text' },
+    type: { type: String, required: false, default: 'text' },
     label: { type: String, required: true, default: '' },
     outlined: { type: Boolean, required: false, default: false },
     dense: { type: Boolean, required: false, default: false },
     borderless: { type: Boolean, required: false, default: false },
-    color: { type: String, required: false },
+    color: { type: String, required: false, default: 'primary' },
     value: { type: String, required: false },
     error: { type: Boolean, required: false },
     errorMessage: { type: String, required: false },
