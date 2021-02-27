@@ -24,7 +24,8 @@ module.exports = function (/* ctx */) {
       'vee-validate',
       'hello',
       'notify-defaults',
-      'flag-icons'
+      'flag-icons',
+      'global'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css

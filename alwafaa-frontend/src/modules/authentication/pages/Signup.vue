@@ -53,18 +53,16 @@
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
-                <q-input
+                <g-input
                   outlined
                   v-model="firstname"
+                  type="text"
                   :label="$t('formFields.firstname')"
                   color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-account" />
-                  </template>
-                </q-input>
+                  prependIconName="mdi-account"
+                />
               </ValidationProvider>
 
               <ValidationProvider
@@ -73,18 +71,16 @@
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
-                <q-input
-                  v-model="lastname"
+                <g-input
                   outlined
+                  v-model="lastname"
+                  type="text"
                   :label="$t('formFields.lastname')"
                   color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-account" />
-                  </template>
-                </q-input>
+                  prependIconName="mdi-account"
+                />
               </ValidationProvider>
 
               <ValidationProvider
@@ -93,7 +89,7 @@
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
-                <q-select
+                <g-select
                   outlined
                   v-model="gender"
                   :options="genderOptions"
@@ -101,11 +97,8 @@
                   color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-human-male-female" />
-                  </template>
-                </q-select>
+                  prependIconName="mdi-human-male-female"
+                />
               </ValidationProvider>
 
               <ValidationProvider
@@ -114,7 +107,7 @@
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
-                <q-select
+                <g-select
                   outlined
                   v-model="country"
                   :options="countriesNamesOptions"
@@ -122,12 +115,9 @@
                   color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
-                >
-                  <template v-slot:prepend>
-                    <flag v-if="isoCode" :iso="isoCode" class="flag-icon-circle" />
-                    <q-icon v-else name="mdi-flag-variant" />
-                  </template>
-                </q-select>
+                  prependIconName="mdi-flag-variant"
+                  :flag="isoCode"
+                />
               </ValidationProvider>
 
               <ValidationProvider
@@ -136,18 +126,16 @@
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
-                <q-input
-                  v-model="city"
+                <g-input
                   outlined
+                  v-model="city"
+                  type="text"
                   :label="$t('formFields.city')"
                   color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-city" />
-                  </template>
-                </q-input>
+                  prependIconName="mdi-city"
+                />
               </ValidationProvider>
 
               <q-btn
@@ -185,22 +173,19 @@
                 rules="required|email"
                 v-slot="{ errors, invalid, validated }"
               >
-                <q-input
-                  v-model="email"
+                <g-input
                   outlined
+                  v-model="email"
                   type="email"
                   :label="$t('formFields.email')"
                   color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-account" />
-                  </template>
-                  <template v-slot:append v-if="!!email && (!invalid || !validated)">
-                    <q-icon name="fas fa-check" color="green" size="xs" />
-                  </template>
-                </q-input>
+                  prependIconName="mdi-account"
+                  :appendIconName="!!email && (!invalid || !validated) ? 'mdi-check' : null"
+                  appendIconColor="green"
+                  appendIconSize="sm"
+                />
               </ValidationProvider>
 
               <div class="col-12 row phone"
@@ -211,27 +196,25 @@
                   rules="required|numeric"
                   v-slot="{ errors, invalid, validated }"
                 >
-                  <q-input
+                  <g-input
                     borderless
                     v-model="phoneNumber"
+                    type="text"
                     :label="$t('formFields.phone')"
                     color="primary"
                     :error="invalid && validated"
                     :error-message="errors[0]"
-                  >
-                    <template v-slot:prepend>
-                      <q-icon name="mdi-phone" />
-                    </template>
-                  </q-input>
+                    prependIconName="mdi-phone"
+                  />
                 </ValidationProvider>
 
                 <ValidationProvider
-                  name="phone"
+                  name="phone-key"
                   class="col-xs-3 col-sm-3 col-md-2 col-lg-2 q-pb-xs phone-select"
                   rules="required"
                   v-slot="{ errors, invalid, validated }"
                 >
-                  <q-select
+                  <g-select
                     borderless
                     v-model="phoneKey"
                     :options="dialCodesOPtions"
@@ -247,26 +230,17 @@
                 rules="required|min:7"
                 v-slot="{ errors, invalid, validated }"
               >
-                <q-input
+                <g-input
                   v-model="password"
                   outlined
-                  :type="isPwd ? 'password' : 'text'"
+                  type="password"
                   :label="$t('formFields.password')"
                   color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-key" />
-                  </template>
-                  <template v-slot:append>
-                    <q-icon
-                      :name="isPwd ? 'mdi-eye-off' : 'mdi-eye'"
-                      class="cursor-pointer"
-                      @click="isPwd = !isPwd"
-                    ></q-icon>
-                  </template>
-                </q-input>
+                  prependIconName="mdi-key"
+                  appendIconName="mdi-eye-off"
+                />
               </ValidationProvider>
 
               <ValidationProvider
@@ -275,26 +249,17 @@
                 rules="required|confirmed:password"
                 v-slot="{ errors, invalid, validated }"
               >
-                <q-input
+                <g-input
                   v-model="confirmPass"
                   outlined
-                  :type="isCPwd ? 'password' : 'text'"
+                  type="password"
                   :label="$t('formFields.confirmPass')"
                   color="primary"
                   :error="invalid && validated"
                   :error-message="errors[0]"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="mdi-key" />
-                  </template>
-                  <template v-slot:append>
-                    <q-icon
-                      :name="isCPwd ? 'mdi-eye-off' : 'mdi-eye'"
-                      class="cursor-pointer"
-                      @click="isCPwd = !isCPwd"
-                    ></q-icon>
-                  </template>
-                </q-input>
+                  prependIconName="mdi-key"
+                  appendIconName="mdi-eye-off"
+                />
               </ValidationProvider>
 
               <q-btn
@@ -428,14 +393,10 @@ export default {
       phoneKey: '',
       password: '',
       confirmPass: '',
-      verficationCode: '',
-      agree: false,
       genderOptions: ['Female', 'Male'],
       countriesNamesOptions: countriesNames,
       dialCodesOPtions: dialCodes,
-      isoCode: '',
-      isPwd: true,
-      isCPwd: true
+      isoCode: ''
     }
   },
   computed: {

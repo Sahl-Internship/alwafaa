@@ -48,27 +48,18 @@
           rules="required|min:7"
           v-slot="{ errors, invalid, validated }"
         >
-          <q-input
-          class="q-pb-lg"
+          <g-input
+            class="q-pb-lg"
             v-model="password"
             outlined
-            :type="isPwd ? 'password' : 'text'"
+            type='password'
             :label="$t('formFields.password')"
             color="primary"
             :error="invalid && validated"
             :error-message="errors[0]"
-          >
-            <template v-slot:prepend>
-              <q-icon name="mdi-key" />
-            </template>
-            <template v-slot:append>
-              <q-icon
-                :name="isPwd ? 'mdi-eye-off' : 'mdi-eye'"
-                class="cursor-pointer"
-                @click="isPwd = !isPwd"
-              ></q-icon>
-            </template>
-          </q-input>
+            appendIconName= 'mdi-eye-off'
+            prependIconName= 'mdi-key'
+          />
         </ValidationProvider>
 
         <ValidationProvider
@@ -77,7 +68,7 @@
           rules="required|confirmed:password"
           v-slot="{ errors, invalid, validated }"
         >
-          <q-input
+          <g-input
             v-model="confirmPass"
             outlined
             :type="isCPwd ? 'password' : 'text'"
@@ -86,18 +77,9 @@
             class="q-pb-lg"
             :error="invalid && validated"
             :error-message="errors[0]"
-          >
-            <template v-slot:prepend>
-              <q-icon name="mdi-key" />
-            </template>
-            <template v-slot:append>
-              <q-icon
-                :name="isCPwd ? 'mdi-eye-off' : 'mdi-eye'"
-                class="cursor-pointer"
-                @click="isCPwd = !isCPwd"
-              ></q-icon>
-            </template>
-          </q-input>
+            prependIconName='mdi-key'
+            appendIconName='mdi-eye-off'
+          />
         </ValidationProvider>
         <div class="col-12 row justify-center">
           <q-btn

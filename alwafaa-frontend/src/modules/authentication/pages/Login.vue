@@ -22,7 +22,7 @@
           rules="required|email"
           v-slot="{ errors, invalid, validated }"
         >
-          <q-input
+          <g-input
             class="input-field q-pb-lg"
             v-model="email"
             outlined
@@ -33,11 +33,11 @@
             bg-color="white"
             :error="invalid && validated"
             :error-message="errors[0]"
-          >
-            <template v-slot:prepend>
-              <q-icon name="person" />
-            </template>
-          </q-input>
+            prependIconName='person'
+            :appendIconName='!!email && (!invalid || !validated) ? "mdi-check" : null'
+            appendIconColor= 'green'
+            appendIconSize= 'sm'
+          />
         </ValidationProvider>
 
         <ValidationProvider
@@ -46,29 +46,20 @@
           rules="required"
           v-slot="{ errors, invalid, validated }"
         >
-          <q-input
+          <g-input
             class="input-field q-pb-lg"
             v-model="password"
             outlined
-            :type="isPwd ? 'password' : 'text'"
+            type= 'password'
             :label="$t('formFields.password')"
             label-color="dark"
             color="blue-1"
             bg-color="white"
             :error="invalid && validated"
             :error-message="errors[0]"
-          >
-            <template v-slot:prepend>
-              <q-icon name="vpn_key" />
-            </template>
-            <template v-slot:append>
-              <q-icon
-                :name="isPwd ? 'visibility_off' : 'visibility'"
-                class="cursor-pointer"
-                @click="isPwd = !isPwd"
-              />
-            </template>
-          </q-input>
+            prependIconName='vpn_key'
+            appendIconName='mdi-eye-off'
+          />
         </ValidationProvider>
         <div class="col-7 row">
           <q-checkbox

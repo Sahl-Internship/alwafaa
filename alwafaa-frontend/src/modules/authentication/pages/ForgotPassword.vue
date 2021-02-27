@@ -39,30 +39,21 @@
           rules="required|email"
           v-slot="{ errors, invalid, validated }"
         >
-          <q-input
+          <g-input
+            class="input-field q-pb-lg"
             v-model="email"
             outlined
             type="email"
             :label="$t('formFields.email')"
-            color="primary"
-            bg-color="grey-1"
+            color="blue-1"
+            bg-color="white"
             :error="invalid && validated"
             :error-message="errors[0]"
-          >
-            <template v-slot:prepend>
-              <q-icon name="mdi-account" />
-            </template>
-            <template
-              v-slot:append
-              v-if="!!email && (!invalid || !validated)"
-            >
-              <q-icon
-                name="fas fa-check"
-                color="green"
-                size="xs"
-              />
-            </template>
-          </q-input>
+            :appendIconName='!!email && (!invalid || !validated) ? "mdi-check" : null'
+            appendIconColor= 'green'
+            appendIconSize= 'sm'
+            prependIconName='person'
+          />
 
         </ValidationProvider>
         <div class="col-12 row justify-center">
