@@ -38,7 +38,7 @@
           <ValidationProvider
             name="password"
             class="col-11 q-pb-xl"
-            rules="required|min:7"
+            rules="required"
             v-slot="{ errors, invalid, validated }"
           >
             <q-input
@@ -53,9 +53,9 @@
               :error="invalid && validated"
               :error-message="errors[0]"
             >
-            <template v-slot:prepend>
-            <q-icon name="vpn_key" />
-          </template>
+              <template v-slot:prepend>
+                <q-icon name="vpn_key" />
+              </template>
               <template v-slot:append>
                 <q-icon
                   :name="isPwd ? 'visibility_off' : 'visibility'"

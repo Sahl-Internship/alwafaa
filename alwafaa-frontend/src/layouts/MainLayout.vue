@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import TheHeader from 'src/UI/TheHeader.vue'
+import TheHeader from 'src/components/UI/TheHeader.vue'
 
 export default {
   name: 'MainLayout',

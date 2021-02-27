@@ -33,7 +33,7 @@
       }"
     >
       <div class="row justify-around items-center">
-        <basic-card
+        <base-card
           borderPrimary="true"
           :class="{
             'col-3': !$q.screen.lt.xl,
@@ -52,9 +52,9 @@
             <div class="text-h4 self-center">1000+</div>
             <div class="text-subtitle2 self-center">Students</div>
           </template>
-        </basic-card>
+        </base-card>
 
-        <basic-card
+        <base-card
           borderPrimary="true"
           :class="{
             'col-3': !$q.screen.lt.xl,
@@ -73,9 +73,9 @@
             <div class="text-h4 self-center">300+</div>
             <div class="text-subtitle2 self-center">Teachers</div>
           </template>
-        </basic-card>
+        </base-card>
 
-        <basic-card
+        <base-card
           borderPrimary="true"
           :class="{
             'col-3': !$q.screen.lt.xl,
@@ -94,7 +94,7 @@
             <div class="text-h4 self-center">100+</div>
             <div class="text-subtitle2 self-center">Courses</div>
           </template>
-        </basic-card>
+        </base-card>
       </div>
     </div>
   </div>
@@ -102,11 +102,11 @@
 </template>
 
 <script>
-import BasicCard from 'src/UI/BasicCard'
+import BaseCard from './UI/BaseCard'
 
 export default {
   name: 'AcademyInfoSection',
-  components: { BasicCard }
+  components: { BaseCard }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <basic-card>
+  <base-card>
     <template #cardImg>
       <img src="~assets/course-img.jpg" />
     </template>
@@ -19,14 +19,14 @@
         <q-btn flat round icon="add" />
       </q-btn>
     </template>
-  </basic-card>
+  </base-card>
 </template>
 
 <script>
-import BasicCard from 'src/UI/BasicCard.vue'
+import BaseCard from './UI/BaseCard.vue'
 
 export default {
   name: 'CourseCard',
-  components: { BasicCard }
+  components: { BaseCard }
 }
 </script>
