@@ -1,22 +1,5 @@
 <template>
-  <div class="q-pa-md">
-    <div
-      class="col-12 q-my-lg title text-center"
-      :class="{
-        'text-h4': !$q.screen.lt.md,
-        'text-h5': $q.screen.lt.md,
-      }"
-    >
-      {{ $t('resetPass.title') }}
-    </div>
-
-    <q-separator
-      color="grey-1"
-      size="3px"
-      spaced="lg"
-      class="separator col-7"
-      inset
-    />
+  <div class="q-pa-md q-mt-xl">
 
     <ValidationObserver v-slot="{ handleSubmit }">
       <q-form
@@ -24,14 +7,29 @@
         class="row justify-center"
       >
         <div
+          class="col-12 q-my-sm text-center"
+          :class="{
+            'text-h4': !$q.screen.lt.md,
+            'text-h5': $q.screen.lt.md,
+          }"
+        >
+          {{ $t('resetPass.title') }}
+        </div>
+        <q-separator
+          class="col-7 separator"
+          spaced="lg"
+          size="3px"
+          color="grey-1"
+        />
+        <div
           class="step1 col-12 row"
         >
           <h4
-            class="col-12 q-my-lg form-title text-center">
+            class="col-12 q-mt-xl q-mb-none title-2 text-center text-grey-4">
             {{ $t('resetPass.title') }}
           </h4>
           <p
-            class="col-12 q-my-md second-title text-center">
+            class="col-12 q-mb-lg second-title text-center text-grey-3">
             {{ $t('resetPass.enterEmail') }}
           </p>
         </div>
@@ -129,32 +127,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.title {
-  color: $dark;
-  text-align: center;
-  margin-top: 60px;
-}
-
-.form-title{
-  font-weight: normal;
+.title-2{
   font-size: 17px;
-  height: 0;
-  color: $grey-4;
 }
-.second-title{
-  margin-bottom: 30px;
-  color: $grey-3;
-}
-.separator{
-  width: 60%;
-  margin: 0px 20%;
-}
-// .form-btn{
-//   width: 20%;
-//   margin: 0px 40%;
-//   border-radius: 25px;
-//   font-size: 18px;
-// }
 
 .q-btn {
   &::v-deep {
@@ -163,15 +138,5 @@ export default {
     }
   }
 }
-// @media (max-width: 860px) and(min-width: 700px) {
-//   .title {
-//     font-size: 25px;
-//   }
-// }
 
-// @media (max-width: 500px) {
-//   .title {
-//     font-size: 30px;
-//   }
-// }
 </style>
