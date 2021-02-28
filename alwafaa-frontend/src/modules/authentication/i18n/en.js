@@ -77,6 +77,7 @@ export default {
     notvalid: ' not valid',
     verifyError: 'You must verify your email first',
     dataError: 'Wrong Email or Password',
+    PasswordError: 'Wrong Password',
     verfiyEmailSucess: 'Check your email to reset password',
     verfiyEmailError: 'There is no such email or not verfied yet',
     resetSuccess: 'New password saved successfully',

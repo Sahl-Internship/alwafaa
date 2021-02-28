@@ -78,6 +78,7 @@ export default {
     notvalid: ' غير صحيح',
     verifyError: 'قم بتأكيد البريد اﻹلكتروني أولا',
     dataError: 'خطأ في البريد الإلكتروني أو كلمة المرور',
+    PasswordError: 'كلمة المرور خاطئة',
     verfiyEmailSucess: 'تحقق من البريد اﻹلكتروني لتغيير كلمة المرور',
     verfiyEmailError: 'لم يتم التسجيل بهذا الايميل أو لم يتم تاكيده',
     resetSuccess: 'تم حفظ كلمة المرور الجديدة بنجاح',
