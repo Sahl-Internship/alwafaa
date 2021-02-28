@@ -75,6 +75,7 @@ export default {
     registerSuccess: 'You registered successfully, confirm your email to login',
     registerdefaultError: 'Error while registering, Try Again',
     notvalid: ' not valid',
+    verfiySuccess: 'Your email was verfied, you can login now',
     verifyError: 'You must verify your email first',
     dataError: 'Wrong Email or Password',
     PasswordError: 'Wrong Password',

@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { i18n } from 'src/boot/i18n'
 
 export default {
   name: 'Login',
@@ -115,7 +116,12 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route)
+    if (this.$route.query.verify) {
+      this.$q.notify({
+        type: 'positive',
+        message: i18n.t('authNotification.verfiySuccess')
+      })
+    }
   }
 }
 </script>
