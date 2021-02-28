@@ -198,7 +198,9 @@ class SignInController extends \yii\web\Controller
         ]);
 
 //        return $this->goHome();
-        return redirect('http://localhost:4000/auth/login','1');
+        return redirect('http://localhost:4000/auth/login',[
+            'verify'=>'1'
+        ]);
     }
 
 
