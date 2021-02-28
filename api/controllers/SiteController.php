@@ -61,7 +61,7 @@ class SiteController extends ApiController
         if($valid_password){
             return ['status'=>1,  'profile'=> $user ];
         }else{
-            return ['status'=>0 , 'message'=>'Invalid password'];
+            return ['status'=>0 , 'message'=>'Invalid password','key'=>'PasswordError'];
 
         }
 
