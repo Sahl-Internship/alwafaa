@@ -75,11 +75,13 @@ export default {
     registerSuccess: 'You registered successfully, confirm your email to login',
     registerdefaultError: 'Error while registering, Try Again',
     notvalid: ' not valid',
-    loginError: 'Wrong Email or Password',
+    verifyError: 'You must verify your email first',
+    dataError: 'Wrong Email or Password',
     verfiyEmailSucess: 'Check your email to reset password',
-    verfiyEmailError: 'Error, try again',
+    verfiyEmailError: 'There is no such email or not verfied yet',
     resetSuccess: 'New password saved successfully',
-    resetError: 'Error While reset password, Try Again'
+    resetError: 'Error While reset password, Try Again',
+    DefaultError: 'Error, try again'
   },
 
   header: {

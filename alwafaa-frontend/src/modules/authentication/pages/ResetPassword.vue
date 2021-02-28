@@ -103,7 +103,7 @@
             outline
             type="button"
             icon-right="mdi-window-close"
-            :label="$t('login.cancel')"
+            :label="$t('forgotPass.cancel')"
             class="col-sm-3 col-md-3 col-lg-2 q-mt-md q-ml-md "
             :size="$q.screen.lt.md? 'md' : 'lg'"
             text-color="grey-5"

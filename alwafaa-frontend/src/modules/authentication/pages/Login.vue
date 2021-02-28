@@ -113,6 +113,9 @@ export default {
       }
       this.$store.dispatch('auth/login', user)
     }
+  },
+  mounted () {
+    console.log(this.$route)
   }
 }
 </script>
