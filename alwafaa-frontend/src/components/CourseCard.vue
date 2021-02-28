@@ -1,7 +1,7 @@
 <template>
   <base-card>
     <template #cardImg>
-      <img src="~assets/course-img.jpg" />
+      <img src="/images/course-img.jpg" />
     </template>
 
     <template #cardHeader>

@@ -3,7 +3,7 @@
     <q-toolbar>
       <q-avatar size="90px">
         <!-- eslint-disable-next-line prettier/prettier -->
-        <img src="~assets/logo.png">
+        <img src="/images/logo.png">
       </q-avatar>
 
       <q-space />
