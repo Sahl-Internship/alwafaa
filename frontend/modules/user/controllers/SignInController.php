@@ -198,8 +198,8 @@ class SignInController extends \yii\web\Controller
         ]);
 
 //        return $this->goHome();
-//        return redirect('http://localhost:4000/auth/login');
-        return Yii::$app->response->redirect(['http://localhost:4000/auth/login','verified' => 1]);
+        return redirect('http://localhost:4000/auth/login?verify=1');
+//        return redirect(['http://localhost:4000/auth/login','verified' => 1]);
     }
 
 
