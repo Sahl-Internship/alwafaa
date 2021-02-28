@@ -1,5 +1,5 @@
 <template>
-  <basic-section
+  <base-section
     title="Sections"
     link="See All"
     class="q-pt-xs q-pb-xl academy-sections"
@@ -93,16 +93,16 @@
         </div>
       </q-carousel-slide>
     </template>
-  </basic-section>
+  </base-section>
 </template>
 
 <script>
-import BasicSection from 'src/UI/BasicSection.vue'
+import BaseSection from './UI/BaseSection.vue'
 import SectionCard from './SectionCard.vue'
 
 export default {
   name: 'CoursesSection',
-  components: { BasicSection, SectionCard },
+  components: { BaseSection, SectionCard },
   mounted () {
     this.$q.screen.setSizes({
       sm: 380,

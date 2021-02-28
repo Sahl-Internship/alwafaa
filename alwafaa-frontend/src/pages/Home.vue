@@ -97,7 +97,7 @@ import HomeCarousel from 'src/components/HomeCarousel.vue'
 import CoursesSection from 'src/components/CoursesSection.vue'
 import AcademySections from 'src/components/AcademySections.vue'
 import AcademyInfoSection from 'src/components/AcademyInfoSection.vue'
-import TheFooter from 'src/UI/TheFooter.vue'
+import TheFooter from 'src/components/UI/TheFooter.vue'
 
 export default {
   name: 'Home',
@@ -107,9 +107,6 @@ export default {
     AcademySections,
     AcademyInfoSection,
     HomeCarousel
-  },
-  mounted () {
-    console.log('home')
   }
 }
 </script>

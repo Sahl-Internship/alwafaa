@@ -52,10 +52,10 @@ class SiteController extends ApiController
             ->andWhere(['or', ['username' => $params['identity'] ], ['email' => $params['identity']]])
             ->one();
         if(!$user){
-            return ['status'=>0 , 'message'=>'Email not found'];
+            return ['status'=>0 , 'message'=>'Email not found','key'=>'dataError'];
         }
         if($user->status == User::STATUS_NOT_ACTIVE){
-            return ['status'=>0 , 'message'=>'You must verify your email first'];
+            return ['status'=>0 , 'message'=>'You must verify your email first','key'=>'verifyError'];
         }
         $valid_password = Yii::$app->getSecurity()->validatePassword($params['password'], $user->password_hash);
         if($valid_password){

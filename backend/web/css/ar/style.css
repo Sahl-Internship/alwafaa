@@ -501,8 +501,17 @@ div.card {
 
 /* user creation */
 
-
 /* End All Users */
+
+
+/* Start Course */
+.datetimepicker {
+  width: 315px;
+  top: 313;
+  right: 310px;
+}
+
+/* End Course  */
 /* Start Footer */
 a.back-to-top {
   background-color: #13A8E5;

@@ -10,7 +10,8 @@
     <auth-second-section v-if="!$q.screen.lt.sm"></auth-second-section>
 
     <q-page-container class="col-xs-12 col-sm-9 col-md-7 column justify-start">
-      <go-back class="align-start"></go-back>
+      <auth-header class="align-start"></auth-header>
+
       <router-view />
     </q-page-container>
   </q-layout>
@@ -18,11 +19,11 @@
 
 <script>
 import AuthSecondSection from '../components/AuthSecondSection.vue'
-import GoBack from '../components/GoBack.vue'
+import AuthHeader from '../components/AuthHeader.vue'
 
 export default {
   name: 'AuthLayout',
-  components: { AuthSecondSection, GoBack },
+  components: { AuthSecondSection, AuthHeader },
   computed: {
     reverseRow () {
       const { name } = this.$route

@@ -29,8 +29,8 @@ else {
             'name'  => 'time',
             'type'  => DateTimePicker::className(),
             'title' => Yii::t('backend','Class Date'),
-            'value' => function($model) {
-                return $model->time;
+            'value' => function($data) {
+                return date('Y-m-d H:i:s', $data->time);
             },
             'items' => [
                 '0' => 'Saturday',
