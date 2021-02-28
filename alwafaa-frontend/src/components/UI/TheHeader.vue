@@ -1,6 +1,6 @@
 <template>
   <q-header elevated class="header">
-    <q-toolbar>
+    <q-toolbar class="row">
       <q-btn
         flat
         dense
@@ -10,12 +10,15 @@
         @click="leftDrawerOpen = !leftDrawerOpen"
         v-if="false"
       />
-
-      <q-btn flat round to="/home" class="avatar">
-        <q-avatar>
-          <img src="~/assets/logo.png" />
-        </q-avatar>
-      </q-btn>
+      <!-- <q-btn flat round to="/home" class="avatar"> -->
+      <div class="logo col-6 row">
+        <img src="~/assets/home-imgs/logo.png" class="img q-mt-md col-3" />
+        <ul class="nav-list q-mt-lg col-9">
+          <li class="nav-item q-mr-md">الرئيسية</li>
+          <li class="nav-item">الكورسات المتاحة</li>
+        </ul>
+      </div>
+      <!-- </q-btn> -->
 
       <q-space />
 
@@ -42,44 +45,58 @@
           />
         </template>
       </q-input> -->
+    <div class="left-section col-6 text-right">
+      <q-btn-dropdown
+        flat
+        class="transparent"
+        rounded
+        label="اللغة"
+      >
+      <q-list>
+        <q-item clickable v-close-popup class="lang-item">
+          <q-btn flat round dense @click="changeLanguage('en-us', 'ar')">
+            <flag iso="us"/>
+          </q-btn>
+        </q-item>
 
-      <q-btn flat round dense @click="changeLanguage('en-us', 'ar')">
-        <flag iso="us" />
-      </q-btn>
-      <q-btn flat round dense @click="changeLanguage('ar', 'en-us')">
-        <flag iso="eg" />
-      </q-btn>
-
-      <q-btn
-        v-if="isAuthed"
-        flat
-        no-caps
-        :label="$t('header.logout')"
-        type="button"
-        text-color="grey-1"
-        size="17px"
-        @click="handleLogout"
-      />
-      <q-btn
-        v-if="!isAuthed"
-        flat
-        no-caps
-        :label="$t('header.login')"
-        type="button"
-        text-color="grey-1"
-        size="17px"
-        to="auth/login"
-      />
-      <q-btn
-        v-if="!isAuthed"
-        flat
-        no-caps
-        :label="$t('header.signup')"
-        type="button"
-        text-color="grey-1"
-        size="17px"
-        to="auth/signup"
-      />
+        <q-item clickable v-close-popup class="lang-item">
+          <q-btn flat round dense @click="changeLanguage('ar', 'en-us')">
+            <flag iso="eg"/>
+          </q-btn>
+        </q-item>
+      </q-list>
+      </q-btn-dropdown>
+        <q-btn
+          v-if="isAuthed"
+          flat
+          no-caps
+          :label="$t('header.logout')"
+          type="button"
+          text-color="grey-1"
+          size="17px"
+          @click="handleLogout"
+        />
+        <q-btn
+          v-if="!isAuthed"
+          flat
+          no-caps
+          :label="$t('header.login')"
+          type="button"
+          text-color="grey-1"
+          size="17px"
+          to="auth/login"
+        />
+        <q-btn
+          v-if="!isAuthed"
+          flat
+          no-caps
+          :label="$t('header.signup')"
+          type="button"
+          text-color="grey-1"
+          size="17px"
+          to="auth/signup"
+        />
+      </div>
     </q-toolbar>
   </q-header>
 </template>
@@ -117,10 +134,19 @@ export default {
 </script>
 <style lang="scss" scoped>
 .header {
-  // background-color: $grey-2;
-  .avatar {
-    background-color: $grey-1;
-    opacity: 0.7;
+  background: transparent;
+  height: 0;
+  .img{
+    height: 50px;
+    width: 80px;
+    display: inline-block;
+  }
+  .nav-list{
+    list-style: none;
+    display: inline-block;
+    .nav-item{
+      display: inline-block;
+    }
   }
   .link {
     color: #fff;

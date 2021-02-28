@@ -1,22 +1,20 @@
 <template>
-  <div class="q-pa-none">
-    <q-carousel
-      animated
-      v-model="slide"
-      navigation
-      infinite
-      :autoplay="autoplay"
-      arrows
-      transition-prev="slide-right"
-      transition-next="slide-left"
-      control-text-color="green"
-      @mouseenter="autoplay = false"
-      @mouseleave="autoplay = true"
+  <div class="q-pa-none col-12">
+
+    <q-img
+      src="~assets/home-imgs/header.png"
+      class="img"
     >
-      <q-carousel-slide :name="1" img-src="~assets/slider-img.jpg" />
-      <q-carousel-slide :name="2" img-src="~assets/slider-img.jpg" />
-      <q-carousel-slide :name="3" img-src="~assets/slider-img.jpg" />
-    </q-carousel>
+      <div class="search-section justify-around absolute-center">
+        <h4 class="text-grey-3"> إبدأ رحلتك التعليمية ,تعلم اليوم, لتقود الغد </h4>
+        <h6 class="text-grey-3">235 كورس في اللغة العربيةو تحفيظ القرآن الكريم يتم تدريسها من قبل خبراء</h6>
+        <q-input outlined bottom-slots v-model="text" bg-color="white" counter maxlength="12" :dense="dense">
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
+      </div>
+    </q-img>
   </div>
 </template>
 
@@ -30,3 +28,8 @@ export default {
   }
 }
 </script>
+<style lang='scss' scoped>
+.img{
+  background-size: cover;
+}
+</style>
