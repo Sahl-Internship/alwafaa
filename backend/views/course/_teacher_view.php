@@ -8,23 +8,13 @@ use yii\widgets\DetailView;
  * @var common\models\Course $model
  */
 
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => ' / '.Yii::t('backend','Courses'),
-    'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->title = $model->title;
+//$this->params['breadcrumbs'][] = ['label' => ' / '.Yii::t('backend','Courses'),
+//    'url' => ['index']];
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="course-view">
     <div class="card">
-        <div class="card-header">
-            <?php echo Html::a(Yii::t('backend','Update'), ['update', 'id' => $model->id], ['class' => 'btn view-btn']) ?>
-            <?php echo Html::a(Yii::t('backend','Delete'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' =>Yii::t('backend','Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
-        </div>
         <div class="card-body">
             <?php echo DetailView::widget([
                 'model' => $model,
@@ -48,7 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
         </div>
     </div>
-    <h4>Classes</h4>
+    <h4>
+        <?php echo Yii::t('backend','Course schedule') ?>
+    </h4>
     <table class="table table-sm">
         <thead>
         <tr>

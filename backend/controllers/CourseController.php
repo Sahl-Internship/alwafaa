@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\search\TeacherCourseSearch;
 use common\models\CourseClasses;
 use common\models\Section;
 use common\models\User;
@@ -39,8 +40,14 @@ class CourseController extends Controller
     {
         $searchModel = new CourseSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
+        if(Yii::$app->user->can('administrator') || Yii::$app->user->can('manager')){
+            $view = 'index';
+        }elseif(Yii::$app->user->can('teacher')){
+            $view = 'teacher-index';
+        }else{
+            $view = 'teacher-index';
+        }
+        return $this->render($view, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
