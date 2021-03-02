@@ -7,7 +7,7 @@
   >
     <q-img
       alt="elearning-icon"
-      src="~assets/auth-logo.png"
+      src="/images/auth-logo.png"
       class="self-center auth-page-img"
     />
 
@@ -66,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 .second-section {
-  background-image: url('~assets/second-section-auth.png'), linear-gradient($primary, $green);
+  background-image: url('/images/second-section-auth.png'), linear-gradient($primary, $green);
   background-size: cover;
 
   // &.img-flip {

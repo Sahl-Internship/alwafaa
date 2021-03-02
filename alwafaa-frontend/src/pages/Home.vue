@@ -11,7 +11,7 @@
     >
       <div class="col-3 column">
         <q-img
-          src="~/assets/registerBlockImg.png"
+          src="/images/registerBlockImg.png"
           class="register-section-img self-end"
         />
       </div>
@@ -65,7 +65,7 @@
     <academy-sections></academy-sections>
 
     <div class="register-as-instructor">
-      <q-img src="../assets/instructor4.jpg" style="height: 100%">
+      <q-img src="/images/instructor4.jpg" style="height: 100%">
         <div class="absolute-full column justify-center items-center">
           <div
             class="column register-text"
@@ -140,7 +140,7 @@ export default {
 
 .register-as-instructor {
   height: 350px;
-  // background-image: url("../assets/instructor3.jpg");
+  // background-image: url("/images/instructor3.jpg");
   // background-size: cover;
   // background-repeat: no-repeat;
   opacity: 0.8;

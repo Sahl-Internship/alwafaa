@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { i18n } from 'src/boot/i18n'
 
 export default {
   name: 'Login',
@@ -112,6 +113,14 @@ export default {
         password: this.password
       }
       this.$store.dispatch('auth/login', user)
+    }
+  },
+  mounted () {
+    if (this.$route.query.verify) {
+      this.$q.notify({
+        type: 'positive',
+        message: i18n.t('authNotification.verfiySuccess')
+      })
     }
   }
 }

@@ -2,7 +2,7 @@
   <div class="column footer">
     <q-avatar size="xl" class="self-center q-mt-md logo">
       <!-- eslint-disable-next-line prettier/prettier -->
-      <img src="~assets/logo.png">
+      <img src="/images/logo.png">
     </q-avatar>
 
     <p class="q-mt-sm self-center copy-rights">

@@ -13,7 +13,7 @@
 
       <q-btn flat round to="/home" class="avatar">
         <q-avatar>
-          <img src="~/assets/logo.png" />
+          <img src="/images/logo.png" />
         </q-avatar>
       </q-btn>
 

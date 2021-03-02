@@ -153,13 +153,12 @@
               <ValidationProvider
                 name="email"
                 class="col-12 q-pb-xs"
-                rules="required|email"
+                rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
                 <g-input
                   outlined
                   v-model="email"
-                  type="email"
                   :label="$t('formFields.email')"
                   :error="invalid && validated"
                   :error-message="errors[0]"
