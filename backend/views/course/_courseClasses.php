@@ -11,6 +11,11 @@ use kartik\datetime\DateTimePicker;
 use unclead\multipleinput\MultipleInput;
 use yii\bootstrap4\Html;
 
+if (Yii::$app->controller->action->id == 'create')
+    $model->time = null;
+else {
+    $model->time = date('Y-m-d H:i:s', $model->time);
+}
 ?>
 
 <?= $form -> field($model, 'classes') -> widget(MultipleInput ::className(), [
@@ -25,7 +30,7 @@ use yii\bootstrap4\Html;
             'type'  => DateTimePicker::className(),
             'title' => Yii::t('backend','Class Date'),
             'value' => function($data) {
-                return date('Y-m-d H:i:s', $data['time']);
+                return date('Y-m-d H:i:s', $data->time);
             },
             'items' => [
                 '0' => 'Saturday',

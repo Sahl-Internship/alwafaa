@@ -337,7 +337,7 @@ export const countries = [
   },
   {
     name: 'Czech Republic',
-    arName: 'Czech Republic',
+    arName: 'جمهورية سزيتش',
     dial_code: '+420',
     code: 'CZ'
   },
@@ -385,7 +385,7 @@ export const countries = [
   },
   {
     name: 'Equatorial Guinea',
-    arName: 'Equatorial Guinea',
+    arName: 'اكواتوريال جوينيا',
     dial_code: '+240',
     code: 'GQ'
   },
@@ -421,7 +421,7 @@ export const countries = [
   },
   {
     name: 'Fiji',
-    arName: '',
+    arName: 'فيجي',
     dial_code: '+679',
     code: 'FJ'
   },
@@ -817,532 +817,637 @@ export const countries = [
   },
   {
     name: 'Mauritius',
-
+    arName: 'موريتياس',
     dial_code: '+230',
     code: 'MU'
   },
   {
     name: 'Mayotte',
+    arName: 'مايوت',
     dial_code: '+262',
     code: 'YT'
   },
   {
     name: 'Mexico',
+    arName: 'المكسيك',
     dial_code: '+52',
     code: 'MX'
   },
   {
     name: 'Micronesia, Federated States of Micronesia',
+    arName: 'ميكرونيسيا',
     dial_code: '+691',
     code: 'FM'
   },
   {
     name: 'Moldova',
+    arName: 'مولدوفا',
     dial_code: '+373',
     code: 'MD'
   },
   {
     name: 'Monaco',
+    arName: 'موناكو',
     dial_code: '+377',
     code: 'MC'
   },
   {
     name: 'Mongolia',
+    arName: 'مونغاليا',
     dial_code: '+976',
     code: 'MN'
   },
   {
     name: 'Montenegro',
+    arName: 'مونتينجيرو',
     dial_code: '+382',
     code: 'ME'
   },
   {
     name: 'Montserrat',
+    arName: 'مونتسيرات',
     dial_code: '+1664',
     code: 'MS'
   },
   {
     name: 'Morocco',
+    arName: 'المغرب',
     dial_code: '+212',
     code: 'MA'
   },
   {
     name: 'Mozambique',
+    arName: 'موزمبيق',
     dial_code: '+258',
     code: 'MZ'
   },
   {
     name: 'Myanmar',
+    arName: 'ميانمار',
     dial_code: '+95',
     code: 'MM'
   },
   {
     name: 'Namibia',
+    arName: 'ناميبيا',
     dial_code: '+264',
     code: 'NA'
   },
   {
     name: 'Nauru',
+    arName: 'نوارو',
     dial_code: '+674',
     code: 'NR'
   },
   {
     name: 'Nepal',
+    arName: 'نبال',
     dial_code: '+977',
     code: 'NP'
   },
   {
     name: 'Netherlands',
+    arName: 'نثرلاندس',
     dial_code: '+31',
     code: 'NL'
   },
   {
     name: 'Netherlands Antilles',
+    arName: 'نثرلاندس انتيلس',
     dial_code: '+599',
     code: 'AN'
   },
   {
     name: 'New Caledonia',
+    arName: 'نيوكالدونيا',
     dial_code: '+687',
     code: 'NC'
   },
   {
     name: 'New Zealand',
+    arName: 'نيوزيلندا',
     dial_code: '+64',
     code: 'NZ'
   },
   {
     name: 'Nicaragua',
+    arName: 'نيكاراجوا',
     dial_code: '+505',
     code: 'NI'
   },
   {
     name: 'Niger',
+    arName: 'النيجر',
     dial_code: '+227',
     code: 'NE'
   },
   {
     name: 'Nigeria',
+    arName: 'نيجيريا',
     dial_code: '+234',
     code: 'NG'
   },
   {
     name: 'Niue',
+    arName: 'نياو',
     dial_code: '+683',
     code: 'NU'
   },
   {
     name: 'Norfolk Island',
+    arName: 'جزيرة نورفولك',
     dial_code: '+672',
     code: 'NF'
   },
   {
     name: 'Northern Mariana Islands',
+    arName: 'شمال جزيرة ماريانا',
     dial_code: '+1670',
     code: 'MP'
   },
   {
     name: 'Norway',
+    arName: 'نورواي',
     dial_code: '+47',
     code: 'NO'
   },
   {
     name: 'Oman',
+    arName: 'عمان',
     dial_code: '+968',
     code: 'OM'
   },
   {
     name: 'Pakistan',
+    arName: 'باكستان',
     dial_code: '+92',
     code: 'PK'
   },
   {
     name: 'Palau',
+    arName: 'بالاو',
     dial_code: '+680',
     code: 'PW'
   },
   {
-    name: 'Palestinian Territory, Occupied',
+    name: 'Palestinian Territory',
+    arName: 'فلسطين',
     dial_code: '+970',
     code: 'PS'
   },
   {
     name: 'Panama',
+    arName: 'بنما',
     dial_code: '+507',
     code: 'PA'
   },
   {
     name: 'Papua New Guinea',
+    arName: 'باباو',
     dial_code: '+675',
     code: 'PG'
   },
   {
     name: 'Paraguay',
+    arName: 'بورجواي',
     dial_code: '+595',
     code: 'PY'
   },
   {
     name: 'Peru',
+    arName: 'براو',
     dial_code: '+51',
     code: 'PE'
   },
   {
     name: 'Philippines',
+    arName: 'الفيلبين',
     dial_code: '+63',
     code: 'PH'
   },
   {
     name: 'Pitcairn',
+    arName: 'بيتكاين',
     dial_code: '+872',
     code: 'PN'
   },
   {
     name: 'Poland',
+    arName: 'بولندا',
     dial_code: '+48',
     code: 'PL'
   },
   {
     name: 'Portugal',
+    arName: 'البرتغال',
     dial_code: '+351',
     code: 'PT'
   },
   {
     name: 'Puerto Rico',
+    arName: 'بورتو ريكو',
     dial_code: '+1939',
     code: 'PR'
   },
   {
     name: 'Qatar',
+    arName: 'قطر',
     dial_code: '+974',
     code: 'QA'
   },
   {
     name: 'Romania',
+    arName: 'رومانيا',
     dial_code: '+40',
     code: 'RO'
   },
   {
     name: 'Russia',
+    arName: 'روسيا',
     dial_code: '+7',
     code: 'RU'
   },
   {
     name: 'Rwanda',
+    arName: 'اوغندا',
     dial_code: '+250',
     code: 'RW'
   },
   {
     name: 'Reunion',
+    arName: 'رينيون',
     dial_code: '+262',
     code: 'RE'
   },
   {
     name: 'Saint Barthelemy',
+    arName: 'سانت بارثلمي',
     dial_code: '+590',
     code: 'BL'
   },
   {
     name: 'Saint Helena, Ascension and Tristan Da Cunha',
+    arName: 'سانت هيلينا',
     dial_code: '+290',
     code: 'SH'
   },
   {
     name: 'Saint Kitts and Nevis',
+    arName: 'سانت كيتس و نفيس',
     dial_code: '+1869',
     code: 'KN'
   },
   {
     name: 'Saint Lucia',
+    arName: 'سانت لوكيا',
     dial_code: '+1758',
     code: 'LC'
   },
   {
     name: 'Saint Martin',
+    arName: 'سانت مارتين',
     dial_code: '+590',
     code: 'MF'
   },
   {
     name: 'Saint Pierre and Miquelon',
+    arName: 'سانت بير و ميكولون',
     dial_code: '+508',
     code: 'PM'
   },
   {
     name: 'Saint Vincent and the Grenadines',
+    arName: 'سانت فينسينت',
     dial_code: '+1784',
     code: 'VC'
   },
   {
     name: 'Samoa',
+    arName: 'ساموا',
     dial_code: '+685',
     code: 'WS'
   },
   {
     name: 'San Marino',
+    arName: 'سان مارينو',
     dial_code: '+378',
     code: 'SM'
   },
   {
     name: 'Sao Tome and Principe',
+    arName: 'ساو توم و برينكيب',
     dial_code: '+239',
     code: 'ST'
   },
   {
     name: 'Saudi Arabia',
+    arName: 'المملكة العربية السعودية',
     dial_code: '+966',
     code: 'SA'
   },
   {
     name: 'Senegal',
+    arName: 'السنغال',
     dial_code: '+221',
     code: 'SN'
   },
   {
     name: 'Serbia',
+    arName: 'سيربيا',
     dial_code: '+381',
     code: 'RS'
   },
   {
     name: 'Seychelles',
+    arName: 'سيتشيليس',
     dial_code: '+248',
     code: 'SC'
   },
   {
     name: 'Sierra Leone',
+    arName: 'سيرا ليون',
     dial_code: '+232',
     code: 'SL'
   },
   {
     name: 'Singapore',
+    arName: 'سنغافورة',
     dial_code: '+65',
     code: 'SG'
   },
   {
     name: 'Slovakia',
+    arName: 'سولفيكيا',
     dial_code: '+421',
     code: 'SK'
   },
   {
     name: 'Slovenia',
+    arName: 'سولفينيا',
     dial_code: '+386',
     code: 'SI'
   },
   {
     name: 'Solomon Islands',
+    arName: 'جزر سولمون',
     dial_code: '+677',
     code: 'SB'
   },
   {
     name: 'Somalia',
+    arName: 'الصومال',
     dial_code: '+252',
     code: 'SO'
   },
   {
     name: 'South Africa',
+    arName: 'جنوب افريقيا',
     dial_code: '+27',
     code: 'ZA'
   },
   {
     name: 'South Sudan',
+    arName: 'جنوب السودان',
     dial_code: '+211',
     code: 'SS'
   },
   {
     name: 'South Georgia and the South Sandwich Islands',
+    arName: 'جنوب جورجيا',
     dial_code: '+500',
     code: 'GS'
   },
   {
     name: 'Spain',
+    arName: 'اسبانيا',
     dial_code: '+34',
     code: 'ES'
   },
   {
     name: 'Sri Lanka',
+    arName: 'سريلانكا',
     dial_code: '+94',
     code: 'LK'
   },
   {
     name: 'Sudan',
+    arName: 'السودان',
     dial_code: '+249',
     code: 'SD'
   },
   {
     name: 'Suriname',
+    arName: 'سورينام',
     dial_code: '+597',
     code: 'SR'
   },
   {
     name: 'Svalbard and Jan Mayen',
+    arName: 'سفالبارد',
     dial_code: '+47',
     code: 'SJ'
   },
   {
     name: 'Swaziland',
+    arName: 'سوزيلاند',
     dial_code: '+268',
     code: 'SZ'
   },
   {
     name: 'Sweden',
+    arName: 'سويدن',
     dial_code: '+46',
     code: 'SE'
   },
   {
     name: 'Switzerland',
+    arName: 'سويتزرلاند',
     dial_code: '+41',
     code: 'CH'
   },
   {
     name: 'Syrian Arab Republic',
+    arName: 'سوريا',
     dial_code: '+963',
     code: 'SY'
   },
   {
     name: 'Taiwan',
+    arName: 'تايوان',
     dial_code: '+886',
     code: 'TW'
   },
   {
     name: 'Tajikistan',
+    arName: 'تاجيكستان',
     dial_code: '+992',
     code: 'TJ'
   },
   {
     name: 'Tanzania, United Republic of Tanzania',
+    arName: 'تانزانيا',
     dial_code: '+255',
     code: 'TZ'
   },
   {
     name: 'Thailand',
+    arName: 'ثايلاند',
     dial_code: '+66',
     code: 'TH'
   },
   {
     name: 'Timor-Leste',
+    arName: 'تيمورليستا',
     dial_code: '+670',
     code: 'TL'
   },
   {
     name: 'Togo',
+    arName: 'توجو',
     dial_code: '+228',
     code: 'TG'
   },
   {
     name: 'Tokelau',
+    arName: 'توكيلاو',
     dial_code: '+690',
     code: 'TK'
   },
   {
     name: 'Tonga',
+    arName: 'تونجا',
     dial_code: '+676',
     code: 'TO'
   },
   {
     name: 'Trinidad and Tobago',
+    arName: 'ترينيداد و توباجو',
     dial_code: '+1868',
     code: 'TT'
   },
   {
     name: 'Tunisia',
+    arName: 'تونس',
     dial_code: '+216',
     code: 'TN'
   },
   {
     name: 'Turkey',
+    arName: 'تركيا',
     dial_code: '+90',
     code: 'TR'
   },
   {
     name: 'Turkmenistan',
+    arName: 'تركمنيستان',
     dial_code: '+993',
     code: 'TM'
   },
   {
     name: 'Turks and Caicos Islands',
+    arName: 'جزر تركس و كايكوس',
     dial_code: '+1649',
     code: 'TC'
   },
   {
     name: 'Tuvalu',
+    arName: 'توفالو',
     dial_code: '+688',
     code: 'TV'
   },
   {
     name: 'Uganda',
+    arName: 'اوغندا',
     dial_code: '+256',
     code: 'UG'
   },
   {
     name: 'Ukraine',
+    arName: 'اوكرانيا',
     dial_code: '+380',
     code: 'UA'
   },
   {
     name: 'United Arab Emirates',
+    arName: 'المملكة العربيى الاماراتية',
     dial_code: '+971',
     code: 'AE'
   },
   {
     name: 'United Kingdom',
+    arName: 'المملكة المتحدة (بريطانيا)',
     dial_code: '+44',
     code: 'GB'
   },
   {
     name: 'United States',
+    arName: 'امريكا',
     dial_code: '+1',
     code: 'US'
   },
   {
     name: 'Uruguay',
+    arName: 'ارجواي',
     dial_code: '+598',
     code: 'UY'
   },
   {
     name: 'Uzbekistan',
+    arName: 'ازبكستان',
     dial_code: '+998',
     code: 'UZ'
   },
   {
     name: 'Vanuatu',
+    arName: 'فانواتو',
     dial_code: '+678',
     code: 'VU'
   },
   {
     name: 'Venezuela, Bolivarian Republic of Venezuela',
+    arName: 'فنزويلا',
     dial_code: '+58',
     code: 'VE'
   },
   {
     name: 'Vietnam',
+    arName: 'فيتنام',
     dial_code: '+84',
     code: 'VN'
   },
   {
     name: 'Virgin Islands, British',
+    arName: 'جزيرة فيرجين الايطالية',
     dial_code: '+1284',
     code: 'VG'
   },
   {
     name: 'Virgin Islands, U.S.',
+    arName: 'جزيرة فيرجين الامريكية',
     dial_code: '+1340',
     code: 'VI'
   },
   {
     name: 'Wallis and Futuna',
+    arName: 'واليس و فوتونا',
     dial_code: '+681',
     code: 'WF'
   },
   {
     name: 'Yemen',
+    arName: 'اليمن',
     dial_code: '+967',
     code: 'YE'
   },
   {
     name: 'Zambia',
+    arName: 'زامبيا',
     dial_code: '+260',
     code: 'ZM'
   },
   {
     name: 'Zimbabwe',
+    arName: 'زيمباواي',
     dial_code: '+263',
     code: 'ZW'
   }

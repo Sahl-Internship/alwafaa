@@ -41,8 +41,11 @@ class CourseSearch extends Course
      */
     public function search($params)
     {
-        $query = Course::find();
-
+       if(Yii::$app->user->can('manager')){
+           $query = Course::find();
+       }elseif(Yii::$app->user->can('teacher')){
+           $query = Course::findOwnCourses();
+       }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);

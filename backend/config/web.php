@@ -2,7 +2,7 @@
 $config = [
     'homeUrl' => Yii::getAlias('@backendUrl'),
     'controllerNamespace' => 'backend\controllers',
-    'defaultRoute' => 'timeline-event/index',
+    'defaultRoute' => 'site/index',
     'components' => [
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -39,6 +39,14 @@ $config = [
             'class' => backend\modules\rbac\Module::class,
             'defaultRoute' => 'rbac-auth-item/index',
         ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+            // enter optional module parameters below - only if you need to
+            // use your own export download action or custom translation
+            // message source
+            // 'downloadAction' => 'gridview/export/download',
+            // 'i18n' => []
+        ]
     ],
     'as globalAccess' => [
         'class' => common\behaviors\GlobalAccessBehavior::class,
@@ -77,7 +85,7 @@ $config = [
             ],
             [
                 'allow' => true,
-                'roles' => ['manager', 'administrator'],
+                'roles' => ['manager', 'administrator','teacher'],
             ],
         ],
     ],

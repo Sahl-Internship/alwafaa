@@ -53,6 +53,12 @@
           <li class="nav-item"><router-link class="link" to="/">  {{$t('homeCover.availableCourse')}}</router-link> </li>
         </ul>
       </div>
+      <!-- Conflict
+        <q-btn flat round to="/home" class="avatar">
+        <q-avatar>
+          <img src="/images/logo.png" />
+        </q-avatar>
+      </q-btn> -->
 
       <q-space />
 
