@@ -1,20 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <the-header v-if="headerVisibility"></the-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-      v-if="false"
-    >
-      <q-list>
-        <q-item-label header class="text-grey-8">
-          Essential Links
-        </q-item-label>
-      </q-list>
-    </q-drawer>
+    <the-header  v-if="headerVisibility" color='primary'>
+    </the-header>
 
     <q-page-container>
       <router-view />
@@ -32,7 +19,7 @@ export default {
   },
   data () {
     return {
-      leftDrawerOpen: false
+
     }
   },
   computed: {

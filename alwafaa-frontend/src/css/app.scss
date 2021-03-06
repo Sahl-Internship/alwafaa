@@ -1,5 +1,8 @@
 // app global css in SCSS form
 
+
 body {
   font-family: "Almarai", sans-serif;
 }
+
+@import 'node_modules/slick-carousel/slick/slick';
