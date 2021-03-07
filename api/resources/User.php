@@ -43,7 +43,7 @@ class User extends \common\models\User
                 return $model->userProfile->city;
             },
              'bio'=>function($model){
-                return $model->userProfile->bio;
+                return json_decode( $model->userProfile->bio);
             },
 
 //            'full_name'=>function($model){
