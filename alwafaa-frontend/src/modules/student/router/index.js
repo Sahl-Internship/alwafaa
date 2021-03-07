@@ -1,21 +1,16 @@
 const studentRoutes = [
   {
-    path: '/profile',
-    component: () => import('src/modules/student/pages/ProfileNavigation.vue'),
-    // meta: {
-    //   requiresAuth: true
-    // },
+    path: '/student',
+    component: () => import('src/modules/student/layout/StudentLayout.vue'),
     children: [
       {
-        path: '/profile/my_courses',
-        component: () => import('src/modules/student/pages/MyCourses.vue'),
-        meta: {
-          requiresAuth: true
-        }
+        path: '',
+        redirect: 'profile'
       },
       {
-        path: '/profile/pre-courses',
-        component: () => import('src/modules/student/pages/PreCourses.vue'),
+        path: 'profile',
+        name: 'studentProfile',
+        component: () => import('src/modules/student/pages/Profile.vue'),
         meta: {
           requiresAuth: true
         }

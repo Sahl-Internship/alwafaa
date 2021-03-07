@@ -67,6 +67,7 @@ export default {
 
       const { token, ...user } = response.data.profile
       localStorage.setItem('token', token)
+      localStorage.setItem('user', JSON.stringify(user))
       context.commit('loginState', {
         token,
         user
@@ -93,7 +94,6 @@ export default {
 
     try {
       const response = await handleForgotPass(email)
-      console.log(response)
       if (response.data.status !== 1) {
         const errorMessage = response.data.message.email
           ? i18n.t('authNotification.verfiyEmailError')
@@ -127,7 +127,6 @@ export default {
 
     try {
       const response = await handleResetPassword({ password }, token)
-      console.log(response)
       if (response.data.status !== 1) {
         const err = new Error(i18n.t('authNotification.resetError'))
         throw err
@@ -156,6 +155,7 @@ export default {
   logout ({ commit }) {
     commit('logout')
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
     this.$router.push({ name: 'login' })
   }
 }
