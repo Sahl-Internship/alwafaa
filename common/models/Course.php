@@ -27,6 +27,7 @@ class Course extends \yii\db\ActiveRecord
     public $classes;
 
     public $attachments;
+
     /**
      * {@inheritdoc}
      */
@@ -34,6 +35,7 @@ class Course extends \yii\db\ActiveRecord
     {
         return '{{%course}}';
     }
+
     public function behaviors()
     {
         return [
@@ -60,7 +62,7 @@ class Course extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['time', 'duration', 'section_id','title','description'], 'required'],
+            [['time', 'duration', 'section_id', 'title', 'description'], 'required'],
             [['duration', 'section_id', 'teacher_id'], 'integer'],
             [['title', 'description', 'zoom_link'], 'string', 'max' => 255],
             [['time'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
@@ -139,10 +141,14 @@ class Course extends \yii\db\ActiveRecord
 //        parent::afterFind ();
 //        $this->time=Yii::$app->formatter->asDate($this->time);
 //    }
+    public function findOwnCourses()
+    {
+        return Course::find()->andWhere('teacher_id=:id',['id'=> Yii::$app->user->id]);
+    }
+
 
     public function addCourseClasses()
     {
-
 
 
     }

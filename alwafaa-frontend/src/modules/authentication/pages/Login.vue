@@ -75,16 +75,13 @@
             {{$t('login.forgotPassword')}}
           </router-link>
         </div>
-          <q-btn
-            dense
-            no-caps
-            rounded
-            :label="$t('header.login')"
+          <g-btn
+            label="header.login"
             type="submit"
-            color="green"
-            text-color="grey-5"
-            class="form-btn col-4 q-mx-xl"
-        ></q-btn>
+            :width="!$q.screen.lt.md ? 'col-5' : 'col-6'"
+            :margin="['q-mt-md']"
+        />
+        <!--             class="form-btn col-4 q-mx-xl" -->
         <!-- <google-btn class="social-button" status="login"></google-btn> -->
         <!-- <facebook-btn class="social-button face" status="login"></facebook-btn> -->
       </q-form>

@@ -8,7 +8,8 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'home'
+        name: 'home',
+        component: () => import('src/modules/home/page/Home.vue')
       },
       {
         path: 'home',

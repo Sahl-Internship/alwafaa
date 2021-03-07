@@ -1,7 +1,9 @@
 <?php
 
+use backend\modules\system\models\SystemLog;
 use backend\widgets\MainSidebarMenu;
 use common\models\TimelineEvent;
+use rmrevin\yii\fontawesome\FAR;
 use rmrevin\yii\fontawesome\FAS;
 
 $keyStorage = Yii::$app->keyStorage;
@@ -72,7 +74,7 @@ echo MainSidebarMenu::widget([
             'active' => Yii::$app->controller->id === 'course',
             'visible' => Yii::$app->user->can('administrator'),
         ],
-        /*
+
                                 [
                                     'label' => Yii::t('backend', 'Content'),
                                     'options' => ['class' => 'nav-header'],
@@ -222,6 +224,6 @@ echo MainSidebarMenu::widget([
                                     'badgeBgClass' => 'badge-danger',
                                 ],
 
-                                */
+
     ],
 ]) ;

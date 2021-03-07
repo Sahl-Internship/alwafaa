@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <tr>
             <th>Day</th>
             <th>date</th>
-            <th>hours</th>
+            <th>time</th>
             <th>title</th>
             <th>Duration</th>
             <th>Teacher name</th>
@@ -69,8 +69,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td><?php echo date('d-m-Y',$class->time) ?></td>
                 <td><?php echo date('H:m A',$class->time) ?></td>
                 <td><?php echo $class->title ?></td>
-                <td><?php echo $class->duration  . ' hours' ?></td>
-                <td><?php echo $model->teacher->username ?></td>
+                <td><?php echo $class->duration  . ' min' ?></td>
+                <td><?php echo ($model->teacher->userProfile->firstname.' '.$model->teacher->userProfile->lastname) ?? $model->teacher->username ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>

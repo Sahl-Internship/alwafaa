@@ -82,10 +82,7 @@
           />
         </ValidationProvider>
         <div class="col-12 row justify-center">
-          <q-btn
-            type="submit"
-            rounded
-            no-caps
+          <g-btn
             :class="{
               'col-3': !$q.screen.lt.md,
               'col-4': $q.screen.lt.md && !$q.screen.lt.sm,
@@ -93,20 +90,16 @@
               'q-mt-md': true
             }"
             :size="$q.screen.lt.md? 'md' : 'lg'"
-            color="green"
-            :label="$t('resetPass.change')"
+            label="resetPass.change"
           />
-          <q-btn
+          <g-btn
             v-if="!$q.screen.lt.sm"
-            no-caps
-            rounded
-            outline
             type="button"
+            color='white'
             icon-right="mdi-window-close"
-            :label="$t('forgotPass.cancel')"
-            class="col-sm-3 col-md-3 col-lg-2 q-mt-md q-ml-md "
-            :size="$q.screen.lt.md? 'md' : 'lg'"
-            text-color="grey-5"
+            label="forgotPass.cancel"
+            :margin="['q-mt-md','q-ml-md']"
+            class="col-sm-3 col-md-3 col-lg-2"
             to="/auth/login"
           />
         </div>
