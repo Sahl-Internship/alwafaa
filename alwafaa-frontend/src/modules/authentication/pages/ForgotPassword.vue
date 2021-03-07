@@ -57,7 +57,7 @@
 
         </ValidationProvider>
         <div class="col-12 row justify-center">
-          <q-btn
+          <!-- <q-btn
             no-caps
             rounded
             :icon-right="checkDirection ? 'mdi-chevron-left' : 'mdi-chevron-right'"
@@ -72,12 +72,30 @@
             type="submit"
             color="green"
             text-color="grey-5"
+          /> -->
+          <g-btn
+            :icon-right="checkDirection ? 'mdi-chevron-left' : 'mdi-chevron-right'"
+            label="forgotPass.submit"
+            :class="{
+              'col-3': !$q.screen.lt.md,
+              'col-4': $q.screen.lt.md && !$q.screen.lt.sm,
+              'col-5': $q.screen.lt.sm,
+              'q-mt-md': true
+            }"
+            :size="$q.screen.lt.md? 'md' : 'lg'"
           />
-
-          <q-btn
+          <g-btn
             v-if="!$q.screen.lt.sm"
-            no-caps
-            rounded
+            color='white'
+            type="button"
+            icon-right="mdi-window-close"
+            label="forgotPass.cancel"
+            class="col-sm-3 col-md-3 col-lg-2 q-mt-md q-ml-md "
+            text-color="grey-5"
+            to="/auth/login"
+          />
+          <!-- <q-btn
+            v-if="!$q.screen.lt.sm"
             outline
             type="button"
             icon-right="mdi-window-close"
@@ -86,7 +104,7 @@
             :size="$q.screen.lt.md? 'md' : 'lg'"
             text-color="grey-5"
             to="/auth/login"
-          />
+          /> -->
         </div>
       </q-form>
     </ValidationObserver>

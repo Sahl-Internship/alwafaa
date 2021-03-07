@@ -7,6 +7,7 @@
     :borderless="borderless"
     :value="value"
     :color="color"
+    :bg-color="bgColor"
     @input="value => $emit('input', value)"
     :error="error"
     :error-message="errorMessage"
@@ -50,6 +51,7 @@ export default {
     dense: { type: Boolean, required: false, default: false },
     borderless: { type: Boolean, required: false, default: false },
     color: { type: String, required: false, default: 'primary' },
+    bgColor: { type: String, required: false },
     value: { type: String, required: false },
     error: { type: Boolean, required: false },
     errorMessage: { type: String, required: false },

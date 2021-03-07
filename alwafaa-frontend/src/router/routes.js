@@ -9,16 +9,16 @@ const routes = [
       {
         path: '',
         name: 'home',
-        component: () => import('pages/Home.vue')
+        component: () => import('src/modules/home/page/Home.vue')
       },
       {
         path: 'home',
         redirect: '/'
-      },
-      ...studentRoutes
+      }
     ]
   },
   ...authRoutes,
+  ...studentRoutes,
 
   // Always leave this as last one,
   // but you can also remove it
