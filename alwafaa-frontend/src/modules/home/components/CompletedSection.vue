@@ -10,7 +10,7 @@
         </div>
         <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6 q-my-xl">
         <div class="text-center">
-        <img src="~assets/home-imgs/block2.png" class="completed-img"/>
+        <img src="/images/home-imgs/block2.png" class="completed-img"/>
         </div>
         </div>
     </div>

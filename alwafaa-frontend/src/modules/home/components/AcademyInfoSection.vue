@@ -6,21 +6,21 @@
   >
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center first card">
       <div class="back-img">
-          <img src="~assets/home-imgs/info-course.png" class="icon"/>
+          <img src="/images/home-imgs/info-course.png" class="icon"/>
         <h3 class="text-white">235</h3>
         <h6 class="text-white q-mt-none q-pt-none column">{{$t('academyInfo.course')}}</h6>
       </div>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center second card">
       <div class="back-img">
-          <img src="~assets/home-imgs/info-student.png"  class="icon"/>
+          <img src="/images/home-imgs/info-student.png"  class="icon"/>
         <h3 class="text-white">61.8</h3>
         <h6 class="text-white">{{$t('academyInfo.student')}}</h6>
       </div>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center third card">
           <div class="back-img">
-            <img src="~assets/home-imgs/info-player.png" class="icon"/>
+            <img src="/images/home-imgs/info-player.png" class="icon"/>
             <h3 class="text-white">14.1</h3>
             <h6 class="text-white">{{$t('academyInfo.lecture')}}</h6>
             </div>
@@ -28,7 +28,7 @@
 
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center fourth card">
       <div class="back-img">
-          <img src="~assets/home-imgs/info-timer.png" class="icon"/>
+          <img src="/images/home-imgs/info-timer.png" class="icon"/>
         <h3 class="text-white">17.8</h3>
         <h6 class="text-white last-text">{{$t('academyInfo.time')}}</h6>
       </div>
@@ -72,7 +72,7 @@ export default {
     .back-img::before{
       background-position: center;
       content: "";
-      background-image: url('~assets/home-imgs/info-course2.png');
+      background-image: url('/images/home-imgs/info-course2.png');
       background-size: auto 100%;
       position: absolute;
       background-repeat: no-repeat;
@@ -93,7 +93,7 @@ export default {
     .back-img::before{
       background-position: center;
       content: "";
-      background-image: url('~assets/home-imgs/info-student2.png');
+      background-image: url('/images/home-imgs/info-student2.png');
       background-size: auto 100%;
       position: absolute;
       background-repeat: no-repeat;
@@ -112,7 +112,7 @@ export default {
     .back-img::before{
       background-position: center;
       content: "";
-      background-image: url('~assets/home-imgs/info-player2.png');
+      background-image: url('/images/home-imgs/info-player2.png');
       background-size: auto 100%;
       position: absolute;
       background-repeat: no-repeat;
@@ -134,7 +134,7 @@ export default {
     .back-img::before{
       background-position: center;
       content: "";
-      background-image: url('~assets/home-imgs/info-timer2.png');
+      background-image: url('/images/home-imgs/info-timer2.png');
       background-size: auto 100%;
       position: absolute;
       background-repeat: no-repeat;

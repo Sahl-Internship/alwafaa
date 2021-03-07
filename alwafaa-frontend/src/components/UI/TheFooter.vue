@@ -1,13 +1,7 @@
 <template>
   <div class="footer q-pa-xl">
     <div class="row justify-center items-center q-mb-xl ">
-    <img src="~assets/home-imgs/footer-img.png" class="footer-img">
-  <!-- Conflict
-     <div class="column footer">
-    <q-avatar size="xl" class="self-center q-mt-md logo"> -->
-      <!-- eslint-disable-next-line prettier/prettier -->
-      <!-- <img src="/images/logo.png">
-    </q-avatar> -->
+    <img src="/images/home-imgs/footer-img.png" class="footer-img">
 
     </div>
     <div class="row">

@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-none col-12 text-center q-mb-xl main">
     <q-img
-      src='~assets/home-imgs/header.png'
+      src='/images/home-imgs/header.png'
       class="img col-12 text-center justify-center items-center"
       flat
     >
@@ -68,7 +68,7 @@
           </youtube>
 
           <q-img
-            src="~assets/home-imgs/square-vid.png"
+            src="/images/home-imgs/square-vid.png"
             class="vid-img q-ma-xs"
             :class="{'hide' : show}"
           >
@@ -76,7 +76,7 @@
               class="overlay absolute-full flex flex-center"
             >
               <q-img
-                src="~assets/home-imgs/play-vid.png"
+                src="/images/home-imgs/play-vid.png"
                 class="play-vid"
                 :class="{'hide' : show}"
                 @click="showVideo"

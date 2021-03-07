@@ -8,7 +8,7 @@
       <div class="col-xs-12 col-sm-12 col-md-3  q-mx-md q-my-md">
         <q-card class="my-card q-px-md q-py-sm first-card col" flat >
           <q-img
-            src="~assets/home-imgs/mosque.png" class="icon q-mt-xl"
+            src="/images/home-imgs/mosque.png" class="icon q-mt-xl"
           />
 
           <q-card-section class="row">
@@ -23,7 +23,7 @@
       <div class="col-xs-12 col-sm-12 col-md-3 q-my-md q-mx-md" >
       <q-card class="my-card q-px-md q-py-xs col flat"  flat>
         <q-img
-          src="~assets/home-imgs/book.png" class="icon q-mt-xl"
+          src="/images/home-imgs/book.png" class="icon q-mt-xl"
         />
 
         <q-card-section class="row">
@@ -37,7 +37,7 @@
       <div class="col-xs-12 col-sm-12 col-md-3  q-mx-md q-my-md">
       <q-card class="my-card q-px-md q-py-xs col" flat>
         <q-img
-          src="~assets/home-imgs/config.png" class="icon q-mt-xl"
+          src="/images/home-imgs/config.png" class="icon q-mt-xl"
         />
 
         <q-card-section class="text-center">

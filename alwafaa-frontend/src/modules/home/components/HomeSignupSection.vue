@@ -12,8 +12,8 @@
       />
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 img-container" >
-      <img src="~assets/home-imgs/create-account.png" class="create-img">
-        <img src="~assets/home-imgs/block4.png" class="rol-img"/>
+      <img src="/images/home-imgs/create-account.png" class="create-img">
+        <img src="/images/home-imgs/block4.png" class="rol-img" :class="{'flip':!checkDirection}"/>
     </div>
   </div>
 </template>
@@ -21,7 +21,12 @@
 <script>
 
 export default {
-  name: 'CoursesSection'
+  name: 'CoursesSection',
+  computed: {
+    checkDirection () {
+      return this.$q.lang.rtl
+    }
+  }
 }
 </script>
 
@@ -80,5 +85,10 @@ p{
 }
 a{
   color: $primary;
+}
+.flip{
+ margin-bottom: -100px !important;
+ left: 430px !important;
+ height: 170px !important;
 }
 </style>

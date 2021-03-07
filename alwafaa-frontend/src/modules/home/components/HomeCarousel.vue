@@ -50,17 +50,17 @@
           >
           <base-card>
             <template>
-              <img src="~assets/home-imgs/alorefy.jpg" to='/auth/login'/>
+              <img src="/images/home-imgs/alorefy.jpg" to='/auth/login'/>
             </template>
             <template #teacherData>
               <p class="label-1">
-                <img src="~assets/home-imgs/person.png" class="img-icon">
+                <img src="/images/home-imgs/person.png" class="img-icon">
                 د / محمد العريفي
               </p>
             </template>
             <template #sectionData>
               <p class="label-2">
-                <img src="~assets/home-imgs/quran-icon2.png" class="img-icon2">
+                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
                 القرآن الكريم
               </p>
             </template>
@@ -71,27 +71,27 @@
             </template>
             <template #viewedSection>
                 <p class="viewed-no">7</p>
-                <img src="~assets/home-imgs/viewed.png" alt="" class="viewed-icon">
+                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
             </template>
             <template #durationSection>
                 <p class="duration">04:30:00</p>
-                <img src="~assets/home-imgs/duration.png" class="duration-icon">
+                <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
           </base-card>
 <!-- =================================================================================== -->
           <base-card>
             <template>
-              <img src="~assets/home-imgs/omar.jpg" />
+              <img src="/images/home-imgs/omar.jpg" />
             </template>
             <template #teacherData>
               <p class="label-1">
-                <img src="~assets/home-imgs/person.png" class="img-icon">
+                <img src="/images/home-imgs/person.png" class="img-icon">
                 د / عمر عبدالكافي
               </p>
             </template>
             <template #sectionData>
               <p class="label-2">
-                <img src="~assets/home-imgs/quran-icon2.png" class="img-icon2">
+                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
                 القرآن الكريم
               </p>
             </template>
@@ -102,27 +102,27 @@
             </template>
             <template #viewedSection>
                 <p class="viewed-no">7</p>
-                <img src="~assets/home-imgs/viewed.png" alt="" class="viewed-icon">
+                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
             </template>
             <template #durationSection>
                 <p class="duration">04:30:00</p>
-                <img src="~assets/home-imgs/duration.png" class="duration-icon">
+                <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
           </base-card>
 <!-- ================================================================================================ -->
           <base-card>
             <template>
-              <img src="~assets/home-imgs/arabic.jpeg" />
+              <img src="/images/home-imgs/arabic.jpeg" />
             </template>
             <template #teacherData>
               <p class="label-1">
-                <img src="~assets/home-imgs/person.png" class="img-icon">
+                <img src="/images/home-imgs/person.png" class="img-icon">
                 د / احمد سلمان
               </p>
             </template>
             <template #sectionData>
               <p class="label-2">
-                <img src="~assets/home-imgs/quran-icon2.png" class="img-icon2">
+                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
                 اللغة العربية
               </p>
             </template>
@@ -133,27 +133,27 @@
             </template>
             <template #viewedSection>
                 <p class="viewed-no">7</p>
-                <img src="~assets/home-imgs/viewed.png" alt="" class="viewed-icon">
+                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
             </template>
             <template #durationSection>
                 <p class="duration">05:30:00</p>
-                <img src="~assets/home-imgs/duration.png" class="duration-icon">
+                <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
           </base-card>
 <!-- =================================================================================== -->
           <base-card>
             <template>
-              <img src="~assets/home-imgs/alorefy.jpg" />
+              <img src="/images/home-imgs/alorefy.jpg" />
             </template>
             <template #teacherData>
               <p class="label-1">
-                <img src="~assets/home-imgs/person.png" class="img-icon">
+                <img src="/images/home-imgs/person.png" class="img-icon">
                 د / محمد العريفي
               </p>
             </template>
             <template #sectionData>
               <p class="label-2">
-                <img src="~assets/home-imgs/quran-icon2.png" class="img-icon2">
+                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
                    القرآن الكريم
               </p>
             </template>
@@ -164,27 +164,27 @@
             </template>
             <template #viewedSection>
                 <p class="viewed-no">7</p>
-                <img src="~assets/home-imgs/viewed.png" alt="" class="viewed-icon">
+                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
             </template>
             <template #durationSection>
                 <p class="duration">08:10:00</p>
-                <img src="~assets/home-imgs/duration.png" class="duration-icon">
+                <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
           </base-card>
 <!-- ================================================================================= -->
           <base-card>
             <template>
-              <img src="~assets/home-imgs/omar.jpg" />
+              <img src="/images/home-imgs/omar.jpg" />
             </template>
             <template #teacherData>
               <p class="label-1">
-                <img src="~assets/home-imgs/person.png" class="img-icon">
+                <img src="/images/home-imgs/person.png" class="img-icon">
                 د / عمر عبدالكافي
               </p>
             </template>
             <template #sectionData>
               <p class="label-2">
-                <img src="~assets/home-imgs/quran-icon2.png" class="img-icon2">
+                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
                    القرآن الكريم
               </p>
             </template>
@@ -195,11 +195,11 @@
             </template>
             <template #viewedSection>
                 <p class="viewed-no">7</p>
-                <img src="~assets/home-imgs/viewed.png" alt="" class="viewed-icon">
+                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
             </template>
             <template #durationSection>
                 <p class="duration">08:10:00</p>
-                <img src="~assets/home-imgs/duration.png" class="duration-icon">
+                <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
           </base-card>
 <!-- ==================================================================================== -->

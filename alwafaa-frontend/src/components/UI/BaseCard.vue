@@ -7,14 +7,14 @@
       <div >
         <slot name="teacherData"></slot>
         <!-- <p class="label-1">
-          <img src="~assets/home-imgs/person.png" class="img-icon">
+          <img src="~public/images/home-imgs/person.png" class="img-icon">
           د / محمد العريفي
         </p> -->
     </div>
     <div >
       <slot name="sectionData"></slot>
       <!-- <p class="label-2">
-        <img src="~assets/home-imgs/quran-icon2.png" class="img-icon2">
+        <img src="~public/images/home-imgs/quran-icon2.png" class="img-icon2">
         القرآن الكريم
       </p> -->
     </div>
@@ -26,12 +26,12 @@
   </div>
   <div class="rating-section text-center">
     <p class="rating-no">4.5</p>
-    <img src="~assets/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="~assets/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="~assets/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="~assets/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="~assets/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="~assets/home-imgs/half-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/half-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
     <p class="rating-no2">(455)</p>
   </div>
   <!-- <q-rating v-model="stars" :max="5" size="32px" /> -->

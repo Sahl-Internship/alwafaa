@@ -14,7 +14,7 @@
         v-model="leftDrawerOpen"
         content-class="bg-grey-5"
       >
-        <div class="logo text-center"><img src="~/assets/home-imgs/logo.png" class="drawer-logo q-ma-md" /></div>
+        <div class="logo text-center"><img src="/images/home-imgs/logo.png" class="drawer-logo q-ma-md" /></div>
         <q-list class="drawer-lists q-mt-xl">
           <q-item-label header class="text-grey-8">
             <router-link to='/' class="link">{{$t('homeCover.main')}}</router-link>
@@ -23,6 +23,11 @@
         <q-list class="drawer-lists">
           <q-item-label header class="text-grey-8">
             <router-link to="/" class="link">{{$t('homeCover.availableCourse')}}</router-link>
+          </q-item-label>
+        </q-list>
+        <q-list class="drawer-lists">
+          <q-item-label header class="text-grey-8">
+            <router-link to="/student/profile" class="link">{{$t('homeCover.studentProfile')}}</router-link>
           </q-item-label>
         </q-list>
         <q-list class="drawer-lists">
@@ -47,18 +52,13 @@
         </q-list>
       </q-drawer>
       <div class="logo col-6 row">
-        <img src="~/assets/home-imgs/logo.png" class="header-img q-mt-md col-3" />
+        <img src="/images/home-imgs/logo.png" class="header-img q-mt-md col-3" />
         <ul class="nav-list q-mt-lg col-9 gt-sm">
           <li class="nav-item q-mr-md "><router-link class="link" to="/">{{$t('homeCover.main')}}</router-link></li>
-          <li class="nav-item"><router-link class="link" to="/">  {{$t('homeCover.availableCourse')}}</router-link> </li>
+          <li class="nav-item q-mr-md"><router-link class="link" to="/">  {{$t('homeCover.availableCourse')}}</router-link> </li>
+          <li class="nav-item"><router-link class="link" to="/student/profile">  {{$t('homeCover.studentProfile')}}</router-link> </li>
         </ul>
       </div>
-      <!-- Conflict
-        <q-btn flat round to="/home" class="avatar">
-        <q-avatar>
-          <img src="/images/logo.png" />
-        </q-avatar>
-      </q-btn> -->
 
       <q-space />
 

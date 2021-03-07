@@ -2,6 +2,7 @@ export default {
   homeCover: {
     main: 'Home',
     availableCourse: 'Available Courses',
+    studentProfile: 'My Profile',
     lang: 'Language',
     signupFree: 'Free Signup',
     startJourney: 'Start your learning journy , learn today to lead tomorrow',
@@ -27,7 +28,7 @@ export default {
     title: 'Know about the courses offered',
     showAll: 'See more ',
     newestCourses: 'Newest',
-    highestRating: 'Rating'
+    highestRating: 'Highest Rating'
   },
   academyInfo: {
     course: 'Course',

@@ -2,7 +2,7 @@
 <div class=" row choose-course items-center q-pa-xl q-mb-xl" >
     <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-8 " >
     <div class="q-mb-lg q-my-xs text-center">
-    <img src="~assets/home-imgs/block3.png" class="choose-img"/>
+    <img src="/images/home-imgs/block3.png" class="choose-img"/>
     </div>
     </div>
     <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-4 q-px-lg ">

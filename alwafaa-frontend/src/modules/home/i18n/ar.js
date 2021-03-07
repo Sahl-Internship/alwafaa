@@ -2,6 +2,7 @@ export default {
   homeCover: {
     main: 'الرئيسية',
     availableCourse: 'الكورسات المتاحة',
+    studentProfile: 'حسابي',
     lang: 'اللغة',
     signupFree: 'سجل مجاناً',
     startJourney: 'إبدأ رحلتك التعليمية ,تعلم اليوم, لتقود الغد',
