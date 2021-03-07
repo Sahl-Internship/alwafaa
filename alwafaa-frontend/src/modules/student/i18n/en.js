@@ -49,6 +49,9 @@ export default {
       privacy: 'Privacy',
       security: 'Security',
       back: 'Back'
+    },
+    search: {
+      title: 'Search'
     }
   }
 }

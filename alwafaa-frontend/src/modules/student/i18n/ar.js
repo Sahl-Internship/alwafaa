@@ -49,6 +49,9 @@ export default {
       privacy: 'الخصوصية',
       security: 'الأمان',
       back: 'للخلف'
+    },
+    search: {
+      title: 'البحث'
     }
   }
 }

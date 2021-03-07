@@ -1,6 +1,6 @@
 <template>
   <q-header
-    class="header bg-white"
+    class="header bg-white z-max"
     :class="{
      ' q-px-xl': !$q.screen.lt.md,
     }"
@@ -28,7 +28,7 @@
         >
           <q-card
             v-if="openMenu"
-            class="q-pa-lg q-ml-md header-menu"
+            class="q-pa-lg q-ml-md"
             :class="$q.screen.lt.sm ? 'card-menu-sm' : 'card-menu-bg'"
           >
             <q-card-section class="column items-center">
@@ -50,7 +50,7 @@
                 :label="$t('student.header.setting')"
                 text-color="grey-4"
                 class="setting-link"
-                @click="$emit('openDialog')"
+                @click="$emit('openDialog', 'editMode')"
               />
             </q-card-section>
 
@@ -103,26 +103,11 @@
           flat
           dense
           rounded
-          :icon="!openSearch ? 'mdi-magnify' : 'mdi-close'"
+          icon="mdi-magnify"
           text-color="grey-4"
           size="17px"
-          @click="() => this.openSearch = !this.openSearch"
+          @click="$emit('openDialog', 'searchMode')"
         />
-
-        <q-input
-          filled
-          dense
-          outlined
-          v-if="openSearch"
-          v-model="searchVal"
-          debounce="500"
-          :placeholder="$t('student.header.search')"
-          style="width: 42%"
-        >
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
       </div>
 
       <q-space />
@@ -140,16 +125,25 @@
         </q-avatar>
       </q-btn>
     </q-toolbar>
+
+    <!-- <search
+      v-if="searchMode"
+      class="full-width"
+    ></search> -->
+
   </q-header>
 </template>
 
 <script>
+// import Search from './Search'
+
 export default {
+  // components: { Search },
   data () {
     return {
       openMenu: false,
       searchVal: '',
-      openSearch: false,
+      searchMode: false,
       user: {}
     }
   },

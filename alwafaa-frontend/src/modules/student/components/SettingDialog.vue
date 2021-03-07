@@ -1,6 +1,6 @@
 <template>
   <q-card
-    class="q-mt-xl dislog-card"
+    class="q-mt-xl dialog-card"
     :class="$q.screen.lt.sm ? 'q-mx-xs' : 'q-mx-lg'"
   >
     <div class="col-12 text-left">
@@ -11,7 +11,7 @@
         text-color="grey-4"
         size="md"
         class="q-mt-md q-ml-md"
-        @click="$emit('closeDialoge')"
+        @click="$emit('closeDialog', 'editMode')"
       />
     </div>
 
@@ -383,7 +383,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dislog-card {
+.dialog-card {
   height: 90%;
 }
 .q-tabs {
@@ -421,6 +421,7 @@ export default {
       }
       .q-field--focused {
         border: solid 1.5px $primary;
+        outline: solid 1.5px $primary;
       }
       .q-field__prepend {
         padding-left: 12px;
