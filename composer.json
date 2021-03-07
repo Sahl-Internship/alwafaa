@@ -62,7 +62,8 @@
     "unclead/yii2-multiple-input": "~2.0",
     "kartik-v/yii2-grid": "dev-master",
     "kartik-v/yii2-widget-timepicker": "dev-master",
-    "kartik-v/yii2-field-range": "*"
+    "kartik-v/yii2-field-range": "*",
+    "ext-json": "*"
   },
   "require-dev": {
     "yiisoft/yii2-gii": "^2.0.0",

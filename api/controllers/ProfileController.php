@@ -32,8 +32,11 @@ class ProfileController extends ApiController
     public function actionUpdate(){
 
         $params = \Yii::$app->request->post();
-//
+//\Yii::$app->user->identity->getId()
         $user= User::findOne(['id'=>\Yii::$app->user->identity->getId()]) ;
+        if(!$user){
+            return "Kullanıcı yok";
+        }
         $profile=$user->userProfile;
 
 //        if (isset($params['full_name'])){
@@ -44,7 +47,7 @@ class ProfileController extends ApiController
         if (isset($params['firstname'])) $profile->firstname= $params['firstname'] ;
         if (isset($params['lastname'])) $profile->lastname= $params['lastname'] ;
         if (isset($params['birthdate'])) $profile->birthdate= $params['birthdate'] ;
-        if (isset($params['bio'])) $profile->bio= $params['bio'] ;
+        if (isset($params['bio'])) $profile->bio= json_encode($params['bio']) ;
         if (isset($params['phone_key'])) $profile->phone_key= $params['phone_key'] ;
         if (isset($params['phone'])) $profile->phone= $params['phone'] ;
         if (isset($params['country'])) $profile->country= $params['country'] ;
