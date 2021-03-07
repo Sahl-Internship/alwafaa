@@ -39,16 +39,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         'contentOptions'=>['style'=>'width:60px']
                     ],
 
-                    ['attribute'=>'time',
+                    ['attribute'=>'title',
+                        'contentOptions'=>['style'=>'width:60px']
+                    ],
+
+                    ['attribute'=>'start_at',
                         'format'=>'date',
                         'contentOptions'=>['style'=>'width:60px']
                     ],
 
-                    ['attribute'=>'duration',
-                        'contentOptions'=>['style'=>'width:60px']
-                    ],
-
-                    ['attribute'=>'title',
+                    ['attribute'=>'end_at',
                         'contentOptions'=>['style'=>'width:60px']
                     ],
 

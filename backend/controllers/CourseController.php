@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use backend\models\search\TeacherCourseSearch;
 use common\models\CourseClasses;
 use common\models\Section;
 use common\models\User;
@@ -78,16 +77,7 @@ class CourseController extends Controller
         $model->classes = [];
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if($model->classes){
-//                var_dump($model->classes);
-//                die();
-                foreach($model->classes as $class){
-                    $courseClass = new CourseClasses();
-                    $courseClass->course_id = $model->id;
-                    $courseClass->title = $class['title'];
-                    $courseClass->time = $class['time'];
-                    $courseClass->duration = $class['duration'];
-                    $courseClass->save();
-                }
+                $model->classSchedule($model->classes);
             }
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -109,20 +99,12 @@ class CourseController extends Controller
         $model = $this->findModel($id);
         $user = new User();
         $teacher = $user->getTeacher();
-//        return date('Y-m-d', $model->time);
         $model->classes = CourseClasses::find()->where('course_id=:id',['id'=>$id])->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             if($model->classes){
                 CourseClasses::deleteAll(['course_id'=>$model->id]);
-                foreach($model->classes as $class){
-                    $courseClass = new CourseClasses();
-                    $courseClass->course_id = $model->id;
-                    $courseClass->title = $class['title'];
-                    $courseClass->time = $class['time'];
-                    $courseClass->duration = $class['duration'];
-                    $courseClass->save();
-                }
+                $model->classSchedule($model->classes);
             }
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -130,7 +112,6 @@ class CourseController extends Controller
             'model' => $model,
             'sectionList'=>ArrayHelper::map(Section::find()->all(),'id','title'),
             'teacherList'=>ArrayHelper::map($teacher,'id','username'),
-//            'course_time'=>date('Y-m-d H:i:s', $model->time),
         ]);
     }
 

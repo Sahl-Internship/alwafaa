@@ -4,18 +4,25 @@ namespace common\models;
 
 use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
+use yii\base\Exception;
 
 /**
  * This is the model class for table "{{%course}}".
  *
  * @property int $id
- * @property integer $time
- * @property int|null $duration
  * @property string $title
+ * @property string $sub_title
  * @property string $description
  * @property int $section_id
  * @property int $teacher_id
  * @property string|null $zoom_link
+ * @property int $start_at
+ * @property int $end_at
+ * @property string $requirement
+ * @property string $target_student
+ * @property string $targeted_skills
+ * @property string $intro_base_url
+ * @property string $intro_path
  *
  * @property CourseAttachment[] $courseAttachments
  * @property CourseClasses[] $courseClasses
@@ -24,8 +31,8 @@ use Yii;
  */
 class Course extends \yii\db\ActiveRecord
 {
+    public $intro_video;
     public $classes;
-
     public $attachments;
 
     /**
@@ -62,10 +69,11 @@ class Course extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['time', 'duration', 'section_id', 'title', 'description'], 'required'],
-            [['duration', 'section_id', 'teacher_id'], 'integer'],
-            [['title', 'description', 'zoom_link'], 'string', 'max' => 255],
-            [['time'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
+            [['start_at', 'end_at', 'section_id', 'title', 'description','teacher_id'], 'required'],
+            [['section_id', 'teacher_id'], 'integer'],
+            [['title', 'sub_title', 'zoom_link'], 'string', 'max' => 255],
+            [['description','requirement','target_student','targeted_skills','intro_base_url','intro_path'], 'string', 'max' => 1024],
+            [['start_at','end_at'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => Section::className(), 'targetAttribute' => ['section_id' => 'id']],
             [['teacher_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['teacher_id' => 'id']],
             [['attachments', 'classes'], 'safe'],
@@ -79,13 +87,18 @@ class Course extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('backend', 'ID'),
-            'time' => Yii::t('backend', 'Course starts in'),
-            'duration' => Yii::t('backend', 'Duration By Weeks'),
             'title' => Yii::t('backend', 'Title'),
+            'sub_title' => Yii::t('backend', 'Sub Title'),
             'description' => Yii::t('backend', 'Description'),
             'section_id' => Yii::t('backend', 'Section'),
             'teacher_id' => Yii::t('backend', 'Teacher'),
             'zoom_link' => Yii::t('backend', 'Zoom Link'),
+            'start_at' => Yii::t('backend', 'Starts At'),
+            'end_at' => Yii::t('backend', 'Ends In'),
+            'requirement' => Yii::t('backend', 'Requirement'),
+            'target_student' => Yii::t('backend', 'Target Student'),
+            'targeted_skills' => Yii::t('backend', 'Targeted Skills'),
+            'intro_video' => Yii::t('backend', 'Course Introduction'),
         ];
     }
 
@@ -137,19 +150,26 @@ class Course extends \yii\db\ActiveRecord
     {
         return new \common\models\query\CourseQuery(get_called_class());
     }
+
 //    public function afterFind() {
 //        parent::afterFind ();
 //        $this->time=Yii::$app->formatter->asDate($this->time);
 //    }
+
     public function findOwnCourses()
     {
         return Course::find()->andWhere('teacher_id=:id',['id'=> Yii::$app->user->id]);
     }
 
-
-    public function addCourseClasses()
+    public function classSchedule($classesData)
     {
-
-
+        foreach($classesData as $class){
+            $courseClass = new CourseClasses();
+            $courseClass->course_id = $this->id;
+            $courseClass->day_id = $class['day_id'];
+            $courseClass->from = $class['from'];
+            $courseClass->to = $class['to'];
+            $courseClass->save();
+        }
     }
 }

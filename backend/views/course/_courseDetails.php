@@ -7,9 +7,6 @@
  * @var common\models\User $teacherList
  */
 
-use kartik\date\DatePicker;
-use kartik\datetime\DateTimePicker;
-
 ?>
 <?php echo $form->errorSummary($model); ?>
 <div class="row">
@@ -24,40 +21,68 @@ use kartik\datetime\DateTimePicker;
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-4">
-    <?php echo $form->field($model, 'duration')->textInput() ?>
-    </div>
+        <div class="col-sm-4">
+        <?php echo $form->field($model, 'sub_title')->textInput() ?>
+        </div>
     <div class="col-sm-4">
         <?php echo $form->field($model, 'zoom_link')->textInput(['maxlength' => true]) ?>
     </div>
-    <div class="col-sm-4">
-            <?php
-            if(Yii::$app->controller->action->id =='create')
-                $model->time = null;
-            else{
-                $model->time =  date('m/d/Y', $model->time);
-            }
-        echo $form->field($model, 'time')->widget(DatePicker::classname(), []);
-        ?>
-    </div>
-
 </div>
+
 
 <?php echo $form->field($model, 'description')->widget(
     \yii\imperavi\Widget::class,
     [
         'plugins' => ['fullscreen', 'fontcolor', 'video'],
         'options' => [
-            'minHeight' => 400,
-            'maxHeight' => 400,
+            'minHeight' => 200,
+            'maxHeight' => 200,
             'buttonSource' => true,
             'convertDivs' => false,
             'removeEmptyTags' => true,
         ],
     ]
 ) ?>
- <?php //echo $form->field($model, 'section_id')->dropdownList($sectionList) ?>  
-<?php //echo $form->field($model, 'teacher_id')->dropdownList($teacherList) ?>
-<?php// echo $form->field($model, 'zoom_link')->textInput(['maxlength' => true]) ?> 
 
-<?php //echo $form->field($model, 'duration')->textInput() ?>
+<?php echo $form->field($model, 'requirement')->widget(
+    \yii\imperavi\Widget::class,
+    [
+        'plugins' => ['fullscreen', 'fontcolor', 'video'],
+        'options' => [
+            'minHeight' => 200,
+            'maxHeight' => 200,
+            'buttonSource' => true,
+            'convertDivs' => false,
+            'removeEmptyTags' => true,
+        ],
+    ]
+) ?>
+
+<?php echo $form->field($model, 'target_student')->widget(
+    \yii\imperavi\Widget::class,
+    [
+        'plugins' => ['fullscreen', 'fontcolor', 'video'],
+        'options' => [
+            'minHeight' => 200,
+            'maxHeight' => 200,
+            'buttonSource' => true,
+            'convertDivs' => false,
+            'removeEmptyTags' => true,
+        ],
+    ]
+) ?>
+
+<?php echo $form->field($model, 'targeted_skills')->widget(
+    \yii\imperavi\Widget::class,
+    [
+        'plugins' => ['fullscreen', 'fontcolor', 'video'],
+        'options' => [
+            'minHeight' => 200,
+            'maxHeight' => 200,
+            'buttonSource' => true,
+            'convertDivs' => false,
+            'removeEmptyTags' => true,
+        ],
+    ]
+) ?>
+
