@@ -5,19 +5,50 @@ namespace api\controllers;
 
 
 use api\resources\User;
-use frontend\modules\user\models\StudentForm;
-use yii\rest\ActiveController;
-//use yii\rest\Controller;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\HttpBearerAuth;
+use yii\filters\auth\HttpHeaderAuth;
+use yii\filters\auth\QueryParamAuth;
+use yii\web\Controller;
 
 class ProfileController extends ApiController
 {
+    public $modelClass = 'api\resources\User';
 
-//    public function actions()
-//    {
-//        $actions = parent::actions();
-//        unset($actions['create']);
-//        return $actions;
-//    }
+    public function actions()
+    {
+        $actions = parent::actions();
+        unset($actions['update']);
+        return $actions;
+    }
+
+    public function  behaviors()
+    {
+        $behaviors = parent::behaviors();
+        // remove authentication filter if there is one
+        unset($behaviors['authenticator']);
+        // add CORS filter before authentication
+
+
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+        ];
+        // Put in a bearer auth authentication filter
+        // https://www.yiiframework.com/doc/api/2.0/yii-filters-auth-httpbearerauth
+        $behaviors['authenticator'] = [
+            'class' => CompositeAuth::class,
+            'authMethods' => [
+                HttpBasicAuth::class,
+                HttpBearerAuth::class,
+                HttpHeaderAuth::class,
+                QueryParamAuth::class
+            ]
+        ];
+        // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
+        $behaviors['authenticator']['except'] = ['options'];
+        return $behaviors;
+    }
 
     public function actionUploadPicture()
     {
@@ -28,7 +59,6 @@ class ProfileController extends ApiController
         $decoder = base64_decode($base64String);
         return $decoder;
         die();
-
         $img = imagecreatefromstring($decoder);
         return $img;
     }
@@ -37,11 +67,7 @@ class ProfileController extends ApiController
     public function actionUpdate(){
 
         $params = \Yii::$app->request->post();
-//\Yii::$app->user->identity->getId()
-        $user= User::findOne(['id'=>5]) ;
-        if(!$user){
-            return "Kullanıcı yok";
-        }
+        $user= User::findOne(['id'=>\Yii::$app->user->identity->getId()]) ;
         $profile=$user->userProfile;
 
 //        if (isset($params['full_name'])){
