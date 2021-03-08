@@ -12,18 +12,23 @@ use yii\rest\ActiveController;
 class ProfileController extends ApiController
 {
 
-    public function actions()
-    {
-        $actions = parent::actions();
-        unset($actions['create']);
-        return $actions;
-    }
+//    public function actions()
+//    {
+//        $actions = parent::actions();
+//        unset($actions['create']);
+//        return $actions;
+//    }
 
     public function actionUploadPicture()
     {
         $params = \Yii::$app->request->post();
         $base64String = $params['avatar'];
+//        $base64String = mb_convert_encoding($base64String, 'UTF-8', 'UTF-8');
+        $base = json_encode($base64String);
         $decoder = base64_decode($base64String);
+        return $decoder;
+        die();
+
         $img = imagecreatefromstring($decoder);
         return $img;
     }
@@ -33,7 +38,7 @@ class ProfileController extends ApiController
 
         $params = \Yii::$app->request->post();
 //\Yii::$app->user->identity->getId()
-        $user= User::findOne(['id'=>\Yii::$app->user->identity->getId()]) ;
+        $user= User::findOne(['id'=>5]) ;
         if(!$user){
             return "Kullanıcı yok";
         }
