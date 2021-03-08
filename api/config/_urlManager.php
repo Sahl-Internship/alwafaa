@@ -34,5 +34,13 @@ return [
         ]
             , 'pluralize'=>false
         ],
+        ['class' =>'yii\rest\UrlRule','controller'=>'profile'
+            ,'only'=>['update','upload-picture']
+            ,'extraPatterns'=>[
+            'PUT update' => 'update' ,
+            'Post upload-picture' => 'upload-picture'
+        ]
+            , 'pluralize'=>false
+        ],
     ],
 ];
