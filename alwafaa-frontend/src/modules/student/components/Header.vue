@@ -1,6 +1,6 @@
 <template>
   <q-header
-    class="header bg-white z-max"
+    class="header bg-white z-top"
     :class="{
      ' q-px-xl': !$q.screen.lt.md,
     }"
@@ -15,7 +15,7 @@
           v-if="!$q.screen.lt.sm"
           class="text-subtitle1 text-grey-5 q-pr-none"
         >
-          {{ user.firstname }} {{ user.lastname }}
+          {{ student.firstname }} {{ student.lastname }}
         </q-toolbar-title>
 
         <q-btn
@@ -37,11 +37,11 @@
               </q-avatar>
 
               <div class="text-h6 text-center">
-                {{ user.firstname }} {{ user.lastname }}
+                {{ student.firstname }} {{ student.lastname }}
               </div>
 
               <div class="text-subtitle2 text-center text-grey-4">
-                {{ user.email }}
+                {{ student.email }}
               </div>
 
               <q-btn
@@ -143,17 +143,18 @@ export default {
     return {
       openMenu: false,
       searchVal: '',
-      searchMode: false,
-      user: {}
+      searchMode: false
+    }
+  },
+  computed: {
+    student () {
+      return this.$store.getters['auth/getUser']
     }
   },
   methods: {
     handleLogout () {
       this.$store.dispatch('auth/logout')
     }
-  },
-  mounted () {
-    this.user = this.$store.state.auth.user
   }
 }
 </script>

@@ -52,6 +52,11 @@ export default {
     },
     search: {
       title: 'البحث'
+    },
+
+    notification: {
+      editdataErr: 'خطأ خلال تعديل بياناتك, حاول مرة أخري',
+      editDataSuccess: 'تم تعديل بياناتك بنجاح'
     }
   }
 }

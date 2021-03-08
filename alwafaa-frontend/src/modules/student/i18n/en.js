@@ -52,6 +52,11 @@ export default {
     },
     search: {
       title: 'Search'
+    },
+
+    notification: {
+      editdataErr: 'Error while updating your data, Try again',
+      editDataSuccess: 'Your data updated successfully'
     }
   }
 }

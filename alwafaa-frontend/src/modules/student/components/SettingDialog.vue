@@ -255,7 +255,7 @@
                     prependIconName="mdi-city"
                     bg-color='grey-1'
                     :error="invalid && validated"
-                    error-message="errors[0]"
+                    :error-message="errors[0]"
                   />
                  </ValidationProvider>
 
@@ -344,6 +344,7 @@
 
 <script>
 import { dialCodes, countriesNames, getSelectedCountry } from 'src/utils/countries.js'
+import { i18n } from 'src/boot/i18n'
 
 export default {
   data () {
@@ -355,7 +356,6 @@ export default {
       dialCodesOPtions: dialCodes,
       isoCode: '',
       newHobby: ''
-      // bio: ['النحو', 'أحكام القرآن', 'الشعر', 'معرفة', 'الفصاحة'],
     }
   },
   computed: {
@@ -387,7 +387,13 @@ export default {
       }
 
       this.$store.dispatch('student/editStudentData', studentData).then(res => {
-        console.log('res', res)
+        if (res) {
+          this.$emit('closeDialog', 'editMode')
+          this.$q.notify({
+            type: 'positive',
+            message: i18n.t('student.notification.editDataSuccess')
+          })
+        }
       })
     },
     goBack (value) {
@@ -396,7 +402,7 @@ export default {
     removeHobby (name) {
       this.user.bio = this.user.bio.filter(hobby => hobby !== name)
     },
-    addHobby (e) {
+    addHobby () {
       this.user.bio.push(this.newHobby)
       this.newHobby = ''
     }
@@ -417,7 +423,7 @@ export default {
     const student = this.$store.getters['auth/getUser']
     this.user = {
       ...student,
-      bio: student.bio ? student.bio : []
+      bio: student.bio ? [...student.bio] : []
     }
   }
 }

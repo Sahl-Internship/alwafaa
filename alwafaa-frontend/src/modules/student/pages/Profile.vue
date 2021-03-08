@@ -121,7 +121,7 @@
                       'text-h5': $q.screen.lt.md && !$q.screen.lt.sm ,
                       'text-h6': $q.screen.lt.sm,
                     }"
-                  >{{ user.firstname }} {{ user.lastname }}</div>
+                  >{{ student.firstname }} {{ student.lastname }}</div>
                   <div
                     class="text-weight-bold"
                     :class="{
@@ -136,7 +136,7 @@
                     }"
                   >
                     <flag iso="eg" class="rounded-icon q-mr-xs" />
-                    مصر, القاهرة
+                    {{ student.country }}, {{ student.city }}
                   </div>
                 </div>
               </div>
@@ -153,10 +153,10 @@
                     'q-px-md': !$q.screen.lt.md,
                     'q-px-sm': $q.screen.lt.md
                   }"
-                  v-for="(hobby, index) in hobbies"
+                  v-for="(hobby, index) in student.bio"
                   :key="index"
                 >
-                  {{ hobby }}
+                  #{{ hobby }}
                 </div>
               </div>
             </div>
@@ -481,8 +481,12 @@ export default {
           completed: '01:45:23',
           remaining: '02:02:23'
         }
-      ],
-      user: {}
+      ]
+    }
+  },
+  computed: {
+    student () {
+      return this.$store.getters['auth/getUser']
     }
   },
   methods: {
@@ -498,9 +502,6 @@ export default {
     handleChangeBg () {
       this.bgImage = URL.createObjectURL(this.$refs.bgImg.files[0])
     }
-  },
-  mounted () {
-    this.user = this.$store.state.auth.user
   }
 }
 </script>

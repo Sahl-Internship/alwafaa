@@ -1,4 +1,5 @@
-import { Loading } from 'quasar'
+import { Notify, Loading } from 'quasar'
+import { i18n } from 'src/boot/i18n'
 
 import {
   handleEditData
@@ -26,7 +27,10 @@ export default {
     } catch (error) {
       Loading.hide()
       console.log(error)
-      console.log(error.message)
+      Notify.create({
+        type: 'negative',
+        message: i18n.t('student.otification.editdataErr')
+      })
       return false
     }
   }
