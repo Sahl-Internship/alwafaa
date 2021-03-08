@@ -14,7 +14,7 @@ use yii\web\Controller;
 
 class ProfileController extends ApiController
 {
-    public $modelClass = 'api\resources\User';
+//    public $modelClass = 'api\resources\User';
 
     public function actions()
     {
