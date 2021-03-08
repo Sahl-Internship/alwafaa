@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-Vue.prototype.$axios = axios
+const token = localStorage.getItem('token')
 
-export { axios }
+const axiosInstance = axios.create({
+  // baseURL: 'https://some-domain.com/api/',
+  headers: { Authorization: token }
+})
+
+Vue.prototype.$axios = axiosInstance
+
+export { axiosInstance }

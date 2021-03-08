@@ -1,4 +1,4 @@
-import { axios } from 'src/boot/axios'
+import { axiosInstance as axios } from 'src/boot/axios'
 
 export const handleLogin = (userData) => {
   return axios.post('http://endpoints.alwafaa.localhost/site/login', userData)

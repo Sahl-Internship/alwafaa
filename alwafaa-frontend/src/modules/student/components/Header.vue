@@ -15,7 +15,7 @@
           v-if="!$q.screen.lt.sm"
           class="text-subtitle1 text-grey-5 q-pr-none"
         >
-          {{ user.full_name }}
+          {{ user.firstname }} {{ user.lastname }}
         </q-toolbar-title>
 
         <q-btn
@@ -37,7 +37,7 @@
               </q-avatar>
 
               <div class="text-h6 text-center">
-                {{ user.full_name }}
+                {{ user.firstname }} {{ user.lastname }}
               </div>
 
               <div class="text-subtitle2 text-center text-grey-4">

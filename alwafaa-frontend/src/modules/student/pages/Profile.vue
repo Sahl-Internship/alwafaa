@@ -121,7 +121,7 @@
                       'text-h5': $q.screen.lt.md && !$q.screen.lt.sm ,
                       'text-h6': $q.screen.lt.sm,
                     }"
-                  >{{ user.full_name }}</div>
+                  >{{ user.firstname }} {{ user.lastname }}</div>
                   <div
                     class="text-weight-bold"
                     :class="{

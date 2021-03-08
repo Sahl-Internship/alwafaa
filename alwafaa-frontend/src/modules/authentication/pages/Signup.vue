@@ -97,7 +97,7 @@
               </ValidationProvider>
 
               <ValidationProvider
-                name="countary"
+                name="country"
                 class="col-12 q-pb-xs"
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
@@ -107,10 +107,10 @@
                   v-model="country"
                   :options="countriesNamesOptions"
                   :label="$t('formFields.country')"
-                  :error="invalid && validated"
-                  :error-message="errors[0]"
                   prependIconName="mdi-flag-variant"
                   :flag="isoCode"
+                  :error="invalid && validated"
+                  :error-message="errors[0]"
                 />
               </ValidationProvider>
 
@@ -382,13 +382,6 @@ export default {
   },
   methods: {
     validateFirstForm () {
-      console.log({
-        firstname: this.firstname,
-        lastname: this.lastname,
-        gender: this.gender === i18n.t('signup.male') ? '1' : '2',
-        country: this.country,
-        city: this.city
-      })
       this.$refs.stepper.next()
     },
     submitData () {
