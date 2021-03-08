@@ -7,7 +7,7 @@ namespace api\controllers;
 use yii\rest\ActiveController;
 use yii\rest\Controller;
 
-class ApiController extends ActiveController
+class ApiController extends Controller
 {
     public function behaviors(){
         $behaviors = parent::behaviors();

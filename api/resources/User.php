@@ -28,7 +28,7 @@ class User extends \common\models\User
                 return $model->userProfile->lastname;
             },
             'birthdate'=>function($model){
-                return $model->userProfile->birthdate;
+                return date('d-m-Y',$model->userProfile->birthdate);
             },
             'phone_key'=>function($model){
                 return $model->userProfile->phone_key;
