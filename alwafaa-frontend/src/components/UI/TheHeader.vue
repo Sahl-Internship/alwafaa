@@ -69,21 +69,21 @@
         rounded
         :label="$t('homeCover.lang')"
       >
-      <q-list class="lang-list">
-        <q-item clickable v-close-popup @click="changeLanguage('en-us', 'ar')" class="lang-item">
-          <q-btn flat round dense>
-            <flag iso="us"/>
-          </q-btn>
-          <span style="margin-top:6px">En</span>
-        </q-item>
+        <q-list class="lang-list">
+          <q-item clickable v-close-popup @click="changeLanguage('en-us', 'ar')" class="lang-item">
+            <q-btn flat round dense>
+              <flag iso="us"/>
+            </q-btn>
+            <span style="margin-top:6px">En</span>
+          </q-item>
 
-        <q-item clickable v-close-popup @click="changeLanguage('ar', 'en-us')" class="lang-item">
-          <q-btn flat round dense>
-            <flag iso="eg"/>
-          </q-btn>
-          <span style="margin-top:6px">Ar</span>
-        </q-item>
-      </q-list>
+          <q-item clickable v-close-popup @click="changeLanguage('ar', 'en-us')" class="lang-item">
+            <q-btn flat round dense>
+              <flag iso="eg"/>
+            </q-btn>
+            <span style="margin-top:6px">Ar</span>
+          </q-item>
+        </q-list>
       </q-btn-dropdown>
         <q-btn
           v-if="isAuthed"

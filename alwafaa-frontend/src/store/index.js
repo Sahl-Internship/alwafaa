@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import AuthModule from './authentication'
+import homeModule from './home'
 import studentModule from './student'
 
 Vue.use(Vuex)
@@ -19,6 +20,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       auth: AuthModule,
+      home: homeModule,
       student: studentModule
     },
 

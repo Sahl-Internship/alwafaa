@@ -59,6 +59,22 @@
                 استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
               </div>
             </template>
+            <template #rating>
+              <p class="rating-no2">(455)</p>
+              <star-rating
+                class="star-rating"
+                v-model="rating"
+                :increment="0.5"
+                :max-rating="5"
+                :rtl= true
+                :star-size="15"
+                inactive-color="#ccc"
+                active-color="orange"
+              ></star-rating>
+            </template>
+            <!-- <template #rating-counter>
+              <p class="rating-no2">455</p>
+            </template> -->
             <template #viewedSection>
                 <p class="viewed-no">7</p>
                 <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
@@ -90,6 +106,22 @@
                 استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
               </div>
             </template>
+            <template #rating>
+              <p class="rating-no2">(455)</p>
+              <star-rating
+                class="star-rating"
+                v-model="rating"
+                :increment="0.5"
+                :max-rating="5"
+                :rtl= true
+                :star-size="15"
+                inactive-color="#ccc"
+                active-color="orange"
+              ></star-rating>
+            </template>
+            <!-- <template #rating-counter>
+              <p class="rating-no2">(455)</p>
+            </template> -->
             <template #viewedSection>
                 <p class="viewed-no">7</p>
                 <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
@@ -121,6 +153,22 @@
                 استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
               </div>
             </template>
+            <template #rating>
+              <p class="rating-no2">(455)</p>
+              <star-rating
+                class="star-rating"
+                v-model="rating"
+                :increment="0.5"
+                :max-rating="5"
+                :rtl= true
+                :star-size="15"
+                inactive-color="#ccc"
+                active-color="orange"
+              ></star-rating>
+            </template>
+            <!-- <template #rating-counter>
+              <p class="rating-no2">(455)</p>
+            </template> -->
             <template #viewedSection>
                 <p class="viewed-no">7</p>
                 <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
@@ -152,6 +200,22 @@
                 استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
               </div>
             </template>
+            <template #rating>
+              <p class="rating-no2">(455)</p>
+              <star-rating
+                class="star-rating"
+                v-model="rating"
+                :increment="0.5"
+                :max-rating="5"
+                :rtl= true
+                :star-size="15"
+                inactive-color="#ccc"
+                active-color="orange"
+              ></star-rating>
+            </template>
+            <!-- <template #rating-counter>
+              <p class="rating-no2">(455)</p>
+            </template> -->
             <template #viewedSection>
                 <p class="viewed-no">7</p>
                 <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
@@ -183,6 +247,19 @@
                 استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
               </div>
             </template>
+            <template #rating>
+              <p class="rating-no2">(455)</p>
+              <star-rating
+                class="star-rating"
+                v-model="rating"
+                :increment="0.5"
+                :max-rating="5"
+                :rtl= true
+                :star-size="15"
+                inactive-color="#ccc"
+                active-color="orange"
+              ></star-rating>
+            </template>
             <template #viewedSection>
                 <p class="viewed-no">7</p>
                 <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
@@ -200,13 +277,15 @@
 </template>
 <script>
 import Slick from 'vue-slick'
+import StarRating from 'vue-star-rating'
 import BaseCard from 'src/components/UI/BaseCard'
 export default {
-  components: { Slick, BaseCard },
+  components: { Slick, BaseCard, StarRating },
   name: 'HomeCourses',
   data () {
     return {
       dense: true,
+      rating: 0,
       slide: 0,
       slickOptions: {
         slidesToShow: 3,

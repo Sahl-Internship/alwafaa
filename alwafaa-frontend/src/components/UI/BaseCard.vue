@@ -24,17 +24,16 @@
   <div class="row no-wrap items-center text-center">
     <slot name="text"></slot>
   </div>
-  <div class="rating-section text-center">
-    <p class="rating-no">4.5</p>
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/half-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <p class="rating-no2">(455)</p>
+  <div class="rating-section justify-center row">
+    <slot name='rating'></slot>
+    <!-- <p class="rating-no">4.5</p>
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/half-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
+    <p class="rating-no2">(455)</p> -->
   </div>
-  <!-- <q-rating v-model="stars" :max="5" size="32px" /> -->
 </q-card-section>
 <q-separator class="separator" />
 
@@ -128,6 +127,11 @@ title{
               .star-icon{
                 width: 15px;
                 height: 15px;
+                display: inline;
+              }
+              .rating-star{
+                // float: right;
+                // transform: scaleX(-1)
                 display: inline;
               }
             }
