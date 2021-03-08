@@ -16,12 +16,12 @@ class ProfileController extends ApiController
 {
 //    public $modelClass = 'api\resources\User';
 
-    public function actions()
-    {
-        $actions = parent::actions();
-        unset($actions['update']);
-        return $actions;
-    }
+//    public function actions()
+//    {
+//        $actions = parent::actions();
+//        unset($actions['update']);
+//        return $actions;
+//    }
 
     public function  behaviors()
     {
