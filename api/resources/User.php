@@ -20,18 +20,46 @@ class User extends \common\models\User
             'id'=>function($model){
                 return $model->id;
             },
-            'full_name'=>function($model){
-                return $model->getPublicIdentity();
+
+            'firstname'=>function($model){
+                return $model->userProfile->firstname;
             },
+            'lastname'=>function($model){
+                return $model->userProfile->lastname;
+            },
+            'birthdate'=>function($model){
+                return date('d-m-Y',$model->userProfile->birthdate);
+            },
+            'phone_key'=>function($model){
+                return $model->userProfile->phone_key;
+            },
+         'phone'=>function($model){
+                return $model->userProfile->phone;
+            },
+            'country'=>function($model){
+                return $model->userProfile->country;
+            },
+            'city'=>function($model){
+                return $model->userProfile->city;
+            },
+             'bio'=>function($model){
+                return json_decode( $model->userProfile->bio);
+            },
+
+//            'full_name'=>function($model){
+//                return $model->getPublicIdentity();
+//            },
 //            'username',
               'email',
             'token'=>function($model){
-
                 return $model->access_token;
             },
 
             'image'=>function($model){
                 return   $model->userProfile->avatar?: \Yii::getAlias('@backendUrl'). "/img/anonymous.jpg" ;
+            },
+            'cover'=>function($model){
+                return   $model->userProfile->cover?: \Yii::getAlias('@backendUrl'). "/img/anonymous.jpg" ;
             },
 
         ];

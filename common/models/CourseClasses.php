@@ -8,10 +8,10 @@ use Yii;
  * This is the model class for table "{{%course_classes}}".
  *
  * @property int $id
- * @property int|null $course_id
- * @property string|null $title
- * @property int|null $time
- * @property int|null $duration
+ * @property int $course_id
+ * @property int $day_id
+ * @property int $from
+ * @property int $to
  *
  * @property Course $course
  */
@@ -31,10 +31,9 @@ class CourseClasses extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['course_id', 'duration','time','title'], 'required'],
-            [['course_id', 'duration'], 'integer'],
-            [['time'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
-            [['title'], 'string', 'max' => 255],
+            [['course_id', 'day_id'], 'required'],
+            [['course_id', 'day_id'], 'integer'],
+            [['from','to'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
             [['course_id'], 'exist', 'skipOnError' => true, 'targetClass' => Course::className(), 'targetAttribute' => ['course_id' => 'id']],
         ];
     }
@@ -46,10 +45,10 @@ class CourseClasses extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('backend', 'ID'),
-            'course_id' => Yii::t('backend', 'Course ID'),
-            'title' => Yii::t('backend', 'Title'),
-            'time' => Yii::t('backend', 'Time'),
-            'duration' => Yii::t('backend', 'Duration'),
+            'course_id' => Yii::t('backend', 'Course'),
+            'day_id' => Yii::t('backend', 'Day'),
+            'from' => Yii::t('backend', 'From'),
+            'to' => Yii::t('backend', 'To'),
         ];
     }
 
@@ -75,4 +74,19 @@ class CourseClasses extends \yii\db\ActiveRecord
 //        parent::afterFind ();
 //        $this->time=Yii::$app->formatter->asDate($this->time);
 //    }
+
+    public function getWeekDay($key)
+    {
+        $days = [
+            1 => 'Saturday',
+            2 => 'Sunday',
+            3 => 'Monday',
+            4 => 'Tuesday',
+            5 => 'Wednesday',
+            6 => 'Thursday',
+            7 => 'Friday'
+        ];
+        return $days[$key];
+
+    }
 }

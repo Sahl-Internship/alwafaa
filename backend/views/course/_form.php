@@ -14,7 +14,9 @@ use yii\bootstrap4\ActiveForm;
 ?>
 
 <div class="course-form">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+//        'tooltipStyleFeedback' => true,
+    ]); ?>
     <div class="card">
         <div class="card-body">
             <?php
@@ -22,7 +24,7 @@ use yii\bootstrap4\ActiveForm;
 
                 'items' => [
                     [
-                        'label' =>Yii::t('backend','Details'),
+                        'label' => Yii::t('backend', 'Details'),
                         'content' => $this->render('_courseDetails',
                             [
                                 'form' => $form,
@@ -35,15 +37,15 @@ use yii\bootstrap4\ActiveForm;
                         'active' => true
                     ],
                     [
-                        'label' => Yii::t('backend','Classes'),
+                        'label' => Yii::t('backend', 'Classes'),
                         'content' => $this->render('_courseClasses', [
                             'form' => $form,
                             'model' => $model,
                         ]),
                     ],
                     [
-                            'label'=>Yii::t('backend','Attachment'),
-                        'content'=>$this->render('_courseAttachment',[
+                        'label' => Yii::t('backend', 'Attachment'),
+                        'content' => $this->render('_courseAttachment', [
                             'form' => $form,
                             'model' => $model,
                         ]),
@@ -56,11 +58,11 @@ use yii\bootstrap4\ActiveForm;
 
         </div>
         <div class="card-footer">
-<!--            --><?php //echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-            <?php echo Html::submitButton($model->isNewRecord ?
-                    Yii::t('backend','Create') :
-                    Yii::t('backend','Update') ,
-                    ['class' => $model->isNewRecord ? 'btn success-btn' : 'btn btn-primary']) ?>
+            <?php echo Html::submitButton('Create' ,['class' => 'btn btn-success']) ?>
+<!--            --><?php //echo Html::submitButton($model->isNewRecord ?
+//                Yii::t('backend', 'Create') :
+//                Yii::t('backend', 'Update'),
+//                ['class' => $model->isNewRecord ? 'btn success-btn' : 'btn btn-primary']) ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>

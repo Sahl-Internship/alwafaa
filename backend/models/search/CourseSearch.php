@@ -18,8 +18,8 @@ class CourseSearch extends Course
     public function rules()
     {
         return [
-            [['id', 'time', 'duration', 'section_id', 'teacher_id'], 'integer'],
-            [['title', 'description', 'zoom_link'], 'safe'],
+            [['id','section_id', 'teacher_id','start_at','end_at'], 'integer'],
+            [['title', 'description', 'zoom_link','sub_title','requirement','target_student','targeted_skills',''], 'safe'],
         ];
     }
 
@@ -56,15 +56,19 @@ class CourseSearch extends Course
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'time' => $this->time,
-            'duration' => $this->duration,
+            'start_at' => $this->start_at,
+            'end_at' => $this->end_at,
             'section_id' => $this->section_id,
             'teacher_id' => $this->teacher_id,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'sub_title', $this->sub_title])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'zoom_link', $this->zoom_link]);
+            ->andFilterWhere(['like', 'zoom_link', $this->zoom_link])
+            ->andFilterWhere(['like', 'requirement', $this->requirement])
+            ->andFilterWhere(['like', 'target_student', $this->target_student])
+            ->andFilterWhere(['like', 'targeted_skills', $this->targeted_skills]);
 
         return $dataProvider;
     }

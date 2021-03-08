@@ -4,6 +4,7 @@
 namespace api\controllers;
 
 
+use yii\rest\ActiveController;
 use yii\rest\Controller;
 
 class ApiController extends Controller
