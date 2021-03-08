@@ -421,9 +421,12 @@ export default {
   },
   mounted () {
     const student = this.$store.getters['auth/getUser']
+    const birthdate = student.birthdate
+      ? new Date(student.birthdate * 1000 + 7200000).toISOString() : ''
     this.user = {
       ...student,
-      bio: student.bio ? [...student.bio] : []
+      bio: student.bio ? [...student.bio] : [],
+      birthdate
     }
   }
 }

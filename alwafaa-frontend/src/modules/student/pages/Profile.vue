@@ -487,6 +487,7 @@ export default {
   computed: {
     student () {
       return this.$store.getters['auth/getUser']
+        ? this.$store.getters['auth/getUser'] : {}
     }
   },
   methods: {

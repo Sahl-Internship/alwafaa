@@ -29,7 +29,7 @@ export default {
       console.log(error)
       Notify.create({
         type: 'negative',
-        message: i18n.t('student.otification.editdataErr')
+        message: i18n.t('student.notification.editdataErr')
       })
       return false
     }

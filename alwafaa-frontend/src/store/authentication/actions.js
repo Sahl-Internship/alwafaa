@@ -153,9 +153,9 @@ export default {
   },
 
   logout ({ commit }) {
-    commit('logout')
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+    commit('logout')
     this.$router.push({ name: 'login' })
   }
 }
