@@ -22,13 +22,13 @@ if (Yii::$app->controller->action->id == 'create') {
     $model->end_at = date('m/d/Y', $model->end_at);
 }
 $days = [
-    1 => 'Saturday',
-    2 => 'Sunday',
-    3 => 'Monday',
-    4 => 'Tuesday',
-    5 => 'Wednesday',
-    6 => 'Thursday',
-    7 => 'Friday'
+    0 => 'Sunday',
+    1 => 'Monday',
+    2 => 'Tuesday',
+    3 => 'Wednesday',
+    4 => 'Thursday',
+    5 => 'Friday',
+    6 => 'Saturday'
 ];
 ?>
 <br><br>
