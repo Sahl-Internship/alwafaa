@@ -48,51 +48,77 @@
             :options="slickOptions"
             class="slick"
           >
-          <base-card>
-            <template>
-              <img src="/images/home-imgs/alorefy.jpg" to='/auth/login'/>
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / محمد العريفي
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                القرآن الكريم
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="15"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">04:30:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card>
+           <!-- <ul> -->
+            <!-- <li> -->
+            <base-card  v-for="result in courses" :key="result.id">
+              <template>
+                <img src="/images/home-imgs/alorefy.jpg" to='/auth/login'/>
+              </template>
+              <template #teacherData>
+                <p class="label-1">
+                  <img src="/images/home-imgs/person.png" class="img-icon">
+                  د / محمد العريفي
+                </p>
+              </template>
+              <template #sectionData>
+                <p class="label-2">
+                  <span
+                    :class="
+                    {
+                      'img-icon2':result.section_id==='قران كريم' || 'حديث شريف',
+                      'global-icon2':result.section_id==='اللغة العربية'}"></span>
+                  <!-- <img src="/images/home-imgs/quran-icon2.png" class="img-icon2"> -->
+                  <!-- القرآن الكريم -->
+                  {{result.section_id}}
+                </p>
+              </template>
+              <template #courseState>
+                <p
+                  class="course-state"
+                  :class="
+                  {
+                    'red':result.state==='will start',
+                    'green':result.state==='not-ended',
+                    'white':result.state==='ended'
+                  }"
+                >
+                  لم تنته
+                </p>
+              </template>
+              <template #text>
+                <div class="col text-h6 course-name">
+                  <!-- استخدم الاسماء الخمسة في حالات الإعراب الثلاثة -->
+                  {{result.title}}
+                </div>
+              </template>
+              <template #rating>
+                <p class="rating-no2">(455)</p>
+                <star-rating
+                  class="star-rating q-mr-md"
+                  v-model="result.id"
+                  :increment="0.5"
+                  :rtl='true'
+                  :max-rating="5"
+                  :star-size="18"
+                  :padding='8'
+                  inactive-color="#ccc"
+                  active-color="orange"
+                ></star-rating>
+              </template>
+              <template #viewedSection>
+                  <p class="viewed-no">7</p>
+                  <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
+              </template>
+              <template #durationSection>
+                  <p class="duration">
+                    04:30:00
+                  </p>
+                  <img src="/images/home-imgs/duration.png" class="duration-icon">
+              </template>
+            </base-card>
+
 <!-- =================================================================================== -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/omar.jpg" />
             </template>
@@ -121,7 +147,7 @@
                 :increment="0.5"
                 :max-rating="5"
                 :rtl= true
-                :star-size="15"
+                :star-size="20"
                 inactive-color="#ccc"
                 active-color="orange"
               ></star-rating>
@@ -135,9 +161,9 @@
                 <p class="duration">04:30:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- ================================================================================================ -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/arabic.jpeg" />
             </template>
@@ -161,19 +187,16 @@
             <template #rating>
               <p class="rating-no2">(455)</p>
               <star-rating
-                class="star-rating"
+                class="star-rating q-mr-md"
                 v-model="rating"
                 :increment="0.5"
                 :max-rating="5"
                 :rtl= true
-                :star-size="15"
+                :star-size="20"
                 inactive-color="#ccc"
                 active-color="orange"
               ></star-rating>
             </template>
-            <!-- <template #rating-counter>
-              <p class="rating-no2">(455)</p>
-            </template> -->
             <template #viewedSection>
                 <p class="viewed-no">7</p>
                 <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
@@ -182,9 +205,9 @@
                 <p class="duration">05:30:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- =================================================================================== -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/alorefy.jpg" />
             </template>
@@ -213,14 +236,11 @@
                 :increment="0.5"
                 :max-rating="5"
                 :rtl= true
-                :star-size="15"
+                :star-size="20"
                 inactive-color="#ccc"
                 active-color="orange"
               ></star-rating>
             </template>
-            <!-- <template #rating-counter>
-              <p class="rating-no2">(455)</p>
-            </template> -->
             <template #viewedSection>
                 <p class="viewed-no">7</p>
                 <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
@@ -229,9 +249,9 @@
                 <p class="duration">08:10:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- ================================================================================= -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/omar.jpg" />
             </template>
@@ -260,14 +280,13 @@
                 :increment="0.5"
                 :max-rating="5"
                 :rtl= true
-                :star-size="15"
+                :star-size="20"
+                active-border-color="#080"
+                :padding='8'
                 inactive-color="#ccc"
                 active-color="orange"
               ></star-rating>
             </template>
-            <!-- <template #rating-counter>
-              <p class="rating-no2">455</p>
-            </template> -->
             <template #viewedSection>
                 <p class="viewed-no">7</p>
                 <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
@@ -276,11 +295,11 @@
                 <p class="duration">08:10:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- ==================================================================================== -->
           </slick>
         </div>
-</div>
+      </div>
       <!-- second slider -->
       <home-carousel-two></home-carousel-two>
 
@@ -292,7 +311,7 @@ import Slick from 'vue-slick'
 import StarRating from 'vue-star-rating'
 import BaseCard from 'src/components/UI/BaseCard'
 import HomeCarouselTwo from './HomeCarouselTwo.vue'
-import { axios } from 'src/boot/axios'
+// import { axios } from 'src/boot/axios'
 export default {
   components: { Slick, HomeCarouselTwo, BaseCard, StarRating },
   name: 'HomeCourses',
@@ -310,15 +329,15 @@ export default {
         initialSlide: 0,
         // focusOnSelect: true,
         rtl: true,
-        // centerPadding: '24px',
+        // centerPadding: '0px',
         responsive: [
           {
             breakpoint: 1200,
             settings: {
               slidesToShow: 3,
               slidesToScroll: 1,
-              // centerPadding: '100px'
-              centerMode: true
+              centerPadding: '0px'
+              // centerMode: true
             }
           },
           {
@@ -326,8 +345,8 @@ export default {
             settings: {
               slidesToShow: 3,
               slidesToScroll: 1,
-              centerPadding: '0px',
-              centerMode: true
+              centerPadding: '0px'
+              // centerMode: true
             }
           },
           {
@@ -398,14 +417,43 @@ export default {
       }
     }
   },
+  mounted () {
+    this.$store.dispatch('home/getCourses')
+  },
   created () {
-    axios.post('http://endpoints.alwafaa.localhost/course')
-      .then((response) => {
-        this.results = response.data
-        console.log(response)
-      })
+    // this.results = [
+    //   {
+    //     description: '<p>hhhhhhhhhhhhhh</p>',
+    //     end_at: '01-01-1970',
+    //     id: 1,
+    //     requirement: null,
+    //     section_id: 'قران كريم',
+    //     start_at: '01-01-1970',
+    //     sub_title: null,
+    //     target_student: null,
+    //     targeted_skills: null,
+    //     teacher_id: null,
+    //     title: 'course 1'
+    //   },
+    //   {
+    //     description: '<p>hhhhhhhhhhhhhh</p>',
+    //     end_at: '01-01-1970',
+    //     id: 2,
+    //     requirement: null,
+    //     section_id: 'قران كريم',
+    //     start_at: '01-01-1970',
+    //     sub_title: null,
+    //     target_student: null,
+    //     targeted_skills: null,
+    //     teacher_id: null,
+    //     title: 'course 1'
+    //   }
+    // ]
   },
   computed: {
+    courses () {
+      return this.$store.state.home.courses
+    },
     checkDirection () {
       return this.$q.lang.rtl
     },
@@ -464,27 +512,31 @@ export default {
 }
 .slider-container{
   height: 550px;
+  // width: 100%;
   overflow: hidden;
   position: relative;
   .slider{
     height: 100%;
     padding: 18px 0px;
     .slick{
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
+      // height: 100%;
+      // margin: 0;
+      // padding: 0;
+      // right: 0;
+      // left: 0;
+      // width: 100%;
       outline: none !important;
       border: none;
+      // display: inline;
       &:focus{
         outline: none !important;
         outline: 0 !important;
         border: none;
       }
       .my-card{
-        margin-left: -420px;
+        // margin-left: -420px;
+        margin-left: 50px;
+        // position: absolute;
         outline: none;
         border: none;
         width:400px !important;
@@ -500,7 +552,8 @@ export default {
         @media(max-width: 340px ),(max-width: 480px){
           width:300px !important;
           height: 420px !important;
-          margin-left: -330px;
+          margin-left: 30px;
+          // display: inline-block !important;
 
         }
         .rating-section{
@@ -517,7 +570,10 @@ export default {
           }
         }
         .separator{
-          margin-top: -23px;
+          position: absolute;
+          bottom: 55px;
+          margin-top: 0px;
+          width: 100%;
         }
         img{
           height: 220px;
@@ -529,7 +585,11 @@ export default {
           .duration{
             font-size: 15px;
             margin-right: 27px;
-            margin-top: -5px;
+            // display: inline;
+            position: absolute;
+            bottom: 2px;
+            right: 0px;
+            // margin-top: -25px;
             // padding-left: 10px;
           }
           .duration-icon{
@@ -549,9 +609,11 @@ export default {
               left: 25px;
           }
           .viewed-no{
-              font-size: 15px;
-              margin-left: 50px;
-              margin-top: -5px;
+            font-size: 15px;
+            margin-left: 50px;
+            position: absolute;
+            bottom: 2px;
+            left: 0px;
           }
         }
         .course-name{
@@ -587,6 +649,28 @@ export default {
             color: #fff;
             font-size: 12px;
           }
+          .course-state{
+            position:absolute;
+            text-align: center;
+            line-height: 1.8;
+            border-radius: 4px;
+            width: 60px;
+            height: 30px;
+            left: 15px;
+            bottom: 0px;
+          }
+          .red{
+            background: rgb(240, 71, 71);
+            color: #fff;
+          }
+          .green{
+            background: $green;
+            color: #000;
+          }
+          .white{
+            background: #DDD;
+            color: #000;
+          }
           .img-icon{
             width: 17px;
             height: 15px;
@@ -597,13 +681,27 @@ export default {
             margin-top: -1px;
           }
           .img-icon2{
+            background-image: url('/images/home-imgs/quran-icon2.png') ;
+            background-size: 20px 17px;
             width: 20px;
             height: 17px;
             position: absolute;
             padding-right: 0px;
             margin-left: -27px;
             left: 0;
-            margin-top: -1px;
+            top: 0;
+            // margin-top: -1px;
+          }
+          .global-icon2{
+            background-image: url('/images/home-imgs/global.png') ;
+            background-size: 17px 15px;
+            width: 17px;
+            height: 15px;
+            position: absolute;
+            padding-right: 0px;
+            margin-left: -27px;
+            left: 0;
+            top: 0;
           }
           .global{
             width: 17px;
@@ -637,5 +735,8 @@ export default {
 }
 .flip-img{
   transform: scaleX(-1);
+}
+li{
+  display: block;
 }
 </style>

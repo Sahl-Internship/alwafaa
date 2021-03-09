@@ -121,7 +121,7 @@ export default {
       search: '',
       results: ['no matched results'],
       isOpen: false,
-      items: ['Apple', 'Banana', 'Orange', 'Mango', 'Pear', 'Peach', 'Grape', 'Tangerine', 'Pineapple']
+      items: ['محمد العريفي', 'عمر عبدالكافي', 'احمد شعلان', 'محمد امين ارديل', 'احمد النقيب', 'طارق ادريس', 'رضا فاروق', 'شريف ادريس']
     }
   },
   methods: {
@@ -207,6 +207,9 @@ export default {
         // width: 100%;
         z-index: 1000;
         overflow: hidden;
+        @media (max-width: 340px), (max-width: 480px){
+          left: 16%;
+        }
       }
 
       .autocomplete-result {
