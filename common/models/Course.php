@@ -172,4 +172,18 @@ class Course extends \yii\db\ActiveRecord
             $courseClass->save();
         }
     }
+
+    public function getAllDays()
+    {
+        $start_date = $this->start_at;
+        $end_date = $this->end_at;
+        while (date("Y-m-d", $start_date) != date("Y-m-d", $end_date)) {
+            $day_index = date("w", $start_date);
+            if ($day_index == 0 || $day_index == 6) {
+                echo "test";
+            }
+            $now = strtotime(date("Y-m-d", $start_date) . "+1 day");
+        }
+
+    }
 }

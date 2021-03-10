@@ -78,15 +78,26 @@ class CourseClasses extends \yii\db\ActiveRecord
     public function getWeekDay($key)
     {
         $days = [
-            1 => 'Saturday',
-            2 => 'Sunday',
-            3 => 'Monday',
-            4 => 'Tuesday',
-            5 => 'Wednesday',
-            6 => 'Thursday',
-            7 => 'Friday'
+            0 => 'Sunday',
+            1 => 'Monday',
+            2 => 'Tuesday',
+            3 => 'Wednesday',
+            4 => 'Thursday',
+            5 => 'Friday',
+            6 => 'Saturday'
         ];
         return $days[$key];
 
     }
+
+//    public function getClassDuration($id)
+//    {
+//        $classes = CourseClasses::findBySql("
+//            SELECT c.id,c.from,c.to FROM course_classes c WHERE course_id=:id",['id'=>$id])->all();
+//
+//        return $classes;
+////        $time1 = strtotime($this->from);
+////        $time2 = strtotime($this->to);
+////        $difference = round(abs($time2 - $time1) / 3600,2);
+//    }
 }
