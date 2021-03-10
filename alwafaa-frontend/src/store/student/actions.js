@@ -21,17 +21,20 @@ export default {
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
       context.commit('auth/loginState', { token, user }, { root: true })
+      context.commit('toggleEditDialog')
 
       Loading.hide()
-      return true
+      Notify.create({
+        type: 'positive',
+        message: i18n.t('student.notification.editDataSuccess')
+      })
     } catch (error) {
       Loading.hide()
-      console.log(error)
+
       Notify.create({
         type: 'negative',
         message: i18n.t('student.notification.editdataErr')
       })
-      return false
     }
   }
 }

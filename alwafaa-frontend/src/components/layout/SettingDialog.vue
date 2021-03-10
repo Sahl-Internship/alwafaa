@@ -11,7 +11,7 @@
         text-color="grey-4"
         size="md"
         class="q-mt-md q-ml-md"
-        @click="$emit('closeDialog', 'editMode')"
+        @click="closeDialog"
       />
     </div>
 
@@ -344,7 +344,6 @@
 
 <script>
 import { dialCodes, countriesNames, getSelectedCountry } from 'src/utils/countries.js'
-import { i18n } from 'src/boot/i18n'
 
 export default {
   data () {
@@ -386,15 +385,7 @@ export default {
         studentData.password = this.password
       }
 
-      this.$store.dispatch('student/editStudentData', studentData).then(res => {
-        if (res) {
-          this.$emit('closeDialog', 'editMode')
-          this.$q.notify({
-            type: 'positive',
-            message: i18n.t('student.notification.editDataSuccess')
-          })
-        }
-      })
+      this.$store.dispatch('student/editStudentData', studentData)
     },
     goBack (value) {
       this.tab = value
@@ -405,6 +396,9 @@ export default {
     addHobby () {
       this.user.bio.push(this.newHobby)
       this.newHobby = ''
+    },
+    closeDialog () {
+      this.$store.commit('student/toggleEditDialog')
     }
   },
   watch: {

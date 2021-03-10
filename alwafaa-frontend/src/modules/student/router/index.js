@@ -1,7 +1,7 @@
 const studentRoutes = [
   {
     path: '/student',
-    component: () => import('src/modules/student/layout/StudentLayout.vue'),
+    component: () => import('src/modules/student/layout'),
     children: [
       {
         path: '',
@@ -11,14 +11,6 @@ const studentRoutes = [
         path: 'profile',
         name: 'studentProfile',
         component: () => import('src/modules/student/pages/Profile.vue'),
-        meta: {
-          requiresAuth: true
-        }
-      },
-      {
-        path: 'courses/all',
-        name: 'coursesList',
-        component: () => import('src/modules/student/pages/CoursesList.vue'),
         meta: {
           requiresAuth: true
         }

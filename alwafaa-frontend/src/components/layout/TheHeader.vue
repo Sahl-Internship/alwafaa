@@ -7,18 +7,19 @@
   >
     <q-toolbar>
       <div class="row items-center">
-        <q-avatar v-if="!$q.screen.lt.sm">
+        <q-avatar v-if="isAuthenticated && !$q.screen.lt.sm">
           <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
         </q-avatar>
 
         <q-toolbar-title
-          v-if="!$q.screen.lt.sm"
+          v-if="isAuthenticated && !$q.screen.lt.sm"
           class="text-subtitle1 text-grey-5 q-pr-none"
         >
           {{ student.firstname }} {{ student.lastname }}
         </q-toolbar-title>
 
         <q-btn
+          v-if="isAuthenticated"
           no-caps dense
           flat rounded
           icon="mdi-chevron-down"
@@ -50,7 +51,7 @@
                 :label="$t('student.header.setting')"
                 text-color="grey-4"
                 class="setting-link"
-                @click="$emit('openDialog', 'editMode')"
+                @click="toggleSettingDialog"
               />
             </q-card-section>
 
@@ -65,7 +66,7 @@
           </q-card>
         </q-btn>
 
-        <q-separator vertical />
+        <q-separator v-if="isAuthenticated" vertical />
 
         <q-btn
           dense round flat
@@ -106,7 +107,7 @@
           icon="mdi-magnify"
           text-color="grey-4"
           size="17px"
-          @click="$emit('openDialog', 'searchMode')"
+          @click="$emit('ToggleSearchDialog')"
         />
       </div>
 
@@ -126,19 +127,11 @@
       </q-btn>
     </q-toolbar>
 
-    <!-- <search
-      v-if="searchMode"
-      class="full-width"
-    ></search> -->
-
   </q-header>
 </template>
 
 <script>
-// import Search from './Search'
-
 export default {
-  // components: { Search },
   data () {
     return {
       openMenu: false,
@@ -150,11 +143,17 @@ export default {
     student () {
       return this.$store.getters['auth/getUser']
         ? this.$store.getters['auth/getUser'] : {}
+    },
+    isAuthenticated () {
+      return this.$store.getters['auth/isAuthenticated']
     }
   },
   methods: {
     handleLogout () {
       this.$store.dispatch('auth/logout')
+    },
+    toggleSettingDialog () {
+      this.$store.commit('student/toggleEditDialog')
     }
   }
 }
