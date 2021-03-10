@@ -38,10 +38,9 @@
             :options="slickOptions"
             class="slick"
           >
-<!-- ===================================================================================== -->
-            <!-- <base-card v-for="result in results" :key="result.id" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                      <base-card  v-for="result in courses" :key="result.id">
               <template>
-                <img src="/images/home-imgs/alorefy.jpg" to='/auth/login'/>
+              <img src="/images/home-imgs/arabic.jpeg" />
               </template>
               <template #teacherData>
                 <p class="label-1">
@@ -51,8 +50,26 @@
               </template>
               <template #sectionData>
                 <p class="label-2">
-                  <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                  {{result.section_id}}
+                  <span
+                    :class="
+                    {
+                      'img-icon2':result.section==='قران كريم' || 'حديث شريف',
+                      'global-icon2':result.section==='اللغة العربية'}"
+                  ></span>
+                  {{result.section}}
+                </p>
+              </template>
+              <template #courseState>
+                <p
+                  class="course-state"
+                  :class="
+                  {
+                    'red':result.state==='will start',
+                    'green':result.state==='not-ended',
+                    'white':result.state==='ended'
+                  }"
+                >
+                  لم تنته
                 </p>
               </template>
               <template #text>
@@ -61,18 +78,20 @@
                 </div>
               </template>
               <template #rating>
-                <p class="rating-no2">(455)</p>
+                <p class="rating">{{result.rate}}</p>
                 <star-rating
                   class="star-rating q-mr-md"
-                  v-model="rating"
+                  v-model="result.rate"
+                  :rtl='true'
                   :increment="0.5"
                   :max-rating="5"
-                  :rtl= true
                   :star-size="18"
-                  :padding='8'
+                  :show-rating='false'
+                  :padding='5'
                   inactive-color="#ccc"
                   active-color="orange"
                 ></star-rating>
+                <p class="rating-no2">(455)</p>
               </template>
               <template #viewedSection>
                   <p class="viewed-no">7</p>
@@ -80,13 +99,13 @@
               </template>
               <template #durationSection>
                   <p class="duration">
-                    04:30:00
+                    {{calcDuration(result.duration)}}
                   </p>
                   <img src="/images/home-imgs/duration.png" class="duration-icon">
               </template>
-            </base-card> -->
+            </base-card>
 <!-- =================================================================================== -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/arabic.jpeg" />
             </template>
@@ -128,9 +147,9 @@
                 <p class="duration">05:30:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- =================================================================================== -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/omar.jpg" />
             </template>
@@ -172,9 +191,9 @@
                 <p class="duration">04:30:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- ================================================================================================ -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/arabic.jpeg" />
             </template>
@@ -216,9 +235,9 @@
                 <p class="duration">05:30:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- =================================================================================== -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/alorefy.jpg" />
             </template>
@@ -260,9 +279,9 @@
                 <p class="duration">08:10:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- ================================================================================= -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/omar.jpg" />
             </template>
@@ -304,9 +323,9 @@
                 <p class="duration">08:10:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- ==================================================================================== -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/alorefy.jpg" />
             </template>
@@ -348,7 +367,7 @@
                 <p class="duration">08:10:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 
           </slick>
         </div>
@@ -359,7 +378,7 @@
 import Slick from 'vue-slick'
 import StarRating from 'vue-star-rating'
 import BaseCard from 'src/components/UI/BaseCard'
-import { axios } from 'src/boot/axios'
+// import { axios } from 'src/boot/axios'
 export default {
   components: { Slick, BaseCard, StarRating },
   name: 'HomeCourses',
@@ -447,6 +466,11 @@ export default {
     }
   },
   methods: {
+    calcDuration (duration) {
+      const hours = (duration / 60).toString().length > 1 ? duration / 60 : `0${duration / 60}`
+      const mins = (duration - (hours * 60)).toString().length > 1 ? duration - (hours * 60) : `0${duration - (hours * 60)}`
+      return `${hours}:${mins}:00`
+    },
     prevTwo () {
       // if (this.slide > 0) {
       //   if (this.slide - 3 === 0) { return false } else {
@@ -469,14 +493,13 @@ export default {
       // }
     }
   },
-  created () {
-    axios.get('http://endpoints.alwafaa.localhost/course')
-      .then((response) => {
-        this.results = response.data
-        console.log(response.data)
-      })
+  mounted () {
+    this.$store.dispatch('home/getCourses')
   },
   computed: {
+    courses () {
+      return this.$store.state.home.courses
+    },
     checkDirection () {
       return this.$q.lang.rtl
     },
@@ -566,7 +589,7 @@ export default {
         outline: none;
         border: none;
         width:400px !important;
-        height: 420px !important;
+        height: 450px !important;
         &:focus{
           outline: none !important;
           border: none;
@@ -585,9 +608,9 @@ export default {
         .rating-section{
           margin-top: 20px;
           margin-bottom: 30px;
-          .rating-no,.rating-no2{
+          .rating,.rating-no2{
             display: inline;
-            margin: 0px 8px;
+            margin: 4px 0px;
           }
           .star-icon{
             width: 15px;
@@ -611,8 +634,9 @@ export default {
           .duration{
             font-size: 15px;
             margin-right: 27px;
-            margin-top: -25px;
-            // padding-left: 10px;
+            position: absolute;
+            bottom: 2px;
+            right: 0px;
           }
           .duration-icon{
             width: 15px !important;
@@ -631,9 +655,11 @@ export default {
               left: 25px;
           }
           .viewed-no{
-              font-size: 15px;
-              margin-left: 50px;
-              margin-top: -25px;
+            font-size: 15px;
+            margin-left: 50px;
+            position: absolute;
+            bottom: 2px;
+            left: 0px;
           }
         }
         .course-name{
@@ -669,6 +695,28 @@ export default {
             color: #fff;
             font-size: 12px;
           }
+          .course-state{
+            position:absolute;
+            text-align: center;
+            line-height: 1.8;
+            border-radius: 4px;
+            width: 60px;
+            height: 30px;
+            left: 15px;
+            bottom: 0px;
+          }
+          .red{
+            background: rgb(240, 71, 71);
+            color: #fff;
+          }
+          .green{
+            background: $green;
+            color: #000;
+          }
+          .white{
+            background: #DDD;
+            color: #000;
+          }
           .img-icon{
             width: 17px;
             height: 15px;
@@ -678,14 +726,37 @@ export default {
             left: 0;
             margin-top: -1px;
           }
+          // .img-icon2{
+          //   width: 20px;
+          //   height: 17px;
+          //   position: absolute;
+          //   padding-right: 0px;
+          //   margin-left: -27px;
+          //   left: 0;
+          //   margin-top: -1px;
+          // }
           .img-icon2{
+            background-image: url('/images/home-imgs/quran-icon2.png') ;
+            background-size: 20px 17px;
             width: 20px;
             height: 17px;
             position: absolute;
             padding-right: 0px;
             margin-left: -27px;
             left: 0;
-            margin-top: -1px;
+            top: 0;
+            // margin-top: -1px;
+          }
+          .global-icon2{
+            background-image: url('/images/home-imgs/global.png') ;
+            background-size: 17px 15px;
+            width: 17px;
+            height: 15px;
+            position: absolute;
+            padding-right: 0px;
+            margin-left: -27px;
+            left: 0;
+            top: 0;
           }
           .global{
             width: 17px;

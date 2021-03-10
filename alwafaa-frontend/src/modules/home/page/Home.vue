@@ -1,5 +1,6 @@
 <template>
   <q-page>
+    <home-header></home-header>
     <home-cover></home-cover>
     <iqraa-academy-section class="q-mt-xl"></iqraa-academy-section>
     <home-carousel></home-carousel>
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+import HomeHeader from '../components/HomeHeader.vue'
 import HomeCover from 'src/modules/home/components/HomeCover.vue'
 import HomeCarousel from 'src/modules/home/components/HomeCarousel.vue'
 import IqraaAcademySection from 'src/modules/home/components/IqraaAcademySection.vue'
@@ -20,14 +22,13 @@ import HomeSignupSection from 'src/modules/home/components/HomeSignupSection.vue
 import AcademyInfoSection from 'src/modules/home/components/AcademyInfoSection.vue'
 import ChooseCourse from 'src/modules/home/components/ChooseCourse.vue'
 import CompletedSection from 'src/modules/home/components/CompletedSection.vue'
-import TheFooter from 'src/components/UI/TheFooter.vue'
 
 export default {
   name: 'Home',
   components: {
+    HomeHeader,
     CompletedSection,
     ChooseCourse,
-    TheFooter,
     IqraaAcademySection,
     HomeSignupSection,
     AcademyInfoSection,

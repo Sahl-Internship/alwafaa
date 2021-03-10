@@ -25,9 +25,9 @@
             <router-link to="/" class="link">{{$t('homeCover.availableCourse')}}</router-link>
           </q-item-label>
         </q-list>
-        <q-list class="drawer-lists">
+        <q-list class="drawer-lists" v-if="isAuthed">
           <q-item-label header class="text-grey-8">
-            <router-link to="/student/profile" class="link">{{$t('homeCover.studentProfile')}}</router-link>
+            <router-link  to="/student/profile" class="link">{{$t('homeCover.studentProfile')}}</router-link>
           </q-item-label>
         </q-list>
         <q-list class="drawer-lists">
@@ -56,7 +56,7 @@
         <ul class="nav-list q-mt-lg col-9 gt-sm">
           <li class="nav-item q-mr-md "><router-link class="link" to="/">{{$t('homeCover.main')}}</router-link></li>
           <li class="nav-item q-mr-md"><router-link class="link" to="/">  {{$t('homeCover.availableCourse')}}</router-link> </li>
-          <li class="nav-item"><router-link class="link" to="/student/profile">  {{$t('homeCover.studentProfile')}}</router-link> </li>
+          <li class="nav-item" v-if="isAuthed"><router-link class="link" to="/student/profile">  {{$t('homeCover.studentProfile')}}</router-link> </li>
         </ul>
       </div>
 

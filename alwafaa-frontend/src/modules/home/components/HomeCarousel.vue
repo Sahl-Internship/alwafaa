@@ -48,28 +48,26 @@
             :options="slickOptions"
             class="slick"
           >
-           <!-- <ul> -->
-            <!-- <li> -->
+<!-- ========================================================================================= -->
             <base-card  v-for="result in courses" :key="result.id">
               <template>
                 <img src="/images/home-imgs/alorefy.jpg" to='/auth/login'/>
               </template>
               <template #teacherData>
-                <p class="label-1">
+                <p class="teacher-name">
                   <img src="/images/home-imgs/person.png" class="img-icon">
                   د / محمد العريفي
                 </p>
               </template>
               <template #sectionData>
-                <p class="label-2">
+                <p class="course-section-name">
                   <span
                     :class="
                     {
-                      'img-icon2':result.section_id==='قران كريم' || 'حديث شريف',
-                      'global-icon2':result.section_id==='اللغة العربية'}"></span>
-                  <!-- <img src="/images/home-imgs/quran-icon2.png" class="img-icon2"> -->
-                  <!-- القرآن الكريم -->
-                  {{result.section_id}}
+                      'img-icon2':result.section==='قران كريم' || 'حديث شريف',
+                      'global-icon2':result.section==='اللغة العربية'}"
+                  ></span>
+                  {{result.section}}
                 </p>
               </template>
               <template #courseState>
@@ -87,23 +85,24 @@
               </template>
               <template #text>
                 <div class="col text-h6 course-name">
-                  <!-- استخدم الاسماء الخمسة في حالات الإعراب الثلاثة -->
                   {{result.title}}
                 </div>
               </template>
               <template #rating>
-                <p class="rating-no2">(455)</p>
+                <p class="rating">{{result.rate}}</p>
                 <star-rating
                   class="star-rating q-mr-md"
-                  v-model="result.id"
-                  :increment="0.5"
+                  v-model="result.rate"
                   :rtl='true'
+                  :increment="0.5"
                   :max-rating="5"
                   :star-size="18"
-                  :padding='8'
+                  :show-rating='false'
+                  :padding='5'
                   inactive-color="#ccc"
                   active-color="orange"
                 ></star-rating>
+                <p class="rating-no2">(455)</p>
               </template>
               <template #viewedSection>
                   <p class="viewed-no">7</p>
@@ -111,7 +110,7 @@
               </template>
               <template #durationSection>
                   <p class="duration">
-                    04:30:00
+                    {{calcDuration(result.duration)}}
                   </p>
                   <img src="/images/home-imgs/duration.png" class="duration-icon">
               </template>
@@ -311,7 +310,6 @@ import Slick from 'vue-slick'
 import StarRating from 'vue-star-rating'
 import BaseCard from 'src/components/UI/BaseCard'
 import HomeCarouselTwo from './HomeCarouselTwo.vue'
-// import { axios } from 'src/boot/axios'
 export default {
   components: { Slick, HomeCarouselTwo, BaseCard, StarRating },
   name: 'HomeCourses',
@@ -336,8 +334,8 @@ export default {
             settings: {
               slidesToShow: 3,
               slidesToScroll: 1,
-              centerPadding: '0px'
-              // centerMode: true
+              // centerPadding: '50px',
+              centerMode: true
             }
           },
           {
@@ -381,7 +379,7 @@ export default {
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
-              centerMode: true,
+              // centerMode: true,
               centerPadding: '5px'
             }
           },
@@ -400,55 +398,20 @@ export default {
     }
   },
   methods: {
+    calcDuration (duration) {
+      const hours = (duration / 60).toString().length > 1 ? duration / 60 : `0${duration / 60}`
+      const mins = (duration - (hours * 60)).toString().length > 1 ? duration - (hours * 60) : `0${duration - (hours * 60)}`
+      return `${hours}:${mins}:00`
+    },
     prev () {
-      if (this.slide > 0) {
-        this.$refs.slick.prev()
-        this.slide--
-      } else {
-        return false
-      }
+      this.$refs.slick.prev()
     },
     next () {
-      if (this.slide < 2) {
-        this.$refs.slick.next()
-        this.slide++
-      } else {
-        return false
-      }
+      this.$refs.slick.next()
     }
   },
   mounted () {
     this.$store.dispatch('home/getCourses')
-  },
-  created () {
-    // this.results = [
-    //   {
-    //     description: '<p>hhhhhhhhhhhhhh</p>',
-    //     end_at: '01-01-1970',
-    //     id: 1,
-    //     requirement: null,
-    //     section_id: 'قران كريم',
-    //     start_at: '01-01-1970',
-    //     sub_title: null,
-    //     target_student: null,
-    //     targeted_skills: null,
-    //     teacher_id: null,
-    //     title: 'course 1'
-    //   },
-    //   {
-    //     description: '<p>hhhhhhhhhhhhhh</p>',
-    //     end_at: '01-01-1970',
-    //     id: 2,
-    //     requirement: null,
-    //     section_id: 'قران كريم',
-    //     start_at: '01-01-1970',
-    //     sub_title: null,
-    //     target_student: null,
-    //     targeted_skills: null,
-    //     teacher_id: null,
-    //     title: 'course 1'
-    //   }
-    // ]
   },
   computed: {
     courses () {
@@ -512,35 +475,31 @@ export default {
 }
 .slider-container{
   height: 550px;
-  // width: 100%;
   overflow: hidden;
   position: relative;
   .slider{
     height: 100%;
     padding: 18px 0px;
     .slick{
-      // height: 100%;
-      // margin: 0;
-      // padding: 0;
-      // right: 0;
-      // left: 0;
-      // width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
       outline: none !important;
       border: none;
-      // display: inline;
       &:focus{
         outline: none !important;
         outline: 0 !important;
         border: none;
       }
       .my-card{
-        // margin-left: -420px;
-        margin-left: 50px;
-        // position: absolute;
+        margin-left: -420px;
         outline: none;
         border: none;
         width:400px !important;
-        height: 420px !important;
+        height: 450px !important;
         &:focus{
           outline: none !important;
           border: none;
@@ -553,15 +512,13 @@ export default {
           width:300px !important;
           height: 420px !important;
           margin-left: 30px;
-          // display: inline-block !important;
-
         }
         .rating-section{
           margin-top: 20px;
           margin-bottom: 30px;
-          .rating-no,.rating-no2{
+          .rating,.rating-no2{
             display: inline;
-            margin: 0px 8px;
+            margin: 4px 0px;
           }
           .star-icon{
             width: 15px;
@@ -585,12 +542,9 @@ export default {
           .duration{
             font-size: 15px;
             margin-right: 27px;
-            // display: inline;
             position: absolute;
             bottom: 2px;
             right: 0px;
-            // margin-top: -25px;
-            // padding-left: 10px;
           }
           .duration-icon{
             width: 15px !important;
@@ -629,7 +583,7 @@ export default {
           top: 0;
           left: 0;
           right: 0;
-          .label-1{
+          .teacher-name{
             position: absolute;
             top: 0;
             left: 0;
@@ -639,7 +593,7 @@ export default {
             color: #fff;
             font-size: 12px;
           }
-          .label-2{
+          .course-section-name{
             position: absolute;
             top: 0;
             left: 0;
@@ -739,4 +693,7 @@ export default {
 li{
   display: block;
 }
+// .star-rating{
+//   direction: rtl;
+// }
 </style>
