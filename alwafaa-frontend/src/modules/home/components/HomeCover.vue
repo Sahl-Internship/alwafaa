@@ -18,24 +18,41 @@
         >
           {{$t('homeCover.manyCourses')}}
         </p>
-        <q-input
-          outlined
-          v-model="text"
-          :label="$t('homeCover.search')"
-          bg-color="white"
-          maxlength="12"
-          class="col-xs-9 col-sm-5 col-md-5 col-lg-5 row column q-mt-lg q-mx-auto"
-        >
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
+        <div class="auto-complete row col-12 relative-position">
+          <q-input
+            outlined
+            v-model="search"
+            :label="$t('homeCover.search')"
+            bg-color="white"
+            maxlength="12"
+            class="col-xs-9 col-sm-5 col-md-5 col-lg-5 column q-mt-lg q-mx-auto input-field "
+            appendIconName= 'search'
+            @input="onChange"
+          >
+            <template v-slot:append>
+              <q-icon name="search"/>
+            </template>
+          </q-input>
+          <ul
+            v-show="isOpen"
+            class="autocomplete-results row col-xs-9 col-sm-5 col-md-5 col-lg-5"
+          >
+            <li
+              v-for="(result, i) in results"
+              :key="i"
+              @click="setResult(result)"
+              class="autocomplete-result"
+            >
+              {{ result }}
+            </li>
+          </ul>
+        </div>
         <div
           class="col-12 q-mb-lg"
         >
           <span> {{$t('homeCover.suggest')}}</span>
-          <router-link to='/'> {{$t('homeCover.firstSuggest')}} </router-link><span>/</span>
-          <router-link to='/'> {{$t('homeCover.secondSuggest')}} </router-link><span class="last-slash">/</span>
+          <router-link to='/'> {{$t('homeCover.firstSuggest')}} </router-link><span>,</span>
+          <router-link to='/'> {{$t('homeCover.secondSuggest')}} </router-link><span class="last-slash">,</span>
           <router-link class="last-link" to='/'>{{$t('homeCover.thirdSuggest')}} </router-link>
 
         </div>
@@ -101,13 +118,34 @@ export default {
       height: '100%',
       width: '100%',
       show: false,
-      text: ''
+      search: '',
+      results: ['no matched results'],
+      isOpen: false,
+      items: ['محمد العريفي', 'عمر عبدالكافي', 'احمد شعلان', 'محمد امين ارديل', 'احمد النقيب', 'طارق ادريس', 'رضا فاروق', 'شريف ادريس']
     }
   },
   methods: {
     showVideo () {
       this.show = !this.show
       this.autoplay = !this.autoplay
+    },
+    setResult (result) {
+      this.search = result
+      this.isOpen = false
+    },
+    onChange () {
+      this.isOpen = true
+      this.filterResults()
+    },
+    filterResults () {
+      this.results = this.items.filter(item => item.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+    }
+  },
+  watch: {
+    search (value) {
+      if (value === '') {
+        this.isOpen = false
+      }
     }
   },
   computed: {
@@ -156,22 +194,45 @@ export default {
       @media (max-width: 340px){
         margin-top: 0%;
       }
+      .autocomplete-results {
+        position: absolute;
+        padding: 5px;
+        margin-left: -11px;
+        background: #fff;
+        left: 30%;
+        top: 67px;
+        border-radius: 3px;
+        border: 1px solid #eeeeee;
+        height: 120px;
+        // width: 100%;
+        z-index: 1000;
+        overflow: hidden;
+        @media (max-width: 340px), (max-width: 480px){
+          left: 16%;
+        }
+      }
+
+      .autocomplete-result {
+        list-style: none;
+        text-align: left;
+        padding: 4px 2px;
+        color: $green;
+        display: block;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .autocomplete-result:hover {
+        background-color: $green;
+        color: white;
+      }
       p{
         font-size: calc(1rem + 1vw);
-        // font-size: 35px;
         font-weight: bold;
-        @media(max-width: 992px){
-          // font-size: 25px;
-        }
-        @media(max-width: 767px){
-          // font-size: 15px;
-        }
         @media (max-width: 480px){
-          // font-size: 15px;
           font-weight: normal;
         }
         @media (max-width: 340px){
-          // font-size: 13px;
           font-weight: normal;
           margin-bottom: 9px;
         }
@@ -180,28 +241,18 @@ export default {
         text-align: center;
         font-size: calc(0.02rem + 1vw);
         font-weight: normal;
-        // font-size: 15px;
-        @media(max-width: 992px){
-          // font-size: 12px;
-        }
         @media(max-width: 767px){
-          // font-size: 9px;
         }
         @media (max-width: 480px){
-          // font-size: 11px;
           font-size: calc(0.4rem + 1vw);
         }
         @media (max-width: 340px){
-          // font-size: 11px;
           font-weight: normal;
         }
       }
       span{
         color: #fff;
         margin: 0px 5px;
-        @media(max-width:480px),(max-width: 340px){
-          // display: none;
-        }
         @media(max-width: 767px){
           font-size: 12px;
         }
@@ -209,9 +260,6 @@ export default {
       a{
         text-decoration: none;
         color: #fff;
-        @media(max-width:480px),(max-width: 340px){
-        // display: none;
-        }
         @media(max-width: 767px){
           font-size: 12px;
         }

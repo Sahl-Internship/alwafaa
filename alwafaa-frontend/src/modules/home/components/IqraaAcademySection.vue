@@ -29,7 +29,7 @@
         <q-card-section class="row">
           <div class="text-h5 q-mt-xs q-mb-xs card-title-1 col-lg-10   q-mr-auto q-ml-auto">{{$t('iqraa.secondCardText1')}}</div>
           <div class="text-caption text-grey col-lg-10 q-mb-lg  q-mr-auto q-ml-auto">
-            {{$t('iqraa.secondCardText1')}}
+            {{$t('iqraa.secondCardText2')}}
           </div>
         </q-card-section>
       </q-card>

@@ -19,7 +19,6 @@
         </q-toolbar-title>
 
         <q-btn
-          v-if="isAuthenticated"
           no-caps dense
           flat rounded
           icon="mdi-chevron-down"
@@ -28,8 +27,8 @@
           @click="() => this.openMenu = !this.openMenu "
         >
           <q-card
-            v-if="openMenu"
-            class="q-pa-lg q-ml-md"
+            v-if="openMenu && isAuthenticated"
+            class="q-pa-lg q-ml-md card-menu"
             :class="$q.screen.lt.sm ? 'card-menu-sm' : 'card-menu-bg'"
           >
             <q-card-section class="column items-center">
@@ -57,6 +56,7 @@
 
             <q-card-actions class="column items-center">
               <q-btn
+                no-caps
                 :label="$t('student.header.logout')"
                 color="red-1"
                 text-color="red"
@@ -64,9 +64,38 @@
               />
             </q-card-actions>
           </q-card>
+
+          <q-card
+            v-if="openMenu && !isAuthenticated"
+            class="card-menu-unAuth q-px-sm"
+          >
+            <q-list>
+              <q-item
+                clickable
+                v-close-popup
+                to="/auth/login"
+              >
+                <q-item-section>
+                  {{ $t('student.header.login') }}
+                </q-item-section>
+              </q-item>
+
+              <q-separator />
+
+              <q-item
+                clickable
+                v-close-popup
+                to="/auth/signup"
+              >
+                <q-item-section>
+                  {{ $t('student.header.signup') }}
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-card>
         </q-btn>
 
-        <q-separator v-if="isAuthenticated" vertical />
+        <q-separator vertical />
 
         <q-btn
           dense round flat
@@ -171,16 +200,24 @@ export default {
   border-radius: 15px;
 }
 
-.card-menu-bg {
+.card-menu-unAuth {
   position: absolute;
   top: 45px;
+  min-width: 140px;
+  left: 2px;
+}
+
+.card-menu {
+  position: absolute;
+  top: 45px;
+  min-width: 300px;
+}
+
+.card-menu-bg {
   left: -170px;
-  min-width: 325px;
 }
 
 .card-menu-sm {
-  position: absolute;
-  top: 45px;
   left: -20px;
 }
 

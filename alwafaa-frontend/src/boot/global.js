@@ -4,9 +4,8 @@ import BaseInput from 'src/components/UI/BaseInput'
 import BaseSelect from 'src/components/UI/BaseSelect'
 import BaseButton from 'src/components/UI/BaseButton'
 import VueCarousel from 'vue-carousel'
-// import Embed from 'v-video-embed'
-// Vue.use(Embed)
 import VueYouTubeEmbed from 'vue-youtube-embed'
+
 Vue.use(VueYouTubeEmbed)
 Vue.use(VueCarousel)
 

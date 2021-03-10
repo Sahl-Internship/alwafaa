@@ -1,5 +1,5 @@
 <template>
-  <q-card class="my-card col-xs-12 col-sm-6 col-md-3 col-lg-3 q-mx-lg q-my-md" >
+  <q-card class="my-card col-xs-12 col-sm-6 col-md-3 col-lg-3 q-my-md" >
   <div class="container">
     <slot></slot>
     <div class="overlay"></div>
@@ -10,31 +10,33 @@
           <img src="~public/images/home-imgs/person.png" class="img-icon">
           د / محمد العريفي
         </p> -->
-    </div>
-    <div >
-      <slot name="sectionData"></slot>
-      <!-- <p class="label-2">
-        <img src="~public/images/home-imgs/quran-icon2.png" class="img-icon2">
-        القرآن الكريم
-      </p> -->
-    </div>
+      </div>
+      <div>
+        <slot name="sectionData"></slot>
+        <!-- <p class="label-2">
+         <img src="~public/images/home-imgs/quran-icon2.png" class="img-icon2">
+         القرآن الكريم
+       </p> -->
+      </div>
+      <div>
+        <slot name='courseState'></slot>
+      </div>
   </div>
 </div>
 <q-card-section>
   <div class="row no-wrap items-center text-center">
     <slot name="text"></slot>
   </div>
-  <div class="rating-section text-center">
-    <p class="rating-no">4.5</p>
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/half-star.png" alt="" class="star-icon" :class="{'flip-img':!checkDirection}">
-    <p class="rating-no2">(455)</p>
+  <div class="rating-section justify-center row">
+    <slot name='rating'></slot>
+    <!-- <p class="rating-no">4.5</p>
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
+    <img src="/images/home-imgs/half-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
+    <p class="rating-no2">(455)</p> -->
   </div>
-  <!-- <q-rating v-model="stars" :max="5" size="32px" /> -->
 </q-card-section>
 <q-separator class="separator" />
 
@@ -107,7 +109,8 @@ title{
           outline: none;
         }
         .my-card{
-            margin-left: -410px;
+            // margin-left: -410px;
+            display: inline-block;
             width:400px !important;
             height: 420px !important;
              @media(max-width: 1170px ){
@@ -117,6 +120,7 @@ title{
             @media(max-width: 340px ),(max-width: 480px){
               width:300px !important;
               height: 420px !important;
+              display: inline-block !important;
             }
             .rating-section{
               margin-top: 20px;
@@ -130,16 +134,24 @@ title{
                 height: 15px;
                 display: inline;
               }
+              .rating-star{
+                // float: right;
+                // transform: scaleX(-1)
+                display: inline;
+              }
             }
             .separator{
-              margin-top: -23px;
+              position: absolute;
+              bottom: 55px;
+              margin-top: 0px;
+              width: 100%;
             }
         .duration-view{
           margin-top: 20px;
           .duration{
             font-size: 15px;
             margin-right: 27px;
-            margin-top: -5px;
+            margin-top: 3px;
             // padding-left: 10px;
           }
           .duration-icon{
@@ -161,7 +173,7 @@ title{
           .viewed-no{
               font-size: 15px;
               margin-left: 50px;
-              margin-top: -5px;
+              margin-top: 3px;
           }
           // Flip in English
           .duration-flip{
