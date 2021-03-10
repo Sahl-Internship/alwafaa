@@ -3,7 +3,9 @@ export default {
     header: {
       logout: 'تسجيل الخروج',
       search: 'ابحث',
-      setting: 'إعدادات الحساب'
+      setting: 'إعدادات الحساب',
+      login: 'تسجيل الدخول',
+      signup: 'إنشاء حساب'
     },
     footer: {
       aboutIqraa: 'عن إقرأ',

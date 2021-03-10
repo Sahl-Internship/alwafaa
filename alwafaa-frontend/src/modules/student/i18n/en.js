@@ -3,7 +3,9 @@ export default {
     header: {
       logout: 'Logout',
       search: 'Search',
-      setting: 'Account Setting'
+      setting: 'Account Setting',
+      login: 'Login',
+      signup: 'Signup'
     },
     footer: {
       aboutIqraa: 'About Iqraa',
