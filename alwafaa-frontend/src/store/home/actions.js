@@ -1,9 +1,11 @@
-import { axios } from 'src/boot/axios'
+// import { axiosInstance as axios } from 'src/boot/axios'
+import {
+  handleGetCourses
+} from 'src/services/coursesApi'
 export default {
   async getCourses (context) {
-    const response = await axios.get('http://endpoints.alwafaa.localhost/course')
+    const response = await handleGetCourses()
     context.commit('getCourses', response.data)
-    console.log('from action', response.data)
   }
   // async getHigherRate (context) {
   //   const response = await axios.get('http://endpoints.alwafaa.localhost/course')

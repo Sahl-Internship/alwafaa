@@ -50,7 +50,7 @@
             class="slick"
           >
 <!-- ========================================================================================= -->
-            <base-card  v-for="result in courses" :key="result.id">
+            <base-card  v-for="result in courses" :key="result.id" :to="'courses/:' + result.id">
               <template>
                 <img src="/images/home-imgs/alorefy.jpg" to='/auth/login'/>
               </template>
@@ -311,6 +311,7 @@ import Slick from 'vue-slick'
 import StarRating from 'vue-star-rating'
 import BaseCard from 'src/components/UI/BaseCard'
 import HomeCarouselTwo from './HomeCarouselTwo.vue'
+// import courses from 'src/store/courses'
 
 export default {
   components: { Slick, HomeCarouselTwo, BaseCard, StarRating },
@@ -429,75 +430,6 @@ export default {
     left () {
       return this.checkDirection ? 'fas fa-angle-right' : 'fas fa-angle-left'
     }
-  },
-  created () {
-    this.results = [
-      {
-        description: '<p>hhhhhhhhhhhhhh</p>',
-        end_at: '01-01-1970',
-        id: 1,
-        requirement: null,
-        section_id: 'قران كريم',
-        start_at: '01-01-1970',
-        sub_title: null,
-        target_student: null,
-        targeted_skills: null,
-        teacher_id: null,
-        title: 'course 1'
-      },
-      {
-        description: '<p>hhhhhhhhhhhhhh</p>',
-        end_at: '01-01-1970',
-        id: 2,
-        requirement: null,
-        section_id: 'قران كريم',
-        start_at: '01-01-1970',
-        sub_title: null,
-        target_student: null,
-        targeted_skills: null,
-        teacher_id: null,
-        title: 'course 1'
-      }
-      // {
-      //   description: '<p>hhhhhhhhhhhhhh</p>',
-      //   end_at: '01-01-1970',
-      //   id: 3,
-      //   requirement: null,
-      //   section_id: 'قران كريم',
-      //   start_at: '01-01-1970',
-      //   sub_title: null,
-      //   target_student: null,
-      //   targeted_skills: null,
-      //   teacher_id: null,
-      //   title: 'course 1'
-      // },
-      // {
-      //   description: '<p>hhhhhhhhhhhhhh</p>',
-      //   end_at: '01-01-1970',
-      //   id: 4,
-      //   requirement: null,
-      //   section_id: 'قران كريم',
-      //   start_at: '01-01-1970',
-      //   sub_title: null,
-      //   target_student: null,
-      //   targeted_skills: null,
-      //   teacher_id: null,
-      //   title: 'course 1'
-      // },
-      // {
-      //   description: '<p>hhhhhhhhhhhhhh</p>',
-      //   end_at: '01-01-1970',
-      //   id: 5,
-      //   requirement: null,
-      //   section_id: 'قران كريم',
-      //   start_at: '01-01-1970',
-      //   sub_title: null,
-      //   target_student: null,
-      //   targeted_skills: null,
-      //   teacher_id: null,
-      //   title: 'course 1'
-      // }
-    ]
   }
 }
 </script>
