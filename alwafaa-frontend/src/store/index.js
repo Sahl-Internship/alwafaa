@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import AuthModule from './authentication'
 import studentModule from './student'
+import coursestModule from './courses'
 
 Vue.use(Vuex)
 
@@ -19,7 +20,8 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       auth: AuthModule,
-      student: studentModule
+      student: studentModule,
+      courses: coursestModule
     },
 
     // enable strict mode (adds overhead!)

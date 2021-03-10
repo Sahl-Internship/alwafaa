@@ -1,24 +1,25 @@
 <template>
   <q-header
-    class="header bg-white"
+    class="header bg-white z-top"
     :class="{
      ' q-px-xl': !$q.screen.lt.md,
     }"
   >
     <q-toolbar>
       <div class="row items-center">
-        <q-avatar v-if="!$q.screen.lt.sm">
+        <q-avatar v-if="isAuthenticated && !$q.screen.lt.sm">
           <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
         </q-avatar>
 
         <q-toolbar-title
-          v-if="!$q.screen.lt.sm"
+          v-if="isAuthenticated && !$q.screen.lt.sm"
           class="text-subtitle1 text-grey-5 q-pr-none"
         >
-          {{ user.full_name }}
+          {{ student.firstname }} {{ student.lastname }}
         </q-toolbar-title>
 
         <q-btn
+          v-if="isAuthenticated"
           no-caps dense
           flat rounded
           icon="mdi-chevron-down"
@@ -28,7 +29,7 @@
         >
           <q-card
             v-if="openMenu"
-            class="q-pa-lg q-ml-md header-menu"
+            class="q-pa-lg q-ml-md"
             :class="$q.screen.lt.sm ? 'card-menu-sm' : 'card-menu-bg'"
           >
             <q-card-section class="column items-center">
@@ -37,11 +38,11 @@
               </q-avatar>
 
               <div class="text-h6 text-center">
-                {{ user.full_name }}
+                {{ student.firstname }} {{ student.lastname }}
               </div>
 
               <div class="text-subtitle2 text-center text-grey-4">
-                {{ user.email }}
+                {{ student.email }}
               </div>
 
               <q-btn
@@ -50,7 +51,7 @@
                 :label="$t('student.header.setting')"
                 text-color="grey-4"
                 class="setting-link"
-                @click="$emit('openDialog')"
+                @click="toggleSettingDialog"
               />
             </q-card-section>
 
@@ -65,7 +66,7 @@
           </q-card>
         </q-btn>
 
-        <q-separator vertical />
+        <q-separator v-if="isAuthenticated" vertical />
 
         <q-btn
           dense round flat
@@ -103,26 +104,11 @@
           flat
           dense
           rounded
-          :icon="!openSearch ? 'mdi-magnify' : 'mdi-close'"
+          icon="mdi-magnify"
           text-color="grey-4"
           size="17px"
-          @click="() => this.openSearch = !this.openSearch"
+          @click="$emit('ToggleSearchDialog')"
         />
-
-        <q-input
-          filled
-          dense
-          outlined
-          v-if="openSearch"
-          v-model="searchVal"
-          debounce="500"
-          :placeholder="$t('student.header.search')"
-          style="width: 42%"
-        >
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
       </div>
 
       <q-space />
@@ -140,6 +126,7 @@
         </q-avatar>
       </q-btn>
     </q-toolbar>
+
   </q-header>
 </template>
 
@@ -149,17 +136,25 @@ export default {
     return {
       openMenu: false,
       searchVal: '',
-      openSearch: false,
-      user: {}
+      searchMode: false
+    }
+  },
+  computed: {
+    student () {
+      return this.$store.getters['auth/getUser']
+        ? this.$store.getters['auth/getUser'] : {}
+    },
+    isAuthenticated () {
+      return this.$store.getters['auth/isAuthenticated']
     }
   },
   methods: {
     handleLogout () {
       this.$store.dispatch('auth/logout')
+    },
+    toggleSettingDialog () {
+      this.$store.commit('student/toggleEditDialog')
     }
-  },
-  mounted () {
-    this.user = this.$store.state.auth.user
   }
 }
 </script>

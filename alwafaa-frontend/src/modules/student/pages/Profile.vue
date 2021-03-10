@@ -1,6 +1,4 @@
 <template>
-  <div>
-  <Header @openDialog="activeEditMode"></Header>
   <div
     class="row justify-center bg-grey-2 q-gutter-y-md profile"
     :class="{
@@ -28,7 +26,7 @@
               no-icon-animation
             >
               <q-list class="q-px-sm" style="minWidth: 190px">
-                <q-item clickable @click="editMode = true">
+                <q-item clickable v-close-popup @click="toggleSettingDialog">
                   <q-item-section side class="q-pr-sm">
                     <q-icon name="mdi-cog" color="grey-4" size="xs" />
                   </q-item-section>
@@ -40,7 +38,7 @@
 
                 <q-separator color="grey-2" />
 
-                <q-item clickable>
+                <q-item clickable v-close-popup>
                     <q-item-section side class="q-pr-sm">
                       <q-icon name="mdi-image" color="grey-4" size="xs" />
                     </q-item-section>
@@ -60,7 +58,7 @@
 
                 </q-item>
 
-                <q-item dense clickable class="bg-red-1 q-mb-xs">
+                <q-item dense clickable v-close-popup class="bg-red-1 q-mb-xs">
                   <q-item-section side class="q-pr-sm">
                     <q-icon name="mdi-delete" color="red" size="xs" />
                   </q-item-section>
@@ -112,7 +110,7 @@
                     'text-h5': $q.screen.lt.md && !$q.screen.lt.sm ,
                     'text-h6': $q.screen.lt.sm,
                   }"
-                >{{ user.full_name }}</div>
+                >{{ student.firstname }} {{ student.lastname }}</div>
                 <div
                   class="text-weight-bold"
                   :class="{
@@ -127,7 +125,7 @@
                   }"
                 >
                   <flag iso="eg" class="rounded-icon q-mr-xs" />
-                  مصر, القاهرة
+                  {{ student.country }}, {{ student.city }}
                 </div>
               </div>
             </div>
@@ -144,10 +142,10 @@
                   'q-px-md': !$q.screen.lt.md,
                   'q-px-sm': $q.screen.lt.md
                 }"
-                v-for="(hobby, index) in hobbies"
+                v-for="(hobby, index) in student.bio"
                 :key="index"
               >
-                {{ hobby }}
+                #{{ hobby }}
               </div>
             </div>
           </div>
@@ -343,7 +341,7 @@
                   text-color="grey-5"
                   icon="mdi-plus"
                   :size="$q.screen.lt.md ? 'lg' : 'xl'"
-                  to=""
+                  to="/courses/all"
                 />
               </div>
             </div>
@@ -388,27 +386,18 @@
       </div>
     </div>
 
-    <q-dialog v-model="editMode" full-width>
-      <setting-dialog @closeDialoge="handleCloseDialoge" ></setting-dialog>
-    </q-dialog>
-
-  </div>
   </div>
 </template>
 
 <script>
-import Header from '../components/Header.vue'
 import ActivityCard from '../components/ActivityCard'
 import UncompleteCourseCard from '../components/UncompleteCourseCard.vue'
-import SettingDialog from '../components/SettingDialog.vue'
 
 export default {
-  components: { Header, ActivityCard, UncompleteCourseCard, SettingDialog },
+  components: { ActivityCard, UncompleteCourseCard },
   data () {
     return {
-      hobbies: ['#النحو', '#أحكام القرآن', '#الشعر', '#معرفة', '#الفصاحة'],
       slide: 1,
-      editMode: false,
       profileImage: 'https://cdn.quasar.dev/img/boy-avatar.png',
       bgImage: '/images/profile-bg.png',
       activities: [
@@ -461,26 +450,25 @@ export default {
           completed: '01:45:23',
           remaining: '02:02:23'
         }
-      ],
-      user: {}
+      ]
+    }
+  },
+  computed: {
+    student () {
+      return this.$store.getters['auth/getUser']
+        ? this.$store.getters['auth/getUser'] : {}
     }
   },
   methods: {
-    activeEditMode () {
-      this.editMode = true
-    },
-    handleCloseDialoge () {
-      this.editMode = false
-    },
     handleChangeAvatar () {
       this.profileImage = URL.createObjectURL(this.$refs.profileImg.files[0])
     },
     handleChangeBg () {
       this.bgImage = URL.createObjectURL(this.$refs.bgImg.files[0])
+    },
+    toggleSettingDialog () {
+      this.$store.commit('student/toggleEditDialog')
     }
-  },
-  mounted () {
-    this.user = this.$store.state.auth.user
   }
 }
 </script>
@@ -593,10 +581,5 @@ export default {
     width: 100px;
     height: 58px;
   }
-
-  // :class="{
-  //   'q-px-lg q-py-sm': !$q.screen.lt.md,
-  //   'q-px-sm q-py-xs': $q.screen.lt.md,
-  // }"
 }
 </style>

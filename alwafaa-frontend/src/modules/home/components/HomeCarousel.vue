@@ -48,7 +48,10 @@
             :options="slickOptions"
             class="slick"
           >
-          <base-card>
+          <base-card
+            v-for="result in results"
+            :key="result.id"
+          >
             <template>
               <img src="/images/home-imgs/alorefy.jpg" to='/auth/login'/>
             </template>
@@ -79,7 +82,7 @@
             </template>
           </base-card>
 <!-- =================================================================================== -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/omar.jpg" />
             </template>
@@ -108,9 +111,9 @@
                 <p class="duration">04:30:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- ================================================================================================ -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/arabic.jpeg" />
             </template>
@@ -139,9 +142,9 @@
                 <p class="duration">05:30:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- =================================================================================== -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/alorefy.jpg" />
             </template>
@@ -170,9 +173,9 @@
                 <p class="duration">08:10:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- ================================================================================= -->
-          <base-card>
+          <!-- <base-card>
             <template>
               <img src="/images/home-imgs/omar.jpg" />
             </template>
@@ -201,7 +204,7 @@
                 <p class="duration">08:10:00</p>
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
-          </base-card>
+          </base-card> -->
 <!-- ==================================================================================== -->
           </slick>
         </div>
@@ -216,6 +219,7 @@
 import Slick from 'vue-slick'
 import BaseCard from 'src/components/UI/BaseCard'
 import HomeCarouselTwo from './HomeCarouselTwo.vue'
+
 export default {
   components: { Slick, HomeCarouselTwo, BaseCard },
   name: 'HomeCourses',
@@ -297,8 +301,75 @@ export default {
             }
           }
         ]
-        // autoplay: true
-      }
+        // autoplay: true,
+      },
+      results: [
+        // {
+        //   description: '<p>hhhhhhhhhhhhhh</p>',
+        //   end_at: '01-01-1970',
+        //   id: 1,
+        //   requirement: null,
+        //   section_id: 'قران كريم',
+        //   start_at: '01-01-1970',
+        //   sub_title: null,
+        //   target_student: null,
+        //   targeted_skills: null,
+        //   teacher_id: null,
+        //   title: 'course 1'
+        // },
+        // {
+        //   description: '<p>hhhhhhhhhhhhhh</p>',
+        //   end_at: '01-01-1970',
+        //   id: 2,
+        //   requirement: null,
+        //   section_id: 'قران كريم',
+        //   start_at: '01-01-1970',
+        //   sub_title: null,
+        //   target_student: null,
+        //   targeted_skills: null,
+        //   teacher_id: null,
+        //   title: 'course 1'
+        // },
+        // {
+        //   description: '<p>hhhhhhhhhhhhhh</p>',
+        //   end_at: '01-01-1970',
+        //   id: 3,
+        //   requirement: null,
+        //   section_id: 'قران كريم',
+        //   start_at: '01-01-1970',
+        //   sub_title: null,
+        //   target_student: null,
+        //   targeted_skills: null,
+        //   teacher_id: null,
+        //   title: 'course 1'
+        // },
+        // {
+        //   description: '<p>hhhhhhhhhhhhhh</p>',
+        //   end_at: '01-01-1970',
+        //   id: 4,
+        //   requirement: null,
+        //   section_id: 'قران كريم',
+        //   start_at: '01-01-1970',
+        //   sub_title: null,
+        //   target_student: null,
+        //   targeted_skills: null,
+        //   teacher_id: null,
+        //   title: 'course 1'
+        // },
+        // {
+        //   description: '<p>hhhhhhhhhhhhhh</p>',
+        //   end_at: '01-01-1970',
+        //   id: 5,
+        //   requirement: null,
+        //   section_id: 'قران كريم',
+        //   start_at: '01-01-1970',
+        //   sub_title: null,
+        //   target_student: null,
+        //   targeted_skills: null,
+        //   teacher_id: null,
+        //   title: 'course 1'
+        // }
+      ]
     }
   },
   methods: {
@@ -330,6 +401,75 @@ export default {
     left () {
       return this.checkDirection ? 'fas fa-angle-right' : 'fas fa-angle-left'
     }
+  },
+  created () {
+    this.results = [
+      {
+        description: '<p>hhhhhhhhhhhhhh</p>',
+        end_at: '01-01-1970',
+        id: 1,
+        requirement: null,
+        section_id: 'قران كريم',
+        start_at: '01-01-1970',
+        sub_title: null,
+        target_student: null,
+        targeted_skills: null,
+        teacher_id: null,
+        title: 'course 1'
+      },
+      {
+        description: '<p>hhhhhhhhhhhhhh</p>',
+        end_at: '01-01-1970',
+        id: 2,
+        requirement: null,
+        section_id: 'قران كريم',
+        start_at: '01-01-1970',
+        sub_title: null,
+        target_student: null,
+        targeted_skills: null,
+        teacher_id: null,
+        title: 'course 1'
+      }
+      // {
+      //   description: '<p>hhhhhhhhhhhhhh</p>',
+      //   end_at: '01-01-1970',
+      //   id: 3,
+      //   requirement: null,
+      //   section_id: 'قران كريم',
+      //   start_at: '01-01-1970',
+      //   sub_title: null,
+      //   target_student: null,
+      //   targeted_skills: null,
+      //   teacher_id: null,
+      //   title: 'course 1'
+      // },
+      // {
+      //   description: '<p>hhhhhhhhhhhhhh</p>',
+      //   end_at: '01-01-1970',
+      //   id: 4,
+      //   requirement: null,
+      //   section_id: 'قران كريم',
+      //   start_at: '01-01-1970',
+      //   sub_title: null,
+      //   target_student: null,
+      //   targeted_skills: null,
+      //   teacher_id: null,
+      //   title: 'course 1'
+      // },
+      // {
+      //   description: '<p>hhhhhhhhhhhhhh</p>',
+      //   end_at: '01-01-1970',
+      //   id: 5,
+      //   requirement: null,
+      //   section_id: 'قران كريم',
+      //   start_at: '01-01-1970',
+      //   sub_title: null,
+      //   target_student: null,
+      //   targeted_skills: null,
+      //   teacher_id: null,
+      //   title: 'course 1'
+      // }
+    ]
   }
 }
 </script>
@@ -415,7 +555,6 @@ export default {
           width:300px !important;
           height: 420px !important;
           margin-left: -330px;
-
         }
         .rating-section{
           margin-top: 20px;
