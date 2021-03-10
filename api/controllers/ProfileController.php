@@ -6,6 +6,7 @@ namespace api\controllers;
 
 use api\resources\User;
 use common\models\CourseReview;
+use common\models\JoinCourses;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
@@ -107,22 +108,5 @@ class ProfileController extends ApiController
 
 
     }
-
-    public function actionReview(){
-        $params = \Yii::$app->request->post();
-        $review = new CourseReview();
-
-        $review->load(['CourseReview' => $params]);
-        if ($review->validate() and $registerUser = $review->save()) {
-            return ['status'=>1, 'message'=>'Successfully Registration'];
-        }elseif($review->errors){
-            return ['status'=>0,'message'=> $review->errors,'key'=>'dataError'];
-        }else{
-            return ['status'=>0,  'message'=> 'Error,Try again' ];
-        }
-
-
-    }
-
 
 }
