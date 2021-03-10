@@ -4,7 +4,11 @@
     <q-separator color="grey-1" />
 
     <div class="row justify-center">
-      <div class="col-xs-12  col-sm-11 row q-py-lg q-px-md">
+
+      <div
+        class="col-xs-12 col-sm-11 row q-py-lg q-px-md"
+        :class="$q.screen.lt.md ? 'q-gutter-y-lg' : 'q-gutter-y-xl'"
+      >
         <div class="col-12">
           <q-breadcrumbs
             separator=">"
@@ -16,7 +20,10 @@
           </q-breadcrumbs>
         </div>
 
-        <div class="text-h4 text-weight-bold text-grey-5 text-left q-my-xl">
+        <div
+          class="text-weight-bold text-grey-5 text-left"
+          :class="$q.screen.lt.sm ? 'text-h5' : 'text-h4'"
+        >
           الدورات المتاحة
         </div>
 
@@ -40,134 +47,213 @@
             </template>
           </q-input>
 
-          <q-btn
-            no-caps
-            unelevated
-            no-icon-animation
-            icon-right="mdi-chevron-down"
-            text-color="grey-5"
-            color="grey-1"
-            align="between"
-            class="filter-select"
+          <div
+            class="col-xs-12 col-sm-6 row justify-between"
+            :class="{
+              'q-pl-lg': !$q.screen.lt.md,
+              'q-pl-sm': $q.screen.lt.md && !$q.screen.lt.sm,
+            }"
           >
-            <div v-if="!selectedSection" class="text-subtitle1 text-grey-3">
-              فئة الدورة
-            </div>
+            <q-btn
+              no-caps
+              no-wrap
+              unelevated
+              no-icon-animation
+              icon-right="mdi-chevron-down"
+              text-color="grey-5"
+              color="grey-1"
+              align="between"
+              class="filter-select"
+              :class="$q.screen.lt.md ? 'filter-select-sm' : ''"
+            >
+              <div
+                v-if="!selectedSection"
+                class="text-grey-3 ellipsis"
+                :class="{
+                  'text-subtitle1': !$q.screen.lt.md,
+                  'text-caption': $q.screen.lt.md
+                }"
+              >
+                فئة الدورة
+              </div>
 
-            <div v-else class="row justify-start items-center">
-              <q-img :src="selectedSection.src" width="16px" class="q-mr-sm" />
-              <div class="text-subtitle1">{{ selectedSection.label }}</div>
-            </div>
-
-            <q-menu max-width="175px">
-              <q-list style="width: 175px" class="q-pa-sm">
-                <q-item
-                  clickable v-close-popup
-                  v-for="(option, index) in sectionsOptions"
-                  :key="index"
-                  @click="selectSection(index)"
+              <div v-else class="row justify-start items-center no-wrap ellipsis">
+                <q-img
+                  v-if="!$q.screen.lt.md"
+                  :src="selectedSection.src"
+                  width="16px"
+                  class="q-mr-sm"
+                />
+                <div
                   :class="{
-                    'bg-grey-1': index === activeSectionIndex
+                    'text-subtitle1': !$q.screen.lt.md,
+                    'text-caption': $q.screen.lt.md
                   }"
+                >{{ selectedSection.label }}</div>
+              </div>
+
+              <q-menu fit>
+                <q-list
+                  class="q-pa-sm"
+                  :class="$q.screen.lt.md ? 'list-sm' : 'list-lg'"
                 >
-                  <q-item-section>
-                    <div class="row justify-start">
-                      <q-img :src="option.src" width="16px" class="q-mr-sm" />
-                      <q-item-label>{{ option.label }}</q-item-label>
-                    </div>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-          </q-btn>
+                  <q-item
+                    clickable v-close-popup
+                    v-for="(option, index) in sectionsOptions"
+                    :key="index"
+                    @click="selectSection(index)"
+                    :class="{
+                      'bg-grey-1': index === activeSectionIndex
+                    }"
+                  >
+                    <q-item-section>
+                      <div class="row justify-start">
+                        <img :src="option.src" class="q-mr-sm filter-icon" />
+                        <q-item-label
+                          :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
+                        >
+                          {{ option.label }}
+                        </q-item-label>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
 
-          <q-btn
-            no-caps
-            unelevated
-            no-icon-animation
-            icon-right="mdi-chevron-down"
-            text-color="grey-5"
-            color="grey-1"
-            align="between"
-            class="filter-select"
-          >
-            <div class="row justify-start items-center">
-              <q-img :src="selectedLanguage.src" width="16px" height="16px" class="q-mr-sm" />
-              <div class="text-subtitle1">{{ selectedLanguage.label }}</div>
-            </div>
-
-            <q-menu max-width="175px">
-              <q-list style="width: 175px" class="q-pa-sm">
-                <q-item
-                  clickable v-close-popup
-                  v-for="(option, index) in languagesOptions"
-                  :key="index"
-                  @click="selectLanguage(index)"
+            <q-btn
+              no-caps
+              no-wrap
+              unelevated
+              no-icon-animation
+              icon-right="mdi-chevron-down"
+              text-color="grey-5"
+              color="grey-1"
+              align="between"
+              class="filter-select"
+              :class="$q.screen.lt.md ? 'filter-select-sm' : ''"
+            >
+              <div class="row justify-start items-center no-wrap ellipsis">
+                <q-img
+                  v-if="!$q.screen.lt.md"
+                  :src="selectedLanguage.src"
+                  width="16px"
+                  height="16px"
+                  class="q-mr-sm"
+                />
+                <div
                   :class="{
-                    'bg-grey-1': index === activeLanguageIndex
+                    'text-subtitle1': !$q.screen.lt.md,
+                    'text-caption': $q.screen.lt.md
                   }"
+                >{{ selectedLanguage.label }}</div>
+              </div>
+
+              <q-menu fit>
+                <q-list
+                  class="q-pa-sm"
+                  :class="$q.screen.lt.md ? 'list-sm' : 'list-lg'"
                 >
-                  <q-item-section>
-                    <div class="row justify-start">
-                      <q-img :src="option.src" width="16px" class="q-mr-sm" />
-                      <q-item-label>{{ option.label }}</q-item-label>
-                    </div>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-          </q-btn>
+                  <q-item
+                    clickable v-close-popup
+                    v-for="(option, index) in languagesOptions"
+                    :key="index"
+                    @click="selectLanguage(index)"
+                    :class="{
+                      'bg-grey-1': index === activeLanguageIndex
+                    }"
+                  >
+                    <q-item-section>
+                      <div class="row justify-start">
+                        <img :src="option.src" class="q-mr-sm filter-icon" />
+                        <q-item-label
+                          :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
+                        >
+                          {{ option.label }}
+                        </q-item-label>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
 
-          <q-btn
-            no-caps
-            unelevated
-            no-icon-animation
-            icon-right="mdi-chevron-down"
-            text-color="grey-5"
-            color="grey-1"
-            align="between"
-            class="filter-select"
-          >
-            <div v-if="!selectedStatus" class="text-subtitle1 text-grey-3">
-              حالة الدورة
-            </div>
+            <q-btn
+              no-caps
+              no-wrap
+              unelevated
+              no-icon-animation
+              icon-right="mdi-chevron-down"
+              text-color="grey-5"
+              color="grey-1"
+              align="between"
+              class="filter-select"
+              :class="$q.screen.lt.md ? 'filter-select-sm' : ''"
+            >
+              <div
+                v-if="!selectedStatus"
+                class="text-grey-3 ellipsis"
+                :class="{
+                  'text-subtitle1': !$q.screen.lt.md,
+                  'text-caption': $q.screen.lt.md
+                }"
+              >حالة الدورة</div>
 
-            <div v-else class="row justify-start items-center">
-              <q-img :src="selectedStatus.src" width="16px" class="q-mr-sm" />
-              <div class="text-subtitle1">{{ selectedStatus.label }}</div>
-            </div>
-
-            <q-menu max-width="175px">
-              <q-list style="width: 175px" class="q-pa-sm">
-                <q-item
-                  clickable v-close-popup
-                  v-for="(option, index) in statusOptions"
-                  :key="index"
-                  @click="selectStatus(index)"
+              <div v-else class="row justify-start items-center no-wrap ellipsis">
+                <q-img
+                  v-if="!$q.screen.lt.md"
+                  :src="selectedStatus.src"
+                  width="16px"
+                  class="q-mr-sm"
+                />
+                <div
                   :class="{
-                    'bg-grey-1': index === activeStatusIndex
+                    'text-subtitle1': !$q.screen.lt.md,
+                    'text-caption': $q.screen.lt.md
                   }"
+                >{{ selectedStatus.label }}</div>
+              </div>
+
+              <q-menu fit>
+                <q-list
+                  class="q-pa-sm"
+                  :class="$q.screen.lt.md ? 'list-sm' : 'list-lg'"
                 >
-                  <q-item-section>
-                    <div class="row justify-start">
-                      <img :src="option.src" width="16px" class="q-mr-sm" />
-                      <q-item-label>{{ option.label }}</q-item-label>
-                    </div>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-          </q-btn>
+                  <q-item
+                    clickable v-close-popup
+                    v-for="(option, index) in statusOptions"
+                    :key="index"
+                    @click="selectStatus(index)"
+                    :class="{
+                      'bg-grey-1': index === activeStatusIndex
+                    }"
+                  >
+                    <q-item-section>
+                      <div class="row justify-start">
+                        <img :src="option.src" class="q-mr-sm filter-icon" />
+                        <q-item-label
+                          :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
+                        >
+                          {{ option.label }}
+                        </q-item-label>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
+
+          </div>
 
         </div>
       </div>
 
       <div class="col-12 row justify-center bg-grey-2">
         <div
-          class="col-11 row q-gutter-lg q-px-sm q-pt-lg"
+          class="col-xs-12 col-sm-11 row q-gutter-y-lg q-pt-lg"
           :class="{
-            'justify-start': !$q.screen.lt.sm,
-            'justify-center': $q.screen.lt.sm,
+            'q-gutter-x-lg justify-start': !$q.screen.lt.md,
+            'q-gutter-x-sm justify-center': $q.screen.lt.md
           }"
         >
           <course-card
@@ -260,7 +346,7 @@ export default {
       ],
       selectedStatus: null,
       activeStatusIndex: null,
-      allCourses: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+      allCourses: [0, 1, 2, 3, 4, 5, 6, 7],
       shownCourses: [0, 1, 2]
     }
   },
@@ -288,6 +374,7 @@ export default {
 .courses-list {
   overflow-x: hidden;
 }
+
 .search-input {
   &.q-input {
     &::v-deep {
@@ -315,18 +402,57 @@ export default {
 }
 
 .filter-select {
-  width: 14.7%;
-  min-width: 150px;
+  width: 30%;
 
   &.q-btn {
     &::v-deep {
       border-radius: 8px;
       border: solid 2px $grey-2;
+    }
+  }
+}
 
-      .block {
-        color: $grey-3;
-        font-size: 17px;
+.filter-select-sm {
+  &.q-btn {
+    &::v-deep {
+      .q-btn__wrapper {
+        padding-left: 3px;
+        padding-right: 3px;
       }
+
+      .q-icon {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.list-lg {
+  &.q-list {
+    &::v-deep {
+      .q-item__label {
+        font-size: 15px;
+      }
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.list-sm {
+  &.q-list {
+    &::v-deep {
+      .q-item__label {
+        font-size: 11px;
+      }
+    }
+
+    img {
+      width: 11px;
+      height: 11px;
     }
   }
 }
