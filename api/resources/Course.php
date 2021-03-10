@@ -38,8 +38,15 @@ class Course extends \common\models\Course
             'requirement',
             'target_student',
             'targeted_skills',
+            'image'=>function($model){
+                return   $model->picture?: \Yii::getAlias('@backendUrl'). "/img/logo.png" ;
+            },
             'rate'=>function($model){
-            return 4.5;
+            $course = Course::find()->getRate($model->id);
+            return [
+               "rate_average"=> $course['rate_average'],
+               "voters"=>$course['voters']
+            ];
             },
             'sessions'=>function($model){
             $course = Course::find()->getScheduleAndDuration($model->id);

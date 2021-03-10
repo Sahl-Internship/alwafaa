@@ -8,9 +8,10 @@
 */
 
 use trntv\filekit\widget\Upload;
+use yii\web\JsExpression;
 
 ?>
-<!---->
+
 <?php //echo $form->field($model, 'attachments')->widget(
 //    Upload::class,
 //    [
@@ -21,6 +22,25 @@ use trntv\filekit\widget\Upload;
 //    ]
 //)->label(Yii::t('backend','Attachment')) ?>
 
+
+<?php echo $form->field($model, 'image')->widget(
+    Upload::class,
+    [
+        'url' => ['/file/storage/upload'],
+        'maxFileSize' => 5000000, // 5 MiB,
+        'acceptFileTypes' => new JsExpression('/(\.|\/)(gif|jpe?g|png)$/i'),
+    ]
+) ?>
+
+
+<?php echo $form->field($model, 'intro_video')->widget(
+    Upload::class,
+    [
+        'url' => ['/file/storage/upload'],
+        'maxFileSize' => 30*1024*1024, // 30 MiB,
+        'acceptFileTypes' => new JsExpression('/(\.|\/)(mp4|mkv)$/i'),
+    ]
+) ?>
 
 
 

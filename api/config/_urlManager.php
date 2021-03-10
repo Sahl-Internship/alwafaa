@@ -42,5 +42,14 @@ return [
         ]
             , 'pluralize'=>false
         ],
+        ['class' =>'yii\rest\UrlRule','controller'=>'course'
+            ,'only'=>['index','review','join-course']
+            ,'extraPatterns'=>[
+            'GET index' => 'index' ,
+            'Post review' => 'review',
+            'Post join-course' => 'join-course'
+        ]
+            , 'pluralize'=>false
+        ],
     ],
 ];

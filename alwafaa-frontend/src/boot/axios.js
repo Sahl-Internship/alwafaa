@@ -23,4 +23,4 @@ axiosInstance.interceptors.request.use((request) => {
 
 Vue.prototype.$axios = axiosInstance
 
-export { axiosInstance }
+export { axiosInstance, axios }

@@ -4,6 +4,7 @@ namespace common\models\query;
 
 use common\models\Course;
 use common\models\CourseClasses;
+use common\models\CourseReview;
 
 /**
  * This is the ActiveQuery class for [[\common\models\Course]].
@@ -106,4 +107,44 @@ class CourseQuery extends \yii\db\ActiveQuery
         ];
 
     }
+
+    public function getRate($id)
+    {
+        $reviews = CourseReview::findBySql(
+            "SELECT rate FROM course_review WHERE course_id=:id",['id'=>$id])->all();
+        if($reviews){
+            $voters = count($reviews);
+            $all_rates = [];
+            foreach ($reviews as $review) {
+                array_push($all_rates,$review->rate);
+            }
+            $rate_average = array_sum($all_rates)/$voters;
+            return [
+                "voters"=>$voters,
+                "rate_average"=>$rate_average
+            ];
+        }else{
+            return [
+                "voters"=>0,
+                "rate_average"=>0
+            ];
+        }
+
+    }
+//    public function getReview($id)
+//    {
+//        $reviews = CourseReview::find()->andWhere('course_id=:id',['id'=>$id])->all();
+//        $voters = count($reviews);
+//        echo $voters . "<br>";
+//        foreach ($reviews as $review) {
+//            echo $review->course_id . "<br>";
+//            echo $review->rate . "<br>";
+//            echo $review->review . "<br>";
+//            echo $review->created_by . "<br>" ."*********" ."<br>";
+//
+//        }
+//
+//        die();
+//
+//    }
 }
