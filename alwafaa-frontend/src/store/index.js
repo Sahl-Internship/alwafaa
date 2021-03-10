@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import AuthModule from './authentication'
 import homeModule from './home'
 import studentModule from './student'
+import coursestModule from './courses'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,8 @@ export default function (/* { ssrContext } */) {
     modules: {
       auth: AuthModule,
       home: homeModule,
-      student: studentModule
+      student: studentModule,
+      courses: coursestModule
     },
 
     // enable strict mode (adds overhead!)

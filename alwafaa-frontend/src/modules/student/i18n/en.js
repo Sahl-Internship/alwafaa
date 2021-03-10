@@ -49,6 +49,14 @@ export default {
       privacy: 'Privacy',
       security: 'Security',
       back: 'Back'
+    },
+    search: {
+      title: 'Search'
+    },
+
+    notification: {
+      editdataErr: 'Error while updating your data, Try again',
+      editDataSuccess: 'Your data updated successfully'
     }
   }
 }

@@ -1,5 +1,6 @@
 import authRoutes from 'src/modules/authentication/router'
 import studentRoutes from 'src/modules/student/router'
+import coursesRoutes from 'src/modules/courses/router'
 
 const routes = [
   {
@@ -14,11 +15,12 @@ const routes = [
       {
         path: 'home',
         redirect: '/'
-      }
+      },
+      ...studentRoutes,
+      ...coursesRoutes
     ]
   },
   ...authRoutes,
-  ...studentRoutes,
 
   // Always leave this as last one,
   // but you can also remove it

@@ -49,6 +49,14 @@ export default {
       privacy: 'الخصوصية',
       security: 'الأمان',
       back: 'للخلف'
+    },
+    search: {
+      title: 'البحث'
+    },
+
+    notification: {
+      editdataErr: 'خطأ خلال تعديل بياناتك, حاول مرة أخري',
+      editDataSuccess: 'تم تعديل بياناتك بنجاح'
     }
   }
 }

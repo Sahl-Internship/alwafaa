@@ -1,7 +1,7 @@
 const studentRoutes = [
   {
     path: '/student',
-    component: () => import('src/modules/student/layout/StudentLayout.vue'),
+    component: () => import('src/modules/student/layout'),
     children: [
       {
         path: '',

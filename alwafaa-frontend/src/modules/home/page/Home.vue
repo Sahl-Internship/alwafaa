@@ -9,7 +9,6 @@
     <choose-course></choose-course>
     <completed-section></completed-section>
 
-    <the-footer></the-footer>
   </q-page>
 </template>
 
