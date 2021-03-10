@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <Header @openDialog="handleOpenDialog"></Header>
+    <!-- <Header @openDialog="handleOpenDialog"></Header> -->
 
     <search
       v-if="searchMode"
@@ -352,7 +352,7 @@
                     text-color="grey-5"
                     icon="mdi-plus"
                     :size="$q.screen.lt.md ? 'lg' : 'xl'"
-                    to=""
+                    to="courses/all"
                   />
                 </div>
               </div>
@@ -415,14 +415,14 @@
 </template>
 
 <script>
-import Header from '../components/Header.vue'
+// import Header from '../../../components/UI/Header.vue'
 import ActivityCard from '../components/ActivityCard'
 import UncompleteCourseCard from '../components/UncompleteCourseCard.vue'
 import SettingDialog from '../components/SettingDialog.vue'
 import Search from '../components/Search'
 
 export default {
-  components: { Header, ActivityCard, UncompleteCourseCard, SettingDialog, Search },
+  components: { ActivityCard, UncompleteCourseCard, SettingDialog, Search },
   data () {
     return {
       hobbies: ['#النحو', '#أحكام القرآن', '#الشعر', '#معرفة', '#الفصاحة'],

@@ -14,6 +14,14 @@ const studentRoutes = [
         meta: {
           requiresAuth: true
         }
+      },
+      {
+        path: 'courses/all',
+        name: 'coursesList',
+        component: () => import('src/modules/student/pages/CoursesList.vue'),
+        meta: {
+          requiresAuth: true
+        }
       }
     ]
   }

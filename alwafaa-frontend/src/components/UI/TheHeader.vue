@@ -1,220 +1,197 @@
 <template>
-  <q-header  elevated class="header q-mx-xl">
-    <q-toolbar class="row">
-      <div class="lt-md">
+  <q-header
+    class="header bg-white z-top"
+    :class="{
+     ' q-px-xl': !$q.screen.lt.md,
+    }"
+  >
+    <q-toolbar>
+      <div class="row items-center">
+        <q-avatar v-if="!$q.screen.lt.sm">
+          <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+        </q-avatar>
+
+        <q-toolbar-title
+          v-if="!$q.screen.lt.sm"
+          class="text-subtitle1 text-grey-5 q-pr-none"
+        >
+          {{ student.firstname }} {{ student.lastname }}
+        </q-toolbar-title>
+
+        <q-btn
+          no-caps dense
+          flat rounded
+          icon="mdi-chevron-down"
+          color="grey-5"
+          class="q-pr-md relative"
+          @click="() => this.openMenu = !this.openMenu "
+        >
+          <q-card
+            v-if="openMenu"
+            class="q-pa-lg q-ml-md"
+            :class="$q.screen.lt.sm ? 'card-menu-sm' : 'card-menu-bg'"
+          >
+            <q-card-section class="column items-center">
+              <q-avatar>
+                <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+              </q-avatar>
+
+              <div class="text-h6 text-center">
+                {{ student.firstname }} {{ student.lastname }}
+              </div>
+
+              <div class="text-subtitle2 text-center text-grey-4">
+                {{ student.email }}
+              </div>
+
+              <q-btn
+                flat
+                dense
+                :label="$t('student.header.setting')"
+                text-color="grey-4"
+                class="setting-link"
+                @click="$emit('openDialog', 'editMode')"
+              />
+            </q-card-section>
+
+            <q-card-actions class="column items-center">
+              <q-btn
+                :label="$t('student.header.logout')"
+                color="red-1"
+                text-color="red"
+                @click="handleLogout"
+              />
+            </q-card-actions>
+          </q-card>
+        </q-btn>
+
+        <q-separator vertical />
+
+        <q-btn
+          dense round flat
+          icon="mdi-bell"
+          type="button"
+          color="grey-5"
+          class="relative"
+          :class="$q.screen.lt.md ? 'q-ml-sm' : 'q-ml-lg'"
+        >
+          <div
+            class="absolute alarm-box row justify-center"
+            style="top: 9px; left: 14px; transform: translateY(-50%);"
+          >
+            <q-icon
+              name="mdi-circle-medium"
+              color="red"
+              size="29px"
+              style="top: 7px; left: 0.1px; transform: translateY(-50%);"
+            />
+          </div>
+        </q-btn>
+
         <q-btn
           flat
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          class="lt-lg"
+          dense
+          rounded
+          icon="mdi-bookmark-outline"
+          text-color="grey-4"
+          size="17px"
+          :class="$q.screen.lt.md ? 'q-mx-xs' : 'q-mx-md'"
+          to=""
         />
-      </div>
-      <q-drawer
-        v-model="leftDrawerOpen"
-        content-class="bg-grey-5"
-      >
-        <div class="logo text-center"><img src="/images/home-imgs/logo.png" class="drawer-logo q-ma-md" /></div>
-        <q-list class="drawer-lists q-mt-xl">
-          <q-item-label header class="text-grey-8">
-            <router-link to='/' class="link">{{$t('homeCover.main')}}</router-link>
-          </q-item-label>
-        </q-list>
-        <q-list class="drawer-lists">
-          <q-item-label header class="text-grey-8">
-            <router-link to="/" class="link">{{$t('homeCover.availableCourse')}}</router-link>
-          </q-item-label>
-        </q-list>
-        <q-list class="drawer-lists">
-          <q-item-label header class="text-grey-8">
-            <router-link to="/student/profile" class="link">{{$t('homeCover.studentProfile')}}</router-link>
-          </q-item-label>
-        </q-list>
-        <q-list class="drawer-lists">
-          <q-item-label header class="text-grey-8">
-            <router-link to="/auth/login" class="link">{{$t('header.login')}}</router-link>
-            <span class="q-mx-sm">/</span>
-            <router-link to="/auth/signup" class="link">{{$t('header.signup')}}</router-link>
-          </q-item-label>
-        </q-list>
-        <q-list class="drawer-lists">
-          <q-item-label header class="text-grey-8">
-            <p class="text-white q-ma-none"> {{$t('homeCover.lang')}} :
-                          <q-btn flat round dense @click="changeLanguage('en-us', 'ar')" class="q-mx-xm">
-              <flag iso="us"/>
-            </q-btn>
-            <q-btn flat round dense @click="changeLanguage('ar', 'en-us')" class="q-mx-xs">
-              <flag iso="eg"/>
-            </q-btn>
-            </p>
 
-          </q-item-label>
-        </q-list>
-      </q-drawer>
-      <div class="logo col-6 row">
-        <img src="/images/home-imgs/logo.png" class="header-img q-mt-md col-3" />
-        <ul class="nav-list q-mt-lg col-9 gt-sm">
-          <li class="nav-item q-mr-md "><router-link class="link" to="/">{{$t('homeCover.main')}}</router-link></li>
-          <li class="nav-item q-mr-md"><router-link class="link" to="/">  {{$t('homeCover.availableCourse')}}</router-link> </li>
-          <li class="nav-item"><router-link class="link" to="/student/profile">  {{$t('homeCover.studentProfile')}}</router-link> </li>
-        </ul>
+        <q-btn
+          flat
+          dense
+          rounded
+          icon="mdi-magnify"
+          text-color="grey-4"
+          size="17px"
+          @click="$emit('openDialog', 'searchMode')"
+        />
       </div>
 
       <q-space />
 
-    <div class="left-section col-6 text-right gt-sm">
-      <q-btn-dropdown
-        flat
-        class="transparent q-mr-sm"
-        rounded
-        :label="$t('homeCover.lang')"
-      >
-      <q-list class="lang-list">
-        <q-item clickable v-close-popup @click="changeLanguage('en-us', 'ar')" class="lang-item">
-          <q-btn flat round dense>
-            <flag iso="us"/>
-          </q-btn>
-          <span style="margin-top:6px">En</span>
-        </q-item>
+      <q-btn flat dense to="/">
+        <div v-if="!$q.screen.lt.sm" class="column q-mr-md">
+          <div class="text-h5 text-grey-5">أكاديمية إقرأ</div>
+          <div class="text-weight-thin text-grey-4 header-caption">
+            لتعليم اللغة و القرآن الكريم
+          </div>
+        </div>
 
-        <q-item clickable v-close-popup @click="changeLanguage('ar', 'en-us')" class="lang-item">
-          <q-btn flat round dense>
-            <flag iso="eg"/>
-          </q-btn>
-          <span style="margin-top:6px">Ar</span>
-        </q-item>
-      </q-list>
-      </q-btn-dropdown>
-        <q-btn
-          v-if="isAuthed"
-          flat
-          no-caps
-          :label="$t('header.logout')"
-          type="button"
-          text-color="grey-1"
-          size="17px"
-          @click="handleLogout"
-        />
-
-        <q-btn
-          v-if="!isAuthed"
-          class="q-px-lg q-mr-md"
-          rounded
-          no-caps
-          :label="$t('homeCover.signupFree')"
-          type="button"
-          color="green"
-          text-color="dark"
-          size="17px"
-          to="auth/signup"
-        />
-        <q-btn
-          v-if="!isAuthed"
-          outline
-          rounded
-          no-caps
-          :label="$t('header.login')"
-          type="button"
-          text-color="grey-1"
-          size="17px"
-          to="auth/login"
-        />
-      </div>
-
+        <q-avatar square size="60px">
+          <q-img src="/images/logo.png" />
+        </q-avatar>
+      </q-btn>
     </q-toolbar>
+
+    <!-- <search
+      v-if="searchMode"
+      class="full-width"
+    ></search> -->
+
   </q-header>
 </template>
 
 <script>
-import { localize } from 'vee-validate'
+// import Search from './Search'
 
 export default {
-  name: 'TheHeader',
+  // components: { Search },
   data () {
     return {
-      text: '',
-      leftDrawerOpen: false
+      openMenu: false,
+      searchVal: '',
+      searchMode: false
     }
   },
   computed: {
-    isAuthed () {
-      return this.$store.getters['auth/isAuthenticated']
+    student () {
+      return this.$store.getters['auth/getUser']
+        ? this.$store.getters['auth/getUser'] : {}
     }
   },
   methods: {
-    async changeLanguage (language, prevLang) {
-      this.$i18n.locale = language
-      localize(language)
-      this.$i18n.fallbackLocale = prevLang
-      // set quasar's language too!!
-      await import(`quasar/lang/${language}`).then((lang) => {
-        this.$q.lang.set(lang.default)
-      })
-    },
     handleLogout () {
       this.$store.dispatch('auth/logout')
     }
   }
 }
 </script>
+
 <style lang="scss" scoped>
-header.header {
-  background: transparent;
-  position:relative;
-  height: 0;
-  @media (max-width: 340px),(max-width: 480px),(max-width: 767px),(max-width: 992px) {
-    margin-right: 0px !important;
-    margin-left: 0px !important;
-  }
-  .drawer-logo{
-    height: 50px;
-    width: 80px;
-  }
-  .header-img{
-    height: 50px;
-    width: 80px;
-    display: inline-block;
-    @media (max-width: 992px){
-      height: 40px;
-      width: 70px;
-      margin-top: 10px;
+.header-caption {
+  font-size: 10px;
+}
+
+.alarm-box {
+  background-color: white;
+  width: 13px;
+  height: 13px;
+  border-radius: 15px;
+}
+
+.card-menu-bg {
+  position: absolute;
+  top: 45px;
+  left: -170px;
+  min-width: 325px;
+}
+
+.card-menu-sm {
+  position: absolute;
+  top: 45px;
+  left: -20px;
+}
+
+.setting-link {
+  &.q-btn {
+    &::v-deep {
+      .block {
+        text-decoration: underline;
+      }
     }
-    @media (max-width: 340px),(max-width: 480px),(max-width: 767px){
-      // height: 25px;
-      // width: 40px;
-      // margin-top: 6px;
-      display: none;
-    }
-  }
-  .nav-list{
-    list-style: none;
-    display: inline-block;
-    .nav-item{
-      display: inline-block;
-    }
-  }
-  .drawer-lists {
-    border-bottom: 1px solid #484848;
-  }
-  .link {
-    color: #fff;
-    text-decoration: none;
-  }
-  span{
-    color: #fff;
-  }
-  .lang-item{
-    background: $green;
-  }
-  .lang-list{
-    padding: 0 !important;
-    background: $green;
-  }
-  .lang-btn{
-    background: $grey-5;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
   }
 }
 </style>

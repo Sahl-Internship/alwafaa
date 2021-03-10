@@ -1,34 +1,24 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <the-header v-if="headerVisibility"></the-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-      v-if="false"
-    >
-      <q-list>
-        <q-item-label header class="text-grey-8">
-          Essential Links
-        </q-item-label>
-      </q-list>
-    </q-drawer>
+     <the-header v-if="!checkHomeRoute"></the-header>
 
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <the-footer></the-footer>
   </q-layout>
 </template>
 
 <script>
-import TheHeader from 'src/components/UI/TheHeader.vue'
+import TheHeader from '../components/UI/TheHeader'
+import TheFooter from '../components/UI/TheFooter'
 
 export default {
   name: 'MainLayout',
   components: {
-    TheHeader
+    TheHeader,
+    TheFooter
   },
   data () {
     return {
@@ -39,6 +29,9 @@ export default {
     headerVisibility () {
       const { name } = this.$route
       return !(name === 'signup' || name === 'login')
+    },
+    checkHomeRoute () {
+      return this.$route.path === '/' || this.$route.path === '/home'
     }
   }
 }
