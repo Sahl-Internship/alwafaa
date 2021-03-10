@@ -1,4 +1,5 @@
-import { axios } from 'src/boot/axios'
+import { axiosInstance as axios } from 'src/boot/axios'
+
 export default {
   async getCourses (context) {
     const response = await axios.get('http://endpoints.alwafaa.localhost/course')

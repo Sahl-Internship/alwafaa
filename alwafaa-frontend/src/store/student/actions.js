@@ -2,7 +2,8 @@ import { Notify, Loading } from 'quasar'
 import { i18n } from 'src/boot/i18n'
 
 import {
-  handleEditData
+  handleEditData,
+  handleJoinCourse
 } from 'src/services/studentApi'
 
 export default {
@@ -24,6 +25,39 @@ export default {
       context.commit('toggleEditDialog')
 
       Loading.hide()
+      Notify.create({
+        type: 'positive',
+        message: i18n.t('student.notification.editDataSuccess')
+      })
+    } catch (error) {
+      Loading.hide()
+
+      Notify.create({
+        type: 'negative',
+        message: i18n.t('student.notification.editdataErr')
+      })
+    }
+  },
+
+  async joinCourse ({ rootGetters }, courseId) {
+    Loading.show()
+
+    try {
+      const data = {
+        user_id: rootGetters['auth/getUser'].id,
+        course_id: courseId
+      }
+
+      console.log(data)
+
+      const response = await handleJoinCourse(data)
+      if (response.data.status !== 1) {
+        console.log(response)
+        throw new Error()
+      }
+
+      Loading.hide()
+
       Notify.create({
         type: 'positive',
         message: i18n.t('student.notification.editDataSuccess')
