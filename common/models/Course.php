@@ -21,19 +21,24 @@ use yii\base\Exception;
  * @property string $requirement
  * @property string $target_student
  * @property string $targeted_skills
+ * @property string $image_path
+ * @property string $image_base_url
+ ** @property string $intro_path
  * @property string $intro_base_url
- * @property string $intro_path
  *
  * @property CourseAttachment[] $courseAttachments
  * @property CourseClasses[] $courseClasses
+ * @property CourseReview[] $courseReview
  * @property Section $section
  * @property User $teacher
  */
 class Course extends \yii\db\ActiveRecord
 {
-    public $intro_video;
     public $classes;
     public $attachments;
+    public $review;
+    public $intro_video;
+    public $image;
 
     /**
      * {@inheritdoc}
@@ -58,6 +63,19 @@ class Course extends \yii\db\ActiveRecord
                 'sizeAttribute' => 'size',
                 'nameAttribute' => 'name',
             ],
+            [
+                'class' => UploadBehavior::class,
+                'attribute' => 'image',
+                'pathAttribute' => 'image_path',
+                'baseUrlAttribute' => 'image_base_url',
+            ],
+
+            [
+                'class' => UploadBehavior::class,
+                'attribute' => 'intro_video',
+                'pathAttribute' => 'intro_path',
+                'baseUrlAttribute' => 'intro_base_url',
+            ],
 
         ];
     }
@@ -72,11 +90,11 @@ class Course extends \yii\db\ActiveRecord
             [['start_at', 'end_at', 'section_id', 'title', 'description','teacher_id'], 'required'],
             [['section_id', 'teacher_id'], 'integer'],
             [['title', 'sub_title', 'zoom_link'], 'string', 'max' => 255],
-            [['description','requirement','target_student','targeted_skills','intro_base_url','intro_path'], 'string', 'max' => 1024],
+            [['description','requirement','target_student','targeted_skills'], 'string', 'max' => 1024],
             [['start_at','end_at'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => Section::className(), 'targetAttribute' => ['section_id' => 'id']],
             [['teacher_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['teacher_id' => 'id']],
-            [['attachments', 'classes'], 'safe'],
+            [['attachments', 'classes','intro_video','image'], 'safe'],
         ];
     }
 
@@ -99,11 +117,22 @@ class Course extends \yii\db\ActiveRecord
             'target_student' => Yii::t('backend', 'Target Student'),
             'targeted_skills' => Yii::t('backend', 'Targeted Skills'),
             'intro_video' => Yii::t('backend', 'Course Introduction'),
+            'image' => Yii::t('backend', 'Course Image'),
         ];
     }
 
     /**
-     * Gets query for [[CourseAttachments]].
+     * Gets query for [[CourseReview]].
+     *
+     * @return \yii\db\ActiveQuery|\common\models\CourseReview
+     */
+    public function getCourseReviews()
+    {
+        return $this->hasMany(CourseReview::className(), ['course_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[CourseAttachment]].
      *
      * @return \yii\db\ActiveQuery|\common\models\query\CourseAttachmentQuery
      */
@@ -159,6 +188,13 @@ class Course extends \yii\db\ActiveRecord
     public function findOwnCourses()
     {
         return Course::find()->andWhere('teacher_id=:id',['id'=> Yii::$app->user->id]);
+    }
+
+    public function getPicture($default = null)
+    {
+        return $this->image_path
+            ? Yii::getAlias($this->image_base_url . '/' . $this->image_path)
+            : $default;
     }
 
     public function classSchedule($classesData)
