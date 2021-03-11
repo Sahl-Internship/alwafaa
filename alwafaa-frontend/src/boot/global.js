@@ -5,6 +5,8 @@ import BaseSelect from 'src/components/UI/BaseSelect'
 import BaseButton from 'src/components/UI/BaseButton'
 import VueCarousel from 'vue-carousel'
 import VueYouTubeEmbed from 'vue-youtube-embed'
+import SlitherSlider from 'slither-slider'
+Vue.use(SlitherSlider)
 
 Vue.use(VueYouTubeEmbed)
 Vue.use(VueCarousel)

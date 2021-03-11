@@ -1,6 +1,6 @@
 <template>
   <q-card class="my-card col-xs-12 col-sm-6 col-md-3 col-lg-3 q-my-md" >
-  <div class="container">
+  <div class="container" >
     <slot></slot>
     <div class="overlay"></div>
     <div class="label-container">

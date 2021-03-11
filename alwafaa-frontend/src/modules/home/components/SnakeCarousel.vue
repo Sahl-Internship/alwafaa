@@ -42,15 +42,12 @@
           </q-btn>
         </div>
       </div>
-      <div class="slider-container">
-        <div class="slider" >
-          <slick
-            ref="slick"
-            :options="slickOptions"
-            class="slick"
-          >
+
 <!-- ========================================================================================= -->
-            <base-card  v-for="result in courses" :key="result.id"  >
+<slither-slider ref='slick'
+  :options="{dots: false,numberOfSlides: 5,slidePosition:'center',controls:false,gap:20,endless:true,loop:true,rtl:true,extra:-1}" style="direction:rtl;"
+>
+           <base-card  v-for="result in courses" :key="result.id"  >
               <template >
                 <img :src="result.image" to='/auth/login' />
               </template>
@@ -71,7 +68,7 @@
                   {{result.section}}
                 </p>
               </template>
-              <!-- <template #courseState>
+              <template #courseState>
                 <p
                   class="course-state"
                   :class="
@@ -83,7 +80,7 @@
                 >
                   لم تنته
                 </p>
-              </template> -->
+              </template>
               <template #text>
                 <div class="col text-h6 course-name" @click="coursePage(result.id)">
                   {{result.title}}
@@ -116,190 +113,76 @@
                   <img src="/images/home-imgs/duration.png" class="duration-icon">
               </template>
             </base-card>
+</slither-slider>
+            <!-- <base-card  v-for="result in courses" :key="result.id"  >
+              <template >
+                <img :src="result.image" to='/auth/login' />
+              </template>
+              <template #teacherData>
+                <p class="teacher-name" >
+                  <img src="/images/home-imgs/person.png" class="img-icon" >
+                  د / محمد العريفي
+                </p>
+              </template>
+              <template #sectionData>
+                <p class="course-section-name">
+                  <span
+                    :class="
+                    {
+                      'img-icon2':result.section==='قران كريم' || 'حديث شريف',
+                      'global-icon2':result.section==='اللغة العربية'}"
+                  ></span>
+                  {{result.section}}
+                </p>
+              </template>
+              <template #courseState>
+                <p
+                  class="course-state"
+                  :class="
+                  {
+                    'red':result.state==='will start',
+                    'green':result.state==='not-ended',
+                    'white':result.state==='ended'
+                  }"
+                >
+                  لم تنته
+                </p>
+              </template>
+              <template #text>
+                <div class="col text-h6 course-name" @click="coursePage(result.id)">
+                  {{result.title}}
+                </div>
+              </template>
+              <template #rating>
+                <p class="rating">{{result.rate.rate_average}}</p>
+                <star-rating
+                  class="star-rating q-mr-md"
+                  v-model="result.rate.rate_average"
+                  :rtl='true'
+                  :increment="0.5"
+                  :max-rating="5"
+                  :star-size="18"
+                  :show-rating='false'
+                  :padding='5'
+                  inactive-color="#ccc"
+                  active-color="orange"
+                ></star-rating>
+                <p class="rating-no2">{{result.rate.voters}}</p>
+              </template>
+              <template #viewedSection>
+                  <p class="viewed-no">7</p>
+                  <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
+              </template>
+              <template #durationSection>
+                  <p class="duration">
+                    {{calcDuration(result.duration)}}
+                  </p>
+                  <img src="/images/home-imgs/duration.png" class="duration-icon">
+              </template>
+            </base-card> -->
 
 <!-- =================================================================================== -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/omar.jpg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / عمر عبدالكافي
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                القرآن الكريم
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="20"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
 
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">04:30:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
-<!-- ================================================================================================ -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/arabic.jpeg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / احمد سلمان
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                اللغة العربية
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating q-mr-md"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="20"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">05:30:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
-<!-- =================================================================================== -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/alorefy.jpg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / محمد العريفي
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                   القرآن الكريم
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="20"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">08:10:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
-<!-- ================================================================================= -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/omar.jpg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / عمر عبدالكافي
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                   القرآن الكريم
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="20"
-                active-border-color="#080"
-                :padding='8'
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">08:10:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
-<!-- ==================================================================================== -->
-          </slick>
-        </div>
-      </div>
       <!-- second slider -->
       <home-carousel-two></home-carousel-two>
 
@@ -307,97 +190,25 @@
 </template>
 <script>
 // import SectionCard from './SectionCard.vue'
-import Slick from 'vue-slick'
 import StarRating from 'vue-star-rating'
 import BaseCard from 'src/components/UI/BaseCard'
 import HomeCarouselTwo from './HomeCarouselTwo.vue'
 // import courses from 'src/store/courses'
 
 export default {
-  components: { Slick, HomeCarouselTwo, BaseCard, StarRating },
+  components: {
+    //   Slick,
+    HomeCarouselTwo,
+    BaseCard,
+    StarRating
+  },
   name: 'HomeCourses',
   data () {
     return {
       dense: true,
       rating: 0,
       slide: 0,
-      results: [],
-      slickOptions: {
-        slidesToShow: 3,
-        arrows: false,
-        mobileFirst: true,
-        infinite: false,
-        initialSlide: 0,
-        // focusOnSelect: true,
-        rtl: true,
-        // centerPadding: '0px',
-        responsive: [
-          {
-            breakpoint: 1200,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 1,
-              // centerPadding: '50px',
-              centerMode: true
-            }
-          },
-          {
-            breakpoint: 992,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 1,
-              centerPadding: '0px'
-              // centerMode: true
-            }
-          },
-          {
-            breakpoint: 767,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              centerMode: true,
-              centerPadding: '23px'
-            }
-          },
-          {
-            breakpoint: 650,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              centerMode: true,
-              centerPadding: '25px'
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              centerMode: true,
-              centerPadding: '100px'
-            }
-          },
-          {
-            breakpoint: 340,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              // centerMode: true,
-              centerPadding: '5px'
-            }
-          },
-          {
-            breakpoint: 280,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              centerMode: true,
-              centerPadding: '10px'
-            }
-          }
-        ]
-        // autoplay: true,
-      }
+      results: []
     }
   },
   methods: {
@@ -479,33 +290,21 @@ export default {
     color: $grey-4;
   }
 }
-.slider-container{
-  height: 550px;
-  overflow: hidden;
-  position: relative;
-  .slider{
-    height: 100%;
-    padding: 18px 0px;
-    .slick{
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
-      outline: none !important;
-      border: none;
-      &:focus{
-        outline: none !important;
-        outline: 0 !important;
-        border: none;
-      }
+.slider-slide {
+  margin: 0 200px;
+}
+
+.slider-slides {
+  padding-bottom: 100px;
+}
       .my-card{
         // margin-left: -420px;
+        position: relative;
         outline: none;
         border: none;
         width:400px !important;
         height: 450px !important;
+        display: inline-block;
         &:focus{
           outline: none !important;
           border: none;
@@ -534,7 +333,7 @@ export default {
         }
         .separator{
           position: absolute;
-          bottom: 55px;
+          bottom: 0px;
           margin-top: 0px;
           width: 100%;
         }
@@ -691,9 +490,6 @@ export default {
           }
         }
       }
-    }
-}
-}
 .flip-img{
   transform: scaleX(-1);
 }

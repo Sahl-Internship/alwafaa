@@ -38,9 +38,10 @@
             :options="slickOptions"
             class="slick"
           >
-                      <base-card  v-for="result in courses" :key="result.id">
+          <!-- ============================================================================== -->
+            <base-card  v-for="result in courses" :key="result.id">
               <template>
-              <img src="/images/home-imgs/arabic.jpeg" />
+              <img :src="result.image" />
               </template>
               <template #teacherData>
                 <p class="label-1">
@@ -59,7 +60,7 @@
                   {{result.section}}
                 </p>
               </template>
-              <template #courseState>
+              <!-- <template #courseState>
                 <p
                   class="course-state"
                   :class="
@@ -71,7 +72,7 @@
                 >
                   لم تنته
                 </p>
-              </template>
+              </template> -->
               <template #text>
                 <div class="col text-h6 course-name">
                   {{result.title}}

@@ -40,10 +40,10 @@
             <li
               v-for="(result, i) in results"
               :key="i"
-              @click="setResult(result)"
+              @click="setResult(result.id)"
               class="autocomplete-result"
             >
-              {{ result }}
+              {{ result.title }}
             </li>
           </ul>
         </div>
@@ -120,8 +120,29 @@ export default {
       show: false,
       search: '',
       results: ['no matched results'],
-      isOpen: false,
-      items: ['محمد العريفي', 'عمر عبدالكافي', 'احمد شعلان', 'محمد امين ارديل', 'احمد النقيب', 'طارق ادريس', 'رضا فاروق', 'شريف ادريس']
+      isOpen: false
+      // courses: [
+      //   {
+      //     name: 'المستوى الاول في اللغة العربية',
+      //     id: 7
+      //   },
+      //   {
+      //     name: 'تحفيظ القران الكريم',
+      //     id: 6
+      //   },
+      //   {
+      //     name: 'المستوى الثاني في اللغة العربية',
+      //     id: 9
+      //   },
+      //   {
+      //     name: 'الاحاديث النبوية ',
+      //     id: 8
+      //   },
+      //   {
+      //     name: 'دراسة القراءات المتنوعة ',
+      //     id: 10
+      //   }
+      // ]
     }
   },
   methods: {
@@ -129,16 +150,18 @@ export default {
       this.show = !this.show
       this.autoplay = !this.autoplay
     },
-    setResult (result) {
-      this.search = result
+    setResult (id) {
+      // this.search = result
       this.isOpen = false
+      this.$router.push('/courses/' + id)
     },
     onChange () {
       this.isOpen = true
       this.filterResults()
     },
     filterResults () {
-      this.results = this.items.filter(item => item.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+      // this.results = this.courses.filter(course => course.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1)
+      this.results = this.courses.filter(course => course.title.toLowerCase().includes(this.search.toLowerCase()))
     }
   },
   watch: {
@@ -151,6 +174,9 @@ export default {
   computed: {
     autoPlayMethod () {
       return this.autoplay
+    },
+    courses () {
+      return this.$store.getters['home/getCourses']
     }
   }
 }
