@@ -58,7 +58,9 @@ export default {
 
     notification: {
       editdataErr: 'Error while updating your data, Try again',
-      editDataSuccess: 'Your data updated successfully'
+      editDataSuccess: 'Your data updated successfully',
+      joinCourseSuccess: 'You joined course successfully',
+      joinCourseErr: 'Error while joining course, Try again'
     }
   }
 }

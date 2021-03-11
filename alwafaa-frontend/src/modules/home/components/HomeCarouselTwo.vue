@@ -39,7 +39,7 @@
             class="slick"
           >
           <!-- ============================================================================== -->
-            <base-card  v-for="result in courses" :key="result.id" >
+            <base-card  v-for="result in courses" :key="result.id">
               <template>
               <img :src="result.image" />
               </template>
@@ -73,8 +73,8 @@
                   لم تنته
                 </p>
               </template> -->
-              <template #text>
-                <div class="col text-h6 course-name">
+              <template #text >
+                <div class="col text-h6 course-name" @click="clickCard(result.id)">
                   {{result.title}}
                 </div>
               </template>
@@ -95,7 +95,7 @@
                 <p class="rating-no2">{{result.rate.voters}}</p>
               </template>
               <template #viewedSection>
-                  <p class="viewed-no">{{result.sessions}}</p>
+                  <p class="viewed-no">7</p>
                   <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
               </template>
               <template #durationSection>
@@ -473,25 +473,13 @@ export default {
       return `${hours}:${mins}:00`
     },
     prevTwo () {
-      // if (this.slide > 0) {
-      //   if (this.slide - 3 === 0) { return false } else {
       this.$refs.slick.prev()
-      //   this.slide--
-      // }
-      // return false
-      // } else {
-      //   return false
-      // }
     },
     nextTwo () {
-      // if (this.slide < 2) {
-      //   if (this.slide + 3 === 5) { return false } else {
       this.$refs.slick.next()
-      //     this.slide++
-      //   }
-      // } else {
-      //   return false
-      // }
+    },
+    clickCard (id) {
+      this.$router.push('/courses/' + id)
     }
   },
   mounted () {
@@ -499,13 +487,14 @@ export default {
   },
   computed: {
     courses () {
-      return this.$store.state.home.courses
+      return this.$store.getters['home/getCourses']
     },
     checkDirection () {
       return this.$q.lang.rtl
     },
     right () {
       return this.checkDirection ? 'fas fa-angle-left' : 'fas fa-angle-right'
+      // : this.checkDirection ? 'fas fa-arrow-circle-right' : 'fas fa-arrow-circle-left'
     },
     left () {
       return this.checkDirection ? 'fas fa-angle-right' : 'fas fa-angle-left'

@@ -85,7 +85,7 @@
                 </p>
               </template> -->
               <template #text>
-                <div class="col text-h6 course-name" @click="coursePage(result.id)">
+                <div class="col text-h6 course-name" @click="clickCard(result.id)">
                   {{result.title}}
                 </div>
               </template>
@@ -106,7 +106,7 @@
                 <p class="rating-no2">{{result.rate.voters}}</p>
               </template>
               <template #viewedSection>
-                  <p class="viewed-no">{{result.sessions}}</p>
+                  <p class="viewed-no">7</p>
                   <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
               </template>
               <template #durationSection>
@@ -412,7 +412,7 @@ export default {
     next () {
       this.$refs.slick.next()
     },
-    coursePage (id) {
+    clickCard (id) {
       this.$router.push('/courses/' + id)
     }
   },

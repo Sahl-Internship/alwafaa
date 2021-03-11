@@ -26,7 +26,7 @@
 
           <div class="col-12 row items-center">
             <img
-              src="/images/Path 8205 22.png"
+              src="/images/home-imgs/global.png"
               :class="{
                 'icon-lg': !$q.screen.lt.sm,
                 'icon-sm': $q.screen.lt.sm

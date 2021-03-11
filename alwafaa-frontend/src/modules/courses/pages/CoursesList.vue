@@ -15,8 +15,8 @@
             separator-color="grey-3"
             active-color="grey-3"
           >
-            <q-breadcrumbs-el label="الرئيسية" color="grey-3" to="/" />
-            <q-breadcrumbs-el label="الدورات" />
+            <q-breadcrumbs-el :label="$t('coursesList.home')" color="grey-3" to="/" />
+            <q-breadcrumbs-el :label="$t('coursesList.courses')" />
           </q-breadcrumbs>
         </div>
 
@@ -24,7 +24,7 @@
           class="text-weight-bold text-grey-5 text-left"
           :class="$q.screen.lt.sm ? 'text-h5' : 'text-h4'"
         >
-          الدورات المتاحة
+          {{ $t('coursesList.title') }}
         </div>
 
         <div class="col-12 row justify-between q-gutter-y-sm">
@@ -32,7 +32,7 @@
             dense
             borderless
             v-model="searchText"
-            placeholder="عن ماذا تبحث؟"
+            :placeholder="$t('coursesList.search')"
             bg-color="grey-1"
             class="col-xs-12 col-sm-6 search-input"
           >
@@ -74,7 +74,7 @@
                   'text-caption': $q.screen.lt.md
                 }"
               >
-                فئة الدورة
+                {{ $t('coursesList.section') }}
               </div>
 
               <div v-else class="row justify-start items-center no-wrap ellipsis">
@@ -89,7 +89,7 @@
                     'text-subtitle1': !$q.screen.lt.md,
                     'text-caption': $q.screen.lt.md
                   }"
-                >{{ selectedSection.label }}</div>
+                >{{ $t(`coursesList.${selectedSection.label}`) }}</div>
               </div>
 
               <q-menu fit>
@@ -112,7 +112,7 @@
                         <q-item-label
                           :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
                         >
-                          {{ option.label }}
+                          {{ $t(`coursesList.${option.label}`) }}
                         </q-item-label>
                       </div>
                     </q-item-section>
@@ -146,7 +146,7 @@
                     'text-subtitle1': !$q.screen.lt.md,
                     'text-caption': $q.screen.lt.md
                   }"
-                >{{ selectedLanguage.label }}</div>
+                >{{ $t(`coursesList.${selectedLanguage.label}`) }}</div>
               </div>
 
               <q-menu fit>
@@ -169,7 +169,7 @@
                         <q-item-label
                           :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
                         >
-                          {{ option.label }}
+                          {{ $t(`coursesList.${option.label}`) }}
                         </q-item-label>
                       </div>
                     </q-item-section>
@@ -197,7 +197,7 @@
                   'text-subtitle1': !$q.screen.lt.md,
                   'text-caption': $q.screen.lt.md
                 }"
-              >حالة الدورة</div>
+              >{{ $t('coursesList.status') }}</div>
 
               <div v-else class="row justify-start items-center no-wrap ellipsis">
                 <q-img
@@ -211,7 +211,7 @@
                     'text-subtitle1': !$q.screen.lt.md,
                     'text-caption': $q.screen.lt.md
                   }"
-                >{{ selectedStatus.label }}</div>
+                >{{ $t(`coursesList.${selectedStatus.label}`) }}</div>
               </div>
 
               <q-menu fit>
@@ -234,7 +234,7 @@
                         <q-item-label
                           :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
                         >
-                          {{ option.label }}
+                          {{ $t(`coursesList.${option.label}`) }}
                         </q-item-label>
                       </div>
                     </q-item-section>
@@ -265,16 +265,17 @@
         <div class="col-12 q-my-xl text-center">
           <q-btn
             flat
+            no-caps
             type="button"
             icon-right="mdi-chevron-down"
-            label="عرض المزيد"
+            :label="$t('coursesList.more')"
             text-color="blue"
             size="lg"
             class="show-more"
             @click="getShownCourses"
           />
           <div class="text-subtitle1 text-grey-3 text-center">
-            {{ shownCourses.length }} من {{ allCourses.length }}
+            {{ shownCourses.length }} {{ $t('coursesList.from') }} {{ allCourses.length }}
           </div>
         </div>
       </div>
@@ -297,15 +298,15 @@ export default {
       sectionValue: null,
       sectionsOptions: [
         {
-          label: 'الكل',
+          label: 'all',
           src: '/images/Group 5797.png'
         },
         {
-          label: 'اللغة العربية',
+          label: 'arabicSec',
           src: '/images/Path 9259.png'
         },
         {
-          label: 'القرآن الكريم',
+          label: 'quran',
           src: '/images/Group 5796.png'
         }
       ],
@@ -313,34 +314,34 @@ export default {
       activeSectionIndex: null,
       languagesOptions: [
         {
-          label: 'العربية',
+          label: 'arabic',
           src: '/images/united-arab-emirates.png'
         },
         {
-          label: 'الإنجليزية',
+          label: 'english',
           src: '/images/united-states.png'
         }
       ],
       selectedLanguage: {
-        label: 'العربية',
+        label: 'arabic',
         src: '/images/united-arab-emirates.png'
       },
       activeLanguageIndex: 0,
       statusOptions: [
         {
-          label: 'الكل',
+          label: 'all',
           src: '/images/Group 5797.png'
         },
         {
-          label: 'انتهت',
+          label: 'finished',
           src: '/images/Group 5806.png'
         },
         {
-          label: 'لم تبدأ',
+          label: 'notStarted',
           src: '/images/Path 9266.png'
         },
         {
-          label: 'بدأت',
+          label: 'started',
           src: '/images/Group 5803.png'
         }
       ],
