@@ -78,10 +78,13 @@ $config = [
                 'controllers' => ['user'],
                 'allow' => true,
                 'roles' => ['administrator'],
+
             ],
             [
                 'controllers' => ['user'],
                 'allow' => false,
+                'actions' => ['index', 'create', 'update','view','delete','teacher'],
+                'roles' => ['teacher'],
             ],
             [
                 'allow' => true,

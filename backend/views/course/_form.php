@@ -44,8 +44,8 @@ use yii\bootstrap4\ActiveForm;
                         ]),
                     ],
                     [
-                        'label' => Yii::t('backend', 'Attachment'),
-                        'content' => $this->render('_courseAttachment', [
+                        'label' => Yii::t('backend', 'Media'),
+                        'content' => $this->render('_courseMedia', [
                             'form' => $form,
                             'model' => $model,
                         ]),
@@ -58,11 +58,10 @@ use yii\bootstrap4\ActiveForm;
 
         </div>
         <div class="card-footer">
-            <?php echo Html::submitButton('Create' ,['class' => 'btn btn-success']) ?>
-<!--            --><?php //echo Html::submitButton($model->isNewRecord ?
-//                Yii::t('backend', 'Create') :
-//                Yii::t('backend', 'Update'),
-//                ['class' => $model->isNewRecord ? 'btn success-btn' : 'btn btn-primary']) ?>
+            <?php echo Html::submitButton($model->isNewRecord ?
+                Yii::t('backend', 'Create') :
+                Yii::t('backend', 'Update'),
+                ['class' => $model->isNewRecord ? 'btn success-btn' : 'btn btn-primary']) ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>

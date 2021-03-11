@@ -37,29 +37,19 @@ class UserSearch extends User
      * Creates data provider instance with search query applied
      * @return ActiveDataProvider
      */
-    public function search($params,$qry=null)
+    public function search($params, $qry = null)
     {
-//        echo $qry;
-//        die();
-        if(!$qry){
+        if ($qry == "student") {
+            if(\Yii::$app->user->can('manager')){
+                $query = User::find()->getStudent();
+            }else{
+                $ids = User::find()->getOwnStudents();
+                $query = User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',', array_map('intval', $ids['students'])) . ")");
+            }
+        } elseif ($qry == "teacher") {
+            $query = User::find()->getTeacher();
+        } else {
             $query = User::find();
-              }elseif($qry=="student"){
-            $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'student'])->all();
-            $user_ids = [];
-            foreach ($role_user as $index =>$value){
-                $id = $value['user_id'];
-                array_push($user_ids,$id);
-            }
-            $query = User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',',array_map('intval',$user_ids)) . ")");
-        }else{
-            $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'teacher'])->all();
-            $teacher_ids = [];
-            foreach ($role_user as $index =>$value){
-                $id = $value['user_id'];
-                array_push($teacher_ids,$id);
-            }
-            $query = User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',',array_map('intval',$teacher_ids)) . ")");
-
         }
 
 

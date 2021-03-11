@@ -35,12 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         'contentOptions'=>['style'=>'width:50px']
                     ],
 
-                    ['attribute'=>'time',
+                    ['attribute'=>'start_at',
                         'format'=>'date',
                         'contentOptions'=>['style'=>'width:60px']
                     ],
 
-                    ['attribute'=>'duration',
+                    ['attribute'=>'end_at',
+                        'format'=>'date',
                         'contentOptions'=>['style'=>'width:60px']
                     ],
 
@@ -52,6 +53,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute'=>'description',
                         'content'=>function($model){
                             return StringHelper::truncateWords($model->description,7);
+                        }
+                    ],
+                    [
+                        'label'=>'Students',
+                        'content'=>function($model){
+                            return count($model->find()->getJoinedStudents($model->id));
                         }
                     ],
                     // 'section_id',

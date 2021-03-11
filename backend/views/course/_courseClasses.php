@@ -8,10 +8,8 @@
  */
 
 use kartik\date\DatePicker;
-use kartik\datetime\DateTimePicker;
 use kartik\time\TimePicker;
 use unclead\multipleinput\MultipleInput;
-use yii\bootstrap4\Html;
 
 
 if (Yii::$app->controller->action->id == 'create') {
@@ -69,7 +67,9 @@ $days = [
 <?php
 //foreach ($days as $index => $day): ?>
 <!--<div class="card">-->
-<!--    <input type="checkbox" id="--><?php //echo 'day_' . $index ?><!--" onclick="myFunction('--><?php //echo $index;?>//')">
+    <!--
+    <input type="checkbox" id="<?php //echo 'day_' . $index ?>" onclick="myFunction('<?php //echo $index;?>')">
+    -->
  <!--  <label for="myCheck"><?php //echo $day ?></label>-->
 <!--</div>-->
 <!---->
@@ -104,8 +104,8 @@ $days = [
 <!---->
 <!-- Try To Remove Option from Select-->
 <!--<label for="cars">Choose a car:</label>-->
-<!--<select name="cars" id="cars" onchange="yfun(--><?php //echo $days ?>//)">
-//    <?php
+<!--<select name="cars" id="cars" onchange="yfun(--><?php //echo $days ?>
+   <?php
 //    foreach ($days as $day) :?>
 <!--    <option value="--><?php //echo $day ?><!--">--><?php //echo $day ?><!--</option>-->
 <!--    --><?php //endforeach; ?>
@@ -143,35 +143,7 @@ $days = [
     ],
     'allowEmptyList'=>false,
     'enableGuessTitle'=>true,
-    'addButtonPosition'=>MultipleInput::POS_HEADER,
+//    'addButtonPosition'=>MultipleInput::POS_HEADER,
+    'iconSource'=>MultipleInput::ICONS_SOURCE_FONTAWESOME,
+
 ])->label(false) ?>
-
-
-<script>
-
-    function yfun(days) {
-        let optionValue = document.getElementById("cars").value;
-        console.log(optionValue)
-        days=days.filter(day =>day!)
-    }
-
-    function myFunction(e) {
-        // Get the checkbox
-        // const id = e.target.attributes.id.value;
-        // const class_id = id.split('_')[1]
-// console.log(class_id)
-// console.log(e.target.attributes.id.value)
-        let checkBox = document.getElementById(`day_${e}`);
-        // Get the output text
-        let classes = document.getElementById(`class_${e}`);
-
-        // If the checkbox is checked, display the output text
-        if (checkBox.checked == true) {
-            classes.style.display = "flex";
-
-        } else {
-            classes.style.display = "none";
-
-        }
-    }
-</script>
