@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     [
-                        'label'=>'Students',
+                        'label'=>Yii::t('backend','Students'),
                         'content'=>function($model){
                             return count($model->find()->getJoinedStudents($model->id));
                         }

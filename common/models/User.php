@@ -205,6 +205,7 @@ class User extends ActiveRecord implements IdentityInterface
             'email' => Yii::t('common', 'E-mail'),
             'status' => Yii::t('common', 'Status'),
             'access_token' => Yii::t('common', 'API access token'),
+            'auth_key' => Yii::t('common', 'Auth Key'),
             'created_at' => Yii::t('common', 'Created at'),
             'updated_at' => Yii::t('common', 'Updated at'),
             'logged_at' => Yii::t('common', 'Last login'),

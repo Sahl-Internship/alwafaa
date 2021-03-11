@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
 
                     ['attribute'=>'end_at',
+                        'format'=>'date',
                         'contentOptions'=>['style'=>'width:60px']
                     ],
 

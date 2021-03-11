@@ -78,13 +78,13 @@ class CourseClasses extends \yii\db\ActiveRecord
     public function getWeekDay($key)
     {
         $days = [
-            0 => 'Sunday',
-            1 => 'Monday',
-            2 => 'Tuesday',
-            3 => 'Wednesday',
-            4 => 'Thursday',
-            5 => 'Friday',
-            6 => 'Saturday'
+            0 => Yii::t('common','Sunday'),
+            1 => Yii::t('common','Monday'),
+            2 => Yii::t('common','Tuesday'),
+            3 => Yii::t('common','Wednesday'),
+            4 => Yii::t('common','Thursday'),
+            5 => Yii::t('common','Friday'),
+            6 => Yii::t('common','Saturday'),
         ];
         return $days[$key];
 
