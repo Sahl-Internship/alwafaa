@@ -20,12 +20,28 @@
             <p class="sub-title text-white">تعليم اهم قواعد النحو من الصفر إلى اتقان الإعراب بكل سهولة</p>
           </div>
 
-          <div class="col-11 row justify-between">
+          <div class="col-11 row justify-between q-mb-lg">
             <div class="row items-center">
               <q-avatar>
                 <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
               </q-avatar>
               <div class="text-h6 text-white q-ml-sm">ebtsam ali</div>
+            </div>
+
+            <div class="row items-center">
+              <div class="text-h6 text-white">فئة الدورة: </div>
+              <div class="row items-center q-pl-sm q-gutter-x-sm">
+                <img src="/images/Box/Group 4877.png" width="25px" />
+                <div class="text-h6 text-white">القرآن الكريم</div>
+              </div>
+            </div>
+
+            <div class="row items-center">
+              <div class="text-h6 text-white">آخر تحديث: </div>
+              <div class="row items-center q-pl-sm q-gutter-x-sm">
+                <img src="/images/Box/calender.png" width="18px" />
+                <div class="text-h6 text-white">12 يناير 2021</div>
+              </div>
             </div>
           </div>
         </div>

@@ -16,6 +16,7 @@
     "core-js": "^3.6.5",
     "hellojs": "^1.18.8",
     "quasar": "^1.0.0",
+    "slither-slider": "^2.7.0",
     "vee-validate": "^3.4.5",
     "vue-carousel": "^0.18.0",
     "vue-flag-icon": "^1.0.6",
