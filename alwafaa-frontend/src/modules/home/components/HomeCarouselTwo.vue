@@ -78,7 +78,7 @@
                 </div>
               </template>
               <template #rating>
-                <p class="rating">{{result.rate}}</p>
+                <p class="rating">{{result.rate.rate_average}}</p>
                 <star-rating
                   class="star-rating q-mr-md"
                   v-model="result.rate"
@@ -91,7 +91,7 @@
                   inactive-color="#ccc"
                   active-color="orange"
                 ></star-rating>
-                <p class="rating-no2">(455)</p>
+                <p class="rating-no2">{{result.rate.voters}}</p>
               </template>
               <template #viewedSection>
                   <p class="viewed-no">7</p>
