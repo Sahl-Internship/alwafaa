@@ -82,7 +82,7 @@
                 <p class="rating">{{result.rate.rate_average}}</p>
                 <star-rating
                   class="star-rating q-mr-md"
-                  v-model="result.rate"
+                  v-model="result.rate.rate_average"
                   :rtl='true'
                   :increment="0.5"
                   :max-rating="5"
