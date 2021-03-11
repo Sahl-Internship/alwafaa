@@ -552,3 +552,11 @@ a.back-to-top:hover {
 .box-header .box-title {
   float: right;
 }
+/*
+
+*/
+.redactor-box{
+	top: 30px;
+	/*margin: 15px 0px 0px;*/
+	padding-bottom: 25px;
+}

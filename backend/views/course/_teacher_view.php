@@ -48,10 +48,10 @@ use yii\widgets\DetailView;
     <table class="table table-sm">
         <thead>
         <tr>
-            <th>Day</th>
-            <th>from</th>
-            <th>to</th>
-            <th>Teacher name</th>
+            <th><?php echo Yii::t('backend','Day') ?></th>
+            <th><?php echo Yii::t('backend','From') ?></th>
+            <th><?php echo Yii::t('backend','To') ?></th>
+            <th><?php echo Yii::t('backend','Teacher name') ?></th>
         </tr>
         </thead>
         <tbody>
@@ -60,8 +60,8 @@ use yii\widgets\DetailView;
                 <td>
                     <?php echo $class->getWeekDay($class->day_id) ?>
                 </td>
-                <td><?php echo date('H:i A',$class->from) ?></td>
-                <td><?php echo date('H:i A',$class->to) ?></td>
+                <td><?php echo date('h:i A',$class->from) ?></td>
+                <td><?php echo date('h:i A',$class->to) ?></td>
 <!--                <td>--><?php //echo $class->title ?><!--</td>-->
 <!--                <td>--><?php //echo $class->duration  . ' min' ?><!--</td>-->
                 <td><?php echo ($model->teacher->userProfile->firstname.' '.$model->teacher->userProfile->lastname) ?? $model->teacher->username ?></td>

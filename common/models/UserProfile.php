@@ -101,7 +101,7 @@ class UserProfile extends ActiveRecord
             'middlename' => Yii::t('common', 'Middlename'),
             'lastname' => Yii::t('common', 'Lastname'),
             'phone_key' => Yii::t('common', 'Phone Key'),
-            'phone' => Yii::t('common', 'Phone Number'),
+            'phone' => Yii::t('common', 'Phone'),
             'locale' => Yii::t('common', 'Locale'),
             'picture' => Yii::t('common', 'Picture'),
             'gender' => Yii::t('common', 'Gender'),
