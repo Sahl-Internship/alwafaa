@@ -23,6 +23,7 @@
                 size='lg'
                 :dense='dense'
                 class="col-11 text-grey-5 bg-green"
+                @click="joinCourse"
               ></q-btn>
               <q-btn
                 label='دروس الدورة'
@@ -58,15 +59,24 @@
         <!-- End Course info Main Section -->
     </div>
 </template>
+
 <script>
 export default {
   data () {
     return {
       dense: false
     }
+  },
+  methods: {
+    joinCourse () {
+      console.log(this.$router)
+      const courseId = this.$route.params.id
+      this.$store.dispatch('student/joinCourse', courseId)
+    }
   }
 }
 </script>
+
 <style lang='scss' scoped>
 .blue-section{
   background: #2B5078;

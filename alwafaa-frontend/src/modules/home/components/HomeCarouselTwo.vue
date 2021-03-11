@@ -38,9 +38,10 @@
             :options="slickOptions"
             class="slick"
           >
-                      <base-card  v-for="result in courses" :key="result.id">
+          <!-- ============================================================================== -->
+            <base-card  v-for="result in courses" :key="result.id">
               <template>
-              <img src="/images/home-imgs/arabic.jpeg" />
+              <img :src="result.image" />
               </template>
               <template #teacherData>
                 <p class="label-1">
@@ -59,7 +60,7 @@
                   {{result.section}}
                 </p>
               </template>
-              <template #courseState>
+              <!-- <template #courseState>
                 <p
                   class="course-state"
                   :class="
@@ -71,9 +72,9 @@
                 >
                   لم تنته
                 </p>
-              </template>
-              <template #text>
-                <div class="col text-h6 course-name">
+              </template> -->
+              <template #text >
+                <div class="col text-h6 course-name" @click="clickCard(result.id)">
                   {{result.title}}
                 </div>
               </template>
@@ -472,25 +473,13 @@ export default {
       return `${hours}:${mins}:00`
     },
     prevTwo () {
-      // if (this.slide > 0) {
-      //   if (this.slide - 3 === 0) { return false } else {
       this.$refs.slick.prev()
-      //   this.slide--
-      // }
-      // return false
-      // } else {
-      //   return false
-      // }
     },
     nextTwo () {
-      // if (this.slide < 2) {
-      //   if (this.slide + 3 === 5) { return false } else {
       this.$refs.slick.next()
-      //     this.slide++
-      //   }
-      // } else {
-      //   return false
-      // }
+    },
+    clickCard (id) {
+      this.$router.push('/courses/' + id)
     }
   },
   mounted () {
@@ -498,7 +487,7 @@ export default {
   },
   computed: {
     courses () {
-      return this.$store.state.home.courses
+      return this.$store.getters['home/getCourses']
     },
     checkDirection () {
       return this.$q.lang.rtl

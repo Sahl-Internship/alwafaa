@@ -58,7 +58,9 @@ export default {
 
     notification: {
       editdataErr: 'خطأ خلال تعديل بياناتك, حاول مرة أخري',
-      editDataSuccess: 'تم تعديل بياناتك بنجاح'
+      editDataSuccess: 'تم تعديل بياناتك بنجاح',
+      joinCourseSuccess: 'تم الإشتراك في الدورة بنجاح',
+      joinCourseErr: 'خطأ خلال الإشتراك في الدورة, حاول مرة أخري'
     }
   }
 }

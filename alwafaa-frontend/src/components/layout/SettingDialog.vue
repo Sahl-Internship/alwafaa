@@ -285,55 +285,74 @@
           </q-tab-panel>
 
           <q-tab-panel name="security">
-            <q-form
-              class="row justify-center"
-              @submit.prevent="submitForm"
-            >
-              <g-input
-                dense
-                outlined
-                v-model="password"
-                type="password"
-                :label="$t('formFields.password')"
-                prependIconName="mdi-key"
-                appendIconName="mdi-eye-off"
-                bg-color='grey-1'
-                class="col-12 q-pb-sm"
-              />
-              <g-input
-                dense
-                outlined
-                v-model="confirmPass"
-                type="password"
-                :label="$t('formFields.confirmPass')"
-                prependIconName="mdi-key"
-                appendIconName="mdi-eye-off"
-                bg-color='grey-1'
-                class="col-12 q-pb-sm"
-              />
+            <ValidationObserver v-slot="{ handleSubmit }">
+              <q-form
+                class="row justify-center"
+                @submit.prevent="handleSubmit(submitForm)"
+              >
+                <ValidationProvider
+                  name="password"
+                  class="col-12 q-pb-xs"
+                  :rules="confirmPass ? 'required|min:7' : ''"
+                  v-slot="{ errors, invalid, validated }"
+                >
+                  <g-input
+                    dense
+                    outlined
+                    v-model="password"
+                    type="password"
+                    :label="$t('formFields.password')"
+                    prependIconName="mdi-key"
+                    appendIconName="mdi-eye-off"
+                    bg-color='grey-1'
+                    :error="invalid && validated"
+                    :error-message="errors[0]"
+                  />
+                </ValidationProvider>
 
-              <div class="col-12 row justify-between q-mt-xl">
-                <q-btn
-                  dense
-                  flat
-                  type="button"
-                  :label="$t('student.setting.back')"
-                  :icon="checkDirection ? 'mdi-chevron-right' : 'mdi-chevron-left'"
-                  size="md"
-                  @click="goBack('privacy')"
-                  class="back-btn"
-                  :class="!$q.screen.lt.sm ? 'col-4' : 'col-6'"
-                />
+                <ValidationProvider
+                  name="confirm-password"
+                  class="col-12 q-pb-xs"
+                  :rules="password ? 'required|confirmed:password' : ''"
+                  v-slot="{ errors, invalid, validated }"
+                >
+                  <g-input
+                    dense
+                    outlined
+                    v-model="confirmPass"
+                    type="password"
+                    :label="$t('formFields.confirmPass')"
+                    prependIconName="mdi-key"
+                    appendIconName="mdi-eye-off"
+                    bg-color='grey-1'
+                    :error="invalid && validated"
+                    :error-message="errors[0]"
+                  />
+                </ValidationProvider>
 
-                <g-btn
-                  dense
-                  label="signup.finish"
-                  :icon-right="checkDirection ? 'mdi-chevron-left' : 'mdi-chevron-right'"
-                  :width="!$q.screen.lt.sm ? 'col-4' : 'col-5'"
-                  size="md"
-                />
-              </div>
-            </q-form>
+                <div class="col-12 row justify-between q-mt-xl">
+                  <q-btn
+                    dense
+                    flat
+                    type="button"
+                    :label="$t('student.setting.back')"
+                    :icon="checkDirection ? 'mdi-chevron-right' : 'mdi-chevron-left'"
+                    size="md"
+                    @click="goBack('privacy')"
+                    class="back-btn"
+                    :class="!$q.screen.lt.sm ? 'col-4' : 'col-6'"
+                  />
+
+                  <g-btn
+                    dense
+                    label="signup.finish"
+                    :icon-right="checkDirection ? 'mdi-chevron-left' : 'mdi-chevron-right'"
+                    :width="!$q.screen.lt.sm ? 'col-4' : 'col-5'"
+                    size="md"
+                  />
+                </div>
+              </q-form>
+            </ValidationObserver>
           </q-tab-panel>
         </q-tab-panels>
       </div>

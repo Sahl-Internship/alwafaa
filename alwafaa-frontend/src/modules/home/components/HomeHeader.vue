@@ -55,7 +55,7 @@
         <img src="/images/home-imgs/logo.png" class="header-img q-mt-md col-3" />
         <ul class="nav-list q-mt-lg col-9 gt-sm">
           <li class="nav-item q-mr-md "><router-link class="link" to="/">{{$t('homeCover.main')}}</router-link></li>
-          <li class="nav-item q-mr-md"><router-link class="link" to="/">  {{$t('homeCover.availableCourse')}}</router-link> </li>
+          <li class="nav-item q-mr-md"><router-link class="link" to="/courses/all">  {{$t('homeCover.availableCourse')}}</router-link> </li>
           <li class="nav-item" v-if="isAuthed"><router-link class="link" to="/student/profile">  {{$t('homeCover.studentProfile')}}</router-link> </li>
         </ul>
       </div>

@@ -13,7 +13,7 @@ const coursesRoutes = [
         component: () => import('src/modules/courses/pages/CoursesList.vue')
       },
       {
-        path: 'courses/:id',
+        path: ':id',
         name: 'coursePage',
         component: () => import('src/modules/courses/pages/CoursePage.vue')
       }

@@ -3,6 +3,7 @@
     <home-header></home-header>
     <home-cover></home-cover>
     <iqraa-academy-section class="q-mt-xl"></iqraa-academy-section>
+    <!-- <snake-carousel></snake-carousel> -->
     <home-carousel></home-carousel>
     <academy-info-section></academy-info-section>
     <home-signup-section></home-signup-section>
@@ -21,6 +22,7 @@ import HomeSignupSection from 'src/modules/home/components/HomeSignupSection.vue
 import AcademyInfoSection from 'src/modules/home/components/AcademyInfoSection.vue'
 import ChooseCourse from 'src/modules/home/components/ChooseCourse.vue'
 import CompletedSection from 'src/modules/home/components/CompletedSection.vue'
+// import SnakeCarousel from '../components/SnakeCarousel.vue'
 
 export default {
   name: 'Home',
@@ -33,6 +35,7 @@ export default {
     AcademyInfoSection,
     HomeCover,
     HomeCarousel
+    // SnakeCarousel
   },
   data () {
     return {
