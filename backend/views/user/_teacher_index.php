@@ -36,30 +36,30 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['style' => 'width:50px']
                 ],
                 [
-                    'label' => 'Student Name',
+                    'label' => Yii::t('backend','Student Name'),
                     'content' => function ($model) {
                         return $model->userProfile->getFullName();
                     },
                 ],
                 'email:email',
                 [
-                    'attribute' => 'phone',
+                    'attribute' => Yii::t('backend','phone'),
                     'value' => function ($model) {
-                        return $model->userProfile->phone_key . " - " . $model->userProfile->phone;
+                        return $model->userProfile->phone;
                     },
                 ],
                 [
-                    'attribute' => 'country',
+                    'attribute' => Yii::t('backend','Country'),
                     'value' => function ($model) {
                         return $model->userProfile->country;
                     }
                 ],
-                [
-                    'class' => EnumColumn::class,
-                    'attribute' => 'status',
-                    'enum' => User::statuses(),
-                    'filter' => User::statuses()
-                ],
+//                [
+//                    'class' => EnumColumn::class,
+//                    'attribute' => 'status',
+//                    'enum' => User::statuses(),
+//                    'filter' => User::statuses()
+//                ],
             ],
         ]); ?>
     </div>
