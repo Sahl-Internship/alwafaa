@@ -6,6 +6,7 @@ use backend\models\search\CourseSearch;
 use common\models\Course;
 use common\models\CourseClasses;
 use common\models\query\CourseClassesQuery;
+use common\models\User;
 use Yii;
 
 /**
@@ -42,8 +43,9 @@ class SiteController extends \yii\web\Controller
 
             $view = 'index';
         } else if (Yii::$app->user->can('teacher')) {
+            $courses_number = count(Course::findOwnCourses()->all());
+            $students_number = User::find()->getOwnStudents();
             $view = 'teacher';
-            $dataProvider = count(Course::findOwnCourses()->all());
         } else {
             //logout
             return $this->redirect(['/sign-in/login']);
@@ -51,18 +53,23 @@ class SiteController extends \yii\web\Controller
 
         //var_dump(Yii::$app->user->identity->userProfile->school); die;
 
-        return $this->render($view, ['dataProvider' => $dataProvider]);
+        return $this->render($view, [
+            'courses_number' => $courses_number,
+            'students_number' => $students_number['student_number'],
+        ]);
     }
 
     public function actionTest()
     {
 //        $classes = CourseClasses::find()->getDurationPerWeek(27);
 //        $course = Course::find()->getScheduleAndDuration(26);
-        $course = Course::find()->getRate(5);
-
+//        $course = Course::find()->getRate(5);
+//        $stusents = Course::find()->getJoinedStudents(5);
+        $stusents = User::find()->getOwnStudents();
 
         return $this->render('test', [
-            'data' => $course,
+//            'data' => $course,
+            'data' => $stusents,
         ]);
     }
 //

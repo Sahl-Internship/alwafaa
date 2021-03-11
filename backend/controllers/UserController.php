@@ -5,9 +5,11 @@ namespace backend\controllers;
 use backend\models\search\UserSearch;
 use backend\models\UserForm;
 use backend\modules\rbac\models\RbacAuthAssignment;
+use common\models\Course;
 use common\models\User;
 use common\models\UserToken;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -152,9 +154,16 @@ class UserController extends Controller
 
     public function actionStudent()
     {
+        if(Yii::$app->user->can('administrator') || Yii::$app->user->can('manager')){
+            $view = 'index';
+        }elseif(Yii::$app->user->can('teacher')){
+            $view = '_teacher_index';
+        }else{
+            $view = '_teacher_index';
+        }
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams,'student');
-        return $this->render('index', [
+        return $this->render($view, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'title' =>Yii::t('backend', 'Students') ,
