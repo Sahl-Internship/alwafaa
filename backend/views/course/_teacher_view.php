@@ -20,13 +20,17 @@ use yii\widgets\DetailView;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'time:date',
-                    'duration',
+                    'start_at:date',
+                    'end_at:date',
                     'title',
+                    'sub_title',
                     'description:html',
+                    'requirement:html',
+                    'target_student:html',
+                    'targeted_skills:html',
                     [
                             'attribute'=>'teacher_id',
-                        'value'=>$model->teacher->username,
+                        'value'=>$model->teacher->userProfile->getFullName(),
                     ],
                     [
                         'attribute'=>'section_id',
@@ -45,10 +49,8 @@ use yii\widgets\DetailView;
         <thead>
         <tr>
             <th>Day</th>
-            <th>date</th>
-            <th>time</th>
-            <th>title</th>
-            <th>Duration</th>
+            <th>from</th>
+            <th>to</th>
             <th>Teacher name</th>
         </tr>
         </thead>
@@ -56,12 +58,12 @@ use yii\widgets\DetailView;
         <?php foreach ($model->courseClasses as $class): ?>
             <tr>
                 <td>
-                    <?php echo date('D',$class->time) ?>
+                    <?php echo $class->getWeekDay($class->day_id) ?>
                 </td>
-                <td><?php echo date('d-m-Y',$class->time) ?></td>
-                <td><?php echo date('H:m A',$class->time) ?></td>
-                <td><?php echo $class->title ?></td>
-                <td><?php echo $class->duration  . ' min' ?></td>
+                <td><?php echo date('H:i A',$class->from) ?></td>
+                <td><?php echo date('H:i A',$class->to) ?></td>
+<!--                <td>--><?php //echo $class->title ?><!--</td>-->
+<!--                <td>--><?php //echo $class->duration  . ' min' ?><!--</td>-->
                 <td><?php echo ($model->teacher->userProfile->firstname.' '.$model->teacher->userProfile->lastname) ?? $model->teacher->username ?></td>
             </tr>
         <?php endforeach; ?>

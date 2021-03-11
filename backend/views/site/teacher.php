@@ -1,9 +1,11 @@
 <?php
 
+/** @var int $students_number */
+/** @var int $courses_number */
+
+
 /* @var $this yii\web\View */
 /** @var float $totalEarnings */
-/** @var int $totalOrders */
-/** @var int $totalProducts */
 /** @var int $totalUsers */
 /** @var array $labels */
 /** @var array $data */
@@ -26,7 +28,7 @@ $this->title = 'TimeLine';
                                     <?php echo Yii::t('backend','Students') ?>
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <?php echo 73 ?>
+                                    <?php echo $students_number ?>
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -47,7 +49,7 @@ $this->title = 'TimeLine';
                                     <?php echo Yii::t('backend','Courses') ?>
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <?php echo $dataProvider ?>
+                                    <?php echo $courses_number ?>
                                 </div>
                             </div>
                             <div class="col-auto">

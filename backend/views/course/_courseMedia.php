@@ -32,15 +32,15 @@ use yii\web\JsExpression;
     ]
 ) ?>
 
-
-<?php echo $form->field($model, 'intro_video')->widget(
-    Upload::class,
-    [
-        'url' => ['/file/storage/upload'],
-        'maxFileSize' => 30*1024*1024, // 30 MiB,
-        'acceptFileTypes' => new JsExpression('/(\.|\/)(mp4|mkv)$/i'),
-    ]
-) ?>
+<!---->
+<?php //echo $form->field($model, 'intro_video')->widget(
+//    Upload::class,
+//    [
+//        'url' => ['/file/storage/upload'],
+//        'maxFileSize' => 30*1024*1024, // 30 MiB,
+//        'acceptFileTypes' => new JsExpression('/(\.|\/)(mp4|mkv)$/i'),
+//    ]
+//) ?>
 
 
 
