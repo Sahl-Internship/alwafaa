@@ -11,12 +11,22 @@
           <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
         </q-avatar>
 
-        <q-toolbar-title
+        <!-- <q-toolbar-title
           v-if="isAuthenticated && !$q.screen.lt.sm"
           class="text-subtitle1 text-grey-5 q-pr-none"
         >
           {{ student.firstname }} {{ student.lastname }}
-        </q-toolbar-title>
+        </q-toolbar-title> -->
+          <q-btn
+            v-if="isAuthenticated && !$q.screen.lt.sm"
+            flat
+            dense
+            no-caps
+            :label="student.firstname +' '+ student.lastname"
+            text-color="grey-5"
+            size="20px"
+            to="/student/profile"
+          />
 
         <q-btn
           no-caps dense
@@ -36,9 +46,20 @@
                 <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
               </q-avatar>
 
-              <div class="text-h6 text-center">
+              <!-- <div class="text-h6 text-center">
                 {{ student.firstname }} {{ student.lastname }}
-              </div>
+              </div> -->
+              <q-btn
+                flat
+                dense
+                no-caps
+                :label="student.firstname +' '+ student.lastname"
+                text-color="grey-5"
+                size="20px"
+                style="height: 37px"
+                to="/student/profile"
+                @click="() => this.openMenu = !this.openMenu"
+              />
 
               <div class="text-subtitle2 text-center text-grey-4">
                 {{ student.email }}

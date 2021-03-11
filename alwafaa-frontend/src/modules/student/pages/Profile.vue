@@ -12,7 +12,7 @@
     >
       <template>
         <div class="dimmed fit profile-bg-container">
-          <img :src="bgImage" class="fit profile-bg" />
+          <img :src="coverImage" class="fit profile-bg" />
         </div>
       </template>
 
@@ -43,19 +43,18 @@
                       <q-icon name="mdi-image" color="grey-4" size="xs" />
                     </q-item-section>
 
-                    <q-item-section class="file-btn">
+                    <q-item-section>
                       <label>
                         <q-item-label>{{ $t('student.profile.bgChange') }}</q-item-label>
                         <input
-                          ref="bgImg"
+                          ref="coverImg"
                           type="file"
                           accept="image/*"
-                          @change="handleChangeBg"
+                          @change="handleChangeCover"
                           style="display: none"
-                        />
+                        >
                       </label>
                     </q-item-section>
-
                 </q-item>
 
                 <q-item dense clickable v-close-popup class="bg-red-1 q-mb-xs">
@@ -399,7 +398,7 @@ export default {
     return {
       slide: 1,
       profileImage: 'https://cdn.quasar.dev/img/boy-avatar.png',
-      bgImage: '/images/profile-bg.png',
+      coverImage: '/images/profile-bg.png',
       activities: [
         {
           type: 'comment',
@@ -461,10 +460,24 @@ export default {
   },
   methods: {
     handleChangeAvatar () {
-      this.profileImage = URL.createObjectURL(this.$refs.profileImg.files[0])
+      // this.profileImage = URL.createObjectURL(this.$refs.profileImg.files[0])
+      const file = this.$refs.profileImg.files[0]
+      this.createBase64Img(file, 'profileImage')
     },
-    handleChangeBg () {
-      this.bgImage = URL.createObjectURL(this.$refs.bgImg.files[0])
+    handleChangeCover (e) {
+      // console.log(this.$refs)
+      // console.log(e.target.files)
+      // this.coverImage = URL.createObjectURL(e.target.files[0])
+      const file = e.target.files[0]
+      this.createBase64Img(file, 'coverImage')
+    },
+    createBase64Img (file, key) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this[key] = e.target.result
+        console.log(e.target.result)
+      }
+      reader.readAsDataURL(file)
     },
     toggleSettingDialog () {
       this.$store.commit('student/toggleEditDialog')

@@ -1,6 +1,6 @@
 <template>
     <div>
-              <div class="row q-mx-xl">
+        <div class="row q-mx-xl">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-h6 highest-rate">{{$t('carousel.highestRating')}} </div>
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right arrow">
           <q-btn
@@ -38,7 +38,7 @@
             :options="slickOptions"
             class="slick"
           >
-                      <base-card  v-for="result in courses" :key="result.id">
+            <base-card  v-for="result in courses" :key="result.id">
               <template>
               <img src="/images/home-imgs/arabic.jpeg" />
               </template>
@@ -78,20 +78,20 @@
                 </div>
               </template>
               <template #rating>
-                <p class="rating">{{result.rate}}</p>
+                <p class="rating">{{result.rate.rate_average}}</p>
                 <star-rating
                   class="star-rating q-mr-md"
-                  v-model="result.rate"
-                  :rtl='true'
-                  :increment="0.5"
-                  :max-rating="5"
-                  :star-size="18"
-                  :show-rating='false'
-                  :padding='5'
+                  v-model="result.rate.rate_average"
+                  :rtl=true
+                  :increment=0.5
+                  :max-rating=5
+                  :star-size=18
+                  :show-rating=false
+                  :padding=5
                   inactive-color="#ccc"
                   active-color="orange"
                 ></star-rating>
-                <p class="rating-no2">(455)</p>
+                <p class="rating-no2">{{result.rate.voters}}</p>
               </template>
               <template #viewedSection>
                   <p class="viewed-no">7</p>
@@ -387,7 +387,7 @@ export default {
       dense: true,
       rating: 0,
       slide: 0,
-      results: [],
+      // results: [],
       slickOptions: {
         slidesToShow: 3,
         arrows: false,
@@ -462,7 +462,8 @@ export default {
             }
           }
         ]
-      }
+      },
+      courses: null
     }
   },
   methods: {
@@ -494,12 +495,16 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('home/getCourses')
+    this.$store.dispatch('home/getCourses').then(res => {
+      console.log(res.data)
+      this.courses = res.data
+    })
   },
   computed: {
-    courses () {
-      return this.$store.state.home.courses
-    },
+    // courses () {
+    //   console.log(this.$store.getters['home/getCourses'])
+    //   return this.$store.getters['home/getCourses']
+    // },
     checkDirection () {
       return this.$q.lang.rtl
     },
@@ -513,6 +518,7 @@ export default {
   }
 }
 </script>
+
 <style lang='scss' scoped>
 .title{
   position:relative;

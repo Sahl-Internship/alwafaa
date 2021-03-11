@@ -48,8 +48,6 @@ export default {
         course_id: courseId
       }
 
-      console.log(data)
-
       const response = await handleJoinCourse(data)
       if (response.data.status !== 1) {
         console.log(response)
@@ -60,14 +58,14 @@ export default {
 
       Notify.create({
         type: 'positive',
-        message: i18n.t('student.notification.editDataSuccess')
+        message: i18n.t('student.notification.joinCourseSuccess')
       })
     } catch (error) {
       Loading.hide()
 
       Notify.create({
         type: 'negative',
-        message: i18n.t('student.notification.editdataErr')
+        message: i18n.t('student.notification.joinCourseErr')
       })
     }
   }

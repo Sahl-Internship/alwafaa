@@ -50,7 +50,7 @@
             class="slick"
           >
 <!-- ========================================================================================= -->
-            <base-card  v-for="result in courses" :key="result.id">
+            <base-card  v-for="result in courses" :key="result.id" @click="clickCard()">
               <template>
                 <img src="/images/home-imgs/alorefy.jpg" to='/auth/login'/>
               </template>
@@ -90,20 +90,20 @@
                 </div>
               </template>
               <template #rating>
-                <p class="rating">{{result.rate}}</p>
+                <p class="rating">{{result.rate.rate_average}}</p>
                 <star-rating
                   class="star-rating q-mr-md"
-                  v-model="result.rate"
+                  v-model="result.rate.rate_average"
                   :rtl='true'
-                  :increment="0.5"
-                  :max-rating="5"
-                  :star-size="18"
+                  :increment=0.5
+                  :max-rating=5
+                  :star-size=18
                   :show-rating='false'
-                  :padding='5'
+                  :padding=5
                   inactive-color="#ccc"
                   active-color="orange"
                 ></star-rating>
-                <p class="rating-no2">(455)</p>
+                <p class="rating-no2">{{result.rate.voters}}</p>
               </template>
               <template #viewedSection>
                   <p class="viewed-no">7</p>
@@ -311,6 +311,7 @@ import Slick from 'vue-slick'
 import StarRating from 'vue-star-rating'
 import BaseCard from 'src/components/UI/BaseCard'
 import HomeCarouselTwo from './HomeCarouselTwo.vue'
+// import courses from 'src/store/courses'
 
 export default {
   components: { Slick, HomeCarouselTwo, BaseCard, StarRating },
@@ -320,7 +321,7 @@ export default {
       dense: true,
       rating: 0,
       slide: 0,
-      results: [],
+      // results: [],
       slickOptions: {
         slidesToShow: 3,
         arrows: false,
@@ -396,7 +397,8 @@ export default {
           }
         ]
         // autoplay: true,
-      }
+      },
+      courses: null
     }
   },
   methods: {
@@ -410,15 +412,23 @@ export default {
     },
     next () {
       this.$refs.slick.next()
+    },
+    clickCard () {
+      // this.$route.push(id)
+      console.log('hle')
     }
   },
   mounted () {
-    this.$store.dispatch('home/getCourses')
+    this.$store.dispatch('home/getCourses').then(res => {
+      console.log(res.data)
+      this.courses = res.data
+    })
   },
   computed: {
-    courses () {
-      return this.$store.state.home.courses
-    },
+    // courses () {
+    //   // console.log(this.$store.getters['home/getCourses'])
+    //   return this.$store.getters['home/getCourses']
+    // },
     checkDirection () {
       return this.$q.lang.rtl
     },
@@ -429,78 +439,10 @@ export default {
     left () {
       return this.checkDirection ? 'fas fa-angle-right' : 'fas fa-angle-left'
     }
-  },
-  created () {
-    this.results = [
-      {
-        description: '<p>hhhhhhhhhhhhhh</p>',
-        end_at: '01-01-1970',
-        id: 1,
-        requirement: null,
-        section_id: 'قران كريم',
-        start_at: '01-01-1970',
-        sub_title: null,
-        target_student: null,
-        targeted_skills: null,
-        teacher_id: null,
-        title: 'course 1'
-      },
-      {
-        description: '<p>hhhhhhhhhhhhhh</p>',
-        end_at: '01-01-1970',
-        id: 2,
-        requirement: null,
-        section_id: 'قران كريم',
-        start_at: '01-01-1970',
-        sub_title: null,
-        target_student: null,
-        targeted_skills: null,
-        teacher_id: null,
-        title: 'course 1'
-      }
-      // {
-      //   description: '<p>hhhhhhhhhhhhhh</p>',
-      //   end_at: '01-01-1970',
-      //   id: 3,
-      //   requirement: null,
-      //   section_id: 'قران كريم',
-      //   start_at: '01-01-1970',
-      //   sub_title: null,
-      //   target_student: null,
-      //   targeted_skills: null,
-      //   teacher_id: null,
-      //   title: 'course 1'
-      // },
-      // {
-      //   description: '<p>hhhhhhhhhhhhhh</p>',
-      //   end_at: '01-01-1970',
-      //   id: 4,
-      //   requirement: null,
-      //   section_id: 'قران كريم',
-      //   start_at: '01-01-1970',
-      //   sub_title: null,
-      //   target_student: null,
-      //   targeted_skills: null,
-      //   teacher_id: null,
-      //   title: 'course 1'
-      // },
-      // {
-      //   description: '<p>hhhhhhhhhhhhhh</p>',
-      //   end_at: '01-01-1970',
-      //   id: 5,
-      //   requirement: null,
-      //   section_id: 'قران كريم',
-      //   start_at: '01-01-1970',
-      //   sub_title: null,
-      //   target_student: null,
-      //   targeted_skills: null,
-      //   teacher_id: null,
-      //   title: 'course 1'
-      // }
-    ]
   }
 }
 </script>
+
 <style lang='scss' scoped>
 .title{
   position:relative;
@@ -566,7 +508,7 @@ export default {
         border: none;
       }
       .my-card{
-        margin-left: -420px;
+        // margin-left: -420px;
         outline: none;
         border: none;
         width:400px !important;
