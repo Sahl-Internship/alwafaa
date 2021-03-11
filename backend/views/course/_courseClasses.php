@@ -129,7 +129,7 @@ $days = [
             'type'  => TimePicker::className(),
             'title' => Yii::t('backend','From'),
             'value' => function($data) {
-                return date('H:i:A', $data->from);
+                return date('h:i A', $data->from);
             },
         ],
         [
@@ -137,7 +137,7 @@ $days = [
             'type'  => TimePicker::className(),
             'title'=>Yii::t('backend','To'),
             'value' => function($data) {
-                return date('H:i:A', $data->to);
+                return date('h:i A', $data->to);
             },
         ],
     ],
