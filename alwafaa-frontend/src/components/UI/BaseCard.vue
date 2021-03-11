@@ -6,17 +6,9 @@
     <div class="label-container">
       <div >
         <slot name="teacherData"></slot>
-        <!-- <p class="label-1">
-          <img src="~public/images/home-imgs/person.png" class="img-icon">
-          د / محمد العريفي
-        </p> -->
       </div>
       <div>
         <slot name="sectionData"></slot>
-        <!-- <p class="label-2">
-         <img src="~public/images/home-imgs/quran-icon2.png" class="img-icon2">
-         القرآن الكريم
-       </p> -->
       </div>
       <div>
         <slot name='courseState'></slot>
@@ -29,23 +21,19 @@
   </div>
   <div class="rating-section justify-center row">
     <slot name='rating'></slot>
-    <!-- <p class="rating-no">4.5</p>
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/full-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
-    <img src="/images/home-imgs/half-star.png" alt="" class="star-icon q-mr-xs" :class="{'flip-img':!checkDirection}">
-    <p class="rating-no2">(455)</p> -->
   </div>
 </q-card-section>
 <q-separator class="separator" />
 
 <div class="duration-view row">
-  <div class="col-6">
+  <div class="col-3">
    <slot name="viewedSection"></slot>
   </div>
-  <div class="col-6 text-right">
+  <div class="col-3 text-center">
    <slot name="durationSection"></slot>
+  </div>
+  <div class="col-3">
+    <slot name="joined_student"></slot>
   </div>
 </div>
 </q-card>
@@ -64,50 +52,6 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-title{
-  @media (max-width: 480px){
-    font-size: 22px;
-  }
-}
-.highest-rate{
-  @media(max-width: 480px){
-    text-align: center;
-    margin-bottom: 15px;
-  }
-}
-.register-section {
-  background-color: $grey-1;
-  .ready-text {
-    color: $secondary;
-  }
-
-  .exp-text {
-    color: $grey-4;
-  }
-}
-.arrow{
-    @media(max-width: 480px),(max-width: 340px){
-        text-align: center;
-    }
-}
-.slider-container{
-  height: 550px;
-  overflow: hidden;
-  position: relative;
-    .slider{
-        height: 100%;
-        padding: 18px 0px;
-        .slick{
-          height: 100%;
-          margin: 0;
-          padding: 0;
-          right: 0;
-          left: 0;
-          width: 100%;
-        }
-        .slick-slide{
-          outline: none;
-        }
         .my-card{
             // margin-left: -410px;
             display: inline-block;
@@ -262,8 +206,8 @@ title{
         }
     }
     }
-  }
-}
+//   }
+// }
 .flip-img{
   transform: scaleX(-1);
 }

@@ -39,7 +39,7 @@
             class="slick"
           >
           <!-- ============================================================================== -->
-            <base-card  v-for="result in courses" :key="result.id">
+            <base-card  v-for="result in courses" :key="result.id" >
               <template>
               <img :src="result.image" />
               </template>
@@ -95,7 +95,7 @@
                 <p class="rating-no2">{{result.rate.voters}}</p>
               </template>
               <template #viewedSection>
-                  <p class="viewed-no">7</p>
+                  <p class="viewed-no">{{result.sessions}}</p>
                   <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
               </template>
               <template #durationSection>
@@ -506,7 +506,6 @@ export default {
     },
     right () {
       return this.checkDirection ? 'fas fa-angle-left' : 'fas fa-angle-right'
-      // : this.checkDirection ? 'fas fa-arrow-circle-right' : 'fas fa-arrow-circle-left'
     },
     left () {
       return this.checkDirection ? 'fas fa-angle-right' : 'fas fa-angle-left'

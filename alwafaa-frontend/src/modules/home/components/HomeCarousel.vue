@@ -106,7 +106,7 @@
                 <p class="rating-no2">{{result.rate.voters}}</p>
               </template>
               <template #viewedSection>
-                  <p class="viewed-no">7</p>
+                  <p class="viewed-no">{{result.sessions}}</p>
                   <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
               </template>
               <template #durationSection>
@@ -501,7 +501,7 @@ export default {
         border: none;
       }
       .my-card{
-        // margin-left: -420px;
+        margin-left: -420px;
         outline: none;
         border: none;
         width:400px !important;

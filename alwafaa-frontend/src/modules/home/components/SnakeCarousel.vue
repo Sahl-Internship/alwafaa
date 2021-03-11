@@ -45,9 +45,9 @@
 
 <!-- ========================================================================================= -->
 <slither-slider ref='slick'
-  :options="{dots: false,numberOfSlides: 5,slidePosition:'center',controls:false,gap:20,endless:true,loop:true,rtl:true,extra:-1}" style="direction:rtl;"
+  :options="{dots: false,numberOfSlides: 3,slidePosition:'center',controls:true,gap:20,endless:true,loop:false,rtl:true,extra:-1}" style="direction:rtl;"
 >
-           <base-card  v-for="result in courses" :key="result.id"  >
+           <base-card  v-for="result in courses" :key="result.id"  dir="rtl">
               <template >
                 <img :src="result.image" to='/auth/login' />
               </template>
@@ -318,6 +318,12 @@ export default {
           height: 420px !important;
           margin-left: 30px;
         }
+                .separator{
+          position: absolute;
+          bottom: 55px;
+          margin-top: 0px;
+          width: 100%;
+        }
         .rating-section{
           margin-top: 20px;
           margin-bottom: 30px;
@@ -331,12 +337,7 @@ export default {
             display: inline;
           }
         }
-        .separator{
-          position: absolute;
-          bottom: 0px;
-          margin-top: 0px;
-          width: 100%;
-        }
+
         img{
           height: 220px;
           width: 100%;
@@ -483,7 +484,7 @@ export default {
             transition: .5s ease;
             opacity:1;
             color: white;
-            height: 100%;
+            height: inherit;
             padding: 20px;
             text-align: center;
             border-radius: 5px 5px 0px 0px;
