@@ -55,7 +55,7 @@ export default {
 
     try {
       const response = await handleLogin(userData)
-      console.log(response)
+
       if (response.data.status !== 1) {
         const errorMessage = response.data.key
           ? i18n.t(`authNotification.${response.data.key}`)

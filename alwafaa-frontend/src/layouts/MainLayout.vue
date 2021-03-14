@@ -7,7 +7,7 @@
 
     <search-dialog
       v-if="searchMode"
-      class="full-width fixed search-dialog"
+      class="full-width absolute search-dialog"
       @closeDialog="handleToggleSearch"
     ></search-dialog>
 
@@ -60,7 +60,7 @@ export default {
 
 <style lang="scss" scoped>
 .search-dialog {
-  z-index: 1000;
+  z-index: 500;
   top:68px;
 }
 </style>

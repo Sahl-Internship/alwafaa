@@ -573,7 +573,7 @@ export default {
         border: none;
       }
       .my-card{
-        margin-left: -420px;
+        // margin-left: -420px;
         // display: inline-block;
         outline: none;
         border: none;

@@ -1,6 +1,6 @@
 <template>
   <q-header
-    class="header bg-white z-top"
+    class="header bg-white"
     :class="{
      ' q-px-xl': !$q.screen.lt.md,
     }"

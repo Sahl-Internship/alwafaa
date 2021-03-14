@@ -1,6 +1,6 @@
 <template>
   <q-card class="course-card">
-    <q-img src="/images/home-imgs/alorefy.jpg">
+    <q-img :src="course.image" height="218px">
       <div
         class="column justify-between no-wrap fit"
         :class="$q.screen.lt.md ? 'cover-text' : ''"
@@ -26,7 +26,7 @@
 
           <div class="col-12 row items-center">
             <img
-              src="/images/home-imgs/global.png"
+              :src="sectionImgSrc"
               :class="{
                 'icon-lg': !$q.screen.lt.sm,
                 'icon-sm': $q.screen.lt.sm
@@ -38,46 +38,52 @@
                 'text-caption': $q.screen.lt.sm,
                 'q-ml-sm': true
               }"
-            >اللغة العربية</div>
+            >{{ course.section }}</div>
           </div>
         </div>
 
         <div class="row">
           <div
-            class="text-grey-5 bg-green q-px-sm rounded-borders"
             :class="{
+              'q-px-sm rounded-borders': true,
               'text-subtitle2 q-py-xs': !$q.screen.lt.sm,
               'text-caption': $q.screen.lt.sm,
+              'text-grey-5 bg-green': courseStatus === 'notStarted',
+              'text-grey-4 bg-grey-2': courseStatus === 'finished',
+              'text-white bg-red': courseStatus === 'started',
             }"
           >
-            لم تبدء
+            {{ $t(`coursesList.${courseStatus}`) }}
           </div>
         </div>
 
       </div>
     </q-img>
 
-    <q-card-section :class="$q.screen.lt.md ? 'q-px-xs q-py-md' : 'q-pa-xl'">
+    <q-card-section
+      :class="$q.screen.lt.md ? 'q-px-xs q-py-md' : 'q-pa-xl'"
+      style="height: 204px"
+    >
       <div
-        class="text-grey-5 text-center"
+        class="text-grey-5 text-center ellipsis-2-lines"
         :class="{
           'text-h6 text-weight-bold': !$q.screen.lt.md,
           'text-subtitle2': $q.screen.lt.md,
         }"
       >
-        استخدام الاسماء الخمسة في حالات الاعراب الثلاثة
+        {{ course.title }}
       </div>
 
       <div class="row justify-center q-mt-md">
         <div
           class="text-grey-4"
           :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
-        >4.5</div>
+        >{{ course.rate.rate_average }}</div>
 
         <star-rating
           read-only
           :increment=0.5
-          :rating=4.5
+          :rating="course.rate.rate_average"
           :star-size="$q.screen.lt.md ? 13 : 20"
           :padding="$q.screen.lt.md ? 3 : 5"
           :active-color="['#e49d1a']"
@@ -88,7 +94,7 @@
         <div
           class="text-grey-4 q-ml-sm"
           :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
-        >(454)</div>
+        >({{course.rate.voters}})</div>
       </div>
     </q-card-section>
 
@@ -110,7 +116,7 @@
             'text-caption q-ml-xs': $q.screen.lt.md,
             'text-grey-4': true
           }"
-        >7</div>
+        >{{ course.sessions }}</div>
       </div>
 
       <div
@@ -130,7 +136,7 @@
             'text-caption q-ml-xs': $q.screen.lt.md,
             'text-grey-4': true
           }"
-        >05:30:00</div>
+        >{{ calcDuration }}</div>
       </div>
 
       <div
@@ -150,7 +156,7 @@
             'text-caption q-ml-xs': $q.screen.lt.md,
             'text-grey-4': true
           }"
-        >253</div>
+        >{{ course.student_number }}</div>
       </div>
     </q-card-section>
   </q-card>
@@ -161,10 +167,48 @@ import StarRating from 'vue-star-rating'
 
 export default {
   components: { StarRating },
+  props: {
+    course: {
+      type: Object
+    }
+  },
   computed: {
     isAuthenticated () {
       return this.$store.getters['auth/isAuthenticated']
+    },
+    sectionImgSrc () {
+      if (this.course.section === 'اللغة العربية') {
+        return '/images/home-imgs/global.png'
+      } else if (this.course.section === 'القرآن الكريم') {
+        return '/images/home-imgs/quran-icon2.png'
+      }
+      return null
+    },
+    courseStatus () {
+      const today = new Date().getTime()
+      const startAt = new Date(this.course.start_at).getTime()
+      const endAt = new Date(this.course.end_at).getTime()
+      console.log(this.course.title)
+      console.log(new Date())
+      console.log(this.course.start_at)
+      console.log(this.course.end_at)
+
+      if (startAt > today) {
+        return 'notStarted'
+      } else if (today > endAt) {
+        return 'finished'
+      }
+      return 'started'
+    },
+    calcDuration () {
+      const { duration } = this.course
+      const hours = (duration / 60).toString().length > 1 ? duration / 60 : `0${duration / 60}`
+      const mins = (duration - (hours * 60)).toString().length > 1 ? duration - (hours * 60) : `0${duration - (hours * 60)}`
+      return `${hours}:${mins}:00`
     }
+  },
+  mounted () {
+    console.log(this.course)
   }
 }
 </script>

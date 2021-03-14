@@ -501,7 +501,7 @@ export default {
         border: none;
       }
       .my-card{
-        margin-left: -420px;
+        // margin-left: -420px;
         outline: none;
         border: none;
         width:400px !important;

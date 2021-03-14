@@ -55,8 +55,7 @@
             }"
           >
             <q-btn
-              no-caps
-              no-wrap
+              no-caps no-wrap
               unelevated
               no-icon-animation
               icon-right="mdi-chevron-down"
@@ -257,8 +256,9 @@
           }"
         >
           <course-card
-            v-for="x in shownCourses"
-            :key="x"
+            v-for="course in shownCourses"
+            :key="course.id"
+            :course={...course}
           ></course-card>
         </div>
 
@@ -275,7 +275,7 @@
             @click="getShownCourses"
           />
           <div class="text-subtitle1 text-grey-3 text-center">
-            {{ shownCourses.length }} {{ $t('coursesList.from') }} {{ allCourses.length }}
+            {{ shownCourses.length }} {{ $t('coursesList.from') }} {{ courses.length }}
           </div>
         </div>
       </div>
@@ -347,8 +347,15 @@ export default {
       ],
       selectedStatus: null,
       activeStatusIndex: null,
-      allCourses: [0, 1, 2, 3, 4, 5, 6, 7],
-      shownCourses: [0, 1, 2]
+      shownCourses: []
+    }
+  },
+  computed: {
+    courses () {
+      const allCourses = this.$store.getters['courses/getCourses']
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.shownCourses = allCourses.slice(0, 3)
+      return allCourses
     }
   },
   methods: {
@@ -365,8 +372,11 @@ export default {
       this.activeStatusIndex = index
     },
     getShownCourses () {
-      this.shownCourses = this.allCourses.slice(0, this.shownCourses.length + 3)
+      this.shownCourses = this.courses.slice(0, this.shownCourses.length + 3)
     }
+  },
+  mounted () {
+    this.$store.dispatch('courses/getCourses')
   }
 }
 </script>
