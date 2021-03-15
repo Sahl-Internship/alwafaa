@@ -185,13 +185,8 @@ export default {
       return null
     },
     courseStatus () {
-      const today = new Date().getTime()
-      const startAt = new Date(this.course.start_at).getTime()
-      const endAt = new Date(this.course.end_at).getTime()
-      // console.log(this.course.title)
-      // console.log(new Date())
-      // console.log(this.course.start_at)
-      // console.log(this.course.end_at)
+      const today = new Date().getTime() / 1000
+      const { start_at: startAt, end_at: endAt } = this.course
 
       if (startAt > today) {
         return 'notStarted'

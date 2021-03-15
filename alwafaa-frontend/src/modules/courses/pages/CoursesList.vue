@@ -296,17 +296,6 @@ export default {
       typing: ''
     }
   },
-  computed: {
-    // courses () {
-    // const allCourses = this.$store.getters['courses/getCourses']
-    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-    // this.shownCourses = allCourses.slice(0, 3)
-    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-    // this.filteredCourses = allCourses
-    // this.getShownCourses()
-    // return allCourses
-    // }
-  },
   methods: {
     getShownCourses () {
       this.shownCourses = this.filteredCourses.slice(0, this.shownCourses.length + 3)
@@ -358,23 +347,25 @@ export default {
       ) {
         filtered = this.filterByStatus(filtered, selectedStatus.label)
       }
-      console.log(filtered)
       this.filteredCourses = filtered
+      this.shownCourses = []
       this.getShownCourses()
     },
     filterByStatus (filterFrom, status) {
+      const today = new Date().getTime() / 1000
+
       if (status === 'finished') {
         return filterFrom.filter(
-          course => new Date(course.end_at).getTime() < new Date().getTime()
+          course => new Date(course.end_at).getTime() < today
         )
       } else if (status === 'notStarted') {
         return filterFrom.filter(
-          course => new Date(course.start_at).getTime() > new Date().getTime()
+          course => new Date(course.start_at).getTime() > today
         )
       } else {
         return filterFrom.filter(
-          course => new Date(course.start_at).getTime() < new Date().getTime() &&
-            new Date(course.end_at).getTime() > new Date().getTime()
+          course => new Date(course.start_at).getTime() < today &&
+            new Date(course.end_at).getTime() > today
         )
       }
     }

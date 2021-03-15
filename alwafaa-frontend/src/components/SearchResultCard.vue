@@ -6,64 +6,77 @@
       'search-card search-card-sm': $q.screen.lt.sm
     }"
   >
-    <q-card-section horizontal class="justify-between">
+    <q-card-section horizontal class="row justify-start">
       <img
         :class="$q.screen.lt.sm ? 'card-img-sm' : 'card-img-lg'"
         :src="course.image"
       />
 
       <q-card-section
-        class="col-sx-11 col-sm-10 row self-center q-pa-none"
-        :class="!$q.screen.lt.sm ? 'q-mr-xl': ''"
+        class="col-xs-9 col-sm-10 row self-center q-pa-none"
+        :class="!$q.screen.lt.sm ? 'q-ml-lg': 'q-ml-xs'"
       >
-
-        <div class="col-6 row q-gutter-y-md">
+        <div class="col-xs-7 col-sm-8 row q-gutter-y-xs">
           <div
-            class="col-12 text-grey-3 ellipsis"
-            :class="{
-              'text-h6 text-weight-bold': !$q.screen.lt.sm,
-              'text-caption': $q.screen.lt.sm
-            }"
+            class="col-xs-12 col-sm-6 row"
+            :class="$q.screen.lt.sm ? 'q-gutter-y-xs' : 'q-gutter-y-md'"
           >
-            {{ course.title }}
-          </div>
-
-          <div class="col-xs-12 col-sm-9 row justify-between">
-            <div class="row items-center q-gutter-sm">
-              <img
-                :src="sectionImgSrc"
-                :class="$q.screen.lt.sm ? 'section-img-sm' : 'section-img-lg'"
-              />
-              <div
-                class="text-grey-4"
-                :class="$q.screen.lt.sm ? 'text-sm' : 'text-subtitle1'"
-              >{{ course.section }}</div>
+            <div
+              class="col-12 text-grey-3 ellipsis"
+              :class="{
+                'text-h6 text-weight-bold': !$q.screen.lt.sm,
+                'text-caption': $q.screen.lt.sm
+              }"
+            >
+              {{ course.title }}
             </div>
 
-            <div class="row items-center q-gutter-x-sm">
-              <img
-                src="/images/Path 9266.png"
-                :class="$q.screen.lt.sm ? 'date-img-sm' : 'date-img-lg'"
-              />
-              <div
-                class="text-grey-4"
-                :class="$q.screen.lt.sm ? 'text-sm' : 'text-subtitle1'"
-              >12 يناير 2021</div>
+            <div class="col-xs-12 col-sm-9 row justify-between q-gutter-y-xs">
+              <div class="col-xs-12 col-sm-6 row items-center q-gutter-x-sm">
+                <img
+                  :src="sectionImgSrc"
+                  :class="$q.screen.lt.sm ? 'section-img-sm' : 'section-img-lg'"
+                />
+                <div
+                  class="text-grey-4"
+                  :class="$q.screen.lt.sm ? 'text-sm' : 'text-subtitle1'"
+                >{{ course.section }}</div>
+              </div>
+
+              <div class="col-xs-12 col-sm-6  row items-center q-gutter-x-sm">
+                <img
+                  src="/images/Path 9266.png"
+                  :class="$q.screen.lt.sm ? 'date-img-sm' : 'date-img-lg'"
+                />
+                <div
+                  class="text-grey-4"
+                  :class="$q.screen.lt.sm ? 'text-sm' : 'text-subtitle1'"
+                >12 يناير 2021</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-4 row items-center justify-center">
-          <q-avatar :size="$q.screen.lt.sm ? 'xs' : 'md'">
-            <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
           <div
-            class="text-grey-4 q-ml-sm"
-            :class="$q.screen.lt.sm ? 'text-sm' : 'text-subtitle1'"
-          >د/محمد العريفي</div>
+            class="col-xs-12 col-sm-6 row items-center"
+            :class="$q.screen.lt.sm ? '' : 'justify-center'"
+          >
+            <q-avatar
+              v-if="!$q.screen.lt.sm"
+              :size="$q.screen.lt.sm ? 'xs' : 'md'"
+            >
+              <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+            </q-avatar>
+            <div
+              class="text-grey-4 q-ml-sm"
+              :class="$q.screen.lt.sm ? 'text-sm' : 'text-subtitle1'"
+            >د/محمد العريفي</div>
+          </div>
         </div>
 
-        <div class="col-xs-2 col-sm-4 row items-center justify-end">
+        <div
+          class="col-4 row items-center"
+          :class="$q.screen.lt.sm ? 'justify-center' : 'justify-end'"
+        >
           <div
             class="
               text-red
@@ -84,12 +97,11 @@
             flat
             icon="mdi-chevron-left"
             type="button"
-            size="sm"
-            style="width: 20px"
+            :size="$q.screen.lt.sm ? 'sm' : 'md'"
+            :class="$q.screen.lt.sm ? 'chevron-icon-sm' : ''"
             @click="routeToCourse"
           />
         </div>
-
       </q-card-section>
     </q-card-section>
   </q-card>
@@ -139,7 +151,7 @@ export default {
   height: 140px;
 
   &.search-card-sm {
-    height: 90px;
+    height: 100px;
   }
 
   .card-img-lg {
@@ -149,7 +161,7 @@ export default {
 
   .card-img-sm {
     width: 80px;
-    height: 90px;
+    height: 100px;
   }
 
   .course-start {
@@ -188,6 +200,10 @@ export default {
 
   .date-img-sm {
     width: 8px;
+  }
+
+  .chevron-icon-sm {
+    width: 20px;
   }
 }
 </style>
