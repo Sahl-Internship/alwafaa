@@ -103,7 +103,7 @@ class CourseQuery extends \yii\db\ActiveQuery
             }
         }
         return [
-            'classes_number' => count($schedule),
+            'classes_number' => $schedule,
             'total_time' => $totalTime
         ];
 
@@ -148,14 +148,75 @@ class CourseQuery extends \yii\db\ActiveQuery
 //        die();
 //
 //    }
+    public function getDayDuration($id)
+    {
+        $classes = CourseClasses::findBySql("
+            SELECT c.id,c.day_id,c.from,c.to FROM course_classes c WHERE course_id=:id",['id'=>$id])->all();
+        $duration = [];
+        foreach ($classes as $class) {
+            $day_duration[$class->day_id]=($class->to - $class->from)/60;
+            array_push($duration,$day_duration);
+            echo "from " .date("h:i:s",$class->from) .$class->day_id. "<br>";
+            echo "to " .date("h:i:s",$class->to) . "<br>";
+
+//           var_dump($class->to);
+//            $classTime =  ($class->to - $class->from);
+//            $timeByMin =  round($classTime/60);
+//             array_push($duration,$timeByMin);
+        }
+        var_dump(end($duration));
+        return array_sum($duration);
+    }
+
+    public function getStatus($id)
+    {
+        $course = Course::find()->andWhere('id=:id', ['id' => $id])->one();
+        $start_date = $course->start_at;
+        $end_date = $course->end_at;
+        $finished_classes = [];
+        $not_finished_classes = [];
+        if (time() > $start_date && time() < $end_date) {
+            $classes = $this->getScheduleAndDuration(28);
+            foreach ($classes['classes_number'] as $class) {
+                switch ($class) {
+                    case ($class < time()):
+                        array_push($finished_classes, $class);
+                        break;
+                    case ($class >= time()):
+                        array_push($not_finished_classes, $class);
+                        break;
+                }
+            }
+            sort($finished_classes);
+            foreach ($finished_classes as $finished_class) {
+                echo date('d-m-Y l', $finished_class) . "<br>";
+
+            }
+            echo "<br>";
+            sort($not_finished_classes);
+            foreach ($not_finished_classes as $not_finished_class) {
+                echo date('d-m-Y l', $not_finished_class) . "<br>";
+            }
+            var_dump($finished_classes);
+            var_dump($not_finished_classes);
+
+        } elseif (time() < $start_date) {
+            echo "لم تبدأ";
+        } else {
+            echo "انتهت";
+        }
+//        echo date('d/m/Y h:i A',$time);
+        die();
+
+    }
 
     public function getJoinedStudents($id)
     {
         $students = JoinCourses::findBySql(
-            "SELECT user_id FROM join_courses WHERE course_id=:id",['id'=>$id])->all();
+            "SELECT user_id FROM join_courses WHERE course_id=:id", ['id' => $id])->all();
         $student_ids = [];
         foreach ($students as $student) {
-            array_push($student_ids,$student->user_id);
+            array_push($student_ids, $student->user_id);
         }
         return $student_ids;
     }

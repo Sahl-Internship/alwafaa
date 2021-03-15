@@ -7,6 +7,7 @@ namespace api\controllers;
 use api\resources\User;
 use common\models\CourseReview;
 use common\models\JoinCourses;
+use common\models\UserProfile;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
@@ -25,7 +26,7 @@ class ProfileController extends ApiController
 //        return $actions;
 //    }
 
-    public function  behaviors()
+    public function behaviors()
     {
         $behaviors = parent::behaviors();
         // remove authentication filter if there is one
@@ -55,55 +56,62 @@ class ProfileController extends ApiController
     public function actionUploadPicture()
     {
         $params = \Yii::$app->request->post();
-        $base64String = $params['avatar'];
-//        $base64String = mb_convert_encoding($base64String, 'UTF-8', 'UTF-8');
-        $base = json_encode($base64String);
-        $decoder = base64_decode($base64String);
-        return $decoder;
-        die();
-        $img = imagecreatefromstring($decoder);
-        return $img;
+        $user = User::findOne(['id' => \Yii::$app->user->identity->getId()]);
+        $profile = $user->userProfile;
+        $data = $params['avatar'] ?? $params['cover'];
+        if (preg_match('/^data:image\/(\w+);base64,/', $data, $type)) {
+            $data = substr($data, strpos($data, ',') + 1);
+            $type = strtolower($type[1]); // jpg, png, gif
+            if (!in_array($type, ['jpg', 'jpeg', 'gif', 'png'])) {
+                throw new \Exception('invalid image type');
+            }
+            $data = str_replace(' ', '+', $data);
+            $data = base64_decode($data);
+            if ($data === false) {
+                throw new \Exception('base64_decode failed');
+            }
+        } else {
+            throw new \Exception('did not match data URI with image data');
+        }
+        $image_path = \Yii::getAlias('@storage/web/source/profile/');
+        $image_name = \Yii::$app->getSecurity()->generateRandomString() . "." . $type;
+
+        if ($params['avatar']) {
+            $profile->avatar_base_url = \Yii::getAlias('@storageUrl/source');
+            $profile->avatar_path = "profile/" . $image_name;
+        } else {
+            $profile->cover_base_url = \Yii::getAlias('@storageUrl/source');
+            $profile->cover_path = "profile/" . $image_name;
+        }
+        if ($profile->save()) {
+            file_put_contents($image_path . $image_name, $data);
+            return ['status' => 1, 'profile' => $user];
+        } else {
+            return "failed";
+        }
     }
 
 
-    public function actionUpdate(){
+    public function actionUpdate()
+    {
 
         $params = \Yii::$app->request->post();
-        $user= User::findOne(['id'=>\Yii::$app->user->identity->getId()]) ;
-        $profile=$user->userProfile;
+        $user = User::findOne(['id' => \Yii::$app->user->identity->getId()]);
+        $profile = UserProfile::findOne(['user_id'=>\Yii::$app->user->identity->getId()]);
+        $profile->load(['UserProfile'=>$params]);
+        if (isset($params['password'])) $user->password = $params['password'];
+////        if (isset($params['binary'] )  &&  $params['binary']!= "" ){
+//////            $filename = Media::PrepareImage($params['binary'] );
+//////            $profile->image ='/uploads/profile/'.$filename ;
+////        }
 
-//        if (isset($params['full_name'])){
-//            $names = split_name($params['full_name']);
-//            $profile->firstname= $names[0] ;
-//            $profile->lastname= $names[1] ;
-//        }
-        if (isset($params['firstname'])) $profile->firstname= $params['firstname'] ;
-        if (isset($params['lastname'])) $profile->lastname= $params['lastname'] ;
-        if (isset($params['birthdate'])) $profile->birthdate= $params['birthdate'] ;
-        if (isset($params['bio'])) $profile->bio= json_encode($params['bio']) ;
-        if (isset($params['phone_key'])) $profile->phone_key= $params['phone_key'] ;
-        if (isset($params['phone'])) $profile->phone= $params['phone'] ;
-        if (isset($params['country'])) $profile->country= $params['country'] ;
-        if (isset($params['city'])) $profile->city= $params['city'] ;
+        if ( $profile->validate() &&$profile->save() && $user->save())
+         {
+            return ['status' => 1, 'profile' => $user];
 
-        if (isset($params['email'])) $user->email= $params['email'] ;
+        } else {
 
-//        if (isset($params['binary'] )  &&  $params['binary']!= "" ){
-////            $filename = Media::PrepareImage($params['binary'] );
-////            $profile->image ='/uploads/profile/'.$filename ;
-//        }
-
-        if (isset($params['password']) ) $user->password= $params['password'];
-
-        //var_dump($params);
-
-        if($user->save() && $profile->save()){
-
-            return ['status'=>1 , 'profile'=>$user ];
-
-        }else{
-
-            return ['status'=>0 , 'message'=>'Invalid Data','errors'=>$profile->errors ];
+            return ['status' => 0, 'message' => 'Invalid Data', 'errors' => $profile->errors];
         }
 
 
