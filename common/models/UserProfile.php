@@ -41,7 +41,7 @@ class UserProfile extends ActiveRecord
      * @var
      */
     public $picture;
-//    public $cover;
+    public $cover;
 
     /**
      * @inheritdoc
@@ -147,7 +147,7 @@ class UserProfile extends ActiveRecord
      * @param null $default
      * @return bool|null|string
      */
-    public function getCover($default = null)
+    public function getPcover($default = null)
     {
         return $this->cover_path
             ? Yii::getAlias($this->cover_base_url . '/' . $this->cover_path)

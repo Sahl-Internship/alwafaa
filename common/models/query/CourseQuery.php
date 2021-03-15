@@ -177,7 +177,6 @@ class CourseQuery extends \yii\db\ActiveQuery
                         break;
                 }
             }
-
             echo count($finished_classes) . "<br>";
             echo count($not_finished_classes) . "<br>";
             sort($finished_classes);

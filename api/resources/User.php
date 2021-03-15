@@ -59,7 +59,7 @@ class User extends \common\models\User
                 return   $model->userProfile->avatar?: \Yii::getAlias('@backendUrl'). "/img/anonymous.jpg" ;
             },
             'cover'=>function($model){
-                return   $model->userProfile->cover?: \Yii::getAlias('@backendUrl'). "/img/anonymous.jpg" ;
+                return   $model->userProfile->pcover?: \Yii::getAlias('@backendUrl'). "/img/anonymous.jpg" ;
             },
 
         ];
