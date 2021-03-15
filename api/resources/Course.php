@@ -28,12 +28,10 @@ class Course extends \common\models\Course
                 return $model->section->title;
             },
             'start_at' => function ($model) {
-                $date = (int)$model->start_at;
-                return date('m-d-Y', $date);
+                return  (int)$model->start_at;
             },
             'end_at' => function ($model) {
-                $date = (int)$model->end_at;
-                return date('m-d-Y', $date);
+                return (int)$model->end_at;
             },
             'requirement',
             'target_student',
