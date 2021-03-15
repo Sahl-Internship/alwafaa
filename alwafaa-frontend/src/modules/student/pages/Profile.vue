@@ -12,7 +12,7 @@
     >
       <template>
         <div class="dimmed fit profile-bg-container">
-          <img :src="coverImage" class="fit profile-bg" />
+          <img :src="cover" class="fit profile-bg" />
         </div>
       </template>
 
@@ -73,7 +73,7 @@
           <div class="col-12 column q-gutter-y-lg">
             <div class="row justify-center items-center q-mr-lg">
               <q-avatar :size="$q.screen.lt.sm ? '100px' : '150px'" class="relative">
-                <q-img :src="profileImage" />
+                <q-img :src="avatar" />
                 <div
                   class="absolute camera-box row justify-center"
                   style="top: 15px; right: 14px; transform: translateY(-50%);"
@@ -397,8 +397,8 @@ export default {
   data () {
     return {
       slide: 1,
-      profileImage: 'https://cdn.quasar.dev/img/boy-avatar.png',
-      coverImage: '/images/profile-bg.png',
+      avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
+      cover: '/images/profile-bg.png',
       activities: [
         {
           type: 'comment',
@@ -460,22 +460,24 @@ export default {
   },
   methods: {
     handleChangeAvatar () {
-      // this.profileImage = URL.createObjectURL(this.$refs.profileImg.files[0])
+      // this.avatar = URL.createObjectURL(this.$refs.profileImg.files[0])
       const file = this.$refs.profileImg.files[0]
-      this.createBase64Img(file, 'profileImage')
+      this.createBase64Img(file, 'avatar')
     },
     handleChangeCover (e) {
       // console.log(this.$refs)
       // console.log(e.target.files)
-      // this.coverImage = URL.createObjectURL(e.target.files[0])
+      // this.cover = URL.createObjectURL(e.target.files[0])
       const file = e.target.files[0]
-      this.createBase64Img(file, 'coverImage')
+      this.createBase64Img(file, 'cover')
     },
     createBase64Img (file, key) {
       const reader = new FileReader()
       reader.onload = (e) => {
-        this[key] = e.target.result
-        console.log(e.target.result)
+        const base64Val = e.target.result
+        this[key] = base64Val
+        this.$store.dispatch('student/editProfileAndCoverImg', { [key]: base64Val })
+        console.log(base64Val)
       }
       reader.readAsDataURL(file)
     },

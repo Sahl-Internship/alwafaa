@@ -14,6 +14,7 @@
         <q-btn
           no-caps outlined
           unelevated no-wrap
+          :dense="$q.screen.lt.sm"
           icon-right="mdi-chevron-down"
           color="grey-2"
           text-color="grey-5"
@@ -57,6 +58,7 @@
         <q-input
           outlined
           square
+          :dense="$q.screen.lt.sm"
           v-model="searchText"
           bg-color="grey-1"
           class="col-6 search-input"
@@ -119,7 +121,7 @@
     >
       <div
         v-if="joinedFilteredCourses.length"
-        class="col-11 row q-px-md"
+        class="col-xs-12 col-sm-11 row q-px-md"
       >
         <div class="text-h6 text-grey-3 q-mb-sm"> مشترك بها </div>
         <div class="col-12 row q-gutter-y-sm">
@@ -136,7 +138,7 @@
 
       <div
         v-if="allFilteredCourses.length"
-        class="col-11 row q-px-md"
+        class="col-xs-12 col-sm-11 row q-px-md q-mt-none"
       >
         <div class="text-h6 text-grey-3 q-my-sm"> الكل </div>
         <div class="col-12 row q-gutter-y-sm">
