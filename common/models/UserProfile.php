@@ -26,6 +26,7 @@ use yii\db\ActiveRecord;
  * @property string $city
  * @property integer $birthdate
  * @property string $bio
+ * @property string $cover
  * @property string $cover_base_url
  * @property string $cover_path
  *
@@ -40,7 +41,7 @@ class UserProfile extends ActiveRecord
      * @var
      */
     public $picture;
-    public $cover;
+//    public $cover;
 
     /**
      * @inheritdoc
@@ -56,18 +57,18 @@ class UserProfile extends ActiveRecord
     public function behaviors()
     {
         return [
-            'picture' => [
-                'class' => UploadBehavior::class,
-                'attribute' => 'picture',
-                'pathAttribute' => 'avatar_path',
-                'baseUrlAttribute' => 'avatar_base_url'
-            ],
-            'cover' => [
-                'class' => UploadBehavior::class,
-                'attribute' => 'cover',
-                'pathAttribute' => 'cover_path',
-                'baseUrlAttribute' => 'cover_base_url'
-            ]
+//            'picture' => [
+//                'class' => UploadBehavior::class,
+//                'attribute' => 'picture',
+//                'pathAttribute' => 'avatar_path',
+//                'baseUrlAttribute' => 'avatar_base_url'
+//            ],
+//            'cover' => [
+//                'class' => UploadBehavior::class,
+//                'attribute' => 'cover',
+//                'pathAttribute' => 'cover_path',
+//                'baseUrlAttribute' => 'cover_base_url'
+//            ]
         ];
     }
 
@@ -142,6 +143,10 @@ class UserProfile extends ActiveRecord
             ? Yii::getAlias($this->avatar_base_url . '/' . $this->avatar_path)
             : $default;
     }
+    /**
+     * @param null $default
+     * @return bool|null|string
+     */
     public function getCover($default = null)
     {
         return $this->cover_path
