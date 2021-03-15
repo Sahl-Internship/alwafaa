@@ -3,20 +3,20 @@
     <q-card-section horizontal class="justify-between">
       <img
         class="card-img"
-        src="/images/home-imgs/alorefy.jpg"
+        :src="course.image"
       />
 
       <q-card-section class="col-10 row self-center q-pa-none q-mr-xl">
 
         <div class="col-4 row q-gutter-y-md">
           <div class="col-12 text-h6 text-grey-3 ellipsis text-weight-bold">
-            دورة حفظ القرآن الكريم 2021
+            {{ course.title }}
           </div>
 
           <div class="col-9 row justify-between">
             <div class="row items-center q-gutter-x-sm">
-              <img src="/images/Group 5796.png" width="20px" />
-              <div class="text-subtitle1 text-grey-4">القرآن الكريم</div>
+              <img :src="sectionImgSrc" width="20px" />
+              <div class="text-subtitle1 text-grey-4">{{ course.section }}</div>
             </div>
 
             <div class="row items-center q-gutter-x-sm">
@@ -43,13 +43,14 @@
             course-finished
             status-box
           ">
-            انتهت
+            {{ $t(`coursesList.${courseStatus}`) }}
           </div>
 
           <q-btn
             flat
             icon="mdi-chevron-left"
-            to=""
+            type="button"
+            @click="routeToCourse"
           />
         </div>
 
@@ -57,6 +58,45 @@
     </q-card-section>
   </q-card>
 </template>
+
+<script>
+export default {
+  props: ['course'],
+  computed: {
+    sectionImgSrc () {
+      if (this.course.section === 'اللغة العربية') {
+        return '/images/Path 9259.png'
+      } else if (this.course.section === 'القرآن الكريم') {
+        return '/images/Group 5796.png'
+      }
+      return null
+    },
+    courseStatus () {
+      const today = new Date().getTime()
+      const startAt = new Date(this.course.start_at).getTime()
+      const endAt = new Date(this.course.end_at).getTime()
+      // console.log(this.course.title)
+      // console.log(new Date())
+      // console.log(this.course.start_at)
+      // console.log(this.course.end_at)
+
+      if (startAt > today) {
+        return 'notStarted'
+      } else if (today > endAt) {
+        return 'finished'
+      }
+      return 'started'
+    }
+  },
+  methods: {
+    routeToCourse () {
+      this.$emit('closeSearchDialog')
+      const goToUrl = `/courses/${this.course.id}`
+      this.$route.path !== goToUrl && this.$router.push(goToUrl)
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .search-card {

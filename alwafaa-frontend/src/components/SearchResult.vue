@@ -25,6 +25,12 @@ import SearchResultCard from './SearchResultCard.vue'
 
 export default {
   name: 'SearchResult',
-  components: { SearchResultCard }
+  components: { SearchResultCard },
+  props: ['searchText', 'selectedSection', 'selectedStatus'],
+  mounted () {
+    console.log(this.searchText)
+    console.log(this.selectedSection)
+    console.log(this.selectedStatus)
+  }
 }
 </script>

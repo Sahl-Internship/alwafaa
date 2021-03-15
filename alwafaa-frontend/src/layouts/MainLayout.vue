@@ -54,6 +54,11 @@ export default {
     handleToggleSearch () {
       this.searchMode = !this.searchMode
     }
+  },
+  watch: {
+    $route () {
+      this.searchMode = false
+    }
   }
 }
 </script>

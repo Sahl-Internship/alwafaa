@@ -28,27 +28,40 @@
         </div>
 
         <div class="col-12 row justify-between q-gutter-y-sm">
-          <q-input
-            dense
-            borderless
-            v-model="searchText"
-            :placeholder="$t('coursesList.search')"
+          <q-select
+            dense borderless
+            use-input hide-dropdown-icon
+            v-model="selectedTitle"
+            :label="$t('coursesList.search')"
+            input-debounce="0"
             bg-color="grey-1"
+            :options="coursesOptions"
+            @filter="filterTitles"
+            @input-value="(val) => this.typing = val"
+            @input="filterCourses"
             class="col-xs-12 col-sm-6 search-input"
           >
             <template v-slot:append>
               <q-btn
                 unelevated
                 icon="mdi-magnify"
-                :color="searchText ? 'green' : 'grey-2'"
+                :color="typing ? 'green' : 'grey-2'"
                 text-color="grey-5"
                 class="full-height q-ml-md q-px-xs"
+                @click="filterCourses"
               />
             </template>
-          </q-input>
+            <template v-slot:no-option>
+              <q-item>
+                <q-item-section class="text-grey">
+                  لا يوجد
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
 
           <div
-            class="col-xs-12 col-sm-6 row justify-between"
+            class="col-xs-12 col-sm-6 row q-gutter-x-lg"
             :class="{
               'q-pl-lg': !$q.screen.lt.md,
               'q-pl-sm': $q.screen.lt.md && !$q.screen.lt.sm,
@@ -103,63 +116,6 @@
                     @click="selectSection(index)"
                     :class="{
                       'bg-grey-1': index === activeSectionIndex
-                    }"
-                  >
-                    <q-item-section>
-                      <div class="row justify-start">
-                        <img :src="option.src" class="q-mr-sm filter-icon" />
-                        <q-item-label
-                          :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
-                        >
-                          {{ $t(`coursesList.${option.label}`) }}
-                        </q-item-label>
-                      </div>
-                    </q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
-
-            <q-btn
-              no-caps
-              no-wrap
-              unelevated
-              no-icon-animation
-              icon-right="mdi-chevron-down"
-              text-color="grey-5"
-              color="grey-1"
-              align="between"
-              class="filter-select"
-              :class="$q.screen.lt.md ? 'filter-select-sm' : ''"
-            >
-              <div class="row justify-start items-center no-wrap ellipsis">
-                <q-img
-                  v-if="!$q.screen.lt.md"
-                  :src="selectedLanguage.src"
-                  width="16px"
-                  height="16px"
-                  class="q-mr-sm"
-                />
-                <div
-                  :class="{
-                    'text-subtitle1': !$q.screen.lt.md,
-                    'text-caption': $q.screen.lt.md
-                  }"
-                >{{ $t(`coursesList.${selectedLanguage.label}`) }}</div>
-              </div>
-
-              <q-menu fit>
-                <q-list
-                  class="q-pa-sm"
-                  :class="$q.screen.lt.md ? 'list-sm' : 'list-lg'"
-                >
-                  <q-item
-                    clickable v-close-popup
-                    v-for="(option, index) in languagesOptions"
-                    :key="index"
-                    @click="selectLanguage(index)"
-                    :class="{
-                      'bg-grey-1': index === activeLanguageIndex
                     }"
                   >
                     <q-item-section>
@@ -275,7 +231,7 @@
             @click="getShownCourses"
           />
           <div class="text-subtitle1 text-grey-3 text-center">
-            {{ shownCourses.length }} {{ $t('coursesList.from') }} {{ courses.length }}
+            {{ shownCourses.length }} {{ $t('coursesList.from') }} {{ filteredCourses.length }}
           </div>
         </div>
       </div>
@@ -286,6 +242,7 @@
 
 <script>
 import CourseCard from '../components/CourseCard'
+import { i18n } from 'src/boot/i18n'
 
 export default {
   name: 'CoursesList',
@@ -294,8 +251,9 @@ export default {
   },
   data () {
     return {
-      searchText: '',
-      sectionValue: null,
+      allCourses: [],
+      filteredCourses: [],
+      shownCourses: [],
       sectionsOptions: [
         {
           label: 'all',
@@ -312,21 +270,6 @@ export default {
       ],
       selectedSection: null,
       activeSectionIndex: null,
-      languagesOptions: [
-        {
-          label: 'arabic',
-          src: '/images/united-arab-emirates.png'
-        },
-        {
-          label: 'english',
-          src: '/images/united-states.png'
-        }
-      ],
-      selectedLanguage: {
-        label: 'arabic',
-        src: '/images/united-arab-emirates.png'
-      },
-      activeLanguageIndex: 0,
       statusOptions: [
         {
           label: 'all',
@@ -347,36 +290,102 @@ export default {
       ],
       selectedStatus: null,
       activeStatusIndex: null,
-      shownCourses: []
+      coursesTitles: [],
+      coursesOptions: [],
+      selectedTitle: '',
+      typing: ''
     }
   },
   computed: {
-    courses () {
-      const allCourses = this.$store.getters['courses/getCourses']
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.shownCourses = allCourses.slice(0, 3)
-      return allCourses
-    }
+    // courses () {
+    // const allCourses = this.$store.getters['courses/getCourses']
+    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+    // this.shownCourses = allCourses.slice(0, 3)
+    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+    // this.filteredCourses = allCourses
+    // this.getShownCourses()
+    // return allCourses
+    // }
   },
   methods: {
-    selectLanguage (index) {
-      this.selectedLanguage = this.languagesOptions[index]
-      this.activeLanguageIndex = index
+    getShownCourses () {
+      this.shownCourses = this.filteredCourses.slice(0, this.shownCourses.length + 3)
     },
     selectSection (index) {
       this.selectedSection = this.sectionsOptions[index]
       this.activeSectionIndex = index
+
+      this.filterCourses()
     },
     selectStatus (index) {
       this.selectedStatus = this.statusOptions[index]
       this.activeStatusIndex = index
+
+      this.filterCourses()
     },
-    getShownCourses () {
-      this.shownCourses = this.courses.slice(0, this.shownCourses.length + 3)
+    filterTitles (val, update, abort) {
+      if (val.length < 1) {
+        abort()
+        return
+      }
+
+      update(() => {
+        const title = val.toLowerCase()
+        this.coursesOptions = this.coursesTitles.filter(
+          courseTitle => courseTitle.toLowerCase().indexOf(title) > -1
+        )
+      })
+    },
+    filterCourses () {
+      let filtered = this.allCourses
+      const { selectedTitle, selectedSection, selectedStatus } = this
+
+      if (selectedTitle) {
+        filtered = filtered.filter(course => course.title === selectedTitle)
+      }
+
+      if (
+        selectedSection &&
+        (selectedSection.label !== '' && selectedSection.label !== 'all')
+      ) {
+        filtered = filtered.filter(
+          course => course.section === i18n.t(`coursesList.${selectedSection.label}`)
+        )
+      }
+
+      if (selectedStatus &&
+        (selectedStatus.label !== '' && selectedStatus.label !== 'all')
+      ) {
+        filtered = this.filterByStatus(filtered, selectedStatus.label)
+      }
+      console.log(filtered)
+      this.filteredCourses = filtered
+      this.getShownCourses()
+    },
+    filterByStatus (filterFrom, status) {
+      if (status === 'finished') {
+        return filterFrom.filter(
+          course => new Date(course.end_at).getTime() < new Date().getTime()
+        )
+      } else if (status === 'notStarted') {
+        return filterFrom.filter(
+          course => new Date(course.start_at).getTime() > new Date().getTime()
+        )
+      } else {
+        return filterFrom.filter(
+          course => new Date(course.start_at).getTime() < new Date().getTime() &&
+            new Date(course.end_at).getTime() > new Date().getTime()
+        )
+      }
     }
   },
   mounted () {
-    this.$store.dispatch('courses/getCourses')
+    this.$store.dispatch('courses/getCourses').then(() => {
+      const courses = this.$store.getters['courses/getCourses']
+      this.filteredCourses = this.allCourses = courses
+      this.getShownCourses()
+      this.coursesOptions = this.coursesTitles = courses.map(course => course.title)
+    })
   }
 }
 </script>
@@ -387,7 +396,7 @@ export default {
 }
 
 .search-input {
-  &.q-input {
+  &.q-select {
     &::v-deep {
       border-radius: 8px;
       border: solid 2px $grey-2;
@@ -397,7 +406,7 @@ export default {
         border-radius: 8px;
       }
 
-      .q-placeholder {
+      .q-field__label {
         color: $grey-3;
         font-size: 17px;
         padding-left: 15px;

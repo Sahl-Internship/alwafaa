@@ -16,9 +16,11 @@ export default {
 
       commit('getCourses', response.data)
       Loading.hide()
+      return true
     } catch (error) {
       Loading.hide()
       console.log(error)
+      return false
     }
   }
 }
