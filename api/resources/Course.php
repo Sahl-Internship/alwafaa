@@ -29,11 +29,11 @@ class Course extends \common\models\Course
             },
             'start_at' => function ($model) {
                 $date = (int)$model->start_at;
-                return date('d-m-Y', $date);
+                return date('m-d-Y', $date);
             },
             'end_at' => function ($model) {
                 $date = (int)$model->end_at;
-                return date('d-m-Y', $date);
+                return date('m-d-Y', $date);
             },
             'requirement',
             'target_student',
@@ -50,7 +50,7 @@ class Course extends \common\models\Course
             },
             'sessions'=>function($model){
             $course = Course::find()->getScheduleAndDuration($model->id);
-                return $course['classes_number'];
+                return count($course['classes_number']);
             },
             'duration'=>function($model){
                 $course = Course::find()->getScheduleAndDuration($model->id);
