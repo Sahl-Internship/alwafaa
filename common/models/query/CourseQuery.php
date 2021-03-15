@@ -154,28 +154,18 @@ class CourseQuery extends \yii\db\ActiveQuery
             SELECT c.id,c.day_id,c.from,c.to FROM course_classes c WHERE course_id=:id",['id'=>$id])->all();
         $duration = [];
         foreach ($classes as $class) {
-            $day_duration[$class->day_id]=($class->to - $class->from)/60;
+            $day_duration[$class->day_id]=round(($class->to - $class->from)/60);
             array_push($duration,$day_duration);
-            echo "from " .date("h:i:s",$class->from) .$class->day_id. "<br>";
-            echo "to " .date("h:i:s",$class->to) . "<br>";
-
-//           var_dump($class->to);
-//            $classTime =  ($class->to - $class->from);
-//            $timeByMin =  round($classTime/60);
-//             array_push($duration,$timeByMin);
         }
-        var_dump(end($duration));
-        return array_sum($duration);
+        return $duration;
     }
 
     public function getStatus($id)
     {
         $course = Course::find()->andWhere('id=:id', ['id' => $id])->one();
-        $start_date = $course->start_at;
-        $end_date = $course->end_at;
         $finished_classes = [];
         $not_finished_classes = [];
-        if (time() > $start_date && time() < $end_date) {
+        if (time() > $course->start_at && time() < $course->end_at) {
             $classes = $this->getScheduleAndDuration(28);
             foreach ($classes['classes_number'] as $class) {
                 switch ($class) {
@@ -187,9 +177,12 @@ class CourseQuery extends \yii\db\ActiveQuery
                         break;
                 }
             }
+
+            echo count($finished_classes) . "<br>";
+            echo count($not_finished_classes) . "<br>";
             sort($finished_classes);
             foreach ($finished_classes as $finished_class) {
-                echo date('d-m-Y l', $finished_class) . "<br>";
+                echo date('d-m-Y l w', $finished_class) . "<br>";
 
             }
             echo "<br>";
@@ -200,7 +193,7 @@ class CourseQuery extends \yii\db\ActiveQuery
             var_dump($finished_classes);
             var_dump($not_finished_classes);
 
-        } elseif (time() < $start_date) {
+        } elseif (time() < $course->start_at) {
             echo "لم تبدأ";
         } else {
             echo "انتهت";
