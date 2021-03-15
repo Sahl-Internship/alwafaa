@@ -1,6 +1,9 @@
 <template>
   <q-card class="course-card">
-    <q-img :src="course.image" height="218px">
+    <q-img
+      :src="course.image"
+      :class="$q.screen.lt.md ? 'img-height-sm' : 'img-height-lg'"
+    >
       <div
         class="column justify-between no-wrap fit"
         :class="$q.screen.lt.md ? 'cover-text' : ''"
@@ -61,8 +64,10 @@
     </q-img>
 
     <q-card-section
-      :class="$q.screen.lt.md ? 'q-px-xs q-py-md' : 'q-pa-xl'"
-      style="height: 204px"
+      :class="{
+        'q-pa-xl section-height-lg': !$q.screen.lt.md,
+        'q-px-sm q-py-md section-height-sm': $q.screen.lt.md,
+      }"
     >
       <div
         class="text-grey-5 text-center ellipsis-2-lines"
@@ -100,7 +105,7 @@
 
     <q-card-section
       class="row justify-between items-center rounded-borders bottom-section"
-      :class="$q.screen.lt.md ? 'bottom-section-sm' : 'q-px-lg'"
+      :class="$q.screen.lt.md ? 'bottom-section-sm q-py-sm' : 'q-px-lg'"
     >
       <div class="col-2 row items-center no-wrap">
         <img
@@ -209,6 +214,22 @@ export default {
 .course-card {
   width: 31.3%;
   min-width: 155px;
+
+  .img-height-lg {
+    height: 218px;
+  }
+
+  .img-height-sm {
+    height: 170px;
+  }
+
+  .section-height-lg {
+    height: 190px;
+  }
+
+  .section-height-sm {
+    height: 120px;
+  }
 
   .icon-lg {
     width: 15px;
