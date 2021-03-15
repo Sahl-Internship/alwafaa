@@ -8,7 +8,7 @@
     <q-toolbar>
       <div class="row items-center">
         <q-avatar v-if="isAuthenticated && !$q.screen.lt.sm">
-          <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+          <q-img :src="student.image" />
         </q-avatar>
 
         <!-- <q-toolbar-title

@@ -40,7 +40,6 @@ export default {
   },
 
   async editProfileAndCoverImg (context, image) {
-    console.log(image)
     Loading.show()
 
     try {
@@ -51,16 +50,12 @@ export default {
         throw new Error()
       }
 
-      // const { token, ...user } = response.data.profile
-      // localStorage.setItem('token', token)
-      // localStorage.setItem('user', JSON.stringify(user))
-      // context.commit('auth/loginState', { token, user }, { root: true })
+      const { token, ...user } = response.data.profile
+      localStorage.setItem('token', token)
+      localStorage.setItem('user', JSON.stringify(user))
+      context.commit('auth/loginState', { token, user }, { root: true })
 
       Loading.hide()
-      Notify.create({
-        type: 'positive',
-        message: i18n.t('student.notification.editDataSuccess')
-      })
     } catch (error) {
       Loading.hide()
 
