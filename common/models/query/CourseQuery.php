@@ -133,17 +133,11 @@ class CourseQuery extends \yii\db\ActiveQuery
     public function getReview($id)
     {
         $reviews = CourseReview::find()->andWhere('course_id=:id',['id'=>$id])->all();
-//        foreach ($reviews as $review) {
-//            echo $review->course_id . "<br>";
-//            echo $review->rate . "<br>";
-//            echo $review->review . "<br>";
-//            echo $review->created_by . "<br>" ."*********" ."<br>";
-//
-//        }
-        var_dump($reviews);
-
-        die();
-
+        $review_ids = [];
+        foreach ($reviews as $review) {
+            array_push($review_ids,$review->id);
+        }
+        return $review_ids;
     }
     public function getDayDuration($id)
     {
@@ -224,5 +218,15 @@ class CourseQuery extends \yii\db\ActiveQuery
         $days =  ($course->end_at-$course->start_at);
         $days_number = round($days / (60 * 60 * 24))+1;//add 1 because we want days number not difference
         return $days_number;
+    }
+
+    public function getClasses($id)
+    {
+        $classes = CourseClasses::find()->andWhere('course_id=:id', ['id' => $id])->all();
+        $class_ids = [];
+        foreach ($classes as $class) {
+            array_push($class_ids,$class->id);
+        }
+        return $class_ids;
     }
 }
