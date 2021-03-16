@@ -8,40 +8,9 @@ namespace api\controllers;
 use api\resources\Course;
 use common\models\CourseReview;
 use common\models\JoinCourses;
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\HttpBasicAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\HttpHeaderAuth;
-use yii\filters\auth\QueryParamAuth;
 
-class CourseController extends ApiController
+class CourseController extends ApController
 {
-    public function  behaviors()
-    {
-        $behaviors = parent::behaviors();
-        // remove authentication filter if there is one
-        unset($behaviors['authenticator']);
-        // add CORS filter before authentication
-
-
-        $behaviors['corsFilter'] = [
-            'class' => \yii\filters\Cors::className(),
-        ];
-        // Put in a bearer auth authentication filter
-        // https://www.yiiframework.com/doc/api/2.0/yii-filters-auth-httpbearerauth
-        $behaviors['authenticator'] = [
-            'class' => CompositeAuth::class,
-            'authMethods' => [
-                HttpBasicAuth::class,
-                HttpBearerAuth::class,
-                HttpHeaderAuth::class,
-                QueryParamAuth::class
-            ]
-        ];
-        // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
-        $behaviors['authenticator']['except'] = ['options'];
-        return $behaviors;
-    }
 
     public function actionIndex()
     {

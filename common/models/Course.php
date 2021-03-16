@@ -34,6 +34,9 @@ use yii\base\Exception;
  */
 class Course extends \yii\db\ActiveRecord
 {
+    const STATUS_NOT_STARTED = 0;
+    const STATUS_NOT_FINISHED = 1;
+    const STATUS_FINISHED = 2;
     public $classes;
     public $attachments;
     public $review;
