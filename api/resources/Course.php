@@ -54,8 +54,29 @@ class Course extends \common\models\Course
                 $course = Course::find()->getScheduleAndDuration($model->id);
                 return $course['total_time'];
             },
+            'status'=>function($model){
+                $course = Course::find()->getStatus($model->id);
+                return $course['status'];
+            },
+            'finished_classes'=>function($model){
+                $course = Course::find()->getStatus($model->id);
+                return $course['finished_classes_number'];
+            },
+            'not_finished_classes'=>function($model){
+                $course = Course::find()->getStatus($model->id);
+                return $course['not_finished_classes_number'];
+            },
+            'finished_duration'=>function($model){
+                $course = Course::find()->getStatus($model->id);
+                return $course['finished_duration'];
+            },
+            'not_finished_duration'=>function($model){
+                $course = Course::find()->getStatus($model->id);
+                return $course['not_finished_duration'];
+            },
             'student_number'=>function($model){
-                return 247;
+            $course = Course::find()->getJoinedStudents($model->id);
+                return count($course);
             },
         ];
     }

@@ -38,7 +38,8 @@ return [
             ,'only'=>['update','upload-picture']
             ,'extraPatterns'=>[
             'PUT update' => 'update' ,
-            'Post upload-picture' => 'upload-picture'
+            'Post upload-picture' => 'upload-picture',
+            'GET joined-courses' => 'joined-courses',
         ]
             , 'pluralize'=>false
         ],

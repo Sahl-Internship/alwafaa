@@ -81,16 +81,15 @@ class CourseQuery extends \yii\db\ActiveQuery
         $days = []; //carry days of classes per week
         $schedule = [];//carry days of classes over all the course period
         $totalTime = 0;//carry duration of classes over all the course period by minutes
-        $start_date = date("Y-m-d", $course->start_at);
-        $end_date = date("Y-m-d", $course->end_at);
+        $start_date = date("d-m-Y", strtotime('-1 day',$course->start_at ));//subtracting 1 day because $day_date will search from next day
+        $end_date = date("d-m-Y", $course->end_at);
         foreach ($classDays as $classDay) {
             //calculate class time
             $classTime = ($classDay->to - $classDay->from);
             $timeByMin = round($classTime / 60);
             $day_date = date("d-m-Y", strtotime("first " . $courseClasses->getWeekDay($classDay->day_id) . " " . $start_date));
             array_push($days, $day_date);
-//            echo $timeByMin . "<br>";
-            for ($i = date("W", $course->start_at); $i <= date("W", $course->end_at); $i++) {
+            for ($i = date("z", $course->start_at); $i <= date("z", $course->end_at); $i++) {
                 if (strtotime($day_date) <= strtotime($end_date)) {
                     $date = strtotime($day_date);
                     //save schedule in array as date ,if you need timestamp remove date()
@@ -106,7 +105,6 @@ class CourseQuery extends \yii\db\ActiveQuery
             'classes_number' => $schedule,
             'total_time' => $totalTime
         ];
-
     }
 
     public function getRate($id)
@@ -151,55 +149,63 @@ class CourseQuery extends \yii\db\ActiveQuery
     public function getDayDuration($id)
     {
         $classes = CourseClasses::findBySql("
-            SELECT c.id,c.day_id,c.from,c.to FROM course_classes c WHERE course_id=:id",['id'=>$id])->all();
+            SELECT c.id,c.day_id,c.from,c.to FROM course_classes c WHERE course_id=:id", ['id' => $id])->all();
         $duration = [];
         foreach ($classes as $class) {
-            $day_duration[$class->day_id]=round(($class->to - $class->from)/60);
-            array_push($duration,$day_duration);
+            $day_duration[$class->day_id] = round(($class->to - $class->from) / 60);
+            array_push($duration, $day_duration);
         }
-        return $duration;
+        return end($duration);
     }
 
     public function getStatus($id)
     {
         $course = Course::find()->andWhere('id=:id', ['id' => $id])->one();
+        $days_duration = $this->getDayDuration($id);
         $finished_classes = [];
         $not_finished_classes = [];
+        $finished_duration = [];
+        $not_finished_duration = [];
+        $classes = $this->getScheduleAndDuration($id);
         if (time() > $course->start_at && time() < $course->end_at) {
-            $classes = $this->getScheduleAndDuration(28);
             foreach ($classes['classes_number'] as $class) {
                 switch ($class) {
                     case ($class < time()):
                         array_push($finished_classes, $class);
+                        array_push($finished_duration, $days_duration[date('w', $class)]);
                         break;
                     case ($class >= time()):
                         array_push($not_finished_classes, $class);
+                        array_push($not_finished_duration, $days_duration[date('w', $class)]);
                         break;
                 }
             }
-            echo count($finished_classes) . "<br>";
-            echo count($not_finished_classes) . "<br>";
-            sort($finished_classes);
-            foreach ($finished_classes as $finished_class) {
-                echo date('d-m-Y l w', $finished_class) . "<br>";
-
-            }
-            echo "<br>";
-            sort($not_finished_classes);
-            foreach ($not_finished_classes as $not_finished_class) {
-                echo date('d-m-Y l', $not_finished_class) . "<br>";
-            }
-            var_dump($finished_classes);
-            var_dump($not_finished_classes);
-
+            $status = Course::STATUS_NOT_FINISHED;
+            $finished_classes_number = count($finished_classes);
+            $not_finished_classes_number = count($not_finished_classes);
+            $finished_duration = array_sum($finished_duration);
+            $not_finished_duration = array_sum($not_finished_duration);
         } elseif (time() < $course->start_at) {
-            echo "لم تبدأ";
+            $status = Course::STATUS_NOT_STARTED;
+            $finished_classes_number = 0;
+            $not_finished_classes_number = count($classes['classes_number']);
+            $finished_duration = 0;
+            $not_finished_duration = $classes['total_time'];
         } else {
-            echo "انتهت";
+            $status = Course::STATUS_FINISHED;
+            $finished_classes_number = count($classes['classes_number']);
+            $not_finished_classes_number = 0;
+            $finished_duration = $classes['total_time'];
+            $not_finished_duration = 0;
         }
-//        echo date('d/m/Y h:i A',$time);
-        die();
 
+        return [
+            'status' => $status,
+            'finished_classes_number' => $finished_classes_number,
+            'not_finished_classes_number' => $not_finished_classes_number,
+            'finished_duration' => $finished_duration,
+            'not_finished_duration' => $not_finished_duration,
+        ];
     }
 
     public function getJoinedStudents($id)
