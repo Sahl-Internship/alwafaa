@@ -162,141 +162,7 @@
                 <img src="/images/home-imgs/duration.png" class="duration-icon">
             </template>
           </base-card> -->
-<!-- ================================================================================================ -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/arabic.jpeg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / احمد سلمان
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                اللغة العربية
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating q-mr-md"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="20"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">05:30:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
 <!-- =================================================================================== -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/alorefy.jpg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / محمد العريفي
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                   القرآن الكريم
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="20"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">08:10:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
-<!-- ================================================================================= -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/omar.jpg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / عمر عبدالكافي
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                   القرآن الكريم
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="20"
-                active-border-color="#080"
-                :padding='8'
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">08:10:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
-<!-- ==================================================================================== -->
           </slick>
         </div>
       </div>
@@ -306,12 +172,10 @@
     </div>
 </template>
 <script>
-// import SectionCard from './SectionCard.vue'
 import Slick from 'vue-slick'
 import StarRating from 'vue-star-rating'
 import BaseCard from 'src/components/UI/BaseCard'
 import HomeCarouselTwo from './HomeCarouselTwo.vue'
-// import courses from 'src/store/courses'
 
 export default {
   components: { Slick, HomeCarouselTwo, BaseCard, StarRating },
@@ -320,6 +184,7 @@ export default {
     return {
       dense: true,
       rating: 0,
+      retrievedData: [],
       slide: 0,
       results: [],
       slickOptions: {
@@ -416,8 +281,8 @@ export default {
       this.$router.push('/courses/' + id)
     }
   },
-  mounted () {
-    this.$store.dispatch('home/getCourses')
+  created () {
+    this.results = this.courses.sort(function (a, b) { return b.created_at - a.created_at })
   },
   computed: {
     courses () {

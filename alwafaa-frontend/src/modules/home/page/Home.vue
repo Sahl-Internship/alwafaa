@@ -44,6 +44,9 @@ export default {
       slide: 1
     }
   },
+  mounted () {
+    this.$store.dispatch('home/getCourses')
+  },
   methods: {
 
   }

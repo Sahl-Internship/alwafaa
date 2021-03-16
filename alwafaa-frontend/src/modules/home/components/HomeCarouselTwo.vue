@@ -39,7 +39,7 @@
             class="slick"
           >
           <!-- ============================================================================== -->
-            <base-card  v-for="result in courses" :key="result.id">
+            <base-card  v-for="result in results" :key="result.id">
               <template>
               <img :src="result.image" />
               </template>
@@ -150,225 +150,6 @@
             </template>
           </base-card> -->
 <!-- =================================================================================== -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/omar.jpg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / عمر عبدالكافي
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                القرآن الكريم
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="15"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">04:30:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
-<!-- ================================================================================================ -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/arabic.jpeg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / احمد سلمان
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                اللغة العربية
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="15"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">05:30:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
-<!-- =================================================================================== -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/alorefy.jpg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / محمد العريفي
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                   القرآن الكريم
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="15"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">08:10:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
-<!-- ================================================================================= -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/omar.jpg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / عمر عبدالكافي
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                   القرآن الكريم
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="15"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">08:10:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
-<!-- ==================================================================================== -->
-          <!-- <base-card>
-            <template>
-              <img src="/images/home-imgs/alorefy.jpg" />
-            </template>
-            <template #teacherData>
-              <p class="label-1">
-                <img src="/images/home-imgs/person.png" class="img-icon">
-                د / محمد العريفي
-              </p>
-            </template>
-            <template #sectionData>
-              <p class="label-2">
-                <img src="/images/home-imgs/quran-icon2.png" class="img-icon2">
-                   القرآن الكريم
-              </p>
-            </template>
-            <template #text>
-              <div class="col text-h6 course-name">
-                استخدم الاسماء الخمسة في حالات الإعراب الثلاثة
-              </div>
-            </template>
-            <template #rating>
-              <p class="rating-no2">(455)</p>
-              <star-rating
-                class="star-rating"
-                v-model="rating"
-                :increment="0.5"
-                :max-rating="5"
-                :rtl= true
-                :star-size="15"
-                inactive-color="#ccc"
-                active-color="orange"
-              ></star-rating>
-            </template>
-            <template #viewedSection>
-                <p class="viewed-no">7</p>
-                <img src="/images/home-imgs/viewed.png" alt="" class="viewed-icon">
-            </template>
-            <template #durationSection>
-                <p class="duration">08:10:00</p>
-                <img src="/images/home-imgs/duration.png" class="duration-icon">
-            </template>
-          </base-card> -->
 
           </slick>
         </div>
@@ -482,8 +263,8 @@ export default {
       this.$router.push('/courses/' + id)
     }
   },
-  mounted () {
-    this.$store.dispatch('home/getCourses')
+  created () {
+    this.results = this.courses.sort(function (a, b) { return b.rate.rate_average - a.rate.rate_average })
   },
   computed: {
     courses () {
@@ -494,7 +275,6 @@ export default {
     },
     right () {
       return this.checkDirection ? 'fas fa-angle-left' : 'fas fa-angle-right'
-      // : this.checkDirection ? 'fas fa-arrow-circle-right' : 'fas fa-arrow-circle-left'
     },
     left () {
       return this.checkDirection ? 'fas fa-angle-right' : 'fas fa-angle-left'

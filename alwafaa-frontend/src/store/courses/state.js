@@ -1,5 +1,8 @@
 export default () => {
   return {
-    courses: []
+    courses: [],
+    rate: '',
+    comment: '',
+    rank: ''
   }
 }

@@ -16,5 +16,10 @@ export default {
     started: 'بدأت',
     more: 'عرض المزيد',
     from: 'من'
+  },
+  courseNotifications: {
+    reviewSuccess: 'تم ارسال التقييم بنجاح',
+    reviewError: 'خطأ خلال الارسال, حاول مرة اخري',
+    notvalid: ' غير صحيح'
   }
 }
