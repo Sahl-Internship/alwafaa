@@ -7,7 +7,7 @@ namespace api\resources;
 use common\models\CourseClasses;
 use function foo\func;
 
-class Course extends \common\models\Course
+class CourseDetails extends \common\models\Course
 {
 
     public function fields()
@@ -40,44 +40,45 @@ class Course extends \common\models\Course
                 return   $model->picture?: \Yii::getAlias('@backendUrl'). "/img/logo.png" ;
             },
             'rate'=>function($model){
-            $course = Course::find()->getRate($model->id);
+            $course = CourseDetails::find()->getRate($model->id);
             return [
                "rate_average"=> $course['rate_average'],
                "voters"=>$course['voters']
             ];
             },
             'sessions'=>function($model){
-            $course = Course::find()->getScheduleAndDuration($model->id);
+            $course = CourseDetails::find()->getScheduleAndDuration($model->id);
                 return count($course['classes_number']);
             },
             'duration'=>function($model){
-                $course = Course::find()->getScheduleAndDuration($model->id);
+                $course = CourseDetails::find()->getScheduleAndDuration($model->id);
                 return $course['total_time'];
             },
             'status'=>function($model){
-                $course = Course::find()->getStatus($model->id);
+                $course = CourseDetails::find()->getStatus($model->id);
                 return $course['status'];
             },
             'finished_classes'=>function($model){
-                $course = Course::find()->getStatus($model->id);
+                $course = CourseDetails::find()->getStatus($model->id);
                 return $course['finished_classes_number'];
             },
             'not_finished_classes'=>function($model){
-                $course = Course::find()->getStatus($model->id);
+                $course = CourseDetails::find()->getStatus($model->id);
                 return $course['not_finished_classes_number'];
             },
             'finished_duration'=>function($model){
-                $course = Course::find()->getStatus($model->id);
+                $course = CourseDetails::find()->getStatus($model->id);
                 return $course['finished_duration'];
             },
             'not_finished_duration'=>function($model){
-                $course = Course::find()->getStatus($model->id);
+                $course = CourseDetails::find()->getStatus($model->id);
                 return $course['not_finished_duration'];
             },
             'student_number'=>function($model){
-            $course = Course::find()->getJoinedStudents($model->id);
+            $course = CourseDetails::find()->getJoinedStudents($model->id);
                 return count($course);
             },
+            'created_at',
         ];
     }
 
