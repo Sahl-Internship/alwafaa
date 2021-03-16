@@ -5,6 +5,7 @@ namespace common\models;
 use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
 use yii\base\Exception;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%course}}".
@@ -25,7 +26,7 @@ use yii\base\Exception;
  * @property string $image_base_url
  ** @property string $intro_path
  * @property string $intro_base_url
- *
+ * @property int $created_at
  * @property CourseAttachment[] $courseAttachments
  * @property CourseClasses[] $courseClasses
  * @property CourseReview[] $courseReview
@@ -34,6 +35,9 @@ use yii\base\Exception;
  */
 class Course extends \yii\db\ActiveRecord
 {
+    const STATUS_NOT_STARTED = 0;
+    const STATUS_NOT_FINISHED = 1;
+    const STATUS_FINISHED = 2;
     public $classes;
     public $attachments;
     public $review;
@@ -75,6 +79,10 @@ class Course extends \yii\db\ActiveRecord
                 'attribute' => 'intro_video',
                 'pathAttribute' => 'intro_path',
                 'baseUrlAttribute' => 'intro_base_url',
+            ],
+            [
+                'class'=>TimestampBehavior::class,
+                'updatedAtAttribute' => false
             ],
 
         ];

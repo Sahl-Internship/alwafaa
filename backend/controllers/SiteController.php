@@ -62,14 +62,19 @@ class SiteController extends \yii\web\Controller
     public function actionTest()
     {
 //        $classes = CourseClasses::find()->getDurationPerWeek(27);
-//        $course = Course::find()->getScheduleAndDuration(26);
+//        $course = Course::find()->getScheduleAndDuration(30);
 //        $course = Course::find()->getRate(5);
 //        $stusents = Course::find()->getJoinedStudents(5);
-        $stusents = User::find()->getOwnStudents();
+//        $stusents = User::find()->getOwnStudents();
+//         Course::find()->getDayDuration(26);
+//        $status = Course::find()->getStatus(30);
+        $ownCourses = User::find()->getOwnCourses();
+
 
         return $this->render('test', [
 //            'data' => $course,
-            'data' => $stusents,
+//            'data' => $status,
+            'data' => $ownCourses,
         ]);
     }
 //

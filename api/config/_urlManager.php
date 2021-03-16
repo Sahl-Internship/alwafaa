@@ -38,7 +38,8 @@ return [
             ,'only'=>['update','upload-picture']
             ,'extraPatterns'=>[
             'PUT update' => 'update' ,
-            'Post upload-picture' => 'upload-picture'
+            'Post upload-picture' => 'upload-picture',
+            'GET joined-courses' => 'joined-courses',
         ]
             , 'pluralize'=>false
         ],
@@ -47,6 +48,14 @@ return [
             ,'only'=>['index','review','join-course']
             ,'extraPatterns'=>[
             'GET index' => 'index' ,
+            'Post review' => 'review',
+            'Post join-course' => 'join-course'
+        ]
+            , 'pluralize'=>false
+        ],
+        ['class' =>'yii\rest\UrlRule','controller'=>'join-course'
+            ,'only'=>['review','join-course']
+            ,'extraPatterns'=>[
             'Post review' => 'review',
             'Post join-course' => 'join-course'
         ]

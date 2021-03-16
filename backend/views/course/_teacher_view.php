@@ -58,7 +58,7 @@ use yii\widgets\DetailView;
         <?php foreach ($model->courseClasses as $class): ?>
             <tr>
                 <td>
-                    <?php echo $class->getWeekDay($class->day_id) ?>
+                    <?php echo Yii::t('common',$class->getWeekDay($class->day_id)) ?>
                 </td>
                 <td><?php echo date('h:i A',$class->from) ?></td>
                 <td><?php echo date('h:i A',$class->to) ?></td>
@@ -69,6 +69,10 @@ use yii\widgets\DetailView;
         <?php endforeach; ?>
         </tbody>
     </table>
+    <div class="card-header">
+        <?php echo Html::a(Yii::t('backend','More Details'),
+            ['create'], ['class' => 'btn btn-primary']) ?>
+    </div>
 
 
 </div>
