@@ -21,9 +21,6 @@ class CourseDetails extends \common\models\Course
 //            'description' => function ($model) {
 //                return strip_tags($model->description);
 //            },
-            'teacher_name' => function ($model) {
-                return $model->teacher->userProfile->getFullName();
-            },
             'section_id',
             'section' => function ($model) {
                 return $model->section->title;
@@ -88,24 +85,17 @@ class CourseDetails extends \common\models\Course
                 return Classes::find()->andWhere(['in', 'id', $ids])->all();
             },
             'teacher' => function ($model) {
-                $teacher_name = $model->teacher->userProfile->getFullName();
-                $teacher_avatar = $model->teacher->userProfile->avatar;
-                $students_number = User::find()->getTeacherPortfolio($model->teacher->id);
-                $duration = 990;
-                $classes_number = 42;
-//                $Students_number = 230;
+                $teacher_portfolio = User::find()->getTeacherPortfolio($model->teacher->id);
                 return [
-                    'name' => $teacher_name,
-                    'job_title' => "معلم اللغة العربية والقران الكريم",
-                    'avatar' => $teacher_avatar,
-                    'students' => $students_number['student_number'],
-                    'duration' => $students_number['duration'],
-                    'classes_number' => $students_number['classes'],
-//                    'students' => $Students_number,
-                    'bio' => "مدرس اللغة العربية الفصحي والعامية المصرية لدي منهج وكتب جيدة لتعليم العربية لغير الناطقين بها في وقت قصير",
+                    'name' => $model->teacher->userProfile->getFullName(),
+                    'sub_title' => $model->teacher->userProfile->sub_title,
+                    'avatar' => $model->teacher->userProfile->avatar?: \Yii::getAlias('@backendUrl'). "/img/anonymous.jpg",
+                    'students' => $teacher_portfolio['student_number'],
+                    'duration' => $teacher_portfolio['duration'],
+                    'classes_number' => $teacher_portfolio['classes'],
+                    'bio' => $model->teacher->userProfile->bio,
                 ];
             },
-
             'reviews' => function ($model) {
                 $ids = Course::find()->getReview($model->id);
                 return Review::find()->andWhere(['in', 'id', $ids])->all();

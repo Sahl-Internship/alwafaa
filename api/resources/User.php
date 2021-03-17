@@ -27,6 +27,9 @@ class User extends \common\models\User
             'lastname'=>function($model){
                 return $model->userProfile->lastname;
             },
+            'sub_title'=>function($model){
+                return $model->userProfile->sub_title;
+            },
             'birthdate'=>function($model){
                 return $model->userProfile->birthdate;
             },
