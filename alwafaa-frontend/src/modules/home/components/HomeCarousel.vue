@@ -47,10 +47,10 @@
           <slick
             ref="slick"
             :options="slickOptions"
-            class="slick"
+            class="slick q-ml-xl"
           >
 <!-- ========================================================================================= -->
-            <base-card  v-for="result in courses" :key="result.id"  >
+            <!-- <base-card  v-for="result in results" :key="result.id"  >
               <template >
                 <img :src="result.image" to='/auth/login' />
               </template>
@@ -71,7 +71,7 @@
                   {{result.section}}
                 </p>
               </template>
-              <!-- <template #courseState>
+              <template #courseState>
                 <p
                   class="course-state"
                   :class="
@@ -83,7 +83,7 @@
                 >
                   لم تنته
                 </p>
-              </template> -->
+              </template>
               <template #text>
                 <div class="col text-h6 course-name" @click="clickCard(result.id)">
                   {{result.title}}
@@ -115,8 +115,166 @@
                   </p>
                   <img src="/images/home-imgs/duration.png" class="duration-icon">
               </template>
-            </base-card>
+            </base-card> -->
+<q-card class="course-card" v-for="result in results" :key="result.id">
+    <img src="/images/home-imgs/alorefy.jpg"/>
+      <!-- <div
+        class="column justify-between no-wrap fit"
+        :class="$q.screen.lt.md ? 'cover-text' : ''"
+      >
 
+        <div :class="$q.screen.lt.sm ? 'row' : 'row q-gutter-y-xs'">
+          <div class="col-12 row items-center">
+            <img
+              src="/images/home-imgs/person.png"
+              :class="{
+                'icon-lg': !$q.screen.lt.sm,
+                'icon-sm': $q.screen.lt.sm
+              }"
+            />
+            <div
+              :class="{
+                'text-subtitle2': !$q.screen.lt.sm,
+                'text-caption': $q.screen.lt.sm,
+                'q-ml-sm': true
+              }"
+            >د/محمد العريفي</div>
+          </div>
+
+          <div class="col-12 row items-center">
+            <img
+              src="/images/home-imgs/global.png"
+              :class="{
+                'icon-lg': !$q.screen.lt.sm,
+                'icon-sm': $q.screen.lt.sm
+              }"
+            />
+            <div
+              :class="{
+                'text-subtitle2': !$q.screen.lt.sm,
+                'text-caption': $q.screen.lt.sm,
+                'q-ml-sm': true
+              }"
+            >{{result.section}}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div
+            class="text-grey-5 bg-green q-px-sm rounded-borders"
+            :class="{
+              'text-subtitle2 q-py-xs': !$q.screen.lt.sm,
+              'text-caption': $q.screen.lt.sm,
+              'not-started': result.status === 0,
+              'not-finished': result.status === 1,
+              'finished': result.status === 2,
+            }"
+          >
+            لم تبدء
+          </div>
+        </div>
+
+      </div> -->
+    <!-- </q-img> -->
+
+    <q-card-section :class="$q.screen.lt.md ? 'q-px-xs q-py-md' : 'q-pa-xl'">
+      <div
+        class="text-grey-5 text-center"
+        :class="{
+          'text-h6 text-weight-bold': !$q.screen.lt.md,
+          'text-subtitle2': $q.screen.lt.md,
+        }"
+        @click="clickCard(result.id)"
+      >
+        {{result.title}}
+      </div>
+
+      <div class="row justify-center q-mt-md">
+        <div
+          class="text-grey-4"
+          :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
+        >{{result.rate.rate_average}}</div>
+
+        <star-rating
+          read-only
+          :increment=0.5
+          :rating=4.5
+          :star-size="$q.screen.lt.md ? 13 : 20"
+          :padding="$q.screen.lt.md ? 3 : 5"
+          :active-color="['#e49d1a']"
+          :show-rating=false
+          :rtl=true
+        ></star-rating>
+
+        <div
+          class="text-grey-4 q-ml-sm"
+          :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
+        >{{result.rate.voters}}</div>
+      </div>
+    </q-card-section>
+
+    <q-card-section
+      class="row justify-between items-center rounded-borders bottom-section"
+      :class="$q.screen.lt.md ? 'bottom-section-sm' : 'q-px-lg'"
+    >
+      <div class="col-2 row items-center no-wrap">
+        <img
+          src="/images/home-imgs/viewed.png"
+          :class="{
+            'icon-lg': !$q.screen.lt.sm,
+            'icon-sm': $q.screen.lt.sm
+          }"
+        />
+        <div
+          :class="{
+            'text-subtitle1 q-ml-sm': !$q.screen.lt.md,
+            'text-caption q-ml-xs': $q.screen.lt.md,
+            'text-grey-4': true
+          }"
+        >{{result.sessions}}</div>
+      </div>
+
+      <div
+        class="col-5 row items-center no-wrap"
+        :class="isAuthenticated ? 'justify-center' : 'justify-end'"
+      >
+        <img
+          src="/images/home-imgs/duration.png"
+          :class="{
+            'icon-lg': !$q.screen.lt.sm,
+            'icon-sm': $q.screen.lt.sm
+          }"
+        />
+        <div
+          :class="{
+            'text-subtitle1 q-ml-sm': !$q.screen.lt.md,
+            'text-caption q-ml-xs': $q.screen.lt.md,
+            'text-grey-4': true
+          }"
+        >{{calcDuration(result.duration)}}</div>
+      </div>
+
+      <div
+        v-if="isAuthenticated"
+        class="col-3 row justify-end items-center no-wrap"
+      >
+        <img
+          src="/images/Path 8197.png"
+          :class="{
+            'icon-lg': !$q.screen.lt.sm,
+            'icon-sm': $q.screen.lt.sm
+          }"
+        />
+        <div
+          :class="{
+            'text-subtitle1 q-ml-sm': !$q.screen.lt.md,
+            'text-caption q-ml-xs': $q.screen.lt.md,
+            'text-grey-4': true
+          }"
+        >{{result.student_number}}</div>
+      </div>
+    </q-card-section>
+  </q-card>
 <!-- =================================================================================== -->
           <!-- <base-card>
             <template>
@@ -174,36 +332,32 @@
 <script>
 import Slick from 'vue-slick'
 import StarRating from 'vue-star-rating'
-import BaseCard from 'src/components/UI/BaseCard'
+// import BaseCard from 'src/components/UI/BaseCard'
 import HomeCarouselTwo from './HomeCarouselTwo.vue'
 
 export default {
-  components: { Slick, HomeCarouselTwo, BaseCard, StarRating },
+  components: { Slick, HomeCarouselTwo, StarRating },
   name: 'HomeCourses',
   data () {
     return {
       dense: true,
       rating: 0,
       retrievedData: [],
-      slide: 0,
+      // slide: 0,
       results: [],
       slickOptions: {
-        slidesToShow: 3,
+        slidesToShow: 3.1,
         arrows: false,
         mobileFirst: true,
         infinite: false,
         initialSlide: 0,
-        // focusOnSelect: true,
         rtl: true,
-        // centerPadding: '0px',
         responsive: [
           {
             breakpoint: 1200,
             settings: {
-              slidesToShow: 3,
-              slidesToScroll: 1,
-              // centerPadding: '50px',
-              centerMode: true
+              slidesToShow: 3.1,
+              slidesToScroll: 1
             }
           },
           {
@@ -212,7 +366,6 @@ export default {
               slidesToShow: 3,
               slidesToScroll: 1,
               centerPadding: '0px'
-              // centerMode: true
             }
           },
           {
@@ -220,7 +373,6 @@ export default {
             settings: {
               slidesToShow: 2,
               slidesToScroll: 1,
-              centerMode: true,
               centerPadding: '23px'
             }
           },
@@ -229,7 +381,6 @@ export default {
             settings: {
               slidesToShow: 2,
               slidesToScroll: 1,
-              centerMode: true,
               centerPadding: '25px'
             }
           },
@@ -238,7 +389,6 @@ export default {
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
-              centerMode: true,
               centerPadding: '100px'
             }
           },
@@ -247,7 +397,6 @@ export default {
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
-              // centerMode: true,
               centerPadding: '5px'
             }
           },
@@ -256,8 +405,8 @@ export default {
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
-              centerMode: true,
-              centerPadding: '10px'
+              centerPadding: '10px',
+              centerMode: true
             }
           }
         ]
@@ -288,12 +437,14 @@ export default {
     courses () {
       return this.$store.getters['home/getCourses']
     },
+    isAuthenticated () {
+      return this.$store.getters['auth/isAuthenticated']
+    },
     checkDirection () {
       return this.$q.lang.rtl
     },
     right () {
       return this.checkDirection ? 'fas fa-angle-left' : 'fas fa-angle-right'
-      // : this.checkDirection ? 'fas fa-arrow-circle-right' : 'fas fa-arrow-circle-left'
     },
     left () {
       return this.checkDirection ? 'fas fa-angle-right' : 'fas fa-angle-left'
@@ -337,12 +488,6 @@ export default {
 }
 .register-section {
   background-color: $grey-1;
-  .ready-text {
-    color: $secondary;
-  }
-  .exp-text {
-    color: $grey-4;
-  }
 }
 .slider-container{
   height: 550px;
@@ -352,220 +497,254 @@ export default {
     height: 100%;
     padding: 18px 0px;
     .slick{
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
-      outline: none !important;
-      border: none;
-      &:focus{
-        outline: none !important;
-        outline: 0 !important;
-        border: none;
-      }
-      .my-card{
-        margin-left: -420px;
-        outline: none;
-        border: none;
-        width:400px !important;
-        height: 450px !important;
-        &:focus{
-          outline: none !important;
-          border: none;
-        }
-        @media(max-width: 1170px ){
-          width:365px !important;
-          height: 420px !important;
-        }
-        @media(max-width: 340px ),(max-width: 480px){
-          width:300px !important;
-          height: 420px !important;
-          margin-left: 30px;
-        }
-        .rating-section{
-          margin-top: 20px;
-          margin-bottom: 30px;
-          .rating,.rating-no2{
-            display: inline;
-            margin: 4px 0px;
-          }
-          .star-icon{
-            width: 15px;
-            height: 15px;
-            display: inline;
-          }
-        }
-        .separator{
-          position: absolute;
-          bottom: 55px;
-          margin-top: 0px;
-          width: 100%;
-        }
-        img{
-          height: 220px;
-          width: 100%;
-          border-radius: 5px 5px 0px 0px;
-        }
-        .duration-view{
-          margin-top: 20px;
-          .duration{
-            font-size: 15px;
-            margin-right: 27px;
-            position: absolute;
-            bottom: 2px;
-            right: 0px;
-          }
-          .duration-icon{
-            width: 15px !important;
-            height: 15px !important;
-            display: inline;
-            position: absolute;
-            bottom: 21px;
-            right: 85px;
-          }
-          .viewed-icon{
-              width: 15px;
-              height: 15px;
-              display: inline;
-              position: absolute;
-              bottom: 21px;
-              left: 25px;
-          }
-          .viewed-no{
-            font-size: 15px;
-            margin-left: 50px;
-            position: absolute;
-            bottom: 2px;
-            left: 0px;
-          }
-        }
-        .course-name{
-          padding: 0px 50px;
-          cursor: pointer;
-          @media (max-width: 340px),(max-width: 480px){
-            padding: 0px 10px
-          }
-        }
-        .container{
-          border-radius: 5px 5px 0px 0px;
-          position: relative;
-          height: 220px;
-          top: 0;
-          left: 0;
-          right: 0;
-          .teacher-name{
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin-top: 20px;
-            margin-left: 25px;
-            left: 20px;
-            color: #fff;
-            font-size: 12px;
-          }
-          .course-section-name{
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin-top: 50px;
-            margin-left: 25px;
-            left: 20px;
-            color: #fff;
-            font-size: 12px;
-          }
-          .course-state{
-            position:absolute;
-            text-align: center;
-            line-height: 1.8;
-            border-radius: 4px;
-            width: 60px;
-            height: 30px;
-            left: 15px;
-            bottom: 0px;
-          }
-          .red{
-            background: rgb(240, 71, 71);
-            color: #fff;
-          }
-          .green{
-            background: $green;
-            color: #000;
-          }
-          .white{
-            background: #DDD;
-            color: #000;
-          }
-          .img-icon{
-            width: 17px;
-            height: 15px;
-            position: absolute;
-            padding-right: 0px;
-            margin-left: -27px;
-            left: 0;
-            margin-top: -1px;
-          }
-          .img-icon2{
-            background-image: url('/images/home-imgs/quran-icon2.png') ;
-            background-size: 20px 17px;
-            width: 20px;
-            height: 17px;
-            position: absolute;
-            padding-right: 0px;
-            margin-left: -27px;
-            left: 0;
-            top: 0;
-            // margin-top: -1px;
-          }
-          .global-icon2{
-            background-image: url('/images/home-imgs/global.png') ;
-            background-size: 17px 15px;
-            width: 17px;
-            height: 15px;
-            position: absolute;
-            padding-right: 0px;
-            margin-left: -27px;
-            left: 0;
-            top: 0;
-          }
-          .global{
-            width: 17px;
-            height: 15px;
-            position: absolute;
-            padding-right: 3px;
-            margin-left: -27px;
-            left: 0;
-            margin-top: 0px;
-            font-size: 16px;
-          }
-          .overlay {
-            position: absolute;
-            bottom: 0;
-            background: rgb(0, 0, 0);
-            background: rgba(0, 0, 0, 0.5); /* Black see-through */
-            color: #f1f1f1;
-            width: 100%;
-            transition: .5s ease;
-            opacity:1;
-            color: white;
-            height: 100%;
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px 5px 0px 0px;
-          }
-        }
+      @media (max-width: 480px) {
+        margin-left: 22px;
       }
     }
+    // .slick{
+    //   height: 100%;
+    //   margin: 0;
+    //   padding: 0;
+    //   right: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   outline: none !important;
+    //   border: none;
+    //   &:focus{
+    //     outline: none !important;
+    //     outline: 0 !important;
+    //     border: none;
+    //   }
+    //   .my-card{
+    //     margin-left: -420px;
+    //     outline: none;
+    //     border: none;
+    //     width:400px !important;
+    //     height: 450px !important;
+    //     &:focus{
+    //       outline: none !important;
+    //       border: none;
+    //     }
+    //     @media(max-width: 1170px ){
+    //       width:365px !important;
+    //       height: 420px !important;
+    //     }
+    //     @media(max-width: 340px ),(max-width: 480px){
+    //       width:300px !important;
+    //       height: 420px !important;
+    //       margin-left: 30px;
+    //     }
+    //     .rating-section{
+    //       margin-top: 20px;
+    //       margin-bottom: 30px;
+    //       .rating,.rating-no2{
+    //         display: inline;
+    //         margin: 4px 0px;
+    //       }
+    //       .star-icon{
+    //         width: 15px;
+    //         height: 15px;
+    //         display: inline;
+    //       }
+    //     }
+    //     .separator{
+    //       position: absolute;
+    //       bottom: 55px;
+    //       margin-top: 0px;
+    //       width: 100%;
+    //     }
+    //     img{
+    //       height: 220px;
+    //       width: 100%;
+    //       border-radius: 5px 5px 0px 0px;
+    //     }
+    //     .duration-view{
+    //       margin-top: 20px;
+    //       .duration{
+    //         font-size: 15px;
+    //         margin-right: 27px;
+    //         position: absolute;
+    //         bottom: 2px;
+    //         right: 0px;
+    //       }
+    //       .duration-icon{
+    //         width: 15px !important;
+    //         height: 15px !important;
+    //         display: inline;
+    //         position: absolute;
+    //         bottom: 21px;
+    //         right: 85px;
+    //       }
+    //       .viewed-icon{
+    //           width: 15px;
+    //           height: 15px;
+    //           display: inline;
+    //           position: absolute;
+    //           bottom: 21px;
+    //           left: 25px;
+    //       }
+    //       .viewed-no{
+    //         font-size: 15px;
+    //         margin-left: 50px;
+    //         position: absolute;
+    //         bottom: 2px;
+    //         left: 0px;
+    //       }
+    //     }
+    //     .course-name{
+    //       padding: 0px 50px;
+    //       cursor: pointer;
+    //       @media (max-width: 340px),(max-width: 480px){
+    //         padding: 0px 10px
+    //       }
+    //     }
+    //     .container{
+    //       border-radius: 5px 5px 0px 0px;
+    //       position: relative;
+    //       height: 220px;
+    //       top: 0;
+    //       left: 0;
+    //       right: 0;
+    //       .teacher-name{
+    //         position: absolute;
+    //         top: 0;
+    //         left: 0;
+    //         margin-top: 20px;
+    //         margin-left: 25px;
+    //         left: 20px;
+    //         color: #fff;
+    //         font-size: 12px;
+    //       }
+    //       .course-section-name{
+    //         position: absolute;
+    //         top: 0;
+    //         left: 0;
+    //         margin-top: 50px;
+    //         margin-left: 25px;
+    //         left: 20px;
+    //         color: #fff;
+    //         font-size: 12px;
+    //       }
+    //       .course-state{
+    //         position:absolute;
+    //         text-align: center;
+    //         line-height: 1.8;
+    //         border-radius: 4px;
+    //         width: 60px;
+    //         height: 30px;
+    //         left: 15px;
+    //         bottom: 0px;
+    //       }
+    //       .red{
+    //         background: rgb(240, 71, 71);
+    //         color: #fff;
+    //       }
+    //       .green{
+    //         background: $green;
+    //         color: #000;
+    //       }
+    //       .white{
+    //         background: #DDD;
+    //         color: #000;
+    //       }
+    //       .img-icon{
+    //         width: 17px;
+    //         height: 15px;
+    //         position: absolute;
+    //         padding-right: 0px;
+    //         margin-left: -27px;
+    //         left: 0;
+    //         margin-top: -1px;
+    //       }
+    //       .img-icon2{
+    //         background-image: url('/images/home-imgs/quran-icon2.png') ;
+    //         background-size: 20px 17px;
+    //         width: 20px;
+    //         height: 17px;
+    //         position: absolute;
+    //         padding-right: 0px;
+    //         margin-left: -27px;
+    //         left: 0;
+    //         top: 0;
+    //         // margin-top: -1px;
+    //       }
+    //       .global-icon2{
+    //         background-image: url('/images/home-imgs/global.png') ;
+    //         background-size: 17px 15px;
+    //         width: 17px;
+    //         height: 15px;
+    //         position: absolute;
+    //         padding-right: 0px;
+    //         margin-left: -27px;
+    //         left: 0;
+    //         top: 0;
+    //       }
+    //       .global{
+    //         width: 17px;
+    //         height: 15px;
+    //         position: absolute;
+    //         padding-right: 3px;
+    //         margin-left: -27px;
+    //         left: 0;
+    //         margin-top: 0px;
+    //         font-size: 16px;
+    //       }
+    //       .overlay {
+    //         position: absolute;
+    //         bottom: 0;
+    //         background: rgb(0, 0, 0);
+    //         background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    //         color: #f1f1f1;
+    //         width: 100%;
+    //         transition: .5s ease;
+    //         opacity:1;
+    //         color: white;
+    //         height: 100%;
+    //         padding: 20px;
+    //         text-align: center;
+    //         border-radius: 5px 5px 0px 0px;
+    //       }
+    //     }
+    //   }
+    // }
 }
 }
-.flip-img{
-  transform: scaleX(-1);
+.course-card {
+  width: 95% !important;
+  min-width: 155px;
+
+  .icon-lg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .icon-sm {
+    width: 10px;
+    height: 10px;
+  }
 }
-li{
-  display: block;
+
+.q-img__content > div {
+  &.cover-text {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
 }
-// .star-rating{
-//   direction: rtl;
-// }
+
+.bottom-section {
+  border-top: solid 1.5px $grey-1;
+}
+
+.q-card__section--vert {
+  &.bottom-section-sm {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.q-card > div:not(:first-child),
+.q-card > img:not(:first-child) {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
 </style>

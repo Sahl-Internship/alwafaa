@@ -349,6 +349,10 @@ export default {
       this.isShowList = !this.isShowList
     }
   },
+  mounted () {
+    const courseId = this.$route.params.id
+    this.$store.dispatch('courses/coursePage', courseId)
+  },
   computed: {
     isAuthed () {
       return this.$store.getters['auth/isAuthenticated']

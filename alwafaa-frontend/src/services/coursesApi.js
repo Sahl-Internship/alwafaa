@@ -7,3 +7,7 @@ export const handleGetCourses = () => {
 export const handleCourseReview = (review) => {
   return axios.post('http://endpoints.alwafaa.localhost/course/review', review)
 }
+
+export const handleCoursePage = (courseId) => {
+  return axios.post(`http://endpoints.alwafaa.localhost/course/view?id=${courseId}`)
+}

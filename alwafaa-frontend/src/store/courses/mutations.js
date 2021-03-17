@@ -6,5 +6,8 @@ export default {
     state.rate = review.rate
     state.comment = review.comment
     state.rank = review.rank
+  },
+  getCoursePage (state, data) {
+    state.course = data
   }
 }

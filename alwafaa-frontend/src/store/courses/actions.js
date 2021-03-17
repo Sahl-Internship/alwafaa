@@ -1,5 +1,6 @@
 
 import {
+  handleCoursePage,
   handleCourseReview
 } from 'src/services/coursesApi'
 
@@ -10,5 +11,10 @@ export default {
     const response = await handleCourseReview(review)
     console.log(response)
     context.commit('courseReview', review)
+  },
+  async coursePage (context, courseId) {
+    const response = await handleCoursePage(courseId)
+    console.log(response)
+    context.commit('getCoursePage', courseId)
   }
 }
