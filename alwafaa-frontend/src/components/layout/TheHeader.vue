@@ -1,6 +1,6 @@
 <template>
   <q-header
-    class="header bg-white z-top"
+    class="header bg-white"
     :class="{
      ' q-px-xl': !$q.screen.lt.md,
     }"
@@ -8,7 +8,7 @@
     <q-toolbar>
       <div class="row items-center">
         <q-avatar v-if="isAuthenticated && !$q.screen.lt.sm">
-          <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+          <q-img :src="student.image" />
         </q-avatar>
 
         <!-- <q-toolbar-title
