@@ -5,6 +5,7 @@ namespace api\controllers;
 
 
 use api\resources\CourseDetails;
+use api\resources\Profile;
 use api\resources\User;
 use common\models\UserProfile;
 
@@ -22,7 +23,7 @@ class ProfileController extends ApController
     public function actionUploadPicture()
     {
         $params = \Yii::$app->request->post();
-        $user = User::findOne(['id' => \Yii::$app->user->identity->getId()]);
+        $user = Profile::findOne(['id' => \Yii::$app->user->identity->getId()]);
         $profile = $user->userProfile;
         $data = $params['avatar'] ?? $params['cover'];
         if (preg_match('/^data:image\/(\w+);base64,/', $data, $type)) {
@@ -62,7 +63,7 @@ class ProfileController extends ApController
     {
 
         $params = \Yii::$app->request->post();
-        $user = User::findOne(['id' => \Yii::$app->user->identity->getId()]);
+        $user = Profile::findOne(['id' => \Yii::$app->user->identity->getId()]);
         $profile = UserProfile::findOne(['user_id'=>\Yii::$app->user->identity->getId()]);
         $profile->load(['UserProfile'=>$params]);
         if (isset($params['bio'])) $profile->bio= json_encode($params['bio']);
@@ -90,5 +91,6 @@ class ProfileController extends ApController
         $courses = CourseDetails::find()->andWhere(['in','id',$course_ids])->all();
         return $courses;
     }
+
 
 }

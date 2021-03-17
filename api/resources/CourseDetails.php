@@ -98,7 +98,7 @@ class CourseDetails extends \common\models\Course
             },
             'reviews' => function ($model) {
                 $ids = Course::find()->getReview($model->id);
-                return Review::find()->andWhere(['in', 'id', $ids])->all();
+                return CourseReviews::find()->andWhere(['in', 'id', $ids])->all();
             }
 
         ];
