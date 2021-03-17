@@ -15,7 +15,9 @@ class CoursesList extends \common\models\Course
             'id',
             'title',
             'teacher' => function ($model) {
-                return $model->teacher->userProfile->getFullName();
+            $name = $model->teacher->userProfile->getFullName();
+            $avatar =  $model->teacher->userProfile->avatar;
+                return ['name'=>$name,'avatar'=>$avatar];
             },
             'section_id',
             'section' => function ($model) {
@@ -48,6 +50,12 @@ class CoursesList extends \common\models\Course
                 return count($students);
             },
             'created_at',
+            'start_at' => function ($model) {
+                return (int)$model->start_at;
+            },
+            'end_at' => function ($model) {
+                return (int)$model->end_at;
+            },
         ];
     }
 

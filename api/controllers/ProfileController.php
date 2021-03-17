@@ -86,7 +86,7 @@ class ProfileController extends ApController
 
     public function actionJoinedCourses()
     {
-        $course_ids =\common\models\User::find()->getOwnCourses();
+        $course_ids =\common\models\User::find()->getStudentCourses();
         $courses = CourseDetails::find()->andWhere(['in','id',$course_ids])->all();
         return $courses;
     }
