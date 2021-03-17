@@ -80,7 +80,7 @@
             class="text-grey-4"
             :class="$q.screen.lt.md ? 'text-subtitle2' : 'text-subtitle1 '"
           >
-            {{ calcDate(course.start_at) }}
+            {{ calcDate(course.end_at) }}
           </div>
         </div>
 
@@ -98,7 +98,7 @@
           :class="$q.screen.lt.md? 'info-box-sm' : 'info-box-lg'"
         >
           <q-img
-            src="https://cdn.quasar.dev/img/boy-avatar.png"
+            :src="course.teacher.avatar"
             :width="$q.screen.lt.md ? '20px' : '30px'"
             class="rounded-icon"
           />
@@ -106,7 +106,7 @@
             class="text-grey-4 text-center ellipsis text-width"
             :class="$q.screen.lt.md ? 'text-subtitle2' : 'text-subtitle1 '"
           >
-            د/محمد العريفي
+           {{ course.teacher.name }}
           </div>
         </div>
 

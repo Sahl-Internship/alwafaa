@@ -148,7 +148,7 @@
             'text-caption q-ml-xs': $q.screen.lt.md,
             'text-grey-4': true
           }"
-        >{{ calcDuration }}</div>
+        >{{ courseDuration }}</div>
       </div>
 
       <div
@@ -176,6 +176,7 @@
 
 <script>
 import StarRating from 'vue-star-rating'
+import { calcDuration } from 'src/utils/global.js'
 
 export default {
   components: { StarRating },
@@ -189,12 +190,10 @@ export default {
       return this.$store.getters['auth/isAuthenticated']
     },
     sectionImgSrc () {
-      if (this.course.section === 'اللغة العربية') {
-        return '/images/home-imgs/global.png'
-      } else if (this.course.section === 'القرآن الكريم') {
+      if (this.course.section === 'القرآن الكريم') {
         return '/images/home-imgs/quran-icon2.png'
       }
-      return null
+      return '/images/home-imgs/global.png'
     },
     courseStatus () {
       // const today = new Date().getTime() / 1000
@@ -208,11 +207,8 @@ export default {
       }
       return 'started'
     },
-    calcDuration () {
-      const { duration } = this.course
-      const hours = (duration / 60).toString().length > 1 ? duration / 60 : `0${duration / 60}`
-      const mins = (duration - (hours * 60)).toString().length > 1 ? duration - (hours * 60) : `0${duration - (hours * 60)}`
-      return `${hours}:${mins}:00`
+    courseDuration () {
+      return calcDuration(this.course.duration)
     }
   }
 }
