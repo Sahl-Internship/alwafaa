@@ -7,7 +7,7 @@ export default {
     state.comment = review.comment
     state.rank = review.rank
   },
-  getCoursePage (state, data) {
-    state.course = data
+  getCoursePage (state, course) {
+    state.course = course
   }
 }

@@ -14,7 +14,7 @@ export default {
   },
   async coursePage (context, courseId) {
     const response = await handleCoursePage(courseId)
-    console.log(response)
-    context.commit('getCoursePage', courseId)
+    console.log(response.data)
+    context.commit('getCoursePage', response.data)
   }
 }

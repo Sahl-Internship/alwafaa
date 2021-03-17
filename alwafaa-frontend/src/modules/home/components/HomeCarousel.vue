@@ -117,7 +117,7 @@
               </template>
             </base-card> -->
 <q-card class="course-card" v-for="result in results" :key="result.id">
-    <img src="/images/home-imgs/alorefy.jpg"/>
+    <img :src="result.image"/>
       <!-- <div
         class="column justify-between no-wrap fit"
         :class="$q.screen.lt.md ? 'cover-text' : ''"
@@ -435,6 +435,7 @@ export default {
   },
   computed: {
     courses () {
+      console.log('get')
       return this.$store.getters['home/getCourses']
     },
     isAuthenticated () {

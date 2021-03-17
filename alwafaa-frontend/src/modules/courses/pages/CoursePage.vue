@@ -332,8 +332,7 @@ export default {
       date: '2019/02/01',
       dense: false,
       step: 1,
-      isShowAll: false,
-      isShowList: false
+      isShowAll: false
     }
   },
   methods: {
@@ -344,9 +343,6 @@ export default {
     },
     showAll () {
       this.isShowAll = !this.isShowAll
-    },
-    showClassList () {
-      this.isShowList = !this.isShowList
     }
   },
   mounted () {
@@ -354,6 +350,10 @@ export default {
     this.$store.dispatch('courses/coursePage', courseId)
   },
   computed: {
+    courseData () {
+      console.log('getters', this.$store.getters['courses/getCoursePage'])
+      return this.$store.getters['courses/getCoursePage']
+    },
     isAuthed () {
       return this.$store.getters['auth/isAuthenticated']
     },
