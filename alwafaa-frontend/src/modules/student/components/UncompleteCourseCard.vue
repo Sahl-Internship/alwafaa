@@ -21,9 +21,9 @@
           </div>
           <div class="text-subtitle1 text-grey-4 course-teacher q-mt-xs">
             <q-avatar size="sm">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+              <img :src="course.teacher.avatar">
             </q-avatar>
-            {{ course.teacher_id }}
+            {{ course.teacher.name }}
           </div>
         </div>
       </q-item-section>

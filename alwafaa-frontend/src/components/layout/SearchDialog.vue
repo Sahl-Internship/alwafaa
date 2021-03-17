@@ -132,8 +132,6 @@
             @closeSearchDialog="$emit('closeDialog')"
           ></search-result-card>
         </div>
-        <!-- <div v-else class="col-12 text-h6 text-grey-5 q-pl-xl"
-        >لا يوجد</div> -->
       </div>
 
       <div
