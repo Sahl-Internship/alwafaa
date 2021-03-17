@@ -6,8 +6,8 @@
     <div class="row justify-center">
 
       <div
-        class="col-xs-12 col-sm-11 row q-py-lg q-px-md"
-        :class="$q.screen.lt.md ? 'q-gutter-y-lg' : 'q-gutter-y-xl'"
+        class="col-xs-12 col-sm-11 row q-py-lg q-pr-md"
+        :class="$q.screen.lt.md ? 'q-gutter-y-lg q-pl-md' : 'q-gutter-y-xl q-pl-sm'"
       >
         <div class="col-12">
           <q-breadcrumbs
@@ -28,42 +28,46 @@
         </div>
 
         <div class="col-12 row justify-between q-gutter-y-sm">
-          <q-select
-            dense borderless
-            use-input hide-dropdown-icon
-            v-model="selectedTitle"
-            :label="$t('coursesList.search')"
-            input-debounce="0"
-            bg-color="grey-1"
-            :options="coursesOptions"
-            @filter="filterTitles"
-            @input-value="(val) => this.typing = val"
-            @input="filterCourses"
-            class="col-xs-12 col-sm-6 search-input"
+          <div
+            class="col-xs-12 col-sm-8"
+            :class="!$q.screen.lt.sm ? 'q-pr-sm' : ''"
           >
-            <template v-slot:append>
-              <q-btn
-                unelevated
-                icon="mdi-magnify"
-                :color="typing ? 'green' : 'grey-2'"
-                text-color="grey-5"
-                class="full-height q-ml-md q-px-xs"
-                @click="filterCourses"
-              />
-            </template>
-            <template v-slot:no-option>
-              <q-item>
-                <q-item-section class="text-grey">
-                  لا يوجد
-                </q-item-section>
-              </q-item>
-            </template>
-          </q-select>
+            <q-select
+              dense borderless
+              use-input hide-dropdown-icon
+              v-model="selectedTitle"
+              :label="$t('coursesList.search')"
+              bg-color="grey-1"
+              :options="coursesOptions"
+              @filter="filterTitles"
+              @input-value="(val) => this.typing = val"
+              @input="filterCourses"
+              class="search-input ellipsis"
+            >
+              <template v-slot:append>
+                <q-btn
+                  unelevated
+                  icon="mdi-magnify"
+                  :color="typing ? 'green' : 'grey-2'"
+                  text-color="grey-5"
+                  class="full-height q-ml-md q-px-xs"
+                  @click="filterCourses"
+                />
+              </template>
+              <template v-slot:no-option>
+                <q-item>
+                  <q-item-section class="text-grey">
+                    لا يوجد
+                  </q-item-section>
+                </q-item>
+              </template>
+            </q-select>
+          </div>
 
           <div
-            class="col-xs-12 col-sm-6 row q-gutter-x-lg"
+            class="col-xs-12 col-sm-4 row justify-between"
             :class="{
-              'q-pl-lg': !$q.screen.lt.md,
+              'q-pl-md': !$q.screen.lt.md,
               'q-pl-sm': $q.screen.lt.md && !$q.screen.lt.sm,
             }"
           >
@@ -207,14 +211,15 @@
         <div
           class="col-xs-12 col-sm-11 row q-gutter-y-lg q-pt-lg"
           :class="{
-            'q-gutter-x-lg justify-start': !$q.screen.lt.md,
-            'q-gutter-x-sm justify-center': $q.screen.lt.md
+            'q-gutter-x-lg': !$q.screen.lt.md,
+            'q-gutter-x-sm': $q.screen.lt.md,
+            'justify-center': $q.screen.lt.sm
           }"
         >
           <course-card
             v-for="course in shownCourses"
             :key="course.id"
-            :course={...course}
+            :course="course"
           ></course-card>
         </div>
 
@@ -387,6 +392,8 @@ export default {
 }
 
 .search-input {
+  height: 44px;
+
   &.q-select {
     &::v-deep {
       border-radius: 8px;
@@ -413,7 +420,7 @@ export default {
 }
 
 .filter-select {
-  width: 30%;
+  width: 46%;
 
   &.q-btn {
     &::v-deep {

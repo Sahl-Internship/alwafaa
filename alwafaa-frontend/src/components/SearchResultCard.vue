@@ -79,18 +79,22 @@
         >
           <div
             class="
-              text-red
               text-center
               q-py-xs
               rounded-borders
-              course-finished
             "
             :class="{
-              'text-subtitle2 q-px-md status-box-lg': !$q.screen.lt.sm,
-              'text-sm status-box-sm': $q.screen.lt.sm
+              'text-subtitle1 q-px-md status-box-lg': !$q.screen.lt.sm,
+              'text-sm status-box-sm': $q.screen.lt.sm,
+              'text-red course-finished': courseStatus === 'finished',
+              'text-blue course-start-not': courseStatus === 'notStarted'
+                || courseStatus === 'started'
             }"
           >
-            {{ $t(`coursesList.${courseStatus}`) }}
+            {{ courseStatus === 'finished'
+              ? $t(`coursesList.${courseStatus}`)
+              : calcDate
+            }}
           </div>
 
           <q-btn
@@ -108,6 +112,8 @@
 </template>
 
 <script>
+import { i18n } from 'src/boot/i18n'
+
 export default {
   props: ['course'],
   computed: {
@@ -120,13 +126,8 @@ export default {
       return null
     },
     courseStatus () {
-      const today = new Date().getTime()
-      const startAt = new Date(this.course.start_at).getTime()
-      const endAt = new Date(this.course.end_at).getTime()
-      // console.log(this.course.title)
-      // console.log(new Date())
-      // console.log(this.course.start_at)
-      // console.log(this.course.end_at)
+      const today = new Date().getTime() / 1000
+      const { start_at: startAt, end_at: endAt } = this.course
 
       if (startAt > today) {
         return 'notStarted'
@@ -134,6 +135,15 @@ export default {
         return 'finished'
       }
       return 'started'
+    },
+    calcDate () {
+      const satrtAt = this.course.start_at * 1000
+      const day = new Date(satrtAt).getDay()
+      const month = new Date(satrtAt)
+        .toLocaleString('default', { month: 'short' })
+      const year = new Date(satrtAt).getFullYear()
+
+      return `${day}  ${i18n.t(`months.${month}`)}  ${year}`
     }
   },
   methods: {
@@ -164,7 +174,7 @@ export default {
     height: 100px;
   }
 
-  .course-start {
+  .course-start-not {
     background: rgb(80, 148, 236);
     background: rgba(80, 148, 236, 0.1);
   }

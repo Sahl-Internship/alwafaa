@@ -4,7 +4,8 @@ import { i18n } from 'src/boot/i18n'
 import {
   handleEditData,
   handleJoinCourse,
-  handleEditImgs
+  handleEditImgs,
+  handleGetJoindCourses
 } from 'src/services/studentApi'
 
 export default {
@@ -94,6 +95,26 @@ export default {
         type: 'negative',
         message: i18n.t('student.notification.joinCourseErr')
       })
+    }
+  },
+
+  async getJoinedCourses ({ commit }) {
+    Loading.show()
+    try {
+      const response = await handleGetJoindCourses()
+      console.log(response)
+      if (response.statusText !== 'OK') {
+        const err = new Error('error')
+        throw err
+      }
+
+      commit('geJoinedtCourses', response.data)
+      Loading.hide()
+      return true
+    } catch (error) {
+      Loading.hide()
+      console.log(error)
+      return false
     }
   }
 }

@@ -1,5 +1,6 @@
 export default () => {
   return {
-    editMode: false
+    editMode: false,
+    joinedCourses: []
   }
 }

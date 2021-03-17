@@ -64,22 +64,29 @@
     </q-img>
 
     <q-card-section
+      class="row justify-center items-center"
       :class="{
-        'q-pa-xl section-height-lg': !$q.screen.lt.md,
-        'q-px-sm q-py-md section-height-sm': $q.screen.lt.md,
+        'section-height-lg q-pa-xl': !$q.screen.lt.md,
+        'section-height-sm q-px-none': $q.screen.lt.md,
       }"
     >
-      <div
-        class="text-grey-5 text-center ellipsis-2-lines"
-        :class="{
-          'text-h6 text-weight-bold': !$q.screen.lt.md,
-          'text-subtitle2': $q.screen.lt.md,
-        }"
+      <q-btn
+        flat
+        :to="'/courses/'+course.id"
+        class="col-12 course-title"
       >
-        {{ course.title }}
-      </div>
+        <div
+          class="text-grey-5 text-center ellipsis-2-lines"
+          :class="{
+            'text-h6 text-weight-bold': !$q.screen.lt.md,
+            'text-subtitle2': $q.screen.lt.md,
+          }"
+        >
+          {{ course.title }}
+        </div>
+      </q-btn>
 
-      <div class="row justify-center q-mt-md">
+      <div class="col-12 row justify-center q-mt-sm">
         <div
           class="text-grey-4"
           :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
@@ -241,6 +248,20 @@ export default {
     height: 10px;
   }
 }
+
+@media (max-width: 1290px) and (min-width: 1024px) {
+  .course-card {
+    width: 30.75%;
+  }
+}
+
+// .course-title {
+//   &.q-btn {
+//     &::v-deep {
+//       .
+//     }
+//   }
+// }
 
 .q-img__content > div {
   &.cover-text {
