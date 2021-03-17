@@ -48,11 +48,6 @@ class Profile extends \common\models\User
              'bio'=>function($model){
                 return json_decode( $model->userProfile->bio);
             },
-
-//            'full_name'=>function($model){
-//                return $model->getPublicIdentity();
-//            },
-//            'username',
               'email',
             'token'=>function($model){
                 return $model->access_token;
@@ -64,10 +59,10 @@ class Profile extends \common\models\User
             'cover'=>function($model){
                 return   $model->userProfile->pcover?: \Yii::getAlias('@backendUrl'). "/img/anonymous.jpg" ;
             },
-            'reviews' => function ($model) {
-                $ids = User::find()->getReview($model->id);
-                return StudentReviews::find()->andWhere(['in', 'id', $ids])->all();
-            }
+//            'reviews' => function ($model) {
+//                $ids = User::find()->getReview($model->id);
+//                return StudentReviews::find()->andWhere(['in', 'id', $ids])->all();
+//            }
 
         ];
     }

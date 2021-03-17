@@ -78,7 +78,12 @@ class UserQuery extends ActiveQuery
         $students = array_unique($all_students);
         $total_duration =array_sum($duration);
         $sessions_number =array_sum($sessions);
-        return ['students'=>$students, 'student_number'=>$students_number,'classes'=>$sessions_number,'duration'=>$total_duration];
+        return [
+            'students'=>$students,
+            'student_number'=>$students_number,
+            'classes'=>$sessions_number,
+            'duration'=>$total_duration
+        ];
 
     }
 
