@@ -35,8 +35,9 @@ return [
             , 'pluralize' => false
         ],
         ['class' => 'yii\rest\UrlRule', 'controller' => 'profile'
-            , 'only' => ['update', 'upload-picture']
+            , 'only' => ['update', 'upload-picture','data']
             , 'extraPatterns' => [
+            'GET data' => 'data',
             'PUT update' => 'update',
             'Post upload-picture' => 'upload-picture',
             'GET joined-courses' => 'joined-courses',

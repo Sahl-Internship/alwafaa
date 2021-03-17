@@ -6,8 +6,11 @@ namespace api\controllers;
 
 use api\resources\CourseDetails;
 use api\resources\Profile;
+use api\resources\StudentCourses;
+use api\resources\StudentReviews;
 use api\resources\User;
 use common\models\UserProfile;
+use Yii;
 
 class ProfileController extends ApController
 {
@@ -19,6 +22,12 @@ class ProfileController extends ApController
 //        unset($actions['update']);
 //        return $actions;
 //    }
+
+    public function actionData()
+    {
+        return Profile::findOne(['id' => \Yii::$app->user->identity->getId()]);
+
+    }
 
     public function actionUploadPicture()
     {
@@ -64,17 +73,16 @@ class ProfileController extends ApController
 
         $params = \Yii::$app->request->post();
         $user = Profile::findOne(['id' => \Yii::$app->user->identity->getId()]);
-        $profile = UserProfile::findOne(['user_id'=>\Yii::$app->user->identity->getId()]);
-        $profile->load(['UserProfile'=>$params]);
-        if (isset($params['bio'])) $profile->bio= json_encode($params['bio']);
+        $profile = UserProfile::findOne(['user_id' => \Yii::$app->user->identity->getId()]);
+        $profile->load(['UserProfile' => $params]);
+        if (isset($params['bio'])) $profile->bio = json_encode($params['bio']);
         if (isset($params['password'])) $user->password = $params['password'];
 ////        if (isset($params['binary'] )  &&  $params['binary']!= "" ){
 //////            $filename = Media::PrepareImage($params['binary'] );
 //////            $profile->image ='/uploads/profile/'.$filename ;
 ////        }
 
-        if ( $profile->validate() &&$profile->save() && $user->save())
-         {
+        if ($profile->validate() && $profile->save() && $user->save()) {
             return ['status' => 1, 'profile' => $user];
 
         } else {
@@ -87,9 +95,16 @@ class ProfileController extends ApController
 
     public function actionJoinedCourses()
     {
-        $course_ids =\common\models\User::find()->getStudentCourses();
-        $courses = CourseDetails::find()->andWhere(['in','id',$course_ids])->all();
-        return $courses;
+        //todo reviews & data of user
+        $course_ids = \common\models\User::find()->getStudentCourses();
+        $courses = StudentCourses::find()->andWhere(['in', 'id', $course_ids])->all();
+        $reviews = StudentReviews::find()->andWhere('created_by=:id',['id'=>Yii::$app->user->id])->all();
+        return [
+            'data'=>Profile::findOne(['id' => \Yii::$app->user->identity->getId()]),
+           'courses'=> $courses,
+            'reviews'=>$reviews,
+
+        ];
     }
 
 

@@ -21,12 +21,12 @@ class User extends \common\models\User
                 return $model->id;
             },
 
-//            'firstname'=>function($model){
-//                return $model->userProfile->firstname;
-//            },
-//            'lastname'=>function($model){
-//                return $model->userProfile->lastname;
-//            },
+            'firstname'=>function($model){
+                return $model->userProfile->firstname;
+            },
+            'lastname'=>function($model){
+                return $model->userProfile->lastname;
+            },
 //            'sub_title'=>function($model){
 //                return $model->userProfile->sub_title;
 //            },
@@ -49,9 +49,9 @@ class User extends \common\models\User
 //                return json_decode( $model->userProfile->bio);
 //            },
 
-            'full_name'=>function($model){
-                return $model->getPublicIdentity();
-            },
+//            'full_name'=>function($model){
+//                return $model->getPublicIdentity();
+//            },
 //            'username',
               'email',
             'token'=>function($model){
