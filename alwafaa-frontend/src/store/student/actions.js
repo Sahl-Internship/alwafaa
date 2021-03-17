@@ -102,7 +102,7 @@ export default {
     Loading.show()
     try {
       const response = await handleGetJoindCourses()
-      console.log('joined', response.data)
+      console.log('joined', response)
       if (response.statusText !== 'OK') {
         const err = new Error('error')
         throw err

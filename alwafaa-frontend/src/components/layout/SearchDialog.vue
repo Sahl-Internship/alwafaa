@@ -129,6 +129,7 @@
             class="col-12"
             v-for="course in joinedFilteredCourses"
             :key="course.id"
+            :course="course"
             @closeSearchDialog="$emit('closeDialog')"
           ></search-result-card>
         </div>
@@ -245,6 +246,7 @@ export default {
         }
 
         this.allFilteredCourses = filtered
+        this.getFilteredJoinedCourses(filtered)
       } else {
         this.joinedFilteredCourses = []
         this.allFilteredCourses = []
@@ -277,6 +279,13 @@ export default {
         ...startedCourses
       ]
     },
+    getFilteredJoinedCourses (filterFrom) {
+      const coursesIds = filterFrom.map(course => course.id)
+
+      this.joinedFilteredCourses = this.joinedCourses.filter(
+        course => coursesIds.includes(course.id)
+      )
+    },
     clearSearchText () {
       this.searchText = ''
     }
@@ -284,9 +293,6 @@ export default {
   mounted () {
     this.getAllCourses()
     this.getJoinedCourses()
-    // this.$store.dispatch('courses/getCourses').then(() => {
-    //   this.filteredCourses = this.allCourses = this.$store.getters['courses/getCourses']
-    // })
   }
 }
 </script>

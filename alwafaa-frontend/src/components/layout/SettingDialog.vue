@@ -118,6 +118,16 @@
                   </template>
                 </q-input>
 
+                <g-input
+                  dense
+                  outlined
+                  v-model="user.subtitle"
+                  :label="$t('formFields.subtitle')"
+                  prependIconName="mdi-briefcase"
+                  bg-color='grey-1'
+                  class="col-12"
+                />
+
                 <div
                   class="col-12 row justify-between q-mt-md q-pa-xs hobbies-box"
                 >
