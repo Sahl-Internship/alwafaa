@@ -16,7 +16,7 @@
           </q-breadcrumbs>
           <!-- </div> -->
           <div class="col-11 title-section">
-            <p class="main-title text-white">دورة تعلم اساسيات اللغة القواعد النحوية المرحلة الاولى من 2021</p>
+            <p class="main-title text-white">{{courseData.title}}</p>
             <p class="sub-title text-white">تعليم اهم قواعد النحو من الصفر إلى اتقان الإعراب بكل سهولة</p>
           </div>
 

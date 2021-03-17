@@ -1,24 +1,11 @@
 <template>
   <q-card>
-    <!-- <div class="col-1 text-right" style="height: 20px">
-      <q-btn
-        flat
-        type="button"
-        icon="mdi-dots-horizontal"
-        text-color="grey-4"
-        size="md"
-        to=""
-      />
-    </div> -->
-
     <q-item>
       <q-item-section>
         <div class="text-subtitle1 text-grey-4 q-mt-md">
           <!-- <q-icon name="mdi-web" /> -->
           <q-img
-            :src="course.section === 'اللغة العربية'
-              ? '/images/Path 8205 22.png'
-              : '/images/Group 553723.png'"
+            :src="sectionImgSrc"
             width='17px'
             class="q-mr-xs"
           />
@@ -27,16 +14,16 @@
 
         <div class="q-ma-lg course-box">
           <div
-            class="text-grey-5 course-title"
+            class="text-grey-5 course-title ellipsis"
             :class="$q.screen.lt.md ? 'text-h6' : 'text-h5'"
           >
-            {{ course.course }}
+            {{ course.title }}
           </div>
           <div class="text-subtitle1 text-grey-4 course-teacher q-mt-xs">
             <q-avatar size="sm">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png">
             </q-avatar>
-            {{ course.teacher }}
+            {{ course.teacher_id }}
           </div>
         </div>
       </q-item-section>
@@ -59,7 +46,7 @@
           <div
             class="text-grey-5 text-center"
             :class="$q.screen.lt.md ? 'text-h6' : 'text-h5'"
-          >{{ course.hours }}</div>
+          >{{ getCourseHours }}</div>
           <div class="text-caption text-grey-5 text-center">
             {{ $t('student.uncompleteCorses.hours') }}
           </div>
@@ -81,7 +68,7 @@
           <div
             class="text-weight-bold"
             :class="$q.screen.lt.md ? 'text-subtitle2' : 'text-subtitle1'"
-          >{{ course.completed }}</div>
+          >{{ getCourseCompletedHours }}</div>
 
           <div class="text-caption">
             {{ $t('student.uncompleteCorses.completed') }}
@@ -102,7 +89,7 @@
           <div
             class="text-weight-bold"
             :class="$q.screen.lt.md ? 'text-subtitle2' : 'text-subtitle1'"
-          >{{ course.remaining }}</div>
+          >{{ getCourseRemainingHours }}</div>
           <div class="text-caption">
             {{ $t('student.uncompleteCorses.remaining') }}
           </div>
@@ -118,6 +105,7 @@
         text-color="grey-5"
         class="col-11 complete-btn"
         size="18px"
+        :to="'/courses/'+course.id"
       />
     </q-card-section>
 
@@ -125,6 +113,8 @@
 </template>
 
 <script>
+import { calcDuration } from 'src/utils/global.js'
+
 export default {
   props: {
     course: {
@@ -140,12 +130,31 @@ export default {
   computed: {
     checkDirection () {
       return this.$q.lang.rtl
+    },
+    sectionImgSrc () {
+      if (this.course.section === 'القرآن الكريم') {
+        return '/images/Group 553723.png'
+      }
+      return '/images/Path 8205 22.png'
+    },
+    getCourseHours () {
+      return calcDuration(this.course.duration)
+    },
+    getCourseCompletedHours () {
+      return calcDuration(this.course.finished_duration)
+    },
+    getCourseRemainingHours () {
+      return calcDuration(this.course.not_finished_duration)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.course-title {
+  width: 90%;
+}
+
 .hours-completed {
   background: rgb(80, 148, 236);
   background: rgba(80, 148, 236, 0.1);

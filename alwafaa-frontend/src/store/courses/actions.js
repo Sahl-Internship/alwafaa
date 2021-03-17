@@ -1,11 +1,31 @@
+import { Loading } from 'quasar'
 
 import {
   handleCoursePage,
-  handleCourseReview
+  handleCourseReview,
+  handleGetCourses
 } from 'src/services/coursesApi'
 
 export default {
-  async getCourses (context, studentData) {
+  async getCourses ({ commit }) {
+    Loading.show()
+    try {
+      const response = await handleGetCourses()
+      console.log(response)
+      if (response.statusText !== 'OK') {
+        const errorMessage = 'Error'
+        const err = new Error(errorMessage)
+        throw err
+      }
+
+      commit('getCourses', response.data)
+      Loading.hide()
+      return true
+    } catch (error) {
+      Loading.hide()
+      console.log(error)
+      return false
+    }
   },
   async courseReview (context, review) {
     const response = await handleCourseReview(review)

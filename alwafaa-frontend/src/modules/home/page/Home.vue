@@ -5,6 +5,7 @@
     <iqraa-academy-section class="q-mt-xl"></iqraa-academy-section>
     <!-- <snake-carousel></snake-carousel> -->
     <home-carousel></home-carousel>
+    <home-carousel-two></home-carousel-two>
     <academy-info-section></academy-info-section>
     <home-signup-section></home-signup-section>
     <choose-course></choose-course>
@@ -17,6 +18,7 @@
 import HomeHeader from '../components/HomeHeader.vue'
 import HomeCover from 'src/modules/home/components/HomeCover.vue'
 import HomeCarousel from 'src/modules/home/components/HomeCarousel.vue'
+import HomeCarouselTwo from 'src/modules/home/components/HomeCarouselTwo.vue'
 import IqraaAcademySection from 'src/modules/home/components/IqraaAcademySection.vue'
 import HomeSignupSection from 'src/modules/home/components/HomeSignupSection.vue'
 import AcademyInfoSection from 'src/modules/home/components/AcademyInfoSection.vue'
@@ -29,6 +31,7 @@ export default {
   components: {
     HomeHeader,
     CompletedSection,
+    HomeCarouselTwo,
     ChooseCourse,
     IqraaAcademySection,
     HomeSignupSection,
@@ -45,10 +48,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('home/getCourses')
-  },
-  methods: {
-
+    this.$store.dispatch('courses/getCourses')
   }
 }
 </script>

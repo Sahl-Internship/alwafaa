@@ -3,12 +3,13 @@ import { i18n } from 'src/boot/i18n'
 
 import {
   handleEditData,
-  handleJoinCourse
+  handleJoinCourse,
+  handleEditImgs,
+  handleGetJoindCourses
 } from 'src/services/studentApi'
 
 export default {
   async editStudentData (context, studentData) {
-    console.log(studentData)
     Loading.show()
 
     try {
@@ -29,6 +30,33 @@ export default {
         type: 'positive',
         message: i18n.t('student.notification.editDataSuccess')
       })
+    } catch (error) {
+      Loading.hide()
+
+      Notify.create({
+        type: 'negative',
+        message: i18n.t('student.notification.editdataErr')
+      })
+    }
+  },
+
+  async editProfileAndCoverImg (context, image) {
+    Loading.show()
+
+    try {
+      const response = await handleEditImgs(image)
+      console.log(response)
+
+      if (response.data.status !== 1) {
+        throw new Error()
+      }
+
+      const { token, ...user } = response.data.profile
+      localStorage.setItem('token', token)
+      localStorage.setItem('user', JSON.stringify(user))
+      context.commit('auth/loginState', { token, user }, { root: true })
+
+      Loading.hide()
     } catch (error) {
       Loading.hide()
 
@@ -67,6 +95,26 @@ export default {
         type: 'negative',
         message: i18n.t('student.notification.joinCourseErr')
       })
+    }
+  },
+
+  async getJoinedCourses ({ commit }) {
+    Loading.show()
+    try {
+      const response = await handleGetJoindCourses()
+      console.log(response)
+      if (response.statusText !== 'OK') {
+        const err = new Error('error')
+        throw err
+      }
+
+      commit('geJoinedtCourses', response.data)
+      Loading.hide()
+      return true
+    } catch (error) {
+      Loading.hide()
+      console.log(error)
+      return false
     }
   }
 }
