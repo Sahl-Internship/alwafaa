@@ -25,6 +25,7 @@ use yii\db\ActiveRecord;
  * @property string $country
  * @property string $city
  * @property integer $birthdate
+ * @property string $sub_title
  * @property string $bio
  * @property string $cover
  * @property string $cover_base_url
@@ -81,7 +82,7 @@ class UserProfile extends ActiveRecord
             [['user_id'], 'required'],
             [['user_id', 'gender'], 'integer'],
             [['gender'], 'in', 'range' => [NULL, self::GENDER_FEMALE, self::GENDER_MALE]],
-            [['firstname', 'middlename', 'lastname', 'avatar_path', 'avatar_base_url','cover_path', 'cover_base_url','country','city'], 'string', 'max' => 255],
+            [['firstname', 'middlename', 'lastname', 'avatar_path', 'avatar_base_url','cover_path', 'cover_base_url','country','city','sub_title'], 'string', 'max' => 255],
             ['locale', 'default', 'value' => Yii::$app->language],
             ['locale', 'in', 'range' => array_keys(Yii::$app->params['availableLocales'])],
             [['picture','cover'], 'safe'],
@@ -109,6 +110,7 @@ class UserProfile extends ActiveRecord
             'country' => Yii::t('common', 'Country'),
             'city' => Yii::t('common', 'City'),
             'birthdate' => Yii::t('common', 'Birth Date'),
+            'sub_title' => Yii::t('common', 'Sub Title'),
             'bio' => Yii::t('common', 'Bio'),
             'cover' => Yii::t('common', 'Cover'),
         ];
