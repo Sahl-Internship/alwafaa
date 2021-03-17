@@ -4,7 +4,7 @@
 namespace api\controllers;
 
 
-use api\resources\Course;
+use api\resources\CourseDetails;
 use api\resources\User;
 use common\models\UserProfile;
 
@@ -87,7 +87,7 @@ class ProfileController extends ApController
     public function actionJoinedCourses()
     {
         $course_ids =\common\models\User::find()->getOwnCourses();
-        $courses = Course::find()->andWhere(['in','id',$course_ids])->all();
+        $courses = CourseDetails::find()->andWhere(['in','id',$course_ids])->all();
         return $courses;
     }
 

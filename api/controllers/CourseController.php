@@ -5,47 +5,31 @@ namespace api\controllers;
 
 
 
-use api\resources\Course;
-use common\models\CourseReview;
-use common\models\JoinCourses;
+use api\resources\CourseDetails;
+use api\resources\CoursesList;
+use yii\rest\ActiveController;
 
-class CourseController extends ApController
+class CourseController extends ApiController
 {
+    public $modelClass = 'api\resources\CoursesList';
+//    public function actions()
+//    {
+//        $actions = parent::actions();
+//        // disable the "index" and "view" actions
+//        unset($actions['index'], $actions['view']);
+//        return $actions;
+//    }
 
     public function actionIndex()
     {
-        $courses = Course::find()->all();
+//         $this->modelClass = 'api\resources\CoursesList';
+        $courses = CoursesList::find()->all();
         return $courses;
-
     }
 
-    public function actionReview(){
-        $params = \Yii::$app->request->post();
-        $review = new CourseReview();
-
-        $review->load(['CourseReview' => $params]);
-        if ($review->validate() and $registerUser = $review->save()) {
-            return ['status'=>1, 'message'=>'Successfully Rated'];
-        }elseif($review->errors){
-            return ['status'=>0,'message'=> $review->errors,'key'=>'dataError'];
-        }else{
-            return ['status'=>0,  'message'=> 'Error,Try again' ];
-        }
-    }
-
-    public function actionJoinCourse()
+    public function actionView($id)
     {
-        $params = \Yii::$app->request->post();
-        $join = new JoinCourses();
-        $join->load(['JoinCourses'=>$params]);
-        if ($join->validate() and  $join->save()) {
-            return ['status'=>1, 'message'=>'Successfully Joined'];
-        }elseif($join->errors){
-            return ['status'=>0,'message'=> $join->errors,'key'=>'dataError'];
-        }else{
-            return ['status'=>0,  'message'=> 'Error,Try again' ];
-        }
+        return CourseDetails::findOne($id);
     }
-
 
 }

@@ -53,6 +53,14 @@ return [
         ]
             , 'pluralize'=>false
         ],
+        ['class' =>'yii\rest\UrlRule','controller'=>'join-course'
+            ,'only'=>['review','join-course']
+            ,'extraPatterns'=>[
+            'Post review' => 'review',
+            'Post join-course' => 'join-course'
+        ]
+            , 'pluralize'=>false
+        ],
 
         ['class' =>'yii\rest\UrlRule','controller'=>'home'
             ,'only'=>['index']
