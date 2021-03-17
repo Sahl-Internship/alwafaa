@@ -24,7 +24,7 @@
                 'text-caption': $q.screen.lt.sm,
                 'q-ml-sm': true
               }"
-            >{{ course.teacher }}</div>
+            >{{ course.teacher.name }}</div>
           </div>
 
           <div class="col-12 row items-center">

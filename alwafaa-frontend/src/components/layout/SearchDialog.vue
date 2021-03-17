@@ -181,6 +181,7 @@ export default {
         'كورس د/حازم شومان'
       ],
       allCourses: [],
+      joinedCourses: [],
       joinedFilteredCourses: [],
       allFilteredCourses: [],
       searchText: ''
@@ -198,13 +199,35 @@ export default {
     }
   },
   methods: {
+    getAllCourses () {
+      const allCourses = this.$store.getters['courses/getCourses']
+
+      if (allCourses.length) {
+        this.allCourses = allCourses
+      } else {
+        this.$store.dispatch('courses/getCourses').then(() => {
+          this.allCourses = this.$store.getters['courses/getCourses']
+        })
+      }
+    },
+    getJoinedCourses () {
+      const joinedCourses = this.$store.getters['student/joinedCourses']
+
+      if (joinedCourses.length) {
+        this.joinedCourses = joinedCourses
+      } else {
+        this.$store.dispatch('student/getJoinedCourses').then(() => {
+          this.joinedCourses = this.$store.getters['student/joinedCourses']
+        })
+      }
+    },
     filterCourses () {
       let filtered = this.allCourses
       const { selectedSection, selectedStatus } = this
 
       if (this.searchText) {
         filtered = filtered.filter(
-          course => course.title.toLowerCase().includes(this.searchText.toLowerCase())
+          course => course.title.toLowerCase().startsWith(this.searchText.toLowerCase())
         )
 
         if (selectedSection && selectedSection !== 'الكل') {
@@ -234,18 +257,17 @@ export default {
 
       if (this.selectedStatus.includes('انتهت')) {
         finishedCourses = filterFrom.filter(
-          course => new Date(course.end_at).getTime() < new Date().getTime()
+          course => course.status === 2
         )
       }
       if (this.selectedStatus.includes('لم تبدأ')) {
         notStartedCourses = filterFrom.filter(
-          course => new Date(course.start_at).getTime() > new Date().getTime()
+          course => course.status === 0
         )
       }
       if (this.selectedStatus.includes('بدأت')) {
         startedCourses = filterFrom.filter(
-          course => new Date(course.start_at).getTime() < new Date().getTime() &&
-            new Date(course.end_at).getTime() > new Date().getTime()
+          course => course.status === 1
         )
       }
 
@@ -260,9 +282,11 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('courses/getCourses').then(() => {
-      this.filteredCourses = this.allCourses = this.$store.getters['courses/getCourses']
-    })
+    this.getAllCourses()
+    this.getJoinedCourses()
+    // this.$store.dispatch('courses/getCourses').then(() => {
+    //   this.filteredCourses = this.allCourses = this.$store.getters['courses/getCourses']
+    // })
   }
 }
 </script>

@@ -327,7 +327,6 @@ export default {
     } else {
       this.$store.dispatch('student/getJoinedCourses').then(() => {
         joinedCourses = this.$store.getters['student/joinedCourses']
-        console.log(joinedCourses)
         this.filterCourses(joinedCourses)
       })
     }
