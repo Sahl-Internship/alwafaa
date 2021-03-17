@@ -12,12 +12,7 @@ use common\models\JoinCourses;
 class JoinCourseController extends ApController
 {
 
-    public function actionIndex()
-    {
-        $courses = CourseDetails::find()->all();
-        return $courses;
 
-    }
 
     public function actionReview(){
         $params = \Yii::$app->request->post();
