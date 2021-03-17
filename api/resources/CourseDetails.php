@@ -21,9 +21,6 @@ class CourseDetails extends \common\models\Course
 //            'description' => function ($model) {
 //                return strip_tags($model->description);
 //            },
-            'teacher_name' => function ($model) {
-                return $model->teacher->userProfile->getFullName();
-            },
             'section_id',
             'section' => function ($model) {
                 return $model->section->title;
@@ -99,7 +96,6 @@ class CourseDetails extends \common\models\Course
                     'bio' => $model->teacher->userProfile->bio,
                 ];
             },
-
             'reviews' => function ($model) {
                 $ids = Course::find()->getReview($model->id);
                 return Review::find()->andWhere(['in', 'id', $ids])->all();
