@@ -159,8 +159,14 @@ export default {
   },
   methods: {
     calcDuration (duration) {
-      const hours = (duration / 60).toString().length > 1 ? duration / 60 : `0${duration / 60}`
-      const mins = (duration - (hours * 60)).toString().length > 1 ? duration - (hours * 60) : `0${duration - (hours * 60)}`
+      const timeInHour = Math.floor(duration / 60)
+      const hours = timeInHour.toString().length > 1
+        ? timeInHour
+        : `0${timeInHour}`
+      const mins = (duration - (timeInHour * 60)).toString().length > 1
+        ? duration - (timeInHour * 60)
+        : `0${duration - (timeInHour * 60)}`
+      console.log(timeInHour)
       return `${hours}:${mins}:00`
     },
     prev () {
@@ -172,9 +178,9 @@ export default {
   },
   computed: {
     courses () {
-      const allCourses = this.$store.getters['courses/getCourses']
-      // const results = allCourses.sort(function (a, b) { return b.created_at - a.created_at })
-      return allCourses
+      const allCourses = [...this.$store.getters['courses/getCourses']]
+      const results = allCourses.sort((a, b) => b.created_at - a.created_at)
+      return results
     },
     isAuthenticated () {
       return this.$store.getters['auth/isAuthenticated']
