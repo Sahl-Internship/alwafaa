@@ -15,59 +15,59 @@ return [
         ['pattern' => 'site/reset-password', 'route' => 'site/reset-password'],
         ['class' => 'yii\rest\UrlRule', 'controller' => 'site', 'pluralize' => false],
 
-        ['class' =>'yii\rest\UrlRule','controller'=>'site'
-            ,'only'=>['login','request-password-reset','reset-password']
-            ,'extraPatterns'=>[
-            'Post login' => 'login' ,
-            'Post request-password-reset' => 'request-password-reset' ,
-            'Post reset-password' => 'reset-password' ,
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'site'
+            , 'only' => ['login', 'request-password-reset', 'reset-password']
+            , 'extraPatterns' => [
+            'Post login' => 'login',
+            'Post request-password-reset' => 'request-password-reset',
+            'Post reset-password' => 'reset-password',
 
         ]
-            , 'pluralize'=>false
+            , 'pluralize' => false
         ],
-        ['class' =>'yii\rest\UrlRule','controller'=>'signup'
-            ,'only'=>['create']
-            ,'extraPatterns'=>[
-            'Post create' => 'create' ,
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'signup'
+            , 'only' => ['create']
+            , 'extraPatterns' => [
+            'Post create' => 'create',
 
 
         ]
-            , 'pluralize'=>false
+            , 'pluralize' => false
         ],
-        ['class' =>'yii\rest\UrlRule','controller'=>'profile'
-            ,'only'=>['update','upload-picture']
-            ,'extraPatterns'=>[
-            'PUT update' => 'update' ,
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'profile'
+            , 'only' => ['update', 'upload-picture']
+            , 'extraPatterns' => [
+            'PUT update' => 'update',
             'Post upload-picture' => 'upload-picture',
             'GET joined-courses' => 'joined-courses',
         ]
-            , 'pluralize'=>false
+            , 'pluralize' => false
         ],
 
-        ['class' =>'yii\rest\UrlRule','controller'=>'course'
-            ,'only'=>['index','review','join-course']
-            ,'extraPatterns'=>[
-            'GET index' => 'index' ,
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'course'
+            , 'only' => ['index', 'view', 'section']
+            , 'extraPatterns' => [
+            'GET index' => 'index',
+            'GET view' => 'view',
+            'GET section' => 'section',
+        ]
+            , 'pluralize' => false
+        ],
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'join-course'
+            , 'only' => ['review', 'join-course']
+            , 'extraPatterns' => [
             'Post review' => 'review',
             'Post join-course' => 'join-course'
         ]
-            , 'pluralize'=>false
-        ],
-        ['class' =>'yii\rest\UrlRule','controller'=>'join-course'
-            ,'only'=>['review','join-course']
-            ,'extraPatterns'=>[
-            'Post review' => 'review',
-            'Post join-course' => 'join-course'
-        ]
-            , 'pluralize'=>false
+            , 'pluralize' => false
         ],
 
-        ['class' =>'yii\rest\UrlRule','controller'=>'home'
-            ,'only'=>['index']
-            ,'extraPatterns'=>[
-            'GET index' => 'index' ,
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'home'
+            , 'only' => ['index']
+            , 'extraPatterns' => [
+            'GET index' => 'index',
         ]
-            , 'pluralize'=>false
+            , 'pluralize' => false
         ],
     ],
 ];
