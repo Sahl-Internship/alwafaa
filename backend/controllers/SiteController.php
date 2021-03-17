@@ -68,15 +68,18 @@ class SiteController extends \yii\web\Controller
 //        $stusents = User::find()->getOwnStudents();
 //         Course::find()->getDayDuration(26);
 //        $status = Course::find()->getStatus(30);
-        $review = Course::find()->getReview(5);
+//        $review = Course::find()->getReview(5);
+        $classes = Course::find()->getReview(5);
 //        $ownCourses = User::find()->getOwnCourses();
 //        $days = Course::find()->getDaysNumber(26);
+
 
 
         return $this->render('test', [
 //            'data' => $course,
 //            'data' => $status,
 //            'data' => $ownCourses,
+            'data' => $classes,
         ]);
     }
 //
