@@ -1,6 +1,10 @@
 import { i18n } from 'src/boot/i18n'
 
 export const dateFormat = (timestamp) => {
+  if (!timestamp) {
+    return ''
+  }
+
   const date = timestamp * 1000
   const day = new Date(date).getDay()
   const month = new Date(date)

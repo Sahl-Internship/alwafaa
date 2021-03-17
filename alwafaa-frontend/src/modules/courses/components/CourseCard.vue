@@ -24,7 +24,7 @@
                 'text-caption': $q.screen.lt.sm,
                 'q-ml-sm': true
               }"
-            >د/محمد العريفي</div>
+            >{{ course.teacher }}</div>
           </div>
 
           <div class="col-12 row items-center">
@@ -51,9 +51,9 @@
               'q-px-sm rounded-borders': true,
               'text-subtitle2 q-py-xs': !$q.screen.lt.sm,
               'text-caption': $q.screen.lt.sm,
-              'text-grey-5 bg-green': courseStatus === 'notStarted',
-              'text-grey-4 bg-grey-2': courseStatus === 'finished',
-              'text-white bg-red': courseStatus === 'started',
+              'text-grey-5 bg-green': course.status === 0,
+              'text-grey-4 bg-grey-2': course.status === 2,
+              'text-white bg-red': course.status === 1,
             }"
           >
             {{ $t(`coursesList.${courseStatus}`) }}
@@ -197,12 +197,13 @@ export default {
       return null
     },
     courseStatus () {
-      const today = new Date().getTime() / 1000
-      const { start_at: startAt, end_at: endAt } = this.course
+      // const today = new Date().getTime() / 1000
+      // const { start_at: startAt, end_at: endAt } = this.course
+      const { status } = this.course
 
-      if (startAt > today) {
+      if (status === 0) {
         return 'notStarted'
-      } else if (today > endAt) {
+      } else if (status === 2) {
         return 'finished'
       }
       return 'started'

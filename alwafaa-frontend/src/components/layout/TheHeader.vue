@@ -43,7 +43,7 @@
           >
             <q-card-section class="column items-center">
               <q-avatar>
-                <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+                <q-img :src="student.image" />
               </q-avatar>
 
               <!-- <div class="text-h6 text-center">
@@ -167,7 +167,7 @@
         <div v-if="!$q.screen.lt.sm" class="column q-mr-md">
           <div class="text-h5 text-grey-5">أكاديمية إقرأ</div>
           <div class="text-weight-thin text-grey-4 header-caption">
-            لتعليم اللغة و القرآن الكريم
+            لتعليم اللغة العربية و القرآن الكريم
           </div>
         </div>
 
@@ -211,7 +211,7 @@ export default {
 
 <style lang="scss" scoped>
 .header-caption {
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .alarm-box {
