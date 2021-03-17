@@ -59,25 +59,34 @@ class UserQuery extends ActiveQuery
         return User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',', array_map('intval', $user_ids)) . ")");
     }
 
-    public function getOwnStudents()
+    public function getTeacherPortfolio($id)
     {
-        $courses = new Course();
-        $courses =  $courses->findOwnCourses()->all();
+        $courses = Course::find()->andWhere('teacher_id=:id',['id'=>$id])->all();
         $students_ids = [];
+        $sessions = [];
+        $duration = [];
         foreach ($courses as $course) {
             $joined_students = Course::find()->getJoinedStudents($course->id);
+            $classes = Course::find()->getScheduleAndDuration($course->id);
             array_push($students_ids,$joined_students);
+            array_push($sessions,count($classes['classes_number']));
+            array_push($duration,$classes['total_time']);
         }
         $all_students = call_user_func_array('array_merge', $students_ids);
         $students_number = count($all_students);
         $students = array_unique($all_students);
+        $total_duration =array_sum($duration);
+        $sessions_number =array_sum($sessions);
+        return ['students'=>$students, 'student_number'=>$students_number,'classes'=>$sessions_number,'duration'=>$total_duration];
 
-//        return User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',', array_map('intval', $students)) . ")");
-        //if you want to get ids and number of students
-        return ['students'=>$students, 'student_number'=>$students_number,];
     }
 
-    public function getOwnCourses()
+    public function getTeacherClassesAndDuration()
+    {
+
+    }
+
+    public function getStudentCourses()
     {
         $joined = JoinCourses::findBySql("SELECT course_id FROM join_courses WHERE user_id=:id",['id'=>Yii::$app->user->id])->all();
         $courses_status = [];

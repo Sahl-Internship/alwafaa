@@ -4,6 +4,7 @@ namespace backend\models\search;
 
 use backend\modules\rbac\models\RbacAuthAssignment;
 use common\models\User;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -43,7 +44,7 @@ class UserSearch extends User
             if(\Yii::$app->user->can('manager')){
                 $query = User::find()->getStudent();
             }else{
-                $ids = User::find()->getOwnStudents();
+                $ids = User::find()->getTeacherPortfolio(Yii::$app->user->id);
                 $query = User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',', array_map('intval', $ids['students'])) . ")");
             }
         } elseif ($qry == "teacher") {

@@ -44,7 +44,7 @@ class SiteController extends \yii\web\Controller
             $view = 'index';
         } else if (Yii::$app->user->can('teacher')) {
             $courses_number = count(Course::findOwnCourses()->all());
-            $students_number = User::find()->getOwnStudents();
+            $students_number = User::find()->getTeacherPortfolio(Yii::$app->user->id);
             $view = 'teacher';
         } else {
             //logout
@@ -69,9 +69,11 @@ class SiteController extends \yii\web\Controller
 //         Course::find()->getDayDuration(26);
 //        $status = Course::find()->getStatus(30);
 //        $review = Course::find()->getReview(5);
-        $classes = Course::find()->getReview(5);
+//        $classes = Course::find()->getReview(5);
 //        $ownCourses = User::find()->getOwnCourses();
+        $ownCourses = User::find()->getTeacherPortfolio(127);
 //        $days = Course::find()->getDaysNumber(26);
+
 
 
 
@@ -79,7 +81,7 @@ class SiteController extends \yii\web\Controller
 //            'data' => $course,
 //            'data' => $status,
 //            'data' => $ownCourses,
-            'data' => $classes,
+            'data' => $ownCourses,
         ]);
     }
 //

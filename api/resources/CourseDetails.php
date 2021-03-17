@@ -90,18 +90,18 @@ class CourseDetails extends \common\models\Course
             'teacher' => function ($model) {
                 $teacher_name = $model->teacher->userProfile->getFullName();
                 $teacher_avatar = $model->teacher->userProfile->avatar;
-//            $Students_number = User::find()->getOwnStudents();
+                $students_number = User::find()->getTeacherPortfolio($model->teacher->id);
                 $duration = 990;
                 $classes_number = 42;
-                $Students_number = 230;
+//                $Students_number = 230;
                 return [
                     'name' => $teacher_name,
                     'job_title' => "معلم اللغة العربية والقران الكريم",
                     'avatar' => $teacher_avatar,
-//                    'students' => $Students_number['student_number'],
-                    'duration' => $duration,
-                    'classes_number' => $classes_number,
-                    'students' => $Students_number,
+                    'students' => $students_number['student_number'],
+                    'duration' => $students_number['duration'],
+                    'classes_number' => $students_number['classes'],
+//                    'students' => $Students_number,
                     'bio' => "مدرس اللغة العربية الفصحي والعامية المصرية لدي منهج وكتب جيدة لتعليم العربية لغير الناطقين بها في وقت قصير",
                 ];
             },
