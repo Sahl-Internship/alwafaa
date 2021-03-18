@@ -7,7 +7,7 @@ export default {
     Loading.show()
     try {
       const response = await handleGetCourses()
-      console.log(response)
+      console.log('all', response.data)
       if (response.statusText !== 'OK') {
         const errorMessage = 'Error'
         const err = new Error(errorMessage)

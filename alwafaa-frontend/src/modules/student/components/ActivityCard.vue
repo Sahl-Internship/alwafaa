@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-card v-if="activity.type === 'comment'">
+    <q-card v-if="activity.review">
       <div class="col-1 text-right q-mr-sm" style="height: 20px">
         <q-btn-dropdown
           dense flat rounded
@@ -45,12 +45,14 @@
       <q-item class="q-ml-md">
         <q-item-section avatar>
           <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+            <img :src="student.image">
           </q-avatar>
         </q-item-section>
 
         <q-item-section>
-          <q-item-label class="text-subtitle1">محمد سليمان</q-item-label>
+          <q-item-label class="text-subtitle1">
+            {{ student.firstname }} {{ student.lastname }}
+          </q-item-label>
           <q-item-label caption>
             {{ $t('student.achievements.date') }}
           </q-item-label>
@@ -62,18 +64,28 @@
         :class="$q.screen.lt.md ? '' : 'q-mt-xs' "
       >
         <div class="col-12 row q-gutter-sm rate">
+          <!-- <img src="/images/Path 8203.png" />
           <img src="/images/Path 8203.png" />
           <img src="/images/Path 8203.png" />
-          <img src="/images/Path 8203.png" />
-          <img src="/images/Path 8204.png" />
-          <div class="text-subtitle1">0.4</div>
+          <img src="/images/Path 8204.png" /> -->
+          <star-rating
+            read-only
+            :increment=0.5
+            :rating="activity.rate"
+            :star-size="$q.screen.lt.md ? 13 : 20"
+            :padding="$q.screen.lt.md ? 3 : 5"
+            :active-color="['#e49d1a']"
+            :show-rating=false
+            :rtl=true
+          ></star-rating>
+          <div class="text-subtitle1">{{ activity.rate }}</div>
         </div>
 
         <div
           class="col-12 text-grey-4"
           :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1' "
         >
-          {{ activity.comment }}
+          {{ activity.review }}
         </div>
 
         <div
@@ -83,31 +95,31 @@
           <div class="text-subtitle1 text-grey-3">
             <!-- <q-icon name="mdi-web" /> -->
             <q-img
-              :src="activity.section === 'اللغة العربية'
+              :src="activity.course.section === 'اللغة العربية'
                 ? '/images/Path 8205 22.png'
                 : '/images/Group 553723.png'"
               width='15px'
               class="q-mr-xs"
             />
-            {{ activity.section }}
+            {{ activity.course.section }}
           </div>
           <div
-            class="text-grey-5"
+            class="text-grey-5 q-px-md ellipsis"
             :class="$q.screen.lt.md ? 'text-h6' : 'text-h5' "
           >
-            {{ activity.course }}
+            {{ activity.course.name }}
           </div>
           <div class="text-subtitle1 text-grey-4">
             <q-avatar size="sm">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+              <img :src="activity.course.teacher_avatar">
             </q-avatar>
-            {{ activity.teacher }}
+            {{ activity.course.teacher }}
           </div>
         </div>
       </q-card-section>
     </q-card>
 
-    <q-card v-if="activity.type === 'achieve'" class="q-py-sm">
+    <q-card v-else class="q-py-sm">
       <q-card-section class="text-white q-pt-lg q-mx-sm achieve-header">
         <div
           class="text-weight-bold"
@@ -129,7 +141,9 @@
 
           <div class="text-subtitle1">
             <img src="/images/Group 4877.png" width="20px" />
-            <span class="achievement-course q-ml-xs">{{ $t('student.achievements.quran') }}</span>
+            <span class="achievement-course q-ml-xs">
+              {{ activity.section }}
+            </span>
           </div>
         </div>
       </q-card-section>
@@ -151,20 +165,26 @@
         <div
           class="text-grey-5"
           :class="$q.screen.lt.md ? 'text-subtitle1' : 'text-h6'"
-        >تمهيد لتعلم القواعد النحوية</div>
+        >{{ activity.title }}</div>
       </q-card-section>
     </q-card>
   </div>
 </template>
 
 <script>
+import StarRating from 'vue-star-rating'
+
 export default {
+  components: { StarRating },
   props: {
     activity: {
       type: Object
     }
   },
   computed: {
+    student () {
+      return this.$store.getters['auth/getUser'] || {}
+    },
     checkDirection () {
       return this.$q.lang.rtl
     }

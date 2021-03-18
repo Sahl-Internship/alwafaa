@@ -120,7 +120,7 @@
                     'text-caption': $q.screen.lt.sm,
                   }"
                 >
-                  كاتب محتوي تسويقي
+                 {{ student.sub_title }}
                 </div>
                 <div
                   :class="{
@@ -206,7 +206,7 @@
           <activity-card
             v-for="(activity, index) in activities"
             :key="index"
-            :activity="{ ...activity }"
+            :activity="activity"
             class="col-11"
           ></activity-card>
         </div>
@@ -246,49 +246,55 @@ export default {
   },
   data () {
     return {
-      slide: 1,
-      activities: [
-        {
-          type: 'comment',
-          comment: 'كورس اكثر من رائع. استفدت منه كثيرا. شكرا علي هذا المجهود',
-          section: 'اللغة العربية',
-          course: 'اساسيات نحو اللغة العربية',
-          teacher: 'د/صلاح عبدالله',
-          rate: 4
-        },
-        {
-          type: 'comment',
-          comment: 'شكرا علي هذا المجهود',
-          section: 'القرآن الكريم',
-          course: 'دورة النطق الصحيح للآيات',
-          teacher: 'د/محمد العريفي',
-          rate: 4.5
-        },
-        {
-          type: 'achieve',
-          comment: 'شكرا علي هذا المجهود',
-          section: 'القرآن الكريم',
-          course: 'تمهيد لتعلم القواعد النحوية',
-          teacher: 'د/محمد العريفي'
-        },
-        {
-          type: 'comment',
-          comment: 'كورس اكثر من رائع. استفدت منه كثيرا.',
-          section: 'اللغة العربية',
-          course: 'اساسيات نحو اللغة العربية',
-          teacher: 'د/محمد العريفي',
-          rate: 3
-        }
-      ],
-      completedCourses: [],
-      uncompletedCourses: []
+      slide: 1
+      // activities: [
+      //   {
+      //     type: 'comment',
+      //     comment: 'كورس اكثر من رائع. استفدت منه كثيرا. شكرا علي هذا المجهود',
+      //     section: 'اللغة العربية',
+      //     course: 'اساسيات نحو اللغة العربية',
+      //     teacher: 'د/صلاح عبدالله',
+      //     rate: 4
+      //   },
+      //   {
+      //     type: 'comment',
+      //     comment: 'شكرا علي هذا المجهود',
+      //     section: 'القرآن الكريم',
+      //     course: 'دورة النطق الصحيح للآيات',
+      //     teacher: 'د/محمد العريفي',
+      //     rate: 4.5
+      //   },
+      //   {
+      //     type: 'achieve',
+      //     comment: 'شكرا علي هذا المجهود',
+      //     section: 'القرآن الكريم',
+      //     course: 'تمهيد لتعلم القواعد النحوية',
+      //     teacher: 'د/محمد العريفي'
+      //   },
+      //   {
+      //     type: 'comment',
+      //     comment: 'كورس اكثر من رائع. استفدت منه كثيرا.',
+      //     section: 'اللغة العربية',
+      //     course: 'اساسيات نحو اللغة العربية',
+      //     teacher: 'د/محمد العريفي',
+      //     rate: 3
+      //   }
+      // ]
     }
   },
   computed: {
     student () {
-      return this.$store.getters['auth/getUser']
-        ? this.$store.getters['auth/getUser']
-        : {}
+      const { studentData } = this.$store.getters['student/profileData']
+      return studentData || {}
+    },
+    uncompletedCourses () {
+      const { joinedCourses } = this.$store.getters['student/profileData']
+      return joinedCourses.filter(course => course.status !== 2)
+    },
+    activities () {
+      const { joinedCourses, activities: reviews } = this.$store.getters['student/profileData']
+      const completedCourses = joinedCourses.filter(course => course.status === 2)
+      return [...reviews, ...completedCourses]
     }
   },
   methods: {
@@ -313,24 +319,16 @@ export default {
     toggleSettingDialog () {
       this.$store.commit('student/toggleEditDialog')
     },
-    filterCourses (courses) {
-      this.completedCourses = courses.filter(course => course.status === 2)
+    getProfileData () {
+      const { joinedCourses } = this.$store.getters['student/profileData']
 
-      this.uncompletedCourses = courses.filter(course => course.status !== 2)
+      if (!joinedCourses.length) {
+        this.$store.dispatch('student/getProfileData')
+      }
     }
   },
   mounted () {
-    let joinedCourses = this.$store.getters['student/joinedCourses']
-    this.filterCourses(joinedCourses)
-    if (joinedCourses.length) {
-      this.joinedCourses = joinedCourses
-    } else {
-      this.$store.dispatch('student/getJoinedCourses').then(() => {
-        joinedCourses = this.$store.getters['student/joinedCourses']
-        console.log(joinedCourses)
-        this.filterCourses(joinedCourses)
-      })
-    }
+    this.getProfileData()
   }
 }
 </script>

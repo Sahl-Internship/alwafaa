@@ -129,6 +129,7 @@
             class="col-12"
             v-for="course in joinedFilteredCourses"
             :key="course.id"
+            :course="course"
             @closeSearchDialog="$emit('closeDialog')"
           ></search-result-card>
         </div>
@@ -181,6 +182,7 @@ export default {
         'كورس د/حازم شومان'
       ],
       allCourses: [],
+      // joinedCourses: [],
       joinedFilteredCourses: [],
       allFilteredCourses: [],
       searchText: ''
@@ -195,16 +197,38 @@ export default {
       }
 
       return value
+    },
+    joinedCourses () {
+      const { joinedCourses } = this.$store.getters['student/profileData']
+      return joinedCourses
     }
   },
   methods: {
+    getAllCourses () {
+      const allCourses = this.$store.getters['courses/getCourses']
+
+      if (allCourses.length) {
+        this.allCourses = allCourses
+      } else {
+        this.$store.dispatch('courses/getCourses').then(() => {
+          this.allCourses = this.$store.getters['courses/getCourses']
+        })
+      }
+    },
+    getJoinedCourses () {
+      const { joinedCourses } = this.$store.getters['student/profileData']
+
+      if (!joinedCourses.length) {
+        this.$store.dispatch('student/getUserData')
+      }
+    },
     filterCourses () {
       let filtered = this.allCourses
       const { selectedSection, selectedStatus } = this
 
       if (this.searchText) {
         filtered = filtered.filter(
-          course => course.title.toLowerCase().includes(this.searchText.toLowerCase())
+          course => course.title.toLowerCase().startsWith(this.searchText.toLowerCase())
         )
 
         if (selectedSection && selectedSection !== 'الكل') {
@@ -222,6 +246,7 @@ export default {
         }
 
         this.allFilteredCourses = filtered
+        this.getFilteredJoinedCourses(filtered)
       } else {
         this.joinedFilteredCourses = []
         this.allFilteredCourses = []
@@ -234,18 +259,17 @@ export default {
 
       if (this.selectedStatus.includes('انتهت')) {
         finishedCourses = filterFrom.filter(
-          course => new Date(course.end_at).getTime() < new Date().getTime()
+          course => course.status === 2
         )
       }
       if (this.selectedStatus.includes('لم تبدأ')) {
         notStartedCourses = filterFrom.filter(
-          course => new Date(course.start_at).getTime() > new Date().getTime()
+          course => course.status === 0
         )
       }
       if (this.selectedStatus.includes('بدأت')) {
         startedCourses = filterFrom.filter(
-          course => new Date(course.start_at).getTime() < new Date().getTime() &&
-            new Date(course.end_at).getTime() > new Date().getTime()
+          course => course.status === 1
         )
       }
 
@@ -255,14 +279,20 @@ export default {
         ...startedCourses
       ]
     },
+    getFilteredJoinedCourses (filterFrom) {
+      const coursesIds = filterFrom.map(course => course.id)
+
+      this.joinedFilteredCourses = this.joinedCourses.filter(
+        course => coursesIds.includes(course.id)
+      )
+    },
     clearSearchText () {
       this.searchText = ''
     }
   },
   mounted () {
-    this.$store.dispatch('courses/getCourses').then(() => {
-      this.filteredCourses = this.allCourses = this.$store.getters['courses/getCourses']
-    })
+    this.getAllCourses()
+    this.getJoinedCourses()
   }
 }
 </script>

@@ -51,7 +51,7 @@
                 <div
                   class="text-grey-4"
                   :class="$q.screen.lt.sm ? 'text-sm' : 'text-subtitle1'"
-                >12 يناير 2021</div>
+                >{{ calcDate }}</div>
               </div>
             </div>
           </div>
@@ -64,12 +64,12 @@
               v-if="!$q.screen.lt.sm"
               :size="$q.screen.lt.sm ? 'xs' : 'md'"
             >
-              <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+              <q-img :src="course.teacher.avatar" />
             </q-avatar>
             <div
               class="text-grey-4 q-ml-sm"
               :class="$q.screen.lt.sm ? 'text-sm' : 'text-subtitle1'"
-            >د/محمد العريفي</div>
+            >{{ course.teacher.name }}</div>
           </div>
         </div>
 
@@ -114,7 +114,6 @@
 
 <script>
 import { dateFormat } from 'src/utils/global.js'
-// import { i18n } from 'src/boot/i18n'
 
 export default {
   props: ['course'],
@@ -140,13 +139,6 @@ export default {
     },
     calcDate () {
       return dateFormat(this.course.start_at)
-      //   const satrtAt = this.course.start_at * 1000
-      //   const day = new Date(satrtAt).getDay()
-      //   const month = new Date(satrtAt)
-      //     .toLocaleString('default', { month: 'short' })
-      //   const year = new Date(satrtAt).getFullYear()
-
-      //   return `${day}  ${i18n.t(`months.${month}`)}  ${year}`
     }
   },
   methods: {
