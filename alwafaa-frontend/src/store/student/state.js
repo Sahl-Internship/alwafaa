@@ -1,6 +1,8 @@
 export default () => {
   return {
     editMode: false,
-    joinedCourses: []
+    studentData: null,
+    joinedCourses: [],
+    activities: []
   }
 }

@@ -27,7 +27,8 @@ export default {
     city: 'City',
     gender: 'Gender',
     verficationCode: 'Verfication Code',
-    birthdate: 'Birthdate'
+    birthdate: 'Birthdate',
+    subtitle: 'Subtitle'
   },
 
   resetPass: {

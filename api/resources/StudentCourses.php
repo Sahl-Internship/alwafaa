@@ -8,7 +8,7 @@ use common\models\Course;
 use common\models\User;
 use function foo\func;
 
-class CourseDetails extends \common\models\Course
+class StudentCourses extends \common\models\Course
 {
 
     public function fields()
@@ -80,27 +80,22 @@ class CourseDetails extends \common\models\Course
             'days_number' => function ($model) {
                 return Course::find()->getDaysNumber($model->id);
             },
-            'classes' => function ($model) {
-                $ids = Course::find()->getClasses($model->id);
-                return Classes::find()->andWhere(['in', 'id', $ids])->all();
-            },
+//            'classes' => function ($model) {
+//                $ids = Course::find()->getClasses($model->id);
+//                return Classes::find()->andWhere(['in', 'id', $ids])->all();
+//            },
             'teacher' => function ($model) {
                 $teacher_portfolio = User::find()->getTeacherPortfolio($model->teacher->id);
                 return [
                     'name' => $model->teacher->userProfile->getFullName(),
-                    'sub_title' => $model->teacher->userProfile->sub_title,
+//                    'sub_title' => $model->teacher->userProfile->sub_title,
                     'avatar' => $model->teacher->userProfile->avatar?: \Yii::getAlias('@backendUrl'). "/img/anonymous.jpg",
-                    'students' => $teacher_portfolio['student_number'],
-                    'duration' => $teacher_portfolio['duration'],
-                    'classes_number' => $teacher_portfolio['classes'],
-                    'bio' => $model->teacher->userProfile->bio,
+//                    'students' => $teacher_portfolio['student_number'],
+//                    'duration' => $teacher_portfolio['duration'],
+//                    'classes_number' => $teacher_portfolio['classes'],
+//                    'bio' => $model->teacher->userProfile->bio,
                 ];
-            },
-            'reviews' => function ($model) {
-                $ids = Course::find()->getReview($model->id);
-                return CourseReviews::find()->andWhere(['in', 'id', $ids])->all();
             }
-
         ];
     }
 

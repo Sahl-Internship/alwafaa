@@ -4,6 +4,7 @@ namespace common\models\query;
 
 use backend\modules\rbac\models\RbacAuthAssignment;
 use common\models\Course;
+use common\models\CourseReview;
 use common\models\JoinCourses;
 use common\models\User;
 use Yii;
@@ -77,7 +78,12 @@ class UserQuery extends ActiveQuery
         $students = array_unique($all_students);
         $total_duration =array_sum($duration);
         $sessions_number =array_sum($sessions);
-        return ['students'=>$students, 'student_number'=>$students_number,'classes'=>$sessions_number,'duration'=>$total_duration];
+        return [
+            'students'=>$students,
+            'student_number'=>$students_number,
+            'classes'=>$sessions_number,
+            'duration'=>$total_duration
+        ];
 
     }
 
@@ -94,5 +100,15 @@ class UserQuery extends ActiveQuery
             array_push($courses_status, $item->course_id);
         }
 return $courses_status;
+    }
+
+    public function getReview($id)
+    {
+        $reviews = CourseReview::find()->andWhere('created_by=:id',['id'=>$id])->all();
+        $review_ids = [];
+        foreach ($reviews as $review) {
+            array_push($review_ids,$review->id);
+        }
+        return $review_ids;
     }
 }

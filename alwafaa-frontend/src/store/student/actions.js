@@ -2,6 +2,7 @@ import { Notify, Loading } from 'quasar'
 import { i18n } from 'src/boot/i18n'
 
 import {
+  handleGetUserData,
   handleEditData,
   handleJoinCourse,
   handleEditImgs,
@@ -9,21 +10,42 @@ import {
 } from 'src/services/studentApi'
 
 export default {
-  async editStudentData (context, studentData) {
+  async getUserData ({ commit }) {
+    Loading.show()
+
+    try {
+      const response = await handleGetUserData()
+      console.log('all user data', response)
+
+      if (response.statusText !== 'OK') {
+        const err = new Error('error')
+        throw err
+      }
+
+      commit('getUserData', response.data)
+      Loading.hide()
+      return true
+    } catch (error) {
+      Loading.hide()
+      console.log(error)
+      return false
+    }
+  },
+
+  async editStudentData ({ commit, dispatch }, studentData) {
     Loading.show()
 
     try {
       const response = await handleEditData(studentData)
+      console.log('after edit', response)
+
       if (response.data.status !== 1) {
-        console.log(response)
+        console.log('after edit', response)
         throw new Error()
       }
 
-      const { token, ...user } = response.data.profile
-      localStorage.setItem('token', token)
-      localStorage.setItem('user', JSON.stringify(user))
-      context.commit('auth/loginState', { token, user }, { root: true })
-      context.commit('toggleEditDialog')
+      dispatch('setStudentData', response.data.profile)
+      commit('toggleEditDialog')
 
       Loading.hide()
       Notify.create({
@@ -40,22 +62,17 @@ export default {
     }
   },
 
-  async editProfileAndCoverImg (context, image) {
+  async editProfileAndCoverImg ({ dispatch }, image) {
     Loading.show()
 
     try {
       const response = await handleEditImgs(image)
-      console.log(response)
 
       if (response.data.status !== 1) {
         throw new Error()
       }
 
-      const { token, ...user } = response.data.profile
-      localStorage.setItem('token', token)
-      localStorage.setItem('user', JSON.stringify(user))
-      context.commit('auth/loginState', { token, user }, { root: true })
-
+      dispatch('setStudentData', response.data.profile)
       Loading.hide()
     } catch (error) {
       Loading.hide()
@@ -98,23 +115,38 @@ export default {
     }
   },
 
-  async getJoinedCourses ({ commit }) {
+  async getProfileData ({ commit }) {
     Loading.show()
+
     try {
       const response = await handleGetJoindCourses()
-      console.log(response)
+      console.log('joined', response)
       if (response.statusText !== 'OK') {
         const err = new Error('error')
         throw err
       }
 
-      commit('geJoinedtCourses', response.data)
+      commit('getProfileData', response.data)
       Loading.hide()
-      return true
     } catch (error) {
       Loading.hide()
       console.log(error)
-      return false
     }
+  },
+
+  setStudentData ({ commit }, data) {
+    const { token, ...user } = data
+    const basicUserInfo = {
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      image: user.image
+    }
+
+    localStorage.setItem('token', token)
+    localStorage.setItem('user', JSON.stringify(basicUserInfo))
+    commit('auth/loginState', { token, user: basicUserInfo }, { root: true })
+    commit('student/getUserData', user, { root: true })
   }
 }

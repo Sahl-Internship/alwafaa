@@ -121,7 +121,7 @@ import { dateFormat } from 'src/utils/global.js'
 export default {
   computed: {
     completedCourses () {
-      const joinedCourses = this.$store.getters['student/joinedCourses']
+      const { joinedCourses } = this.$store.getters['student/profileData']
       const completedCourses = joinedCourses.filter(
         course => course.status === 2
       )

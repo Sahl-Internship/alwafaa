@@ -118,6 +118,16 @@
                   </template>
                 </q-input>
 
+                <g-input
+                  dense
+                  outlined
+                  v-model="user.sub_title"
+                  :label="$t('formFields.subtitle')"
+                  prependIconName="mdi-briefcase"
+                  bg-color='grey-1'
+                  class="col-12"
+                />
+
                 <div
                   class="col-12 row justify-between q-mt-md q-pa-xs hobbies-box"
                 >
@@ -418,6 +428,15 @@ export default {
     },
     closeDialog () {
       this.$store.commit('student/toggleEditDialog')
+    },
+    setUserData (student) {
+      const birthdate = student.birthdate
+        ? new Date(student.birthdate * 1000 + 7200000).toISOString() : ''
+      this.user = {
+        ...student,
+        bio: student.bio ? [...student.bio] : [],
+        birthdate
+      }
     }
   },
   watch: {
@@ -433,13 +452,15 @@ export default {
     }
   },
   mounted () {
-    const student = this.$store.getters['auth/getUser']
-    const birthdate = student.birthdate
-      ? new Date(student.birthdate * 1000 + 7200000).toISOString() : ''
-    this.user = {
-      ...student,
-      bio: student.bio ? [...student.bio] : [],
-      birthdate
+    let student = this.$store.getters['student/getUserData']
+
+    if (student) {
+      this.setUserData(student)
+    } else {
+      this.$store.dispatch('student/getUserData').then(() => {
+        student = this.$store.getters['student/getUserData']
+        this.setUserData(student)
+      })
     }
   }
 }

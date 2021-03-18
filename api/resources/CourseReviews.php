@@ -8,7 +8,7 @@ use common\models\CourseClasses;
 use function foo\func;
 
 
-class Review extends \common\models\CourseReview
+class CourseReviews extends \common\models\CourseReview
 {
 
     public function fields()

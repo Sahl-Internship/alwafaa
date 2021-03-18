@@ -7,6 +7,7 @@ namespace api\controllers;
 
 use api\resources\CourseDetails;
 use api\resources\CoursesList;
+use common\models\Section;
 use yii\rest\ActiveController;
 
 class CourseController extends ApiController
@@ -30,6 +31,12 @@ class CourseController extends ApiController
     public function actionView($id)
     {
         return CourseDetails::findOne($id);
+    }
+
+    public function actionSection()
+    {
+        return Section::find()->all();
+        
     }
 
 }

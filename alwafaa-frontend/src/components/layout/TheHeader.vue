@@ -191,8 +191,7 @@ export default {
   },
   computed: {
     student () {
-      return this.$store.getters['auth/getUser']
-        ? this.$store.getters['auth/getUser'] : {}
+      return this.$store.getters['auth/getUser'] || {}
     },
     isAuthenticated () {
       return this.$store.getters['auth/isAuthenticated']

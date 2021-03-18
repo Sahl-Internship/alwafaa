@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%course_review}}".
@@ -33,7 +34,11 @@ class CourseReview extends \yii\db\ActiveRecord
             [
                 'class' => BlameableBehavior::class,
                 'updatedByAttribute' => false
-            ]
+            ],
+            [
+                'class'=>TimestampBehavior::class,
+                'updatedAtAttribute' => false
+            ],
         ];
     }
 

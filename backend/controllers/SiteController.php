@@ -44,7 +44,7 @@ class SiteController extends \yii\web\Controller
             $view = 'index';
         } else if (Yii::$app->user->can('teacher')) {
             $courses_number = count(Course::findOwnCourses()->all());
-            $students_number = User::find()->getTeacherPortfolio(Yii::$app->user->id);
+            $teacher_portfolio = User::find()->getTeacherPortfolio(Yii::$app->user->id);
             $view = 'teacher';
         } else {
             //logout
@@ -55,7 +55,9 @@ class SiteController extends \yii\web\Controller
 
         return $this->render($view, [
             'courses_number' => $courses_number,
-            'students_number' => $students_number['student_number'],
+            'students_number' => $teacher_portfolio['student_number'],
+            'sessions' => $teacher_portfolio['classes'],
+            'duration' => $teacher_portfolio['duration'],
         ]);
     }
 

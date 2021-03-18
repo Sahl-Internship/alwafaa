@@ -27,7 +27,8 @@ export default {
     city: 'المدينة',
     gender: 'النوع',
     verficationCode: 'كود التحقق',
-    birthdate: 'تاريخ الميلاد'
+    birthdate: 'تاريخ الميلاد',
+    subtitle: 'المسمي الوظيفي'
   },
 
   resetPass: {
