@@ -95,31 +95,41 @@
             <div class="text-h6 col-8 q-mb-md">ماذا ستتعلم</div>
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 course-description__section bg-grey-1 q-pa-xl" >
             <div class="col-11 requirment">
-              <div class="text-h6 q-ml-xs">متطلبات الدورة</div>
-              <div class="text-grey-4 text-body1 q-mb-lg" style="margin-right:-17px;" v-html="courseData.requirement">
+              <div
+                class="text-h6 q-ml-xs"
+              >متطلبات الدورة
               </div>
-              <div class="text-h6">وصف الدورة</div>
-              <div class="text-body1 text-grey-4" v-html="courseData.description">
-                <!-- يحتاج الكثير من متعلمي اللغة العربية إلي تعلم النحو والإعراب بسهولة وسوف يتم ذلك من خلال مجموعة
-                رائعة من الدروس المترابطة وطريقة الشرح التي تستطيع عمل جدول يومي لك لمراجعة النحو العربي
-                اللغة العربية هي أكثر اللغات السامية تحدثا وإحدى أكثر اللغات انتشارا في العالم، يتحدثها أكثر من 467 مليون
-                نسمة. ويتوزع متحدثوها في الوطن العربي، بالإضافة إلى العديد من المناطق الأخرى المجاورة كالأهواز وتركيا
-                وتشاد ومالي والسنغال وإرتيريا وإثيوبيا وجنوب السودان وإيران، وبذلك فهي تحتل المركز الرابع أو الخامس من
-                حيث اللغات الأكثر انتشارا في العالم، واللغة الرابعة من حيث عدد المستخدمين على الإنترنت. اللغة العربية ذات
-                أهمية قصوى لدى المسلمين، فهي عندهم لغة مقدسة إذ أنها لغة القرآن، وهي لغة الصلاة وأساسية في
-                القيام بالعديد من العبادات والشعائر الإسلامية العربية هي أيضا لغة شعائرية رئيسية لدى عدد من الكنائس
-                المسيحية في الوطن العربي، كما كتبت بها كثير من أهم الأعمال الدينية والفكرية اليهودية في العصور الوسطى
-                ارتفعت مكانة اللغة العربية إثر انتشار الإسلام بين الدول إذ أصبحت لغة السياسة والعلم والأدب لقرون طويلة.
-                في الأراضي التي حكمها المسلمون. وللغة العربية تأثير مباشر وغير مباشر على كثير من اللغات الأخرى في
-                العالم الإسلامي -->
+              <div
+                class="text-grey-4 text-body1 q-mb-lg"
+                style="margin-right:-17px;"
+                v-html="courseData.requirement"
+              >
               </div>
-              <!-- <div class="text-h6 q-mt-xl q-mb-md ">ماذا ستتعلم في هذه الدورة</div> -->
-              <div class="toggle-show1 text-body1 text-grey-4 q-my-none" :class="{'toggle-show1-no-gradient': isShowAll}" v-html="courseData.targeted_skills">
+              <div
+                class="text-h6">وصف الدورة</div>
+              <div
+                class="text-body1 text-grey-4"
+                v-html="courseData.description"
+              >
+              </div>
+              <div
+                class="toggle-show1 text-body1 text-grey-4 q-my-none"
+                :class="{
+                  'toggle-show1-no-gradient': isShowAll
+                }"
+                 v-html="courseData.targeted_skills"
+              >
               </div>
               <div
                 class="text-body1 col-12 text-center q-mt-sm show-more_description text-bold"
-                @click="showAll" style="text-decoration:underline;cursor: pointer;">عرض الكل
-                <img src="images/home-imgs/path 1234.png" class="q-ml-sm" style="width:10px;hegight:10px;"/>
+                @click="showAll"
+                style="text-decoration:underline;cursor: pointer;"
+              >عرض الكل
+                <img
+                  src="images/home-imgs/path 1234.png"
+                  class="q-ml-sm"
+                  style="width:10px;hegight:10px;"
+                />
               </div>
             </div>
           </div>
@@ -276,7 +286,7 @@
                   <star-rating
                     read-only
                     :increment=0.5
-                    :rating='courseData.rate.rate_average'
+                    :rating='roundRate'
                     :star-size="$q.screen.lt.md ? 13 : 20"
                     :padding="$q.screen.lt.md ? 3 : 5"
                     :active-color="['#e49d1a']"
@@ -365,6 +375,10 @@ export default {
         return '/images/home-imgs/global.png'
       }
       return '/images/home-imgs/quran-icon2.png'
+    },
+    roundRate () {
+      const roundedRate = (this.courseData.rate.rate_average).toFixed(1)
+      return roundedRate
     }
   }
 }

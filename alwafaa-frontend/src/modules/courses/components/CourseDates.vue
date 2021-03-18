@@ -6,7 +6,7 @@
         <div class="text-h6 col-3 text-grey-4">اليوم</div>
         <div class="text-h6 col-6 text-grey-4">
           <span class="material-icons" style="font-size:25px;cursor: pointer;" @click="$refs.carousel.next()">keyboard_arrow_right</span>
-          8 يناير 2021
+          {{getClassDate(courseData.classes[0].date)}}
           <span class="material-icons" style="font-size:25px;cursor: pointer;" @click="$refs.carousel.previous()">keyboard_arrow_left</span>
         </div>
       </div>
@@ -24,8 +24,8 @@
       <div class="col-12 bg-white q-py-lg q-px-lg">
         <table class="q-mx-auto" >
           <tr>
-            <th class="table-head">السبت   <span class="block text-weight-thin" style="font-size:12px">5 يناير</span></th>
-            <th class="table-head">الاحد    <span class="block text-weight-thin" style="font-size:12px">6 يناير</span></th>
+            <th class="table-head">السبت   <span class="block text-weight-thin" style="font-size:12px"></span></th>
+            <th class="table-head">الاحد    <span class="block text-weight-thin" style="font-size:12px"></span></th>
             <th class="table-head">الاثنين  <span class="block text-weight-thin" style="font-size:12px">7 يناير</span></th>
             <th class="table-head">الثلاثاء <span class="block text-weight-thin" style="font-size:12px">8 يناير</span></th>
             <th class="table-head">الاربعاء <span class="block text-weight-thin" style="font-size:12px">9 يناير</span></th>
@@ -65,7 +65,7 @@
   </div>
 </template>
 <script>
-// import { dateFormat } from 'src/utils/global.js'
+import { dateFormat } from 'src/utils/global.js'
 export default {
   data () {
     return {
@@ -77,6 +77,10 @@ export default {
       const date = new Date(timestamp * 1000)
       console.log(date)
       return date
+    },
+    getClassDate (classDate) {
+      const classDay = dateFormat(classDate)
+      return classDay
     }
   },
   computed: {

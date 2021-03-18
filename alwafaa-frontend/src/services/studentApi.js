@@ -13,7 +13,7 @@ export const handleEditImgs = (data) => {
 }
 
 export const handleJoinCourse = (data) => {
-  return axios.post('http://endpoints.alwafaa.localhost/course/join-course', data)
+  return axios.post('http://endpoints.alwafaa.localhost/join-course/join-course', data)
 }
 
 export const handleGetJoindCourses = () => {
