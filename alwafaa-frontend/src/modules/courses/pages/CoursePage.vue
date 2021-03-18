@@ -17,7 +17,7 @@
           <!-- </div> -->
           <div class="col-11 title-section">
             <p class="main-title text-white">{{courseData.title}}</p>
-            <p class="sub-title text-white">تعليم اهم قواعد النحو من الصفر إلى اتقان الإعراب بكل سهولة</p>
+            <p class="sub-title text-white">{{courseData.sub_title}}</p>
           </div>
 
           <div class="col-11 row justify-between q-mb-lg">
@@ -25,14 +25,14 @@
               <q-avatar>
                 <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
               </q-avatar>
-              <div class="text-h6 text-white q-ml-sm" >ebtsam ali</div>
+              <div class="text-h6 text-white q-ml-sm" >د/ احمد شعلان</div>
             </div>
 
             <div class="row items-center">
               <div class="text-h6 text-white">فئة الدورة: </div>
               <div class="row items-center q-pl-sm q-gutter-x-sm">
-                <img src="/images/Box/Group 4877.png" width="25px" />
-                <div class="text-h6 text-white">القرآن الكريم</div>
+                <img :src='sectionImgSrc' width="25px" />
+                <div class="text-h6 text-white">{{courseData.section}}</div>
               </div>
             </div>
 
@@ -40,7 +40,10 @@
               <div class="text-h6 text-white">آخر تحديث: </div>
               <div class="row items-center q-pl-sm q-gutter-x-sm">
                 <img src="/images/Box/calender.png" width="18px" />
-                <div class="text-h6 text-white">12 يناير 2021</div>
+                <div class="text-h6 text-white">
+                  <!-- 12 يناير 2021 -->
+                  {{ calcDate(courseData.created_at) }}
+                </div>
               </div>
             </div>
           </div>
@@ -93,15 +96,11 @@
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 course-description__section bg-grey-1 q-pa-xl" >
             <div class="col-11 requirment">
               <div class="text-h6 q-ml-xs">متطلبات الدورة</div>
-              <ul class="text-grey-4 text-body1 q-mb-lg" style="padding-right:22px;">
-                <li>لا توجد متطلبات قبل الدورة, ولكن توزع على المتدربين خطة الموضوعات للدورة ككل</li>
-                <li>هناك متطلبات عقب كل محاضرة تتمثل في الإجابة على الأسئلة المرفقة مع مرفقات المادة</li>
-                <li>هناك امتحان في آخر الدورة يتضمن كل المهارات التدريسية التي تضمنتها الدورة</li>
-                <li>يتم اعطاء الطلاب واجبات بعد كل درس</li>
-              </ul>
+              <div class="text-grey-4 text-body1 q-mb-lg" style="padding-right:22px;" v-html="courseData.requirement">
+              </div>
               <div class="text-h6">وصف الدورة</div>
-              <div class="text-body1 text-grey-4">
-                يحتاج الكثير من متعلمي اللغة العربية إلي تعلم النحو والإعراب بسهولة وسوف يتم ذلك من خلال مجموعة
+              <div class="text-body1 text-grey-4" v-html="courseData.description">
+                <!-- يحتاج الكثير من متعلمي اللغة العربية إلي تعلم النحو والإعراب بسهولة وسوف يتم ذلك من خلال مجموعة
                 رائعة من الدروس المترابطة وطريقة الشرح التي تستطيع عمل جدول يومي لك لمراجعة النحو العربي
                 اللغة العربية هي أكثر اللغات السامية تحدثا وإحدى أكثر اللغات انتشارا في العالم، يتحدثها أكثر من 467 مليون
                 نسمة. ويتوزع متحدثوها في الوطن العربي، بالإضافة إلى العديد من المناطق الأخرى المجاورة كالأهواز وتركيا
@@ -112,18 +111,10 @@
                 المسيحية في الوطن العربي، كما كتبت بها كثير من أهم الأعمال الدينية والفكرية اليهودية في العصور الوسطى
                 ارتفعت مكانة اللغة العربية إثر انتشار الإسلام بين الدول إذ أصبحت لغة السياسة والعلم والأدب لقرون طويلة.
                 في الأراضي التي حكمها المسلمون. وللغة العربية تأثير مباشر وغير مباشر على كثير من اللغات الأخرى في
-                العالم الإسلامي
+                العالم الإسلامي -->
               </div>
-              <div class="text-h6 q-mt-xl q-mb-md ">ماذا ستتعلم في هذه الدورة</div>
-              <div class="toggle-show1" :class="{'toggle-show1-no-gradient': isShowAll}">
-                <div class="text-body1 text-grey-4">1- التمييز بين اقسام الكلمة العربية الثلاثة الاسم ,الفعل و الحرف</div>
-                <div class="text-body1 text-grey-4">2- التمييز بين انواع الفعل الثلاثة الماضي ,المضارع و الامر</div>
-                <div class="text-body1 text-grey-4">3- التمييز بين اقسام الكلمة العربية الثلاثة الاسم ,الفعل و الحرف</div>
-              </div>
-              <div class="toggle-show" :class="{'show-hidden-item': isShowAll}">
-                <div class="text-body1 text-grey-4">1- التمييز بين اقسام الكلمة العربية الثلاثة الاسم ,الفعل و الحرف</div>
-                <div class="text-body1 text-grey-4">2- التمييز بين انواع الفعل الثلاثة الماضي ,المضارع و الامر</div>
-                <div class="text-body1 text-grey-4">3- التمييز بين اقسام الكلمة العربية الثلاثة الاسم ,الفعل و الحرف</div>
+              <!-- <div class="text-h6 q-mt-xl q-mb-md ">ماذا ستتعلم في هذه الدورة</div> -->
+              <div class="toggle-show1 text-body1 text-grey-4 q-my-none" :class="{'toggle-show1-no-gradient': isShowAll}" v-html="courseData.targeted_skills">
               </div>
               <div
                 class="text-body1 col-12 text-center q-mt-sm show-more_description text-bold"
@@ -139,7 +130,7 @@
             <div
               class="column justify-between no-wrap course-info q-ml-lg self-end justify-end"
             >
-              <q-img src="images/home-imgs/alorefy.jpg" style="height:245px;width:100%;border-radius:4px 4px 0px 0px">
+              <q-img :src="courseData.image" style="height:245px;width:100%;border-radius:4px 4px 0px 0px">
                 <div class="absolute-full flex flex-center dimmed"></div>
                 <img src="images/home-imgs/info-player.png" class="absolute-center flex flex-center" style="width:25px;height:25px;">
               </q-img>
@@ -169,7 +160,7 @@
                         'text-subtitle2': !$q.screen.lt.sm,
                         'text-caption': $q.screen.lt.sm,
                       }"
-                    >30يوم</div>
+                    >{{courseData.days_number}}يوم</div>
                   </div>
                 </div>
                 <div class="row q-ml-lg q-mb-md">
@@ -198,7 +189,7 @@
                         'text-caption': $q.screen.lt.sm,
                         'q-ml-sm': true
                       }"
-                    >04:20:00 ساعة</div>
+                    >{{calcTime(courseData.duration)}} ساعة</div>
                   </div>
                 </div>
                 <div class="row q-ml-lg q-mb-md">
@@ -227,7 +218,7 @@
                         'text-caption': $q.screen.lt.sm,
                         'q-ml-sm': true
                       }"
-                    >42 درس</div>
+                    >{{courseData.sessions}} درس</div>
                   </div>
                 </div>
                 <div class="row q-ml-lg q-mb-lg">
@@ -256,7 +247,7 @@
                         'text-caption': $q.screen.lt.sm,
                         'q-ml-sm': true
                       }"
-                    > 452 طالب</div>
+                    > {{courseData.student_number}} طالب</div>
                   </div>
                 </div>
                 <div class="row q-ml-lg q-mb-md">
@@ -281,11 +272,11 @@
                   <div
                     class="text-grey-4"
                     :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
-                  >4.5</div>
+                  >{{courseData.rate.rate_average}}</div>
                   <star-rating
                     read-only
                     :increment=0.5
-                    :rating=4.5
+                    :rating='courseData.rate.rate_average'
                     :star-size="$q.screen.lt.md ? 13 : 20"
                     :padding="$q.screen.lt.md ? 3 : 5"
                     :active-color="['#e49d1a']"
@@ -295,7 +286,7 @@
                   <div
                     class="text-grey-4 q-ml-sm"
                     :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
-                  >(454)</div>
+                  >({{courseData.rate.voters}})</div>
                 </div>
                 <q-btn
                   :label='buttonTitleState'
@@ -321,6 +312,7 @@
 </template>
 
 <script>
+import { calcDuration, dateFormat } from 'src/utils/global.js'
 import StarRating from 'vue-star-rating'
 import CourseDates from '../components/CourseDates.vue'
 import AboutTeacher from '../components/AboutTeacher.vue'
@@ -343,6 +335,14 @@ export default {
     },
     showAll () {
       this.isShowAll = !this.isShowAll
+    },
+    calcDate (timestamp) {
+      const date = dateFormat(timestamp)
+      return date
+    },
+    calcTime (timestamp) {
+      const time = calcDuration(timestamp)
+      return time
     }
   },
   mounted () {
@@ -351,7 +351,7 @@ export default {
   },
   computed: {
     courseData () {
-      console.log('getters', this.$store.getters['courses/getCoursePage'])
+      console.log(this.$store.getters['courses/getCoursePage'])
       return this.$store.getters['courses/getCoursePage']
     },
     isAuthed () {
@@ -359,6 +359,12 @@ export default {
     },
     buttonTitleState () {
       return this.isAuthed ? 'اكمال الدورة' : 'الاشتراك في الدورة'
+    },
+    sectionImgSrc () {
+      if (this.courseData.section_id === 5) {
+        return '/images/home-imgs/global.png'
+      }
+      return '/images/home-imgs/quran-icon2.png'
     }
   }
 }

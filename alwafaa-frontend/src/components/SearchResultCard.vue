@@ -78,6 +78,7 @@
           :class="$q.screen.lt.sm ? 'justify-center' : 'justify-end'"
         >
           <div
+            v-if="calcDate"
             class="
               text-center
               q-py-xs
@@ -112,7 +113,8 @@
 </template>
 
 <script>
-import { i18n } from 'src/boot/i18n'
+import { dateFormat } from 'src/utils/global.js'
+// import { i18n } from 'src/boot/i18n'
 
 export default {
   props: ['course'],
@@ -137,13 +139,14 @@ export default {
       return 'started'
     },
     calcDate () {
-      const satrtAt = this.course.start_at * 1000
-      const day = new Date(satrtAt).getDay()
-      const month = new Date(satrtAt)
-        .toLocaleString('default', { month: 'short' })
-      const year = new Date(satrtAt).getFullYear()
+      return dateFormat(this.course.start_at)
+      //   const satrtAt = this.course.start_at * 1000
+      //   const day = new Date(satrtAt).getDay()
+      //   const month = new Date(satrtAt)
+      //     .toLocaleString('default', { month: 'short' })
+      //   const year = new Date(satrtAt).getFullYear()
 
-      return `${day}  ${i18n.t(`months.${month}`)}  ${year}`
+      //   return `${day}  ${i18n.t(`months.${month}`)}  ${year}`
     }
   },
   methods: {

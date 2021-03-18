@@ -5,7 +5,7 @@
       <div class="text-h6 q-ml-lg q-mt-lg">محمد سليمان</div>
       <div class="text-body1 q-ml-lg q-my-sm text-grey-4">معلم اللغة العربية الفصحى و العامية المصرية</div>
       <div class="row col-10">
-        <div class="col-2 q-ml-md"><img src="images/home-imgs/omar.jpg" class="teacher-img"></div>
+        <div class="col-2 q-ml-md"><img src="/images/home-imgs/shalaan.jpg" class="teacher-img"></div>
         <div class="col-9 row teacher-classes" style="margin-top:-10px;">
             <div class="col-6 q-mt-lg q-ml-md">
               <img
@@ -22,7 +22,7 @@
                   'text-caption': $q.screen.lt.sm,
                   'q-ml-md': true
                 }"
-              >   04:20:00 ساعة</div>
+              >   {{calcTime(courseData.teacher.duration)}} ساعة</div>
             </div>
             <div class="col-6 q-ml-md">
               <img
@@ -39,7 +39,7 @@
                   'text-caption': $q.screen.lt.sm,
                   'q-ml-md': true
                 }"
-              >   42 درس  </div>
+              >   {{courseData.teacher.classes_number}} درس  </div>
             </div>
             <div class="col-6 q-ml-md">
               <img
@@ -56,7 +56,7 @@
                   'text-caption': $q.screen.lt.sm,
                   'q-ml-md': true
                 }"
-              >   452 طالب</div>
+              >   {{courseData.teacher.students}} طالب</div>
             </div>
         </div>
       </div>
@@ -77,6 +77,7 @@
   </div>
 </template>
 <script>
+import { dateFormat, calcDuration } from 'src/utils/global.js'
 export default {
   data () {
     return {
@@ -86,6 +87,19 @@ export default {
   methods: {
     showTeacherInfo () {
       this.isShowTeacherInfo = !this.isShowTeacherInfo
+    },
+    calcDate (timestamp) {
+      const date = dateFormat(timestamp)
+      return date
+    },
+    calcTime (timestamp) {
+      const time = calcDuration(timestamp)
+      return time
+    }
+  },
+  computed: {
+    courseData () {
+      return this.$store.getters['courses/getCoursePage']
     }
   }
 }

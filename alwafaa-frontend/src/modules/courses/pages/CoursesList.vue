@@ -357,20 +357,18 @@ export default {
       this.getShownCourses()
     },
     filterByStatus (filterFrom, status) {
-      const today = new Date().getTime() / 1000
-
+      // const today = new Date().getTime() / 1000
       if (status === 'finished') {
         return filterFrom.filter(
-          course => new Date(course.end_at).getTime() < today
+          course => course.status === 2
         )
       } else if (status === 'notStarted') {
         return filterFrom.filter(
-          course => new Date(course.start_at).getTime() > today
+          course => course.status === 0
         )
       } else {
         return filterFrom.filter(
-          course => new Date(course.start_at).getTime() < today &&
-            new Date(course.end_at).getTime() > today
+          course => course.status === 1
         )
       }
     }
@@ -378,6 +376,7 @@ export default {
   mounted () {
     this.$store.dispatch('courses/getCourses').then(() => {
       const courses = this.$store.getters['courses/getCourses']
+      console.log(courses)
       this.filteredCourses = this.allCourses = courses
       this.getShownCourses()
       this.coursesOptions = this.coursesTitles = courses.map(course => course.title)

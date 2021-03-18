@@ -1,19 +1,21 @@
+/* eslint-disable vue/valid-v-model */
 <template>
   <div class="row col-11 teacher">
     <div class="text-h6 col-8 q-mt-xl q-mb-md">تقييمات </div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-8 about-teacher bg-grey-1 q-py-lg">
-      <div v-if="isAuthed" class="row col-12 comment-card  q-py-md q-px-lg q-mx-auto q-mb-md">
+      <div class="row col-12 comment-card  q-py-md q-px-lg q-mx-auto q-mb-md">
         <div class="col-12">
           <div class="text-center">
             <star-rating
               :increment=0.5
-              :rating=4.5
+              :rating="rate"
               :star-size="$q.screen.lt.md ? 20 : 30"
               :padding="$q.screen.lt.md ? 3 : 5"
               :active-color="['#FFC003']"
               :show-rating=false
               :rtl=true
               class="justify-center"
+              @rating-selected ="setRating"
             ></star-rating>
             <div
               class="text-caption text-grey-4 q-ml-md q-mt-sm"
@@ -23,7 +25,7 @@
           <q-input
             outlined
             color="grey-2"
-            v-model="comment"
+            v-model="review"
             label="رأيك في الدورة"
             bg-color="grey-1"
             maxlength="300"
@@ -41,10 +43,10 @@
       <div class="text-h6 col-8 q-mt-sm q-mb-md q-ml-lg student-comments">ملاحظات الطلاب للدورة</div>
 
       <div
-        v-for="x in shownComments"
+        v-for="x in 3"
         :key='x'
         class="row col-10 comment-card  q-py-md q-px-lg q-mx-auto q-mb-sm"
-        >
+      >
         <div
           class="col-1 q-ml-md q-mr-sm"
         >
@@ -53,9 +55,17 @@
             style="width:45px;height:45px;border-radius:50%;margin-top:4px"
           >
         </div>
-        <div class="col-10">
-          <div class="text-h6 row no-wrap">محمد سليمان</div>
-          <div class="row no-wrap">
+        <div
+          class="col-10"
+        >
+          <div
+            class="text-h6 row no-wrap"
+          >
+            محمد سليمان
+          </div>
+          <div
+            class="row no-wrap"
+          >
             <star-rating
               read-only
               :increment=0.5
@@ -66,22 +76,47 @@
               :show-rating=false
               :rtl=true
             ></star-rating>
-            <div class="text-subtitle1 text-grey-3 q-ml-md">12 يناير 2021</div>
-          </div>
-          <div class="text-body1">دورة رائعة , الكريم من المعلومات الجديدة المفيدة</div>
-          <div   class="row q-mt-md">
-            <div class="arrow q-mr-xs">
-              <span class="material-icons" style="font-size:25px;cursor: pointer;">thumb_up_off_alt</span>
+            <div
+              class="text-subtitle1 text-grey-3 q-ml-md"
+            >
+              12 يناير 2021
             </div>
-            <div class="arrow">
-              <span class="material-icons" style="font-size:25px;cursor: pointer;">thumb_down_off_alt</span>
+          </div>
+          <div
+            class="text-body1"
+          >
+            دورة رائعة , الكريم من المعلومات الجديدة المفيدة
+          </div>
+          <div
+            class="row q-mt-md"
+          >
+            <div
+              class="arrow q-mr-xs"
+            >
+              <span
+                class="material-icons"
+                :class="{'like': thumpUp}"
+                style="font-size:25px;cursor: pointer;"
+                @click="up"
+              >
+                thumb_up_off_alt
+              </span>
+            </div>
+            <div
+              class="arrow"
+            >
+              <span
+                class="material-icons"
+                :class="{'like': thumpDown}"
+                style="font-size:25px;cursor: pointer;"
+                @click="down"
+              >
+                thumb_down_off_alt
+              </span>
             </div>
           </div>
         </div>
       </div>
-      <!-- <div class="hide" :class="{'show':isShowComments}">
-
-      </div> -->
       <div
         class="text-body1 col-10 text-center text-bold comment-card q-py-md q-mx-auto"
         @click="showComments"
@@ -104,6 +139,8 @@ export default {
     return {
       isShowComments: false,
       shownComments: 3,
+      thumpUp: false,
+      thumpDown: false,
       rate: 0,
       rank: 0,
       review: ''
@@ -112,13 +149,26 @@ export default {
   computed: {
     isAuthed () {
       return this.$store.getters['auth/isAuthenticated']
+    },
+    userToken () {
+      return this.$store.getters['auth/getToken']
     }
   },
   methods: {
-    up () { this.rank++ },
-    down () { this.rank-- },
+    setRating (rating) {
+      this.rate = rating
+    },
+    up () {
+      this.rank++
+      this.thumpUp = true
+      this.thumpDown = false
+    },
+    down () {
+      this.rank--
+      this.thumpDown = true
+      this.thumpUp = false
+    },
     showComments () {
-      // this.isShowComments = !this.isShowComments
       if (this.shownComments === 12) {
         return false
       } else {
@@ -126,10 +176,11 @@ export default {
       }
     },
     sendReview () {
+      const courseId = this.$route.params.id
       const comment = {
         rate: this.rate,
         review: this.review,
-        rank: this.rank
+        courseId
       }
       this.$store.dispatch('courses/courseReview', comment)
     }
@@ -172,14 +223,6 @@ export default {
       margin-left: 23px;
     }
   }
-}
-.toggle-show1{
-    -webkit-mask-image: -webkit-gradient(linear, left top,
-    left bottom, from(rgba(1,1,1,1)), to(rgba(1,1,1,0)));
-}
-.toggle-show1-no-gradient{
-  -webkit-mask-image: -webkit-gradient(linear, left top,
-  left bottom, from(rgba(1,1,1,1)), to(rgba(1,1,1,1)));
 }
 .q-field{
   &::v-deep{
@@ -238,5 +281,8 @@ export default {
       overflow: hidden;
     }
   }
+}
+.like{
+  color: $primary
 }
 </style>

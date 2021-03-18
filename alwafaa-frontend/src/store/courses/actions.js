@@ -28,8 +28,14 @@ export default {
     }
   },
   async courseReview (context, review) {
-    const response = await handleCourseReview(review)
-    console.log(response)
+    try {
+      const response = await handleCourseReview(review)
+      console.log(response)
+      console.log(review)
+    } catch (error) {
+      console.log(error)
+      console.log('review', review)
+    }
     context.commit('courseReview', review)
   },
   async coursePage (context, courseId) {

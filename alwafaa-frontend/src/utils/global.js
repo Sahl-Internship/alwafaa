@@ -1,6 +1,10 @@
 import { i18n } from 'src/boot/i18n'
 
 export const dateFormat = (timestamp) => {
+  if (!timestamp) {
+    return ''
+  }
+
   const date = timestamp * 1000
   const day = new Date(date).getDay()
   const month = new Date(date)
@@ -10,16 +14,25 @@ export const dateFormat = (timestamp) => {
   return `${day}  ${i18n.t(`months.${month}`)}  ${year}`
 }
 
+// export const timeFormat = (timestamp) => {
+//   if (!timestamp) {
+//     return ''
+//   }
+
+//   const date = new Date(timestamp * 1000)
+//   const hours = '0' + date.getHours()
+//   // Minutes part from the timestamp
+//   const minutes = '0' + date.getMinutes()
+//   // Seconds part from the timestamp
+//   const seconds = '0' + date.getSeconds()
+//   return `${seconds} : ${minutes.substr(-2)} : ${hours}`
+// }
+
 export const calcDuration = (duration) => {
-  // const hours = (duration / 60).toString().length > 1
-  //   ? duration / 60
-  //   : `0${duration / 60}`
+  if (!duration) {
+    return '00:00:00'
+  }
 
-  // const mins = (duration - (hours * 60)).toString().length > 1
-  //   ? duration - (hours * 60)
-  //   : `0${duration - (hours * 60)}`
-
-  // return `${hours}:${mins}:00`
   const timeInHour = Math.floor(duration / 60)
   const hours = timeInHour.toString().length > 1
     ? timeInHour
@@ -27,6 +40,5 @@ export const calcDuration = (duration) => {
   const mins = (duration - (timeInHour * 60)).toString().length > 1
     ? duration - (timeInHour * 60)
     : `0${duration - (timeInHour * 60)}`
-  console.log(timeInHour)
   return `${hours}:${mins}:00`
 }

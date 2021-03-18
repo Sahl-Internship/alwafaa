@@ -5,7 +5,7 @@ export const handleGetCourses = () => {
 }
 
 export const handleCourseReview = (review) => {
-  return axios.post('http://endpoints.alwafaa.localhost/course/review', review)
+  return axios.post('http://endpoints.alwafaa.localhost/join-course/review', review)
 }
 
 export const handleCoursePage = (courseId) => {
