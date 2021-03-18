@@ -66,8 +66,13 @@ export default {
       }
 
       const { token, ...user } = response.data.profile
+      const userInfo = {
+        ...user,
+        image: user.image ? user.image : '/images/logo.png'
+      }
+
       localStorage.setItem('token', token)
-      localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem('user', JSON.stringify(userInfo))
       context.commit('loginState', {
         token,
         user

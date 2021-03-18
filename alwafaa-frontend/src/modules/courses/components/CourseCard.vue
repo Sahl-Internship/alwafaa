@@ -89,8 +89,12 @@
       <div class="col-12 row justify-center q-mt-sm">
         <div
           class="text-grey-4"
-          :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
-        >{{ course.rate.rate_average }}</div>
+          :class="{
+            'text-subtitle1': !$q.screen.lt.md,
+            'text-caption' : $q.screen.lt.md,
+            'text-grey-3': course.rate.rate_average === 0
+          }"
+        >{{ getRate }}</div>
 
         <star-rating
           read-only
@@ -209,6 +213,19 @@ export default {
     },
     courseDuration () {
       return calcDuration(this.course.duration)
+    },
+    getRate () {
+      const rate = this.course.rate.rate_average
+      console.log(rate)
+      if (rate === 0) {
+        return '5/5'
+      } else if (!Number.isInteger(rate)) {
+        const rateAsString = rate.toString().split('.')
+        const floatNum = rateAsString[1].toString()[0]
+
+        return floatNum < 5 ? `${rateAsString[0]}.0` : `${rateAsString[0]}.5`
+      }
+      return `${rate}.0`
     }
   }
 }
@@ -251,14 +268,6 @@ export default {
     width: 30.75%;
   }
 }
-
-// .course-title {
-//   &.q-btn {
-//     &::v-deep {
-//       .
-//     }
-//   }
-// }
 
 .q-img__content > div {
   &.cover-text {
