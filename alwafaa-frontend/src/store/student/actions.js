@@ -84,7 +84,7 @@ export default {
     }
   },
 
-  async joinCourse ({ rootGetters }, courseId) {
+  async joinCourse ({ rootGetters, dispatch }, courseId) {
     Loading.show()
 
     try {
@@ -94,6 +94,7 @@ export default {
       }
 
       const response = await handleJoinCourse(data)
+      dispatch('getProfileData')
       if (response.data.status !== 1) {
         console.log(response)
         throw new Error()

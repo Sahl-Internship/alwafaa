@@ -184,6 +184,9 @@ export default {
       }
       this.$store.dispatch('courses/courseReview', comment)
     }
+  },
+  mounted () {
+    this.$store.dispatch('student/getProfileData')
   }
 }
 </script>

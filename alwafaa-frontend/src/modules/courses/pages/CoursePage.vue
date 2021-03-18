@@ -25,7 +25,7 @@
               <q-avatar>
                 <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
               </q-avatar>
-              <div class="text-h6 text-white q-ml-sm" >د/ احمد شعلان</div>
+              <div class="text-h6 text-white q-ml-sm" >{{courseData.teacher.name}}</div>
             </div>
 
             <div class="row items-center">
@@ -96,7 +96,7 @@
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 course-description__section bg-grey-1 q-pa-xl" >
             <div class="col-11 requirment">
               <div class="text-h6 q-ml-xs">متطلبات الدورة</div>
-              <div class="text-grey-4 text-body1 q-mb-lg" style="padding-right:22px;" v-html="courseData.requirement">
+              <div class="text-grey-4 text-body1 q-mb-lg" style="margin-right:-17px;" v-html="courseData.requirement">
               </div>
               <div class="text-h6">وصف الدورة</div>
               <div class="text-body1 text-grey-4" v-html="courseData.description">

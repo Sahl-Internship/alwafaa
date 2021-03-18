@@ -2,8 +2,8 @@
   <div class="row col-11 teacher">
     <div class="text-h6 col-8 q-mt-xl q-mb-md"> عن المعلم</div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 about-teacher bg-grey-1">
-      <div class="text-h6 q-ml-lg q-mt-lg">محمد سليمان</div>
-      <div class="text-body1 q-ml-lg q-my-sm text-grey-4">معلم اللغة العربية الفصحى و العامية المصرية</div>
+      <div class="text-h6 q-ml-lg q-mt-lg">{{courseData.teacher.name}}</div>
+      <div class="text-body1 q-ml-lg q-my-sm text-grey-4">{{courseData.teacher.sub_title}}</div>
       <div class="row col-10">
         <div class="col-2 q-ml-md"><img src="/images/home-imgs/shalaan.jpg" class="teacher-img"></div>
         <div class="col-9 row teacher-classes" style="margin-top:-10px;">
@@ -61,12 +61,7 @@
         </div>
       </div>
       <div class="text-body1 q-ml-lg q-mt-lg text-grey-5 toggle-show1" :class="{'toggle-show1-no-gradient':isShowTeacherInfo}">
-        مدرس اللغة العربية و العاميةالمصرية لدي منهج و كتب جيدة لتعليم اللغة العربية لغير الناطقين بها في<br> وقت قصير<br>
-        و مناسب لجميع المستويات سواء كنت مبتدأ و متقدم و أدَرس أيضا بعض علوم اللغة العربية مثل النحو
-        <span class="text-body1 hide" :class="{'show': isShowTeacherInfo}">
-        مدرس اللغة العربية و العاميةالمصرية لدي منهج و كتب جيدة لتعليم اللغة العربية لغير الناطقين بها في <br> وقت قصير<br>
-        و مناسب لجميع المستويات سواء كنت مبتدأ و متقدم و أدَرس أيضا بعض علوم اللغة العربية مثل النحو
-        </span>
+        {{courseData.teacher.bio}}
       </div>
       <div
         class="text-body1 col-12 text-center q-my-lg show-more_description text-bold"
