@@ -182,7 +182,7 @@ export default {
         'كورس د/حازم شومان'
       ],
       allCourses: [],
-      joinedCourses: [],
+      // joinedCourses: [],
       joinedFilteredCourses: [],
       allFilteredCourses: [],
       searchText: ''
@@ -197,6 +197,10 @@ export default {
       }
 
       return value
+    },
+    joinedCourses () {
+      const { joinedCourses } = this.$store.getters['student/profileData']
+      return joinedCourses
     }
   },
   methods: {
@@ -212,14 +216,10 @@ export default {
       }
     },
     getJoinedCourses () {
-      const joinedCourses = this.$store.getters['student/joinedCourses']
+      const { joinedCourses } = this.$store.getters['student/profileData']
 
-      if (joinedCourses.length) {
-        this.joinedCourses = joinedCourses
-      } else {
-        this.$store.dispatch('student/getJoinedCourses').then(() => {
-          this.joinedCourses = this.$store.getters['student/joinedCourses']
-        })
+      if (!joinedCourses.length) {
+        this.$store.dispatch('student/getUserData')
       }
     },
     filterCourses () {

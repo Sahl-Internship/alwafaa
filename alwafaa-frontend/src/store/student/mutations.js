@@ -1,8 +1,13 @@
 export default {
+  getUserData (state, data) {
+    state.studentData = data
+  },
   toggleEditDialog (state) {
     state.editMode = !state.editMode
   },
-  geJoinedtCourses (state, data) {
-    state.joinedCourses = data
+  getProfileData (state, data) {
+    state.studentData = data.data
+    state.joinedCourses = data.courses
+    state.activities = data.reviews
   }
 }

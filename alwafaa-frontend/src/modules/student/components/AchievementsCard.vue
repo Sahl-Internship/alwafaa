@@ -106,18 +106,24 @@ export default {
   },
   computed: {
     joinedCoursesNum () {
-      const joinedCourses = this.$store.getters['student/joinedCourses']
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      const { joinedCourses } = this.$store.getters['student/profileData']
+
+      this.calcCompletedCoursesNum(joinedCourses)
+      this.calcUncompletedCoursesNum(joinedCourses)
+
+      return joinedCourses.length
+    }
+  },
+  methods: {
+    calcCompletedCoursesNum (joinedCourses) {
       this.completedCoursesNum = joinedCourses.filter(
         course => course.status === 2
       ).length
-
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+    },
+    calcUncompletedCoursesNum (joinedCourses) {
       this.unCompletedCoursesNum = joinedCourses.filter(
         course => course.status !== 2
       ).length
-
-      return joinedCourses.length
     }
   }
 }
