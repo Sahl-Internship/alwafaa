@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="text-h6 col-8 q-mt-sm q-mb-md q-ml-lg student-comments">ملاحظات الطلاب للدورة</div>
-
+<!-- ================================================================================================ -->
       <div
         v-for="x in 3"
         :key='x'
@@ -176,11 +176,12 @@ export default {
       }
     },
     sendReview () {
-      const courseId = this.$route.params.id
+      // eslint-disable-next-line camelcase
+      const course_id = parseInt(this.$route.params.id)
       const comment = {
         rate: this.rate,
         review: this.review,
-        courseId
+        course_id
       }
       this.$store.dispatch('courses/courseReview', comment)
     }

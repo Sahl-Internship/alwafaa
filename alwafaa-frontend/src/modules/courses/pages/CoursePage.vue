@@ -368,7 +368,7 @@ export default {
       return this.$store.getters['auth/isAuthenticated']
     },
     buttonTitleState () {
-      return this.isAuthed ? 'اكمال الدورة' : 'الاشتراك في الدورة'
+      return this.isAuthed ? 'الاشتراك في الدورة' : 'الاشتراك في الدورة'
     },
     sectionImgSrc () {
       if (this.courseData.section_id === 5) {

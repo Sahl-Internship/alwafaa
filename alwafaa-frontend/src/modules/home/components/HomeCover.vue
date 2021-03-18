@@ -62,6 +62,7 @@
             :label="$t('homeCover.startNow')"
             text-color='dark'
             class="q-px-lg q-mr-auto q-ml-auto q-mt-lg start-btn display-block"
+            to='/courses/all'
           />
         </div>
       </div>
