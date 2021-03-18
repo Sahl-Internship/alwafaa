@@ -17,6 +17,11 @@ export default {
     more: 'عرض المزيد',
     from: 'من'
   },
+  courseNotifications: {
+    reviewSuccess: 'تم ارسال التقييم بنجاح',
+    reviewError: 'خطأ خلال الارسال, حاول مرة اخري',
+    notvalid: ' غير صحيح'
+  },
   months: {
     Jan: 'يناير',
     Feb: 'فبراير',

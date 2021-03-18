@@ -54,7 +54,7 @@
             {{ student.firstname }} {{ student.lastname }}
           </q-item-label>
           <q-item-label caption>
-            {{ $t('student.achievements.date') }}
+            {{ getDate(activity.created_at) }}
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -64,10 +64,6 @@
         :class="$q.screen.lt.md ? '' : 'q-mt-xs' "
       >
         <div class="col-12 row q-gutter-sm rate">
-          <!-- <img src="/images/Path 8203.png" />
-          <img src="/images/Path 8203.png" />
-          <img src="/images/Path 8203.png" />
-          <img src="/images/Path 8204.png" /> -->
           <star-rating
             read-only
             :increment=0.5
@@ -78,7 +74,7 @@
             :show-rating=false
             :rtl=true
           ></star-rating>
-          <div class="text-subtitle1">{{ activity.rate }}</div>
+          <div class="text-subtitle1">{{ getRate }}</div>
         </div>
 
         <div
@@ -95,9 +91,7 @@
           <div class="text-subtitle1 text-grey-3">
             <!-- <q-icon name="mdi-web" /> -->
             <q-img
-              :src="activity.course.section === 'اللغة العربية'
-                ? '/images/Path 8205 22.png'
-                : '/images/Group 553723.png'"
+              :src="sectionSrcGrey"
               width='15px'
               class="q-mr-xs"
             />
@@ -135,12 +129,16 @@
           class="row q-mt-xs"
           :class="$q.screen.lt.md ? 'q-gutter-x-sm' : 'q-gutter-x-lg'"
         >
-          <div class="text-subtitle1">
-            {{ $t('student.activities.today') }}: 08:25
+          <div v-if="checkDate" class="text-subtitle1">
+            {{ $t('student.activities.today') }}: {{ getTime }}
+          </div>
+
+          <div v-else class="text-subtitle1">
+            {{ getDate(activity.end_at) }}
           </div>
 
           <div class="text-subtitle1">
-            <img src="/images/Group 4877.png" width="20px" />
+            <img :src="sectionSrcWhite" width="20px" />
             <span class="achievement-course q-ml-xs">
               {{ activity.section }}
             </span>
@@ -163,7 +161,7 @@
         />
         <div class="text-subtitle1 text-grey-3">{{ $t('student.activities.finish') }}:</div>
         <div
-          class="text-grey-5"
+          class="text-grey-5 ellipsis course-title"
           :class="$q.screen.lt.md ? 'text-subtitle1' : 'text-h6'"
         >{{ activity.title }}</div>
       </q-card-section>
@@ -173,6 +171,7 @@
 
 <script>
 import StarRating from 'vue-star-rating'
+import { dateFormat } from 'src/utils/global.js'
 
 export default {
   components: { StarRating },
@@ -187,6 +186,49 @@ export default {
     },
     checkDirection () {
       return this.$q.lang.rtl
+    },
+    checkDate () {
+      const date = this.activity.end_at * 1000
+      const today = new Date().getTime()
+
+      return date === today
+    },
+    getTime () {
+      const date = new Date(this.activity.end_at * 1000)
+      const hours = date.getHours().length > 1
+        ? date.getHours()
+        : `0${date.getHours()}`
+
+      const minutes = date.getMinutes().length > 1
+        ? date.getMinutes()
+        : `0${date.getMinutes()}`
+
+      console.log(this.activity.end_at)
+
+      return `${hours}:${minutes}`
+    },
+    sectionSrcWhite () {
+      if (this.activity.section === 'القرآن الكريم') {
+        return '/images/home-imgs/quran-icon2.png'
+      }
+
+      return '/images/home-imgs/global.png'
+    },
+    sectionSrcGrey () {
+      if (this.activity.course.section === 'القرآن الكريم') {
+        return '/images/Group 553723.png'
+      }
+
+      return '/images/Path 8205 22.png'
+    },
+    getRate () {
+      const rate = this.activity.rate
+      return Number.isInteger(rate) ? `${rate}.0` : rate
+    }
+  },
+  methods: {
+    getDate (timestampDate) {
+      return dateFormat(timestampDate)
     }
   }
 }
@@ -214,5 +256,9 @@ export default {
 .pin-icon {
   -ms-transform: rotate(-40deg); /* IE 9 */
   transform: rotate(-40deg);
+}
+
+.course-title {
+  padding-right: 170px;
 }
 </style>

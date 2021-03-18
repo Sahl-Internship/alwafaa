@@ -56,7 +56,12 @@
                   </q-item-section>
                 </q-item>
 
-                <q-item dense clickable v-close-popup class="bg-red-1 q-mb-xs">
+                <q-item
+                  dense clickable
+                  v-close-popup
+                  class="bg-red-1 q-mb-xs"
+                  @click="removeCover"
+                >
                   <q-item-section side class="q-pr-sm">
                     <q-icon name="mdi-delete" color="red" size="xs" />
                   </q-item-section>
@@ -128,8 +133,8 @@
                     'text-caption': $q.screen.lt.sm,
                   }"
                 >
-                  <flag iso="eg" class="rounded-icon q-mr-xs" />
-                  {{ student.country }}, {{ student.city }}
+                  <flag v-if="student.country" iso="eg" class="rounded-icon q-mr-xs" />
+                  {{ student.country }} {{ student.city }}
                 </div>
               </div>
             </div>
@@ -247,39 +252,6 @@ export default {
   data () {
     return {
       slide: 1
-      // activities: [
-      //   {
-      //     type: 'comment',
-      //     comment: 'كورس اكثر من رائع. استفدت منه كثيرا. شكرا علي هذا المجهود',
-      //     section: 'اللغة العربية',
-      //     course: 'اساسيات نحو اللغة العربية',
-      //     teacher: 'د/صلاح عبدالله',
-      //     rate: 4
-      //   },
-      //   {
-      //     type: 'comment',
-      //     comment: 'شكرا علي هذا المجهود',
-      //     section: 'القرآن الكريم',
-      //     course: 'دورة النطق الصحيح للآيات',
-      //     teacher: 'د/محمد العريفي',
-      //     rate: 4.5
-      //   },
-      //   {
-      //     type: 'achieve',
-      //     comment: 'شكرا علي هذا المجهود',
-      //     section: 'القرآن الكريم',
-      //     course: 'تمهيد لتعلم القواعد النحوية',
-      //     teacher: 'د/محمد العريفي'
-      //   },
-      //   {
-      //     type: 'comment',
-      //     comment: 'كورس اكثر من رائع. استفدت منه كثيرا.',
-      //     section: 'اللغة العربية',
-      //     course: 'اساسيات نحو اللغة العربية',
-      //     teacher: 'د/محمد العريفي',
-      //     rate: 3
-      //   }
-      // ]
     }
   },
   computed: {
@@ -318,6 +290,9 @@ export default {
     },
     toggleSettingDialog () {
       this.$store.commit('student/toggleEditDialog')
+    },
+    removeCover () {
+      this.$store.dispatch('student/editProfileAndCoverImg', { cover: '' })
     },
     getProfileData () {
       const { joinedCourses } = this.$store.getters['student/profileData']

@@ -6,7 +6,7 @@ import {
   handleEditData,
   handleJoinCourse,
   handleEditImgs,
-  handleGetJoindCourses
+  handleGetProfileData
 } from 'src/services/studentApi'
 
 export default {
@@ -84,7 +84,7 @@ export default {
     }
   },
 
-  async joinCourse ({ rootGetters }, courseId) {
+  async joinCourse ({ rootGetters, dispatch }, courseId) {
     Loading.show()
 
     try {
@@ -94,11 +94,13 @@ export default {
       }
 
       const response = await handleJoinCourse(data)
+      dispatch('getProfileData')
       if (response.data.status !== 1) {
         console.log(response)
         throw new Error()
       }
 
+      dispatch('getProfileData')
       Loading.hide()
 
       Notify.create({
@@ -119,7 +121,7 @@ export default {
     Loading.show()
 
     try {
-      const response = await handleGetJoindCourses()
+      const response = await handleGetProfileData()
       console.log('joined', response)
       if (response.statusText !== 'OK') {
         const err = new Error('error')

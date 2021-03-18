@@ -1,5 +1,10 @@
 export default () => {
   return {
-    courses: []
+    token: localStorage.getItem('token'),
+    courses: [],
+    course: {},
+    rate: '',
+    review: '',
+    rank: ''
   }
 }

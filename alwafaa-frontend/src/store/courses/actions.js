@@ -1,6 +1,10 @@
 import { Loading } from 'quasar'
 
-import { handleGetCourses } from 'src/services/coursesApi'
+import {
+  handleCoursePage,
+  handleCourseReview,
+  handleGetCourses
+} from 'src/services/coursesApi'
 
 export default {
   async getCourses ({ commit }) {
@@ -22,5 +26,21 @@ export default {
       console.log(error)
       return false
     }
+  },
+  async courseReview (context, review) {
+    try {
+      const response = await handleCourseReview(review)
+      console.log(response)
+      console.log(review)
+    } catch (error) {
+      console.log(error)
+      console.log('review', review)
+    }
+    context.commit('courseReview', review)
+  },
+  async coursePage (context, courseId) {
+    const response = await handleCoursePage(courseId)
+    console.log(response.data)
+    context.commit('getCoursePage', response.data)
   }
 }
