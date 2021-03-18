@@ -24,7 +24,7 @@ use yii\db\ActiveRecord;
  * @property integer $gender
  * @property string $country
  * @property string $city
- * @property integer $birthdate
+ * @property int $birthdate
  * @property string $sub_title
  * @property string $bio
  * @property string $cover
@@ -88,7 +88,7 @@ class UserProfile extends ActiveRecord
             [['picture','cover'], 'safe'],
             ['bio', 'safe'],
             [['phone','phone_key'], 'number'],
-            ['birthdate', 'integer'],
+            [['birthdate'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
         ];
     }
 

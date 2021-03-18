@@ -98,7 +98,7 @@ class Course extends \yii\db\ActiveRecord
             [['start_at', 'end_at', 'section_id', 'title', 'description','teacher_id'], 'required'],
             [['section_id', 'teacher_id'], 'integer'],
             [['title', 'sub_title', 'zoom_link'], 'string', 'max' => 255],
-            [['description','requirement','target_student','targeted_skills'], 'string', 'max' => 1024],
+            [['description','requirement','target_student','targeted_skills'], 'string', 'max' => 5000],
             [['start_at','end_at'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => Section::className(), 'targetAttribute' => ['section_id' => 'id']],
             [['teacher_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['teacher_id' => 'id']],
