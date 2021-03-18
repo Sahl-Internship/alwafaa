@@ -76,7 +76,7 @@ class SiteController extends \yii\web\Controller
         $ownCourses = User::find()->getTeacherPortfolio(127);
 //        $days = Course::find()->getDaysNumber(26);
 
-
+        $classes = Course::find()->getClasses(26);
 
 
         return $this->render('test', [

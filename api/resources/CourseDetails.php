@@ -81,8 +81,9 @@ class CourseDetails extends \common\models\Course
                 return Course::find()->getDaysNumber($model->id);
             },
             'classes' => function ($model) {
-                $ids = Course::find()->getClasses($model->id);
-                return Classes::find()->andWhere(['in', 'id', $ids])->all();
+//                $ids = Course::find()->getClasses($model->id);
+//                return Classes::find()->andWhere(['in', 'id', $ids])->all();
+              return  Course::find()->getClasses($model->id);
             },
             'teacher' => function ($model) {
                 $teacher_portfolio = User::find()->getTeacherPortfolio($model->teacher->id);

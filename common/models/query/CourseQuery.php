@@ -81,7 +81,7 @@ class CourseQuery extends \yii\db\ActiveQuery
         $days = []; //carry days of classes per week
         $schedule = [];//carry days of classes over all the course period
         $totalTime = 0;//carry duration of classes over all the course period by minutes
-        $start_date = date("d-m-Y", strtotime('-1 day',$course->start_at ));//subtracting 1 day because $day_date will search from next day
+        $start_date = date("d-m-Y", strtotime('-1 day', $course->start_at));//subtracting 1 day because $day_date will search from next day
         $end_date = date("d-m-Y", $course->end_at);
         foreach ($classDays as $classDay) {
             //calculate class time
@@ -130,15 +130,17 @@ class CourseQuery extends \yii\db\ActiveQuery
         }
 
     }
+
     public function getReview($id)
     {
-        $reviews = CourseReview::find()->andWhere('course_id=:id',['id'=>$id])->all();
+        $reviews = CourseReview::find()->andWhere('course_id=:id', ['id' => $id])->all();
         $review_ids = [];
         foreach ($reviews as $review) {
-            array_push($review_ids,$review->id);
+            array_push($review_ids, $review->id);
         }
         return $review_ids;
     }
+
     public function getDayDuration($id)
     {
         $classes = CourseClasses::findBySql("
@@ -215,18 +217,36 @@ class CourseQuery extends \yii\db\ActiveQuery
     public function getDaysNumber($id)
     {
         $course = Course::find()->andWhere('id=:id', ['id' => $id])->one();
-        $days =  ($course->end_at-$course->start_at);
-        $days_number = round($days / (60 * 60 * 24))+1;//add 1 because we want days number not difference
+        $days = ($course->end_at - $course->start_at);
+        $days_number = round($days / (60 * 60 * 24)) + 1;//add 1 because we want days number not difference
         return $days_number;
     }
 
     public function getClasses($id)
     {
         $classes = CourseClasses::find()->andWhere('course_id=:id', ['id' => $id])->all();
-        $class_ids = [];
-        foreach ($classes as $class) {
-            array_push($class_ids,$class->id);
+        $classes_dates = $this->getScheduleAndDuration($id);
+        $dates = $classes_dates['classes_number'];
+        $class_array = [];
+        sort($dates);
+        foreach ($dates as $date) {
+            foreach ($classes as $class) {
+                if (date('w', $date) == $class->day_id){
+                    $class_details = [
+                        'date'=>$date,
+                        'day_id'=>$class->day_id,
+                        'from'=>$class->from,
+                        'to'=>$class->to,
+                    ];
+//                    echo date('d-m-Y W w', $date) . " from " . date("h:i A", $class->from) . " to " . date("h:i A", $class->to) . "<br>";
+                    array_push($class_array,$class_details);
+                }
+            }
         }
-        return $class_ids;
+//        $class_ids = [];
+//        foreach ($classes as $class) {
+//            array_push($class_ids, $class->id);
+//        }
+        return $class_array;
     }
 }
