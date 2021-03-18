@@ -133,8 +133,8 @@
                     'text-caption': $q.screen.lt.sm,
                   }"
                 >
-                  <flag iso="eg" class="rounded-icon q-mr-xs" />
-                  {{ student.country }}, {{ student.city }}
+                  <flag v-if="student.country" iso="eg" class="rounded-icon q-mr-xs" />
+                  {{ student.country }} {{ student.city }}
                 </div>
               </div>
             </div>
