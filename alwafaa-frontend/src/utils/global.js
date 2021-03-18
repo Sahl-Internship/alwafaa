@@ -6,9 +6,11 @@ export const dateFormat = (timestamp) => {
   }
 
   const date = timestamp * 1000
-  const day = new Date(date).getDay()
+  const day = new Date(date).getDate()
+
   const month = new Date(date)
     .toLocaleString('default', { month: 'short' })
+
   const year = new Date(date).getFullYear()
 
   return `${day}  ${i18n.t(`months.${month}`)}  ${year}`

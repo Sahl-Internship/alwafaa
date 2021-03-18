@@ -42,7 +42,9 @@
       </div>
     </q-card-section>
 
-    <q-card-section class="row justify-center q-px-none q-mx-none">
+    <q-card-section
+      class="row justify-center items-center q-px-none q-mx-none q-py-none"
+    >
       <div class="col-xs-12 col-sm-8 col-md-4">
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="public">
@@ -54,7 +56,7 @@
               >
                 <ValidationProvider
                   name="firstname"
-                  class="col-xs-6 col-sm-6 col-md-6 q-pr-xs q-pb-xs"
+                  class="col-xs-6 col-sm-6 col-md-6 q-pr-xs"
                   rules="required"
                   v-slot="{ errors, invalid, validated }"
                 >
@@ -65,6 +67,7 @@
                     :label="$t('formFields.firstname')"
                     prependIconName="mdi-account"
                     bg-color='grey-1'
+                    :class="errors[0] ? 'q-pb-lg' : 'q-pb-md'"
                     :error="invalid && validated"
                     :error-message="errors[0]"
                   />
@@ -72,7 +75,7 @@
 
                 <ValidationProvider
                   name="lastname"
-                  class="col-xs-6 col-sm-6 col-md-6 q-pb-xs"
+                  class="col-xs-6 col-sm-6 col-md-6"
                   rules="required"
                   v-slot="{ errors, invalid, validated }"
                 >
@@ -83,6 +86,7 @@
                     :label="$t('formFields.lastname')"
                     prependIconName="mdi-account"
                     bg-color='grey-1'
+                    :class="errors[0] ? 'q-pb-lg' : 'q-pb-md'"
                     :error="invalid && validated"
                     :error-message="errors[0]"
                   />
@@ -95,7 +99,7 @@
                   :label="$t('formFields.birthdate')"
                   mask="date"
                   bg-color="grey-1"
-                  class="col-12"
+                  class="col-12 q-pb-md"
                 >
                   <template v-slot:prepend>
                     <q-icon name="event" class="cursor-pointer" size="sm" color="grey-5">
@@ -125,11 +129,11 @@
                   :label="$t('formFields.subtitle')"
                   prependIconName="mdi-briefcase"
                   bg-color='grey-1'
-                  class="col-12"
+                  class="col-12 q-pb-md"
                 />
 
                 <div
-                  class="col-12 row justify-between q-mt-md q-pa-xs hobbies-box"
+                  class="col-12 row justify-between q-pa-xs hobbies-box"
                 >
                   <div
                     class="text-h5 text-center q-mx-xs hash-icon"
