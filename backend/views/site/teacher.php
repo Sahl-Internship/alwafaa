@@ -13,7 +13,7 @@
 /** @var array $countriesData */
 /** @var array $bgColors */
 
-$this->title = 'TimeLine';
+//$this->title = 'TimeLine';
 ?>
     <div class="site-index">
         <!-- Content Row -->

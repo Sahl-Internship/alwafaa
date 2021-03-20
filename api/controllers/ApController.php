@@ -53,6 +53,7 @@ class ApController extends Controller
             'http://localhost:4000',
             'http://localhost:4001',
             'https://jquery.com',
+            'http://backend.alwafaa.localhost',
 //            'http://booking.yaschools.localhost',
 //            "http://booking.yaschools.localhost",
 //            'http://endpoints.yaschools.localhost',

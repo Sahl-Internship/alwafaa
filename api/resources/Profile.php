@@ -31,7 +31,8 @@ class Profile extends \common\models\User
                 return $model->userProfile->sub_title;
             },
             'birthdate'=>function($model){
-                return $model->userProfile->birthdate;
+//                return $model->userProfile->birthdate;
+                return 1354511;
             },
             'phone_key'=>function($model){
                 return $model->userProfile->phone_key;

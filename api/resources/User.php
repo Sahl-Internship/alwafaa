@@ -88,6 +88,6 @@ class User extends \common\models\User
     public function setRole($id)
     {
         $auth = Yii::$app->authManager;
-        $auth->assign($auth->getRole(\common\models\User::ROLE_USER), $id);
+        $auth->assign($auth->getRole(\common\models\User::ROLE_STUDENT), $id);
     }
 }

@@ -23,6 +23,8 @@ class StudentForm extends Model
     public $middlename;
     public $lastname;
     public $phone;
+    public $phone_key;
+    public $sub_title;
     public $locale;
     public $gender;
     public $country;
@@ -37,7 +39,7 @@ class StudentForm extends Model
             [['firstname','lastname','email','password','phone','gender'],'required'],
 //            [['username'],'required'],
 
-            [['firstname','middlename','lastname'],'string','min'=>2,'max'=>15],
+            [['firstname','middlename','lastname','sub_title'],'string','min'=>2,'max'=>15],
 
             ['email','filter','filter'=>'trim'],
             ['email', 'email'],
@@ -51,7 +53,7 @@ class StudentForm extends Model
             [['country','city'], 'string'],
 
 //            ['phone', 'match', 'pattern' => '/^(01)[0-9]{9}$/'],
-            ['phone', 'number'],
+            [['phone','phone_key'], 'number'],
 
             ['birthdate', 'integer'],
 
@@ -68,6 +70,8 @@ class StudentForm extends Model
             'middlename' => Yii::t('common', 'middlename'),
             'lastname' => Yii::t('common', 'Lastname'),
             'phone' => Yii::t('common', 'Mobile'),
+            'phone_key' => Yii::t('common', 'Country Code'),
+            'sub_title' => Yii::t('common', 'Job Title'),
             'country' => Yii::t('common', 'Country'),
             'gender' => Yii::t('common', 'Gender'),
             'birthdate' => Yii::t('common', 'Birth Date'),
@@ -94,7 +98,9 @@ class StudentForm extends Model
             $user->userProfile->firstname = $this->firstname;
             $user->userProfile->middlename = $this->middlename ?? "";
             $user->userProfile->lastname = $this->lastname;
+            $user->userProfile->phone_key = $this->phone_key;
             $user->userProfile->phone = $this->phone;
+            $user->userProfile->sub_title = $this->sub_title;
             $user->userProfile->locale = 'ar-AR';
             $user->userProfile->gender = $this->gender;
             $user->userProfile->country = $this->country;
