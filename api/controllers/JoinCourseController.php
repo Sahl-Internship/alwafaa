@@ -8,6 +8,7 @@ namespace api\controllers;
 use api\resources\CourseDetails;
 use common\models\CourseReview;
 use common\models\JoinCourses;
+use Yii;
 
 class JoinCourseController extends ApController
 {
@@ -16,8 +17,8 @@ class JoinCourseController extends ApController
 
     public function actionReview(){
         $params = \Yii::$app->request->post();
+        $params['created_by'] = Yii::$app->user->id;
         $review = new CourseReview();
-
         $review->load(['CourseReview' => $params]);
         if ($review->validate() and $registerUser = $review->save()) {
             return ['status'=>1, 'message'=>'Successfully Rated'];
@@ -31,6 +32,7 @@ class JoinCourseController extends ApController
     public function actionJoinCourse()
     {
         $params = \Yii::$app->request->post();
+        $params['user_id'] = Yii::$app->user->id;
         $join = new JoinCourses();
         $join->load(['JoinCourses'=>$params]);
         if ($join->validate() and  $join->save()) {
