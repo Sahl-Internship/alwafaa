@@ -49,7 +49,8 @@
             >
               <ValidationProvider
                 name="firstname"
-                class="col-xs-12 col-sm-6 col-md-6 q-pr-xs q-pb-xs"
+                class="col-xs-12 col-sm-6 col-md-6 q-pb-xs"
+                :class="!$q.screen.lt.sm ? 'q-pr-xs' : ''"
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
@@ -80,8 +81,25 @@
               </ValidationProvider>
 
               <ValidationProvider
+                name="subtitle"
+                class="col-xs-12 col-sm-6 col-md-6 q-pb-xs"
+                :class="!$q.screen.lt.sm ? 'q-pr-xs' : ''"
+                rules="required"
+                v-slot="{ errors, invalid, validated }"
+              >
+                <g-input
+                  outlined
+                  v-model="subtitle"
+                  :label="$t('formFields.subtitle')"
+                  :error="invalid && validated"
+                  :error-message="errors[0]"
+                  prependIconName="mdi-account"
+                />
+              </ValidationProvider>
+
+              <ValidationProvider
                 name="gender"
-                class="col-12 q-pb-xs"
+                class="col-xs-12 col-sm-6 col-md-6 q-pb-xs"
                 rules="required"
                 v-slot="{ errors, invalid, validated }"
               >
@@ -355,6 +373,7 @@ export default {
       step: 1,
       firstname: '',
       lastname: '',
+      subtitle: '',
       gender: '',
       country: '',
       city: '',
@@ -364,7 +383,6 @@ export default {
       password: '',
       confirmPass: '',
       genderOptions: [i18n.t('signup.female'), i18n.t('signup.male')],
-      // countriesNamesOptions: countriesNames(this.checkLanguage),
       dialCodesOPtions: dialCodes,
       isoCode: ''
     }
@@ -388,11 +406,13 @@ export default {
       const user = {
         firstname: this.firstname,
         lastname: this.lastname,
+        sub_title: this.subtitle,
         gender: this.gender === i18n.t('signup.male') ? '1' : '2',
         country: this.country,
         city: this.city,
         email: this.email,
-        phone: `${this.phoneKey}${this.phoneNumber}`,
+        phone_key: this.phoneKey,
+        phone: this.phoneNumber,
         password: this.password
       }
       this.$store.dispatch('auth/signup', user)

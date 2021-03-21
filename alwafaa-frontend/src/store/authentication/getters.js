@@ -3,7 +3,7 @@ export default {
     return !!state.token
   },
   getUser (state) {
-    return state.user
+    return state.user || JSON.parse(localStorage.getItem('user'))
   },
   getToken (state) {
     return state.token

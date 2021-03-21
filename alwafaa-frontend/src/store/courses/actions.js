@@ -30,6 +30,8 @@ export default {
   async courseReview (context, review) {
     try {
       const response = await handleCourseReview(review)
+      console.log(context)
+      context.dispatch('student/getProfileData', null, { root: true })
       console.log(response)
       console.log(review)
     } catch (error) {
