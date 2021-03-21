@@ -59,7 +59,12 @@ class CourseController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        if(Yii::$app->user->can('administrator') || Yii::$app->user->can('manager')){
+            $view = 'view';
+        }elseif(Yii::$app->user->can('teacher')){
+            $view = '_teacher_view';
+        }
+        return $this->render($view, [
             'model' => $this->findModel($id),
         ]);
     }
@@ -96,6 +101,15 @@ class CourseController extends Controller
      */
     public function actionUpdate($id)
     {
+        if(!Yii::$app->user->can('administrator') || !Yii::$app->user->can('manager')){
+            $courses_id = User::find()->getOwnCoursesIds(Yii::$app->user->id);
+            if(!in_array($id,$courses_id)){
+                throw new \yii\web\HttpException(403, 'You are not allowed to perform this action.');
+            }
+            $view = 'index';
+        }else{
+            $view = 'view';
+        }
         $model = $this->findModel($id);
         $user = new User();
         $teacher = $user->getTeacher();
@@ -106,7 +120,7 @@ class CourseController extends Controller
                 CourseClasses::deleteAll(['course_id'=>$model->id]);
                 $model->classSchedule($model->classes);
             }
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect([$view, 'id' => $model->id]);
         }
         return $this->render('update', [
             'model' => $model,

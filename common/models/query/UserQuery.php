@@ -87,6 +87,16 @@ class UserQuery extends ActiveQuery
 
     }
 
+    public function getOwnCoursesIds($id)
+    {
+        $courses = Course::find()->andWhere('teacher_id=:id',['id'=>$id])->all();
+        $courses_ids = [];
+        foreach ($courses as $course) {
+            array_push($courses_ids,$course->id);
+        }
+        return $courses_ids;
+    }
+
     public function getTeacherClassesAndDuration()
     {
 
