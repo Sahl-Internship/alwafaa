@@ -60,7 +60,7 @@
 
         <q-separator vertical inset style="height: 65%" />
 
-        <div class="col-4 row justify-center text-center">
+        <div class="col-5 row justify-center text-center">
           <div
             class="text-h5 col-12 text-weight-bold text-grey-5 q-mt-sm"
             style="height: 30px"
@@ -82,7 +82,7 @@
 
         <q-separator vertical inset style="height: 65%" />
 
-        <div class="col-4 text-center">
+        <div class="col-3 text-center">
           <q-btn
             flat
             text-color="grey-5"
