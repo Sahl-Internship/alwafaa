@@ -265,8 +265,18 @@ export default {
     },
     activities () {
       const { joinedCourses, activities: reviews } = this.$store.getters['student/profileData']
-      const completedCourses = joinedCourses.filter(course => course.status === 2)
-      return [...reviews, ...completedCourses]
+      const completedCourses = joinedCourses.reduce(function (accum, course) {
+        if (course.status === 2) {
+          return accum.concat([{
+            ...course,
+            created_at: course.end_at
+          }])
+        }
+        return accum
+      }, [])
+
+      const activities = [...reviews, ...completedCourses]
+      return activities.sort((activityA, activityB) => activityB.created_at - activityA.created_at)
     }
   },
   methods: {

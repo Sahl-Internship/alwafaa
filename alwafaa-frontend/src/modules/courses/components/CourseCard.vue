@@ -88,10 +88,11 @@
 
       <div class="col-12 row justify-center q-mt-sm">
         <div
-          class="text-grey-4"
+          class=""
           :class="{
             'text-subtitle1': !$q.screen.lt.md,
-            'text-caption' : $q.screen.lt.md,
+            'text-caption': $q.screen.lt.md,
+            'text-grey-4': course.rate.rate_average !== 0,
             'text-grey-3': course.rate.rate_average === 0
           }"
         >{{ getRate }}</div>
@@ -108,6 +109,7 @@
         ></star-rating>
 
         <div
+          v-if="course.rate.voters"
           class="text-grey-4 q-ml-sm"
           :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
         >({{course.rate.voters}})</div>
@@ -118,7 +120,7 @@
       class="row justify-between items-center rounded-borders bottom-section"
       :class="$q.screen.lt.md ? 'bottom-section-sm q-py-sm' : 'q-px-lg'"
     >
-      <div class="col-2 row items-center no-wrap">
+      <div class="col-3 row items-center no-wrap">
         <img
           src="/images/home-imgs/viewed.png"
           :class="{
@@ -136,7 +138,7 @@
       </div>
 
       <div
-        class="col-5 row items-center no-wrap"
+        class="col-6 row items-center no-wrap"
         :class="isAuthenticated ? 'justify-center' : 'justify-end'"
       >
         <img
@@ -152,7 +154,10 @@
             'text-caption q-ml-xs': $q.screen.lt.md,
             'text-grey-4': true
           }"
-        >{{ courseDuration }}</div>
+        >
+          {{ courseDuration }}
+          <span style="fontSize: 10px">ساعة</span>
+        </div>
       </div>
 
       <div
@@ -216,16 +221,11 @@ export default {
     },
     getRate () {
       const rate = this.course.rate.rate_average
-      console.log(rate)
       if (rate === 0) {
         return '5/5'
-      } else if (!Number.isInteger(rate)) {
-        const rateAsString = rate.toString().split('.')
-        const floatNum = rateAsString[1].toString()[0]
-
-        return floatNum < 5 ? `${rateAsString[0]}.0` : `${rateAsString[0]}.5`
       }
-      return `${rate}.0`
+
+      return rate.toFixed(1)
     }
   }
 }
