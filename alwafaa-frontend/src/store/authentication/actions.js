@@ -68,14 +68,16 @@ export default {
       const { token, ...user } = response.data.profile
       const userInfo = {
         ...user,
-        image: user.image ? user.image : '/images/logo.png'
+        image: user.image === 'http://backend.alwafaa.localhost/img/anonymous.jpg'
+          ? '/images/user.jpg' : user.image
       }
 
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(userInfo))
+
       context.commit('loginState', {
         token,
-        user
+        user: userInfo
       })
 
       this.$router.push({ name: 'home' })

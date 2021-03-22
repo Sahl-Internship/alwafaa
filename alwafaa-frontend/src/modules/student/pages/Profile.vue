@@ -214,6 +214,11 @@
             :activity="activity"
             class="col-11"
           ></activity-card>
+
+          <div
+            v-if="!activities.length"
+            class="text-h5 text-grey-4 q-my-lg"
+          >لا توجد نشاطات بعد</div>
         </div>
       </div>
 
@@ -231,6 +236,29 @@
           class="q-mt-md"
         >
         </uncomplete-course-card>
+
+        <div
+          v-if="!uncompletedCourses.length"
+          class="q-mt-md q-py-lg column text-center bg-grey-1"
+        >
+          <div
+            class="text-h5 text-grey-4"
+          >لا توجد دورات</div>
+
+          <div
+            class="text-h6 text-grey-4"
+          >
+            الاشتراك في دورة
+            <q-btn
+              flat
+              text-color="blue"
+              icon="mdi-plus"
+              size="lg"
+              style="width: 20px"
+              to="/courses/all"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -265,8 +293,18 @@ export default {
     },
     activities () {
       const { joinedCourses, activities: reviews } = this.$store.getters['student/profileData']
-      const completedCourses = joinedCourses.filter(course => course.status === 2)
-      return [...reviews, ...completedCourses]
+      const completedCourses = joinedCourses.reduce(function (accum, course) {
+        if (course.status === 2) {
+          return accum.concat([{
+            ...course,
+            created_at: course.end_at
+          }])
+        }
+        return accum
+      }, [])
+
+      const activities = [...reviews, ...completedCourses]
+      return activities.sort((activityA, activityB) => activityB.created_at - activityA.created_at)
     }
   },
   methods: {

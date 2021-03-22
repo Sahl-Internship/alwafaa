@@ -31,6 +31,19 @@ $config = [
         ],
         'system' => [
             'class' => backend\modules\system\Module::class,
+            'as access' => [
+                'class' => 'yii\filters\AccessControl',
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['Administrator'],
+                    ],
+                    [
+                        'allow' => false,
+                        'roles' => ['teacher'],
+                    ]
+                ]
+            ],
         ],
         'translation' => [
             'class' => backend\modules\translation\Module::class,
@@ -75,6 +88,18 @@ $config = [
                 'roles' => ['?'],
             ],
             [
+                'controllers' => ['timeline-event'],
+                'allow' => true,
+                'roles' => ['administrator'],
+
+            ],
+            [
+                'controllers' => ['timeline-event'],
+                'allow' => false,
+                'roles' => ['teacher'],
+
+            ],
+            [
                 'controllers' => ['user'],
                 'allow' => true,
                 'roles' => ['administrator'],
@@ -84,6 +109,18 @@ $config = [
                 'controllers' => ['user'],
                 'allow' => false,
                 'actions' => ['index', 'create', 'update','view','delete','teacher'],
+                'roles' => ['teacher'],
+            ],
+            [
+                'controllers' => ['course'],
+                'allow' => true,
+                'roles' => ['administrator'],
+
+            ],
+            [
+                'controllers' => ['course'],
+                'allow' => false,
+                'actions' => ['create','view','delete'],
                 'roles' => ['teacher'],
             ],
             [

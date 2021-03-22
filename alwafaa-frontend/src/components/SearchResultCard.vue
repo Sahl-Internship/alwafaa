@@ -51,7 +51,7 @@
                 <div
                   class="text-grey-4"
                   :class="$q.screen.lt.sm ? 'text-sm' : 'text-subtitle1'"
-                >{{ calcDate }}</div>
+                >{{ calcDate(course.created_at) }}</div>
               </div>
             </div>
           </div>
@@ -78,7 +78,7 @@
           :class="$q.screen.lt.sm ? 'justify-center' : 'justify-end'"
         >
           <div
-            v-if="calcDate"
+            v-if="calcDate(course.start_at)"
             class="
               text-center
               q-py-xs
@@ -94,7 +94,7 @@
           >
             {{ courseStatus === 'finished'
               ? $t(`coursesList.${courseStatus}`)
-              : calcDate
+              : calcDate(course.start_at)
             }}
           </div>
 
@@ -136,9 +136,6 @@ export default {
         return 'finished'
       }
       return 'started'
-    },
-    calcDate () {
-      return dateFormat(this.course.start_at)
     }
   },
   methods: {
@@ -146,6 +143,9 @@ export default {
       this.$emit('closeSearchDialog')
       const goToUrl = `/courses/${this.course.id}`
       this.$route.path !== goToUrl && this.$router.push(goToUrl)
+    },
+    calcDate (timestamp) {
+      return dateFormat(timestamp)
     }
   }
 }

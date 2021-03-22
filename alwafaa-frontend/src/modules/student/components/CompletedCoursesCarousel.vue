@@ -1,22 +1,125 @@
 <template>
-  <q-carousel
-    v-model="firstSlide"
-    swipeable
-    animated
-    navigation
-    arrows
-    :height="$q.screen.lt.md ? '280px' : '320px'"
-    control-type="flat"
-    control-color="grey-5"
-    navigation-active-icon="radio_button_unchecked"
-    navigation-active-color="grey-5"
-    class="text-grey-5 rounded-borders relative"
-  >
-    <q-carousel-slide
-      :name="course.id"
+  <div>
+    <q-carousel
+      v-if="completedCourses.length"
+      v-model="firstSlide"
+      swipeable
+      animated
+      navigation
+      arrows
+      :height="$q.screen.lt.md ? '280px' : '320px'"
+      control-type="flat"
+      control-color="grey-5"
+      navigation-active-icon="radio_button_unchecked"
+      navigation-active-color="grey-5"
+      class="text-grey-5 rounded-borders relative"
+    >
+      <q-carousel-slide
+        :name="course.id"
+        class="column no-wrap flex-center q-pa-none"
+        v-for="course in completedCourses"
+        :key="course.id"
+      >
+        <div class="achieve-icon q-pa-md">
+          <img
+            src="/images/Group 5535.png"
+            :class="$q.screen.lt.md ? 'img-sm' : 'img-lg'"
+          />
+        </div>
+
+        <div
+          class="text-center text-weight-bold text-grey-5 ellipsis text-width"
+          :class="$q.screen.lt.md ? 'text-h6' : 'text-h5'"
+        >
+          {{ course.title }}
+        </div>
+
+        <div
+          class="row q-mt-lg q-mb-xl"
+          :class="$q.screen.lt.md ? 'q-gutter-x-sm' : 'q-gutter-x-md'"
+        >
+          <div
+            class="
+              column
+              items-center
+              justify-center
+              bg-grey-1
+              rounded-borders
+              q-gutter-y-xs
+              q-my-none
+              info-box
+            "
+            :class="$q.screen.lt.md? 'info-box-sm' : 'info-box-lg'"
+          >
+            <q-img
+              :src="sectionImgSrc(course.section)"
+              :width="$q.screen.lt.md ? '20px' : '30px'"
+            />
+
+            <div
+              class="text-grey-4"
+              :class="$q.screen.lt.md ? 'text-subtitle2' : 'text-subtitle1 '"
+            >
+              {{ course.section }}
+            </div>
+          </div>
+
+          <div
+            class="
+              column
+              items-center
+              justify-center
+              bg-grey-1
+              rounded-borders
+              q-gutter-y-xs
+              q-my-none
+              info-box
+            "
+            :class="$q.screen.lt.md? 'info-box-sm' : 'info-box-lg'"
+          >
+            <q-img src="/images/date_range-24px.png" :width="$q.screen.lt.md ? '20px' : '30px'" />
+            <div
+              class="text-grey-4"
+              :class="$q.screen.lt.md ? 'text-subtitle2' : 'text-subtitle1 '"
+            >
+              {{ calcDate(course.end_at) }}
+            </div>
+          </div>
+
+          <div
+            class="
+              column
+              items-center
+              justify-center
+              bg-grey-1
+              rounded-borders
+              q-gutter-y-xs
+              q-my-none
+              info-box
+            "
+            :class="$q.screen.lt.md? 'info-box-sm' : 'info-box-lg'"
+          >
+            <q-img
+              :src="course.teacher.avatar"
+              :width="$q.screen.lt.md ? '20px' : '30px'"
+              class="rounded-icon"
+            />
+            <div
+              class="text-grey-4 text-center ellipsis text-width"
+              :class="$q.screen.lt.md ? 'text-subtitle2' : 'text-subtitle1 '"
+            >
+            {{ course.teacher.name }}
+            </div>
+          </div>
+
+        </div>
+      </q-carousel-slide>
+
+    </q-carousel>
+    <div
+      v-else
+      :style="$q.screen.lt.md ? 'height:280px' : 'height:320px'"
       class="column no-wrap flex-center q-pa-none"
-      v-for="course in completedCourses"
-      :key="course.id"
     >
       <div class="achieve-icon q-pa-md">
         <img
@@ -25,94 +128,9 @@
         />
       </div>
 
-      <div
-        class="text-center text-weight-bold text-grey-5 ellipsis text-width"
-        :class="$q.screen.lt.md ? 'text-h6' : 'text-h5'"
-      >
-        {{ course.title }}
-      </div>
-
-      <div
-        class="row q-mt-lg q-mb-xl"
-        :class="$q.screen.lt.md ? 'q-gutter-x-sm' : 'q-gutter-x-md'"
-      >
-        <div
-          class="
-            column
-            items-center
-            justify-center
-            bg-grey-1
-            rounded-borders
-            q-gutter-y-xs
-            q-my-none
-            info-box
-          "
-          :class="$q.screen.lt.md? 'info-box-sm' : 'info-box-lg'"
-        >
-          <q-img
-            :src="sectionImgSrc(course.section)"
-            :width="$q.screen.lt.md ? '20px' : '30px'"
-          />
-
-          <div
-            class="text-grey-4"
-            :class="$q.screen.lt.md ? 'text-subtitle2' : 'text-subtitle1 '"
-          >
-            {{ course.section }}
-          </div>
-        </div>
-
-        <div
-          class="
-            column
-            items-center
-            justify-center
-            bg-grey-1
-            rounded-borders
-            q-gutter-y-xs
-            q-my-none
-            info-box
-          "
-          :class="$q.screen.lt.md? 'info-box-sm' : 'info-box-lg'"
-        >
-          <q-img src="/images/date_range-24px.png" :width="$q.screen.lt.md ? '20px' : '30px'" />
-          <div
-            class="text-grey-4"
-            :class="$q.screen.lt.md ? 'text-subtitle2' : 'text-subtitle1 '"
-          >
-            {{ calcDate(course.end_at) }}
-          </div>
-        </div>
-
-        <div
-          class="
-            column
-            items-center
-            justify-center
-            bg-grey-1
-            rounded-borders
-            q-gutter-y-xs
-            q-my-none
-            info-box
-          "
-          :class="$q.screen.lt.md? 'info-box-sm' : 'info-box-lg'"
-        >
-          <q-img
-            :src="course.teacher.avatar"
-            :width="$q.screen.lt.md ? '20px' : '30px'"
-            class="rounded-icon"
-          />
-          <div
-            class="text-grey-4 text-center ellipsis text-width"
-            :class="$q.screen.lt.md ? 'text-subtitle2' : 'text-subtitle1 '"
-          >
-           {{ course.teacher.name }}
-          </div>
-        </div>
-
-      </div>
-    </q-carousel-slide>
-  </q-carousel>
+      <div class="text-h4 text-grey-4 q-my-lg">لا يوجد</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -185,15 +203,6 @@ export default {
     background: rgba(238, 192, 7, 0.05);
     border-radius: 100px;
 
-    .img-lg {
-      width: 70px;
-      height: 77px;
-    }
-
-    .img-sm {
-      width: 50px;
-      height: 57px;
-    }
   }
 
   .info-box {
@@ -214,5 +223,15 @@ export default {
   .rounded-icon {
     border-radius: 30px;
   }
+}
+
+.img-lg {
+  width: 70px;
+  height: 77px;
+}
+
+.img-sm {
+  width: 50px;
+  height: 57px;
 }
 </style>

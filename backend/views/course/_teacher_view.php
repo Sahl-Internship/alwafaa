@@ -15,6 +15,9 @@ use yii\widgets\DetailView;
 ?>
 <div class="course-view">
     <div class="card">
+        <div class="card-header">
+            <?php echo Html::a(Yii::t('backend','Update'), ['update', 'id' => $model->id], ['class' => 'btn view-btn']) ?>
+        </div>
         <div class="card-body">
             <?php echo DetailView::widget([
                 'model' => $model,

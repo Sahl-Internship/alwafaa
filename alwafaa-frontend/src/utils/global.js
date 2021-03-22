@@ -32,7 +32,7 @@ export const dateFormat = (timestamp) => {
 
 export const calcDuration = (duration) => {
   if (!duration) {
-    return '00:00:00'
+    return '00:00'
   }
 
   const timeInHour = Math.floor(duration / 60)
@@ -42,7 +42,7 @@ export const calcDuration = (duration) => {
   const mins = (duration - (timeInHour * 60)).toString().length > 1
     ? duration - (timeInHour * 60)
     : `0${duration - (timeInHour * 60)}`
-  return `${hours}:${mins}:00`
+  return `${hours}:${mins}`
 }
 
 export const dateFormatz = (timestamp) => {

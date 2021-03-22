@@ -11,22 +11,16 @@
           <q-img :src="student.image" />
         </q-avatar>
 
-        <!-- <q-toolbar-title
+        <q-btn
           v-if="isAuthenticated && !$q.screen.lt.sm"
-          class="text-subtitle1 text-grey-5 q-pr-none"
-        >
-          {{ student.firstname }} {{ student.lastname }}
-        </q-toolbar-title> -->
-          <q-btn
-            v-if="isAuthenticated && !$q.screen.lt.sm"
-            flat
-            dense
-            no-caps
-            :label="student.firstname +' '+ student.lastname"
-            text-color="grey-5"
-            size="20px"
-            to="/student/profile"
-          />
+          flat
+          dense
+          no-caps
+          :label="student.firstname +' '+ student.lastname"
+          text-color="grey-5"
+          size="20px"
+          to="/student/profile"
+        />
 
         <q-btn
           no-caps dense
@@ -46,9 +40,6 @@
                 <q-img :src="student.image" />
               </q-avatar>
 
-              <!-- <div class="text-h6 text-center">
-                {{ student.firstname }} {{ student.lastname }}
-              </div> -->
               <q-btn
                 flat
                 dense
@@ -191,6 +182,7 @@ export default {
   },
   computed: {
     student () {
+      console.log(this.$store.getters['auth/getUser'] || {})
       return this.$store.getters['auth/getUser'] || {}
     },
     isAuthenticated () {

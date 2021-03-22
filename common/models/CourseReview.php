@@ -32,10 +32,6 @@ class CourseReview extends \yii\db\ActiveRecord
     {
         return [
             [
-                'class' => BlameableBehavior::class,
-                'updatedByAttribute' => false
-            ],
-            [
                 'class'=>TimestampBehavior::class,
                 'updatedAtAttribute' => false
             ],
@@ -49,6 +45,7 @@ class CourseReview extends \yii\db\ActiveRecord
     {
         return [
             [['course_id', 'created_by'], 'integer'],
+            [['course_id', 'created_by'],'unique', 'targetAttribute' => ['course_id', 'created_by']],
             [['rate'], 'number'],
             [['review'], 'string', 'max' => 255],
             [['course_id'], 'exist', 'skipOnError' => true, 'targetClass' => Course::className(), 'targetAttribute' => ['course_id' => 'id']],

@@ -39,7 +39,8 @@ return [
             , 'extraPatterns' => [
             'GET data' => 'data',
             'PUT update' => 'update',
-            'Post upload-picture' => 'upload-picture',
+            'POST upload-picture' => 'upload-picture',
+            'POST delete-cover' => 'delete-cover',
             'GET joined-courses' => 'joined-courses',
         ]
             , 'pluralize' => false

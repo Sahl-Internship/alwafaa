@@ -10,6 +10,34 @@ import {
 } from 'src/services/studentApi'
 
 export default {
+  async getProfileData ({ commit }) {
+    Loading.show()
+
+    try {
+      const response = await handleGetProfileData()
+      console.log('joined', response)
+      if (response.statusText !== 'OK') {
+        const err = new Error('error')
+        throw err
+      }
+
+      const profileInfo = {
+        ...response.data,
+        data: {
+          ...response.data.data,
+          image: response.data.data.image === 'http://backend.alwafaa.localhost/img/anonymous.jpg'
+            ? '/images/user.jpg' : response.data.data.image
+        }
+      }
+
+      commit('getProfileData', profileInfo)
+      Loading.hide()
+    } catch (error) {
+      Loading.hide()
+      console.log(error)
+    }
+  },
+
   async getUserData ({ commit }) {
     Loading.show()
 
@@ -22,7 +50,13 @@ export default {
         throw err
       }
 
-      commit('getUserData', response.data)
+      const userInfo = {
+        ...response.data,
+        image: response.data.image === 'http://backend.alwafaa.localhost/img/anonymous.jpg'
+          ? '/images/user.jpg' : response.data.image
+      }
+
+      commit('getUserData', userInfo)
       Loading.hide()
       return true
     } catch (error) {
@@ -117,25 +151,6 @@ export default {
     }
   },
 
-  async getProfileData ({ commit }) {
-    Loading.show()
-
-    try {
-      const response = await handleGetProfileData()
-      console.log('joined', response)
-      if (response.statusText !== 'OK') {
-        const err = new Error('error')
-        throw err
-      }
-
-      commit('getProfileData', response.data)
-      Loading.hide()
-    } catch (error) {
-      Loading.hide()
-      console.log(error)
-    }
-  },
-
   setStudentData ({ commit }, data) {
     const { token, ...user } = data
     const basicUserInfo = {
@@ -143,7 +158,8 @@ export default {
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
-      image: user.image
+      image: user.image === 'http://backend.alwafaa.localhost/img/anonymous.jpg'
+        ? '/images/user.jpg' : user.image
     }
 
     localStorage.setItem('token', token)

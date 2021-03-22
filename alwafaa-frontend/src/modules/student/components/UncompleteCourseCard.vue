@@ -151,7 +151,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.course-title {
+.course-box {
   width: 90%;
 }
 
