@@ -216,7 +216,6 @@ export default {
     },
     getRate () {
       const rate = this.course.rate.rate_average
-      console.log(rate)
       if (rate === 0) {
         return '5/5'
       } else if (!Number.isInteger(rate)) {

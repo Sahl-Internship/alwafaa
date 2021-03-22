@@ -43,8 +43,8 @@
       <div class="text-h6 col-8 q-mt-sm q-mb-md q-ml-lg student-comments">ملاحظات الطلاب للدورة</div>
 <!-- ================================================================================================ -->
       <div
-        v-for="x in 3"
-        :key='x'
+        v-for="comment in courseData.reviews"
+        :key="comment"
         class="row col-10 comment-card  q-py-md q-px-lg q-mx-auto q-mb-sm"
       >
         <div
@@ -61,7 +61,7 @@
           <div
             class="text-h6 row no-wrap"
           >
-            محمد سليمان
+            {{comment.student_name}}
           </div>
           <div
             class="row no-wrap"
@@ -69,7 +69,7 @@
             <star-rating
               read-only
               :increment=0.5
-              :rating=4.5
+              :rating="comment.rate"
               :star-size="$q.screen.lt.md ? 13 : 20"
               :padding="$q.screen.lt.md ? 3 : 5"
               :active-color="['#FFC003']"
@@ -79,15 +79,15 @@
             <div
               class="text-subtitle1 text-grey-3 q-ml-md"
             >
-              12 يناير 2021
+              {{reviewDate(comment.created_at)}}
             </div>
           </div>
           <div
             class="text-body1"
           >
-            دورة رائعة , الكريم من المعلومات الجديدة المفيدة
+            {{comment.review}}
           </div>
-          <div
+          <!-- <div
             class="row q-mt-md"
           >
             <div
@@ -114,7 +114,7 @@
                 thumb_down_off_alt
               </span>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div
@@ -132,13 +132,13 @@
   </div>
 </template>
 <script>
+import { dateFormat } from 'src/utils/global.js'
 import StarRating from 'vue-star-rating'
 export default {
   components: { StarRating },
   data () {
     return {
       isShowComments: false,
-      shownComments: 3,
       thumpUp: false,
       thumpDown: false,
       rate: 0,
@@ -152,22 +152,25 @@ export default {
     },
     userToken () {
       return this.$store.getters['auth/getToken']
+    },
+    courseData () {
+      return this.$store.getters['courses/getCoursePage']
     }
   },
   methods: {
     setRating (rating) {
       this.rate = rating
     },
-    up () {
-      this.rank++
-      this.thumpUp = true
-      this.thumpDown = false
-    },
-    down () {
-      this.rank--
-      this.thumpDown = true
-      this.thumpUp = false
-    },
+    // up () {
+    //   this.rank++
+    //   this.thumpUp = true
+    //   this.thumpDown = false
+    // },
+    // down () {
+    //   this.rank--
+    //   this.thumpDown = true
+    //   this.thumpUp = false
+    // },
     showComments () {
       if (this.shownComments === 12) {
         return false
@@ -184,6 +187,10 @@ export default {
         course_id
       }
       this.$store.dispatch('courses/courseReview', comment)
+    },
+    reviewDate (time) {
+      const date = dateFormat(time)
+      return date
     }
   },
   mounted () {
@@ -236,11 +243,11 @@ export default {
   }
 }
 .toggle-show1{
-    -webkit-mask-image: -webkit-gradient(linear, left top,
+    mask-image: -webkit-gradient(linear, left top,
     left bottom, from(rgba(1,1,1,1)), to(rgba(1,1,1,0)));
 }
 .toggle-show1-no-gradient{
-  -webkit-mask-image: -webkit-gradient(linear, left top,
+  mask-image: -webkit-gradient(linear, left top,
   left bottom, from(rgba(1,1,1,1)), to(rgba(1,1,1,1)));
 }
 .course-classes__timeline{

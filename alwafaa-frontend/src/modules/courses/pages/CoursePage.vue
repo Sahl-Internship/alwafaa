@@ -339,7 +339,6 @@ export default {
   },
   methods: {
     joinCourse () {
-      console.log(this.$router)
       const courseId = this.$route.params.id
       this.$store.dispatch('student/joinCourse', courseId)
     },

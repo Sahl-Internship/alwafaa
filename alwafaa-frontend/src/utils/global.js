@@ -44,3 +44,27 @@ export const calcDuration = (duration) => {
     : `0${duration - (timeInHour * 60)}`
   return `${hours}:${mins}:00`
 }
+
+export const dateFormatz = (timestamp) => {
+  if (!timestamp) {
+    return ''
+  }
+
+  const date = timestamp * 1000
+  const day = new Date(date).getDate()
+
+  const month = new Date(date)
+    .toLocaleString('default', { month: 'short' })
+
+  return `${day}  ${i18n.t(`months.${month}`)}`
+}
+export const dateDay = (timestamp) => {
+  if (!timestamp) {
+    return ''
+  }
+
+  const date = timestamp * 1000
+  const day = new Date(date)
+  var weekday = day.toLocaleString('default', { weekday: 'short' })
+  return `${i18n.t(`days.${weekday}`)}`
+}
