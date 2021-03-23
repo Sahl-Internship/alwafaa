@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div v-if="!joined" class="row">
           <div
             :class="{
               'q-px-sm rounded-borders': true,
@@ -64,6 +64,78 @@
     </q-img>
 
     <q-card-section
+      v-if="joined"
+      class="row justify-between items-center"
+      :class="{
+        'jsection-height-lg q-pa-md': !$q.screen.lt.md,
+        'jsection-height-sm q-px-none': $q.screen.lt.md,
+      }"
+    >
+      <q-btn
+        flat
+        :to="'/courses/'+course.id"
+        class="col-12 course-title"
+        align="left"
+        style="height: 64px"
+      >
+        <div
+          class="text-grey-5 text-left ellipsis-2-lines"
+          :class="{
+            'text-h6 text-weight-bold': !$q.screen.lt.md,
+            'text-subtitle2': $q.screen.lt.md,
+          }"
+        >
+          {{ course.title }}
+        </div>
+      </q-btn>
+
+      <div class="col-12 q-px-md">
+        <div
+          class="text-subtitle1 text-left text-grey-4"
+          :class="{
+            'text-subtitle1': !$q.screen.lt.md,
+            'text-subtitle2': $q.screen.lt.md && !$q.screen.lt.sm,
+            'text-caption': $q.screen.lt.sm
+          }"
+        >المنجزة</div>
+        <q-linear-progress
+          rounded size="7px"
+          :value=0.7
+          color="green"
+          class="q-mt-xs"
+        />
+      </div>
+
+      <div
+        class="
+          col-12 row
+          justify-between no-wrap
+          q-px-md text-center
+          text-grey-4
+        "
+      >
+        <div
+          class=" q-py-xs bg-grey-1 date-box"
+          :class="{
+            'text-subtitle1': !$q.screen.lt.md,
+            'text-subtitle2': $q.screen.lt.md && !$q.screen.lt.sm,
+            'text-font': $q.screen.lt.sm
+          }"
+        >بدء: 12 يناير</div>
+
+        <div
+          class="q-py-xs bg-grey-1 date-box"
+          :class="{
+            'text-subtitle1': !$q.screen.lt.md,
+            'text-subtitle2': $q.screen.lt.md && !$q.screen.lt.sm,
+            'text-font': $q.screen.lt.sm
+          }"
+        >ينتهي: 12 فبراير</div>
+      </div>
+    </q-card-section>
+
+    <q-card-section
+      v-else
       class="row justify-center items-center"
       :class="{
         'section-height-lg q-pa-xl': !$q.screen.lt.md,
@@ -190,9 +262,8 @@ import { calcDuration } from 'src/utils/global.js'
 export default {
   components: { StarRating },
   props: {
-    course: {
-      type: Object
-    }
+    course: { type: Object },
+    joined: { type: Boolean, default: false }
   },
   computed: {
     isAuthenticated () {
@@ -233,8 +304,9 @@ export default {
 
 <style lang="scss" scoped>
 .course-card {
-  width: 31.3%;
+  max-width: 31.3%;
   min-width: 155px;
+  // width: 200px;
 
   .img-height-lg {
     height: 218px;
@@ -252,6 +324,22 @@ export default {
     height: 120px;
   }
 
+  .jsection-height-lg {
+    height: 240px;
+  }
+
+  .jsection-height-sm {
+    height: 170px;
+  }
+
+  .date-box {
+    width: 48.5%;
+  }
+
+  .text-font {
+    font-size: 10px;
+  }
+
   .icon-lg {
     width: 15px;
     height: 15px;
@@ -262,12 +350,23 @@ export default {
     height: 10px;
   }
 }
-
-@media (max-width: 1290px) and (min-width: 1024px) {
+@media (max-width: 488px) and (min-width: 420px) {
   .course-card {
-    width: 30.75%;
+    min-width: 200px;
   }
 }
+
+@media (max-width: 419px) and (min-width: 380px) {
+  .course-card {
+    min-width: 180px;
+  }
+}
+
+// @media (min-width: 440px) and (max-width: 488px) {
+//   .course-card {
+//     width: 200px;
+//   }
+// }
 
 .q-img__content > div {
   &.cover-text {
