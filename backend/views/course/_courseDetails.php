@@ -8,7 +8,7 @@
  */
 
 ?>
-<?php echo $form->errorSummary($model); ?>
+<?php //echo $form->errorSummary($model); ?>
 <div class="row">
     <div class="col-sm-4">
         <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
@@ -33,7 +33,7 @@
 <?php echo $form->field($model, 'description')->widget(
     \yii\imperavi\Widget::class,
     [
-        'plugins' => ['fullscreen', 'fontcolor', 'video'],
+        'plugins' => ['fullscreen', 'fontcolor'],
         'options' => [
             'minHeight' => 200,
             'maxHeight' => 200,

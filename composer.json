@@ -27,7 +27,7 @@
     "source": "https://github.com/yii2-starter-kit/yii2-starter-kit"
   },
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.2.5",
     "ext-intl": "*",
     "ext-gd": "*",
     "yiisoft/yii2": "^2.0.13",
@@ -63,7 +63,8 @@
     "kartik-v/yii2-grid": "dev-master",
     "kartik-v/yii2-widget-timepicker": "dev-master",
     "kartik-v/yii2-field-range": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "philippfrenzel/yii2fullcalendar": "*"
   },
   "require-dev": {
     "yiisoft/yii2-gii": "^2.0.0",

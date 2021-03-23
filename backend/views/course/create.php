@@ -3,6 +3,7 @@
 /**
  * @var yii\web\View $this
  * @var common\models\Course $model
+ * @var common\models\CourseAttachment $files
  * @var common\models\Section $sectionList
  * @var common\models\User $teacherList
  */
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php echo $this->render('_form', [
         'model' => $model,
+        'files' => $files,
         'sectionList'=>$sectionList,
         'teacherList'=>$teacherList,
     ]) ?>

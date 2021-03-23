@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\CourseAttachment;
 use common\models\CourseClasses;
 use common\models\Section;
 use common\models\User;
@@ -12,6 +13,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CourseController implements the CRUD actions for Course model.
@@ -78,6 +80,7 @@ class CourseController extends Controller
     {
         $model = new Course();
         $user = new User();
+        $files = new CourseAttachment();
         $teacher = $user->getTeacher();
         $model->classes = [];
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -88,6 +91,7 @@ class CourseController extends Controller
         }
         return $this->render('create', [
             'model' => $model,
+            'files' => $files,
             'sectionList'=>ArrayHelper::map(Section::find()->all(),'id','title'),
             'teacherList'=>ArrayHelper::map($teacher,'id','username')
         ]);
@@ -110,6 +114,7 @@ class CourseController extends Controller
         }else{
             $view = 'view';
         }
+        $files = CourseAttachment::find()->andWhere('course_id=:id',['id'=>$id]);
         $model = $this->findModel($id);
         $user = new User();
         $teacher = $user->getTeacher();
@@ -124,6 +129,7 @@ class CourseController extends Controller
         }
         return $this->render('update', [
             'model' => $model,
+            'files' => $files,
             'sectionList'=>ArrayHelper::map(Section::find()->all(),'id','title'),
             'teacherList'=>ArrayHelper::map($teacher,'id','username'),
         ]);
@@ -157,8 +163,48 @@ class CourseController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionClassDetails()
+    public function actionFileUpload()
     {
-        
+        $model = new CourseAttachment();
+        $image_path = Yii::getAlias('@storage/web/source/1/');
+        $image_name = Yii::$app->getSecurity()->generateRandomString();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->path = UploadedFile::getInstances($model, 'attachments');
+            foreach ($model->path as $key => $file) {
+
+                $file->saveAs($image_path. $file->baseName . '.' . $file->extension);//Upload files to server
+                $model->path .= '1/' . $file->baseName . '.' . $file->extension."**";//Save file names in database- '**' is for separating images
+                $model->base_url .= Yii::getAlias('@storageUrl');
+            }
+            $model->save();
+//            return $this->redirect(['view', 'id' => $model->id]);
+            return true;
+        } else {
+//            return $this->render('upload', [
+//                'model' => $model,
+//            ]);
+            return false;
+        }
+    }
+
+    public function actionCalender()
+    {
+        $classes = Course::find()->getClasses(5);
+//        var_dump($classes);
+        $courses = Course::find()->all();
+        foreach ($courses as $course){
+            //Testing
+            $Event = new \yii2fullcalendar\models\Event();
+            $Event->id = $course->id;
+            $Event->title = $course->title;
+            $Event->start = date('Y-m-d\Th:m:s\Z',$course->start_at);
+            $Event->end = date('Y-m-d\Th:m:s\Z',$course->end_at);
+            $events[] = $Event;
+        }
+//        die();
+        return render('calender',[
+            'events'=>$events,
+        ]);
+
     }
 }

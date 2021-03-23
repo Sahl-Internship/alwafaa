@@ -7,16 +7,18 @@ use yii\bootstrap4\ActiveForm;
 /**
  * @var yii\web\View $this
  * @var common\models\Course $model
+ * @var common\models\CourseAttachment $files
  * @var yii\bootstrap4\ActiveForm $form
  * @var common\models\Section $sectionList
  * @var common\models\User $teacherList
  */
 ?>
-
 <div class="course-form">
     <?php $form = ActiveForm::begin([
 //        'tooltipStyleFeedback' => true,
     ]); ?>
+    <?php echo $form->errorSummary($model); ?>
+
     <div class="card">
         <div class="card-body">
             <?php
@@ -47,6 +49,7 @@ use yii\bootstrap4\ActiveForm;
                         'label' => Yii::t('backend', 'Media'),
                         'content' => $this->render('_courseMedia', [
                             'form' => $form,
+                            'files' => $files,
                             'model' => $model,
                         ]),
                     ],
