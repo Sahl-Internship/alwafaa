@@ -33,6 +33,7 @@
         <div
           class="text-body1 text-right text-grey-4 q-mr-md"
           style="cursor: pointer;text-decoration:underline"
+          @click="acheivment"
         > عرض الكل
         </div>
       </div>
@@ -96,10 +97,11 @@
                   :key="lecture"
                   :rowspan="(lecture === 'عطلة') ? 2 : undefined"
                   :class="{
+                    'off': (lecture === 'عطلة'),
                     'green-active': today,
                     'inactive': past,
                     'green-line-active': (future && lecture !== 'عطلة' ),
-                    'off': (lecture === 'عطلة')
+
                   }"
                 >
                   {{lecture}}
@@ -136,10 +138,10 @@
         class="col-12 row q-mt-sm text-grey-4"
       >
         <div class="col-2 text-body1">
-          <div class="green-dot"></div>انجزت: {{courseData.classes.length + 3}} يوم
+          <div class="green-dot"></div>انجزت:  يوم
         </div>
         <div class="col-8 text-body1">
-          <div class="red-dot"></div>يتبقى: 18 يوم على انتهاء الدورة
+          <div class="red-dot"></div>يتبقى: {{courseData.classes.length}} يوم على انتهاء الدورة
         </div>
       </div>
     </div>
@@ -174,19 +176,23 @@ export default {
       past: false,
       future: false,
       today: false,
-      todayDate: new Date(),
-      mappedDate: {
-        4: 0,
-        5: 1,
-        6: 2,
-        0: 3,
-        1: 4,
-        2: 5,
-        3: 6
-      }
+      todayDate: new Date()
     }
   },
   methods: {
+    mappedDate () {
+      const x = {}
+      const startDate = parseInt(this.courseData.classes[0].day_id)
+      console.log('start Date', startDate)
+      x[startDate] = 0
+      console.log(x)
+      for (let i = 1; i <= 6; i++) {
+        console.log('index and start ', 'i:', i, (i + startDate) % 7)
+        x[(startDate + i) % 7] = i
+      }
+      console.log(x)
+      return x
+    },
     convertDate (timestamp) {
       const date = new Date(timestamp * 1000)
       return date
@@ -229,7 +235,8 @@ export default {
 
       const endDate = new Date(start)
       endDate.setDate(start.getDate() + 7)
-
+      const mapped = this.mappedDate()
+      console.log('mapped', mapped)
       for (let i = 0; i < this.courseData.classes.length; i++) {
         const classT = this.courseData.classes[i]
         const pastFuture = new Date(classT.date * 1000)
@@ -242,9 +249,11 @@ export default {
           this.today = true
         }
         if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
-          this.times[this.mappedDate[classT.day_id]] = getClassStartTime(classT.from)
+          console.log('mapped class', mapped[classT.day_id])
+          this.times[mapped[classT.day_id]] = getClassStartTime(classT.from)
         }
       }
+      console.log('times', this.times)
       return this.times
     },
     endClassTime (weekNumber) {
@@ -253,7 +262,7 @@ export default {
 
       const endDate = new Date(start)
       endDate.setDate(start.getDate() + 7)
-
+      const mapped = this.mappedDate()
       for (let i = 0; i < this.courseData.classes.length; i++) {
         const classT = this.courseData.classes[i]
         const pastFuture = new Date(classT.date * 1000)
@@ -266,11 +275,20 @@ export default {
           this.today = true
         }
         if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
-          this.times[this.mappedDate[classT.day_id]] = getClassStartTime(classT.to)
+          this.times[mapped[classT.day_id]] = getClassStartTime(classT.to)
         }
       }
       return this.times
     }
+    // ,
+    // acheivment () {
+    //   const startDate = new Date(this.courseData.start_at * 1000)
+    //   const today = new Date()
+    //   const endDate = new Date(this.courseData.end_at * 1000)
+    //   const acheivedDays = '',
+    //   const restDays = (endDate - startDate) / (1000 * 60 * 60 * 24)
+    //   return acheivedDays
+    // }
   }
 }
 </script>
