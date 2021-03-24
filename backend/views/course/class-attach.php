@@ -14,16 +14,6 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 
 ?>
-<?php echo $form->field($model, 'image')->widget(
-    Upload::class,
-    [
-        'url' => ['/file/storage/upload'],
-        'maxFileSize' => 5000000, // 5 MiB,
-        'acceptFileTypes' => new JsExpression('/(\.|\/)(gif|jpe?g|png)$/i'),
-    ]
-) ?>
-
-
 <?php echo $form->field($model, 'attachments')->widget(
     Upload::class,
     [

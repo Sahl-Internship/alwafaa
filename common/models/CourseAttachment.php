@@ -98,4 +98,5 @@ class CourseAttachment extends \yii\db\ActiveRecord
     {
         return new \common\models\query\CourseAttachmentQuery(get_called_class());
     }
+
 }

@@ -2,16 +2,20 @@
 
 namespace backend\controllers;
 
+use common\models\CourseAttachment;
 use common\models\CourseClasses;
 use common\models\Section;
 use common\models\User;
+use edofre\fullcalendar\models\Event;
 use Yii;
 use common\models\Course;
 use backend\models\search\CourseSearch;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CourseController implements the CRUD actions for Course model.
@@ -39,11 +43,11 @@ class CourseController extends Controller
     {
         $searchModel = new CourseSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if(Yii::$app->user->can('administrator') || Yii::$app->user->can('manager')){
+        if (Yii::$app->user->can('administrator') || Yii::$app->user->can('manager')) {
             $view = 'index';
-        }elseif(Yii::$app->user->can('teacher')){
+        } elseif (Yii::$app->user->can('teacher')) {
             $view = 'teacher-index';
-        }else{
+        } else {
             $view = 'teacher-index';
         }
         return $this->render($view, [
@@ -59,9 +63,9 @@ class CourseController extends Controller
      */
     public function actionView($id)
     {
-        if(Yii::$app->user->can('administrator') || Yii::$app->user->can('manager')){
+        if (Yii::$app->user->can('administrator') || Yii::$app->user->can('manager')) {
             $view = 'view';
-        }elseif(Yii::$app->user->can('teacher')){
+        } elseif (Yii::$app->user->can('teacher')) {
             $view = '_teacher_view';
         }
         return $this->render($view, [
@@ -78,18 +82,20 @@ class CourseController extends Controller
     {
         $model = new Course();
         $user = new User();
+        $files = new CourseAttachment();
         $teacher = $user->getTeacher();
         $model->classes = [];
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if($model->classes){
+            if ($model->classes) {
                 $model->classSchedule($model->classes);
             }
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('create', [
             'model' => $model,
-            'sectionList'=>ArrayHelper::map(Section::find()->all(),'id','title'),
-            'teacherList'=>ArrayHelper::map($teacher,'id','username')
+            'files' => $files,
+            'sectionList' => ArrayHelper::map(Section::find()->all(), 'id', 'title'),
+            'teacherList' => ArrayHelper::map($teacher, 'id', 'username')
         ]);
     }
 
@@ -101,31 +107,33 @@ class CourseController extends Controller
      */
     public function actionUpdate($id)
     {
-        if(!Yii::$app->user->can('administrator') || !Yii::$app->user->can('manager')){
+        if (!Yii::$app->user->can('administrator') || !Yii::$app->user->can('manager')) {
             $courses_id = User::find()->getOwnCoursesIds(Yii::$app->user->id);
-            if(!in_array($id,$courses_id)){
+            if (!in_array($id, $courses_id)) {
                 throw new \yii\web\HttpException(403, 'You are not allowed to perform this action.');
             }
             $view = 'index';
-        }else{
+        } else {
             $view = 'view';
         }
+        $files = CourseAttachment::find()->andWhere('course_id=:id', ['id' => $id]);
         $model = $this->findModel($id);
         $user = new User();
         $teacher = $user->getTeacher();
-        $model->classes = CourseClasses::find()->where('course_id=:id',['id'=>$id])->all();
+        $model->classes = CourseClasses::find()->where('course_id=:id', ['id' => $id])->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            if($model->classes){
-                CourseClasses::deleteAll(['course_id'=>$model->id]);
+            if ($model->classes) {
+                CourseClasses::deleteAll(['course_id' => $model->id]);
                 $model->classSchedule($model->classes);
             }
             return $this->redirect([$view, 'id' => $model->id]);
         }
         return $this->render('update', [
             'model' => $model,
-            'sectionList'=>ArrayHelper::map(Section::find()->all(),'id','title'),
-            'teacherList'=>ArrayHelper::map($teacher,'id','username'),
+            'files' => $files,
+            'sectionList' => ArrayHelper::map(Section::find()->all(), 'id', 'title'),
+            'teacherList' => ArrayHelper::map($teacher, 'id', 'username'),
         ]);
     }
 
@@ -157,8 +165,91 @@ class CourseController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionClassDetails()
+    public function actionFileUpload()
     {
-        
+        $model = new CourseAttachment();
+        $image_path = Yii::getAlias('@storage/web/source/1/');
+        $image_name = Yii::$app->getSecurity()->generateRandomString();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->path = UploadedFile::getInstances($model, 'attachments');
+            foreach ($model->path as $key => $file) {
+
+                $file->saveAs($image_path . $file->baseName . '.' . $file->extension);//Upload files to server
+                $model->path .= '1/' . $file->baseName . '.' . $file->extension . "**";//Save file names in database- '**' is for separating images
+                $model->base_url .= Yii::getAlias('@storageUrl');
+            }
+            $model->save();
+//            return $this->redirect(['view', 'id' => $model->id]);
+            return true;
+        } else {
+//            return $this->render('upload', [
+//                'model' => $model,
+//            ]);
+            return false;
+        }
+    }
+
+    public function actionCalender($id)
+    {
+        $classes = Course::find()->getClasses($id);
+        $courses = Course::find()->all();
+        $course = Course::find()->andWhere('id=:cid', ['cid' => $id])->one();
+        $events = [new Event([
+            'title' => 'Start of Course',
+            'start' => date('Y-m-d', $course->start_at),
+            'color' => 'green',
+        ]),
+            new Event([
+                'title' => 'End of Course',
+                'start' => date('Y-m-d', $course->end_at),
+                'color' => 'red',
+            ]),
+        ];
+//        $events = [];
+        foreach ($classes as $index => $class) {
+            $event = new Event([
+//                'id' => date('z', $class['date']),
+                'id' => $index,
+                'title' => 'Class Day',
+                'start' => date('Y-m-d', $class['date']) . date('\Th:i:s', $class['from']),
+                'end' => date('Y-m-d', $class['date']) . date('\Th:i:s', $class['to']),
+                'url' => Url::to(['attachment','course_id'=>$course->id]),
+                'editable' => true,
+//                'startEditable' => true,
+//                'durationEditable' => true,
+            ]);
+            array_push($events, $event);
+        }
+
+        return render('calender', [
+            'events' => $events,
+        ]);
+
+    }
+
+    public function actionAttachment($course_id)
+    {
+        $model = new CourseAttachment();
+        $file_path = Yii::getAlias('@storage/web/source/1/');
+        $file_name = Yii::$app->getSecurity()->generateRandomString();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->path = UploadedFile::getInstances($model, 'attachments');
+            foreach ($model->path as $key => $file) {
+
+                $file->saveAs($file_path . $file->baseName . '.' . $file->extension);//Upload files to server
+                $model->path .= '1/' . $file->baseName . '.' . $file->extension . "**";//Save file names in database- '**' is for separating images
+                $model->base_url .= Yii::getAlias('@storageUrl');
+                $model->course_id = $course_id;
+//                $model->class_id = $id;
+            }
+            $model->save();
+//            return $this->redirect(['view', 'id' => $model->id]);
+            return true;
+        }
+            return $this->render('class-attach', [
+                'model' => $model,
+            ]);
     }
 }
+
+
