@@ -68,7 +68,7 @@ $logEntries[] = [
         'main-header',
         'navbar',
         'navbar-expand',
-        'navbar-dark',
+        // 'navbar-dark',
         //                'navbar-iqraa',
         $keyStorage->get('adminlte.navbar-no-border') ? 'border-bottom-0' : null,
         $keyStorage->get('adminlte.navbar-small-text') ? 'text-sm' : null,

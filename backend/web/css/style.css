@@ -53,7 +53,7 @@ nav.main-header .navbar-nav .nav-item .fa-bars {
 }
 
 nav.main-header .navbar-nav .nav-item .navbar-badge {
-  background-color: #13A8E5;
+  background-color: #26c5f9;
 }
 
 .nav-logo {
@@ -454,3 +454,96 @@ a.back-to-top {
 }
 
 /* End Footer  */
+
+
+/* start login page */
+.login-container {
+  width: 100%;
+  height: inherit;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.logo-section {
+  height: 100%;
+  background-image: url('/img/second-section-auth.png'), linear-gradient(#26c5f9, #51e69b);
+  background-size: cover;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.auth-page-img {
+  width: 40%;
+}
+
+.form-section {
+  height: 100%;
+  background-color: #fff;
+  /* margin-left: 12px; */
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.form-section .title-separator {
+  border-top: solid 2px #f2f2f2;
+  width: 50px;
+}
+
+.form-section .login-logo h2 {
+  font-weight: bold;
+  color: #383d47;
+}
+
+#loginform-username,
+#loginform-password {
+  background-color: #f2f2f2;
+  height: 44px;
+}
+
+.form-section .login-box-msg {
+  margin-top: 35px;
+  color: #636e7d;
+}
+
+.form-section .custom-control-label {
+  color: #636e7d;
+  font-weight: normal !important;
+}
+
+.custom-control-label::after {
+  /* color: #51e69b; */
+}
+
+.form-section form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-section .form-group {
+  width: 100%;
+}
+
+.form-section button {
+  height: 40px;
+  width: 50%;
+  background-color: #51e69b;
+  border: none;
+  font-size: larger;
+  margin-top: 30px;
+  color: #383d47;
+}
+
+.form-section button:hover,
+.form-section button:focus {
+  background-color: #51e69b;
+}
+
+@media (max-width: 600px) {
+  .logo-section {
+    display: none;
+  }
+}
+
+/* end login page */

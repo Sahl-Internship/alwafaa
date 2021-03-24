@@ -29,7 +29,7 @@
 }
 
 body {
-  font-family: HelveticaNeueW23Reg;
+  font-family: HelveticaNeueW23Reg !important;
 }
 
 @media (max-width: 768px) {
