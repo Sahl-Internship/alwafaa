@@ -67,6 +67,24 @@ class ProfileController extends ApController
         }
     }
 
+    public function actionDeleteCover()
+    {
+        $params = \Yii::$app->request->post();
+        $user = Profile::findOne(['id' => \Yii::$app->user->identity->getId()]);
+        $profile = UserProfile::findOne(['user_id' => \Yii::$app->user->identity->getId()]);
+        $image_path = \Yii::getAlias('@storage/web/source/');
+        $image_name = $profile->cover_path;
+        $profile->cover_path = null;
+        $profile->cover_base_url = null;
+        if($profile->save()){
+            if(isset($image_name))
+            unlink($image_path . $image_name);
+             return ['status' => 1, 'profile' => $user];
+        }else{
+            return ['status' => 0, 'profile' => $user];
+        }
+    }
+
 
     public function actionUpdate()
     {
