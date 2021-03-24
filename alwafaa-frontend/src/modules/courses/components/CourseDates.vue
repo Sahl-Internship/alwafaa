@@ -1,4 +1,3 @@
-
 <template>
   <div class="row col-11" >
     <div class="text-h6 col-8 q-mt-xl q-mb-md">مواعيد الدورة</div>
@@ -19,7 +18,8 @@
           >
             keyboard_arrow_right
           </span>
-          {{fullDate(courseData.classes[0].date)}}
+          <!-- {{fullDate(courseData.classes[0].date)}} -->
+          {{fullDate(todayDate)}}
           <span
             class="material-icons"
             style="font-size:25px;cursor: pointer;"
@@ -49,24 +49,33 @@
           :key="x"
         >
           <div
-            class="col-12 bg-white q-py-lg q-px-xl rounded-borders"
+            class="col-12 bg-white q-py-lg q-px-lg rounded-borders"
           >
             <table>
               <tr>
                 <th
+                  roll="gridcell"
                   class="table-head"
                   v-for='day in getDayDates(courseData.start_at , x - 1)'
                   :key='day'
                 >
                   {{getDayName(day /1000)}}
                 </th>
+                <!-- <th
+                  class="table-head"
+                  v-for='day in daysName'
+                  :key='day'
+                >
+                  {{day}}
+                </th> -->
               </tr>
               <tr>
                 <td
                   v-for="day in getDayDates(courseData.start_at, x - 1)"
                   :key="day"
-                  class="text-weight-thin inactive table-head"
-                  style="font-size:12px"
+                  :class="{'text-grey-3': future || past, 'text-dark': today}"
+                  class="text-weight-thin table-head q-mb-lg q-pb-lg"
+                  style="font-size:12px;"
                 >
                   {{getClassDate(day / 1000)}}
                 </td>
@@ -81,21 +90,41 @@
                 <td rowspan='2' class="off text-h6">
                   عطلة
                 </td> -->
-                <!-- <td
+                <td
                   class="text-body1"
-                  v-for="(lecture) in classesTime"
+                  v-for="(lecture) in startClassTime(x-1)"
                   :key="lecture"
+                  :rowspan="(lecture === 'عطلة') ? 2 : undefined"
+                  :class="{
+                    'green-active': today,
+                    'inactive': past,
+                    'green-line-active': (future && lecture !== 'عطلة' ),
+                    'off': (lecture === 'عطلة')
+                  }"
                 >
-                  {{(lecture.from)}}
-                </td> -->
+                  {{lecture}}
+                </td>
               </tr>
               <tr>
-                <td class="inactive text-body1"> 5:30 م</td>
+                <td
+                  class="text-body1"
+                  v-for="(lecture) in endClassTime(x-1)"
+                  :key="lecture"
+                  :class="{
+                    'hidden': (lecture === 'عطلة'),
+                    'red-active': today,
+                    'inactive': past,
+                    'red-line-active': (future && lecture !== 'عطلة' )
+                  }"
+                >
+                  {{lecture}}
+                </td>
+                <!-- <td class="inactive text-body1"> 5:30 م</td>
                 <td class="inactive text-body1"> 5:30 م</td>
                 <td class="inactive text-body1"> 5:30 م</td>
                 <td class="red-active text-body1"> 5:30 م</td>
                 <td class="red-line-active text-body1"> 5:30 م</td>
-                <td class="red-line-active text-body1"> 5:30 م</td>
+                <td class="red-line-active text-body1"> 5:30 م</td> -->
               </tr>
 
             </table>
@@ -107,7 +136,7 @@
         class="col-12 row q-mt-sm text-grey-4"
       >
         <div class="col-2 text-body1">
-          <div class="green-dot"></div>انجزت: 36 يوم
+          <div class="green-dot"></div>انجزت: {{courseData.classes.length + 3}} يوم
         </div>
         <div class="col-8 text-body1">
           <div class="red-dot"></div>يتبقى: 18 يوم على انتهاء الدورة
@@ -117,12 +146,44 @@
   </div>
 </template>
 <script>
-import { dateFormatz, dateDay, dateFormat } from 'src/utils/global.js'
+import { dateFormatz, dateDay, dateFormat, getClassStartTime } from 'src/utils/global.js'
 export default {
+  computed: {
+    isAuthed () {
+      return this.$store.getters['auth/isAuthenticated']
+    },
+    courseData () {
+      return this.$store.getters['courses/getCoursePage']
+    },
+    numberOfWeeks () {
+      const end = this.convertDate(this.courseData.end_at)
+      const start = this.convertDate(this.courseData.start_at)
+      const weeks = (1000 * 60 * 60 * 24 * 7)
+      const diff = end - start
+      const result = Math.ceil(diff / weeks)
+      console.log(result)
+      return result
+    }
+  },
   data () {
     return {
       slide: 1,
-      classesTime: []
+      classesTime: [],
+      daysName: ['السبت', 'الأحد', 'الأثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'],
+      times: ['عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة'],
+      past: false,
+      future: false,
+      today: false,
+      todayDate: new Date(),
+      mappedDate: {
+        4: 0,
+        5: 1,
+        6: 2,
+        0: 3,
+        1: 4,
+        2: 5,
+        3: 6
+      }
     }
   },
   methods: {
@@ -130,9 +191,11 @@ export default {
       const date = new Date(timestamp * 1000)
       return date
     },
-    fullDate (classDate) {
-      const classDay = dateFormat(classDate)
-      return classDay
+    fullDate () {
+      // const classDay = dateFormat(classDate)
+      const today = new Date()
+      return dateFormat(today.getTime() / 1000)
+      // return classDay
     },
     // For get month date name and day date
     getClassDate (classDate) {
@@ -151,53 +214,62 @@ export default {
 
       const endDate = new Date(start)
       endDate.setDate(start.getDate() + 7)
-
       let dates = []
+
       // eslint-disable-next-line no-unmodified-loop-condition
       while (start < endDate) {
-        this.courseData.classes.forEach(classTime => {
-          console.log('class time', classTime.date * 1000)
-          console.log('start', start.getTime())
-          if (classTime.date * 1000 === start.getTime()) {
-            this.classesTime = [...this.classesTime, classTime]
-          }
-        })
         dates = [...dates, new Date(start)]
         start.setDate(start.getDate() + 1)
       }
-      console.log('dates', dates)
-      console.log('classes', this.classesTime)
       return dates
-    }
-    // ,
-    // getClassStartTime (from) {
-    //   // eslint-disable-next-line no-unmodified-loop-condition
-    //   const date = new Date(from * 1000)
-    //   let hour = date.getHours()
-    //   let min = date.getMinutes()
-    //   const ampm = hour >= 12 ? 'م' : 'ص'
-    //   hour = hour % 12
-    //   hour = hour || 12 // the hour '0' should be '12'
-    //   min = min < 10 ? '0' + min : min
-    //   const time = hour + ':' + min + ' ' + ampm
-    //   return time
-    // }
-  },
-  computed: {
-    isAuthed () {
-      return this.$store.getters['auth/isAuthenticated']
     },
-    courseData () {
-      return this.$store.getters['courses/getCoursePage']
+    startClassTime (weekNumber) {
+      const start = new Date(this.courseData.start_at * 1000)
+      start.setDate(start.getDate() + weekNumber * 7)
+
+      const endDate = new Date(start)
+      endDate.setDate(start.getDate() + 7)
+
+      for (let i = 0; i < this.courseData.classes.length; i++) {
+        const classT = this.courseData.classes[i]
+        const pastFuture = new Date(classT.date * 1000)
+        const today = new Date()
+        if (pastFuture < today) {
+          this.past = true
+        } else if (pastFuture > today) {
+          this.future = true
+        } else {
+          this.today = true
+        }
+        if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
+          this.times[this.mappedDate[classT.day_id]] = getClassStartTime(classT.from)
+        }
+      }
+      return this.times
     },
-    numberOfWeeks () {
-      const end = this.convertDate(this.courseData.end_at)
-      const start = this.convertDate(this.courseData.start_at)
-      const weeks = (1000 * 60 * 60 * 24 * 7)
-      const diff = end - start
-      const result = Math.ceil(diff / weeks)
-      console.log(result)
-      return result
+    endClassTime (weekNumber) {
+      const start = new Date(this.courseData.start_at * 1000)
+      start.setDate(start.getDate() + weekNumber * 7)
+
+      const endDate = new Date(start)
+      endDate.setDate(start.getDate() + 7)
+
+      for (let i = 0; i < this.courseData.classes.length; i++) {
+        const classT = this.courseData.classes[i]
+        const pastFuture = new Date(classT.date * 1000)
+        const today = new Date()
+        if (pastFuture < today) {
+          this.past = true
+        } else if (pastFuture > today) {
+          this.future = true
+        } else {
+          this.today = true
+        }
+        if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
+          this.times[this.mappedDate[classT.day_id]] = getClassStartTime(classT.to)
+        }
+      }
+      return this.times
     }
   }
 }
@@ -208,43 +280,45 @@ table{
   border-spacing: 7px;
   text-align: center;
   box-sizing: border-box;
-  .table-head{
-    // width: 150px !important;
-    padding: 0px 24px;
+  th,td{
+    width: 150px !important;
   }
 
   .green-active{
-    padding: 10px 20px;
+    padding: 10px 13px;
     color: $green;
     background: #DCF8EA;
     border-right: 3px solid $green;
     border-radius: 4px
   }
   .green-line-active{
-    padding: 10px 20px;
+    padding: 10px 23px;
     border: 2px solid #DCF8EA;
-    border-radius: 4px
+    border-radius: 4px;
+    color: $dark
   }
   .inactive{
-    padding: 10px 20px;
+    padding: 10px 13px;
     color:$grey-3;
   }
   .red-active{
     background: #FDE3E3;
-    padding: 10px 20px;
+    padding: 10px 13px;
     color: #F15252;
     border-right: 3px solid #F15252;
     border-radius: 4px;
   }
   .red-line-active{
-    padding: 10px 20px;
+    padding: 10px 13px;
     border: 2px solid #FDE3E3;
     border-radius: 4px;
+    color: $dark
   }
   .off{
-    padding: 0px 20px;
+    padding: 0px 13px;
     background: $grey-1;
-    border-radius: 4px
+    border-radius: 4px;
+    color: $dark
   }
 }
 .green-dot{

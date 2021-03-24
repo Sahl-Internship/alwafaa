@@ -68,3 +68,14 @@ export const dateDay = (timestamp) => {
   var weekday = day.toLocaleString('default', { weekday: 'short' })
   return `${i18n.t(`days.${weekday}`)}`
 }
+export const getClassStartTime = (from) => {
+  const date = new Date(from * 1000)
+  let hour = date.getHours()
+  let min = date.getMinutes()
+  const ampm = hour >= 12 ? 'م' : 'ص'
+  hour = hour % 12
+  hour = hour || 12 // the hour '0' should be '12'
+  min = min < 10 ? '0' + min : min
+  const time = (hour - 2) + ':' + min + ' ' + ampm
+  return time
+}

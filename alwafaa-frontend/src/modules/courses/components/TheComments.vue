@@ -43,7 +43,7 @@
       <div class="text-h6 col-8 q-mt-sm q-mb-md q-ml-lg student-comments">ملاحظات الطلاب للدورة</div>
 <!-- ================================================================================================ -->
       <div
-        v-for="comment in courseData.reviews"
+        v-for="comment in computedObj "
         :key="comment"
         class="row col-10 comment-card  q-py-md q-px-lg q-mx-auto q-mb-sm"
       >
@@ -141,6 +141,7 @@ export default {
       isShowComments: false,
       thumpUp: false,
       thumpDown: false,
+      shownReviews: 4,
       rate: 0,
       rank: 0,
       review: ''
@@ -155,6 +156,9 @@ export default {
     },
     courseData () {
       return this.$store.getters['courses/getCoursePage']
+    },
+    computedObj () {
+      return this.shownReviews ? this.courseData.reviews.slice(0, this.shownReviews) : this.courseData.reviews
     }
   },
   methods: {
@@ -172,11 +176,7 @@ export default {
     //   this.thumpUp = false
     // },
     showComments () {
-      if (this.shownComments === 12) {
-        return false
-      } else {
-        this.shownComments += 3
-      }
+      this.shownReviews += 4
     },
     sendReview () {
       // eslint-disable-next-line camelcase
@@ -187,6 +187,8 @@ export default {
         course_id
       }
       this.$store.dispatch('courses/courseReview', comment)
+      this.rate = 0
+      this.review = ''
     },
     reviewDate (time) {
       const date = dateFormat(time)

@@ -492,11 +492,11 @@ export default {
   }
 }
 .toggle-show1{
-    -webkit-mask-image: -webkit-gradient(linear, left top,
+    mask-image: -webkit-gradient(linear, left top,
     left bottom, from(rgba(1,1,1,1)), to(rgba(1,1,1,0)));
 }
 .toggle-show1-no-gradient{
-  -webkit-mask-image: -webkit-gradient(linear, left top,
+  mask-image: -webkit-gradient(linear, left top,
   left bottom, from(rgba(1,1,1,1)), to(rgba(1,1,1,1)));
 }
 </style>
