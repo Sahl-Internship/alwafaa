@@ -54,14 +54,6 @@ class ApController extends Controller
             'http://localhost:4001',
             'https://jquery.com',
             'http://backend.alwafaa.localhost',
-//            'http://booking.yaschools.localhost',
-//            "http://booking.yaschools.localhost",
-//            'http://endpoints.yaschools.localhost',
-//            'http://schooladmin.yaschools.localhost',
-//            'http://yaschools.localhost',
-//            'https://yaschools.com',
-//            'http://yaschools.localhost',
-//            'https://showroom.yaschools.com'
         ];
     }
 }
