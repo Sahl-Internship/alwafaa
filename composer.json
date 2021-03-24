@@ -64,7 +64,7 @@
     "kartik-v/yii2-widget-timepicker": "dev-master",
     "kartik-v/yii2-field-range": "*",
     "ext-json": "*",
-    "philippfrenzel/yii2fullcalendar": "*"
+    "edofre/yii2-fullcalendar": "V1.0.11"
   },
   "require-dev": {
     "yiisoft/yii2-gii": "^2.0.0",

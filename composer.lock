@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5773f582b4336eb732759c05e59fce37",
+    "content-hash": "5a2fea753d7edaf6ba15b01ea0e4d3a4",
     "packages": [
         {
             "name": "alexantr/yii2-elfinder",
@@ -202,36 +202,6 @@
             "license": [
                 "MIT"
             ]
-        },
-        {
-            "name": "bower-asset/fullcalendar",
-            "version": "v4.4.2",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:fullcalendar/fullcalendar.git",
-                "reference": "71cdba73dadca1d5b6a536142473620051dd640c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/71cdba73dadca1d5b6a536142473620051dd640c",
-                "reference": "71cdba73dadca1d5b6a536142473620051dd640c"
-            },
-            "type": "bower-asset"
-        },
-        {
-            "name": "bower-asset/fullcalendar-scheduler",
-            "version": "v4.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fullcalendar/fullcalendar-scheduler.git",
-                "reference": "391d0326c4c2fd0d33f15522541ac87dde5ab9e8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fullcalendar/fullcalendar-scheduler/zipball/391d0326c4c2fd0d33f15522541ac87dde5ab9e8",
-                "reference": "391d0326c4c2fd0d33f15522541ac87dde5ab9e8"
-            },
-            "type": "bower-asset"
         },
         {
             "name": "bower-asset/inputmask",
@@ -575,6 +545,61 @@
                 }
             ],
             "time": "2020-05-25T17:44:05+00:00"
+        },
+        {
+            "name": "edofre/yii2-fullcalendar",
+            "version": "V1.0.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Edofre/yii2-fullcalendar.git",
+                "reference": "0eed44a374a95849093891f08df20b79942a0c62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Edofre/yii2-fullcalendar/zipball/0eed44a374a95849093891f08df20b79942a0c62",
+                "reference": "0eed44a374a95849093891f08df20b79942a0c62",
+                "shasum": ""
+            },
+            "require": {
+                "npm-asset/fullcalendar": "v3.8.0",
+                "php": ">=5.5.0",
+                "yiisoft/yii2": ">=2.0.9",
+                "yiisoft/yii2-jui": ">=2.0.6"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "edofre\\fullcalendar\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Edo Freriks",
+                    "email": "edofre@gmail.com"
+                }
+            ],
+            "description": "Yii2 widget for fullcalendar",
+            "homepage": "https://github.com/edofre/yii2-fullcalendar",
+            "keywords": [
+                "calendar",
+                "event",
+                "fullcalendar",
+                "javascript"
+            ],
+            "support": {
+                "issues": "https://github.com/Edofre/yii2-fullcalendar/issues",
+                "source": "https://github.com/Edofre/yii2-fullcalendar/tree/v1.0.11"
+            },
+            "time": "2018-01-04T21:25:17+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -3479,6 +3504,22 @@
             "type": "npm-asset"
         },
         {
+            "name": "npm-asset/fullcalendar",
+            "version": "3.8.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/fullcalendar/-/fullcalendar-3.8.0.tgz"
+            },
+            "require": {
+                "npm-asset/jquery": ">=2,<4.0",
+                "npm-asset/moment": ">=2.9.0,<3.0.0"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "npm-asset/html5shiv",
             "version": "3.7.3",
             "dist": {
@@ -3510,6 +3551,18 @@
                 "npm-asset/jquery": ">=1.7"
             },
             "type": "npm-asset"
+        },
+        {
+            "name": "npm-asset/moment",
+            "version": "2.29.1",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "opis/closure",
@@ -3575,60 +3628,6 @@
                 "source": "https://github.com/opis/closure/tree/3.6.1"
             },
             "time": "2020-11-07T02:01:34+00:00"
-        },
-        {
-            "name": "philippfrenzel/yii2fullcalendar",
-            "version": "4.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/philippfrenzel/yii2fullcalendar.git",
-                "reference": "53c8b2f524c5f5d85bd30f6ed7ba34b563479782"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/philippfrenzel/yii2fullcalendar/zipball/53c8b2f524c5f5d85bd30f6ed7ba34b563479782",
-                "reference": "53c8b2f524c5f5d85bd30f6ed7ba34b563479782",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/fullcalendar": "^4.0.2@stable",
-                "bower-asset/fullcalendar-scheduler": "^4.0.2@stable",
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-jui": "*"
-            },
-            "require-dev": {
-                "codeception/codeception": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "yii2fullcalendar\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Philipp Frenzel",
-                    "email": "philipp@frenzel.net",
-                    "homepage": "http://www.frenzel.net/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Yii2 fullcalendar Widgets",
-            "homepage": "http://www.frenzel.net/",
-            "keywords": [
-                "fullcalendar",
-                "widget",
-                "yii2"
-            ],
-            "support": {
-                "issues": "https://github.com/philippfrenzel/yii2fullcalendar/issues",
-                "source": "https://github.com/philippfrenzel/yii2fullcalendar"
-            },
-            "time": "2019-04-17T13:42:59+00:00"
         },
         {
             "name": "psr/http-message",
