@@ -11,6 +11,7 @@ use Yii;
 use common\models\Course;
 use backend\models\search\CourseSearch;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -205,28 +206,49 @@ class CourseController extends Controller
             ]),
         ];
 //        $events = [];
-        foreach ($classes as $index =>$class) {
+        foreach ($classes as $index => $class) {
             $event = new Event([
 //                'id' => date('z', $class['date']),
                 'id' => $index,
                 'title' => 'Class Day',
                 'start' => date('Y-m-d', $class['date']) . date('\Th:i:s', $class['from']),
                 'end' => date('Y-m-d', $class['date']) . date('\Th:i:s', $class['to']),
-                'url'=>'',
+                'url' => Url::to(['attachment','course_id'=>$course->id]),
                 'editable' => true,
 //                'startEditable' => true,
 //                'durationEditable' => true,
             ]);
             array_push($events, $event);
         }
+
         return render('calender', [
             'events' => $events,
         ]);
+
     }
 
-    public function actionAttachment()
+    public function actionAttachment($course_id)
     {
+        $model = new CourseAttachment();
+        $file_path = Yii::getAlias('@storage/web/source/1/');
+        $file_name = Yii::$app->getSecurity()->generateRandomString();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->path = UploadedFile::getInstances($model, 'attachments');
+            foreach ($model->path as $key => $file) {
 
+                $file->saveAs($file_path . $file->baseName . '.' . $file->extension);//Upload files to server
+                $model->path .= '1/' . $file->baseName . '.' . $file->extension . "**";//Save file names in database- '**' is for separating images
+                $model->base_url .= Yii::getAlias('@storageUrl');
+                $model->course_id = $course_id;
+//                $model->class_id = $id;
+            }
+            $model->save();
+//            return $this->redirect(['view', 'id' => $model->id]);
+            return true;
+        }
+            return $this->render('class-attach', [
+                'model' => $model,
+            ]);
     }
 }
 
