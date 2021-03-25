@@ -579,3 +579,19 @@ a.back-to-top:hover {
 }
 
 /*end user profile */
+
+/* start teacher main page */
+.courses-info .card-icon{
+  color: #26c5f9;
+  margin-right: 10px !important;
+}
+
+/* end teacher main page */
+
+
+/* start teacher course page  */
+.course-attachment-section label {
+  text-align: right !important;
+}
+
+/* start teacher course page  */
