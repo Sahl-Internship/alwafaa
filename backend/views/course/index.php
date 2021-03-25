@@ -1,5 +1,6 @@
 <?php
 
+use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\StringHelper;
@@ -10,19 +11,19 @@ use yii\helpers\StringHelper;
  * @var yii\data\ActiveDataProvider $dataProvider
  */
 
-$this->title = Yii::t('backend','Courses');
+$this->title = Yii::t('backend', 'Courses');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="course-index">
     <div class="card">
         <div class="card-header">
-            <?php echo Html::a(Yii::t('backend','Create Course'),
+            <?php echo Html::a(Yii::t('backend', 'Create Course'),
                 ['create'], ['class' => 'btn index-success-btn']) ?>
         </div>
 
         <div class="card-body p-0">
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    
+
             <?php echo GridView::widget([
                 'layout' => "{items}\n{pager}",
                 'options' => [
@@ -35,38 +36,62 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterModel' => $searchModel,
                 'columns' => [
 
-                    ['attribute'=>'id',
-                        'contentOptions'=>['style'=>'width:60px']
+                    ['attribute' => 'id',
+                        'contentOptions' => ['style' => 'width:60px']
                     ],
 
-                    ['attribute'=>'title',
-                        'contentOptions'=>['style'=>'width:60px']
-                    ],
-
-                    ['attribute'=>'start_at',
-                        'format'=>'date',
-                        'contentOptions'=>['style'=>'width:60px']
-                    ],
-
-                    ['attribute'=>'end_at',
-                        'format'=>'date',
-                        'contentOptions'=>['style'=>'width:60px']
+                    ['attribute' => 'title',
+                        'contentOptions' => ['style' => 'width:60px']
                     ],
 
                     [
-                        'attribute'=>'description',
-                        'content'=>function($model){
-                            return StringHelper::truncateWords($model->description,7);
+                        'attribute' => 'start_at',
+                        'format' => 'date',
+//                        'contentOptions'=>['style'=>'width:120px'],
+                        'filter' => DatePicker::widget([
+                            'model' => $searchModel,
+                            'attribute' => 'start_at',
+                            'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                            'pluginOptions' => [
+                                'format' => 'dd-mm-yyyy',
+                                'showMeridian' => true,
+                                'todayBtn' => true,
+//                                'endDate' => '0d',
+                            ]
+                        ]),
+                    ],
+
+
+                    ['attribute' => 'end_at',
+                        'format' => 'date',
+//                        'contentOptions' => ['style' => 'width:80px'],
+                        'filter' => DatePicker::widget([
+                            'model' => $searchModel,
+                            'attribute' => 'end_at',
+                            'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                            'pluginOptions' => [
+                                'format' => 'dd-mm-yyyy',
+                                'showMeridian' => true,
+                                'todayBtn' => true,
+//                                'endDate' => '0d',
+                            ]
+                        ]),
+                    ],
+
+                    [
+                        'attribute' => 'description',
+                        'content' => function ($model) {
+                            return StringHelper::truncateWords($model->description, 7);
                         }
                     ],
                     // 'section_id',
                     // 'teacher_id',
                     // 'zoom_link',
-                    
+
                     ['class' => \common\widgets\ActionColumn::class],
                 ],
             ]); ?>
-    
+
         </div>
         <div class="card-footer">
             <?php echo getDataProviderSummary($dataProvider) ?>

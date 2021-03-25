@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php foreach ($model->courseClasses as $class): ?>
             <tr>
                 <td>
-                    <?php echo  $class->getWeekDay($class->day_id) ?>
+                    <?php echo Yii::t('common', $class->getWeekDay($class->day_id)) ?>
                 </td>
                 <td><?php echo date('H:i A',$class->from)  ?></td>
                 <td><?php echo date('H:i A',$class->to) ?></td>

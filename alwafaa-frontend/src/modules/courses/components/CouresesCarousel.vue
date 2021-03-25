@@ -110,40 +110,40 @@ export default {
   },
   data () {
     return {
-      settings: {
-        arrows: false,
-        focusOnSelect: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        rtl: true,
-        rows: 1,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3
-            }
-          },
-          {
-            breakpoint: 488,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2,
-              initialSlide: 1
-            }
-          }
-        ]
-      },
+      // settings: {
+      //   arrows: false,
+      //   focusOnSelect: true,
+      //   infinite: false,
+      //   speed: 500,
+      //   slidesToShow: 3,
+      //   slidesToScroll: 3,
+      //   rtl: true,
+      //   rows: 1,
+      //   responsive: [
+      //     {
+      //       breakpoint: 1024,
+      //       settings: {
+      //         slidesToShow: 3,
+      //         slidesToScroll: 3
+      //       }
+      //     },
+      //     {
+      //       breakpoint: 600,
+      //       settings: {
+      //         slidesToShow: 3,
+      //         slidesToScroll: 3
+      //       }
+      //     },
+      //     {
+      //       breakpoint: 488,
+      //       settings: {
+      //         slidesToShow: 2,
+      //         slidesToScroll: 2,
+      //         initialSlide: 1
+      //       }
+      //     }
+      //   ]
+      // },
       shownCourses: [],
       stopIndex: 0,
       isLastIndex: false,
@@ -163,9 +163,6 @@ export default {
   },
   methods: {
     getShowCourses () {
-      console.log(this.stopIndex)
-      console.log(this.slidesToShow)
-      console.log(this.$q.screen.width)
       this.shownCourses = this.courses.slice(this.stopIndex, this.stopIndex + this.slidesToShow)
     },
     showNext () {

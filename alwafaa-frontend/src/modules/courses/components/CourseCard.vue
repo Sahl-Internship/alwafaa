@@ -53,7 +53,7 @@
               'text-caption': $q.screen.lt.sm,
               'text-grey-5 bg-green': course.status === 0,
               'text-grey-4 bg-grey-2': course.status === 2,
-              'text-white bg-red': course.status === 1,
+              'text-grey-5 bg-primary': course.status === 1,
             }"
           >
             {{ $t(`coursesList.${courseStatus}`) }}
