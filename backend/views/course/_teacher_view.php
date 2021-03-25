@@ -1,5 +1,6 @@
 <?php
 
+use edofre\fullcalendar\models\Event;
 use yii\bootstrap4\Modal;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -77,8 +78,6 @@ use yii\widgets\DetailView;
     <div class="card-header">
                 <?php echo Html::a(Yii::t('backend', 'More Details'), ['calender', 'id' => $model->id], ['class' => 'btn btn-primary modalButton']) ?>
     </div>
-
-
 </div>
 <?php
 //$modal = Modal::begin([
