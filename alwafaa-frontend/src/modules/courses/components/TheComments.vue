@@ -43,8 +43,8 @@
       <div class="text-h6 col-8 q-mt-sm q-mb-md q-ml-lg student-comments">ملاحظات الطلاب للدورة</div>
 <!-- ================================================================================================ -->
       <div
-        v-for="comment in computedObj "
-        :key="comment"
+        v-for="(comment,index) in computedObj "
+        :key="index"
         class="row col-10 comment-card  q-py-md q-px-lg q-mx-auto q-mb-sm"
       >
         <div
@@ -136,6 +136,15 @@ import { dateFormat } from 'src/utils/global.js'
 import StarRating from 'vue-star-rating'
 export default {
   components: { StarRating },
+  props: {
+    courseData: {
+      // eslint-disable-next-line vue/require-valid-default-prop
+      type: Array,
+      default: function () {
+        return ['']
+      }
+    }
+  },
   data () {
     return {
       isShowComments: false,
@@ -147,6 +156,7 @@ export default {
       review: ''
     }
   },
+
   computed: {
     isAuthed () {
       return this.$store.getters['auth/isAuthenticated']
@@ -154,11 +164,12 @@ export default {
     userToken () {
       return this.$store.getters['auth/getToken']
     },
-    courseData () {
-      return this.$store.getters['courses/getCoursePage']
-    },
+    // courseData () {
+    //   const { reviews } = this.$store.getters['courses/getCoursePage']
+    //   return reviews.length ? reviews : []
+    // },
     computedObj () {
-      return this.shownReviews ? this.courseData.reviews.slice(0, this.shownReviews) : this.courseData.reviews
+      return this.shownReviews ? this.courseData.slice(0, this.shownReviews) : this.courseData
     }
   },
   methods: {
@@ -194,10 +205,11 @@ export default {
       const date = dateFormat(time)
       return date
     }
-  },
-  mounted () {
-    this.$store.dispatch('student/getProfileData')
   }
+  // ,
+  // mounted () {
+  //   this.$store.dispatch('student/getProfileData')
+  // }
 }
 </script>
 <style lang='scss' scoped>

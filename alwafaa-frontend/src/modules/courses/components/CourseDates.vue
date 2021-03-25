@@ -18,8 +18,7 @@
           >
             keyboard_arrow_right
           </span>
-          <!-- {{fullDate(courseData.classes[0].date)}} -->
-          {{fullDate(todayDate)}}
+          {{fullDate()}}
           <span
             class="material-icons"
             style="font-size:25px;cursor: pointer;"
@@ -74,17 +73,17 @@
                         <th
                           roll="gridcell"
                           class="table-head text-dark"
-                          v-for='day in getDayDates(courseData.start_at , x - 1)'
-                          :key='day'
+                          v-for='(day,index) in getDayDates(courseData.start_at , x - 1)'
+                          :key='index'
                         >
                           {{getDayName(day /1000)}}
                         </th>
                       </tr>
                       <tr>
                         <td
-                          v-for="day in getDayDates(courseData.start_at, x - 1)"
-                          :key="day"
-                          :class="{'text-grey-3': future || past, 'text-dark': today}"
+                          v-for="(day,index) in getDayDates(courseData.start_at, x - 1)"
+                          :key="index"
+                          :class="{'text-grey-3': future || past, 'text-dark': todayStatus}"
                           class="text-weight-thin table-head q-mb-lg q-pb-lg"
                           style="font-size:12px;"
                         >
@@ -95,12 +94,12 @@
                       <tr>
                         <td
                           class="text-body1"
-                          v-for="(lecture) in startClassTime(x-1)"
-                          :key="lecture"
+                          v-for="(lecture,index) in startClassTime(x-1)"
+                          :key="index"
                           :rowspan="(lecture === 'عطلة') ? 2 : undefined"
                           :class="{
                             'off': (lecture === 'عطلة'),
-                            'green-active': today,
+                            'green-active': todayStatus,
                             'inactive': past,
                             'green-line-active': (future && lecture !== 'عطلة' ),
 
@@ -113,11 +112,11 @@
                       <tr>
                         <td
                           class="text-body1"
-                          v-for="(lecture) in endClassTime(x-1)"
-                          :key="lecture"
+                          v-for="(lecture,index) in endClassTime(x-1)"
+                          :key="index"
                           :class="{
                             'hidden': (lecture === 'عطلة'),
-                            'red-active': today,
+                            'red-active': todayStatus,
                             'inactive': past,
                             'red-line-active': (future && lecture !== 'عطلة' )
                           }"
@@ -141,6 +140,7 @@
         v-model="slide"
         ref="carousel"
         class="carousel q-mx-auto"
+        v-if="courseData.classes"
       >
         <q-carousel-slide
           :name="x"
@@ -155,24 +155,17 @@
                 <th
                   roll="gridcell"
                   class="table-head"
-                  v-for='day in getDayDates(courseData.start_at , x - 1)'
-                  :key='day'
+                  v-for='(day,index) in getDayDates(courseData.start_at , x - 1)'
+                  :key='index'
                 >
                   {{getDayName(day /1000)}}
                 </th>
-                <!-- <th
-                  class="table-head"
-                  v-for='day in daysName'
-                  :key='day'
-                >
-                  {{day}}
-                </th> -->
               </tr>
               <tr>
                 <td
-                  v-for="day in getDayDates(courseData.start_at, x - 1)"
-                  :key="day"
-                  :class="{'text-grey-3': future || past, 'text-dark': today}"
+                  v-for="(day,index) in getDayDates(courseData.start_at, x - 1)"
+                  :key="index"
+                  :class="{'text-grey-3': future || past, 'text-dark': todayStatus}"
                   class="text-weight-thin table-head q-mb-lg q-pb-lg"
                   style="font-size:12px;"
                 >
@@ -180,19 +173,10 @@
                 </td>
               </tr>
               <tr>
-                <!-- <td class="inactive text-body1"> 5:30 م</td>
-                <td class="inactive text-body1"> 5:30 م</td>
-                <td class="inactive text-body1"> 5:30 م</td>
-                <td class="green-active text-body1"> 5:30 م</td>
-                <td class="green-line-active text-body1"> 5:30 م</td>
-                <td class="green-line-active text-body1"> 5:30 م</td>
-                <td rowspan='2' class="off text-h6">
-                  عطلة
-                </td> -->
                 <td
                   class="text-body1"
-                  v-for="(lecture) in startClassTime(x-1)"
-                  :key="lecture"
+                  v-for="(lecture,index) in startClassTime(x-1)"
+                  :key="index"
                   :rowspan="(lecture === 'عطلة') ? 2 : undefined"
                   :class="{
                     'off': (lecture === 'عطلة'),
@@ -208,8 +192,8 @@
               <tr>
                 <td
                   class="text-body1"
-                  v-for="(lecture) in endClassTime(x-1)"
-                  :key="lecture"
+                  v-for="(lecture,index) in endClassTime(x-1)"
+                  :key="index"
                   :class="{
                     'hidden': (lecture === 'عطلة'),
                     'red-active': todayStatus,
@@ -219,12 +203,6 @@
                 >
                   {{lecture}}
                 </td>
-                <!-- <td class="inactive text-body1"> 5:30 م</td>
-                <td class="inactive text-body1"> 5:30 م</td>
-                <td class="inactive text-body1"> 5:30 م</td>
-                <td class="red-active text-body1"> 5:30 م</td>
-                <td class="red-line-active text-body1"> 5:30 م</td>
-                <td class="red-line-active text-body1"> 5:30 م</td> -->
               </tr>
 
             </table>
@@ -269,13 +247,10 @@ export default {
       dialog: false,
       maximizedToggle: true,
       slide: 1,
-      classesTime: [],
-      daysName: ['السبت', 'الأحد', 'الأثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'],
       times: ['عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة'],
       past: false,
       future: false,
-      todayStatus: false,
-      todayDate: new Date()
+      todayStatus: false
     }
   },
   methods: {
@@ -293,10 +268,8 @@ export default {
       return date
     },
     fullDate () {
-      // const classDay = dateFormat(classDate)
       const today = new Date()
       return dateFormat(today.getTime() / 1000)
-      // return classDay
     },
     // For get month date name and day date
     getClassDate (classDate) {
@@ -315,15 +288,12 @@ export default {
 
       const endDate = new Date(start)
       endDate.setDate(start.getDate() + 7)
-      // const allDays = (endDate - startDate) / (1000 * 60 * 60 * 24)
       let dates = []
 
       // eslint-disable-next-line no-unmodified-loop-condition
       while (start < endDate) {
         dates = [...dates, new Date(start)]
         start.setDate(start.getDate() + 1)
-        console.log('start', start)
-        console.log('end', endDate)
       }
 
       return dates
@@ -336,30 +306,36 @@ export default {
       const endDate = new Date(start)
       endDate.setDate(start.getDate() + 7)
       const mapped = this.mappedDate()
-      for (let i = 0; i < this.courseData.classes.length; i++) {
-        const classT = this.courseData.classes[i]
+      // For Each
+      this.courseData.classes.forEach(classT => {
         const pastFuture = new Date(classT.date * 1000)
         const today = new Date()
-        if (pastFuture.valueOf() < today.valueOf()) {
+        if (pastFuture < today) {
           this.past = true
-          // this.future = false
-          // this.todayStatus = false
-          console.log('past')
-        } else if (pastFuture.valueOf() > today.valueOf()) {
-          // this.past = false
+        } else if (pastFuture > today) {
           this.future = true
-          // this.todayStatus = false
-          console.log('future')
-        } else if (pastFuture.valueOf() === today.valueOf()) {
-          // this.past = false
-          // this.future = false
+        } else if (pastFuture.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
           this.todayStatus = true
-          // console.log('today')
         }
         if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
           this.times[mapped[classT.day_id]] = getClassStartTime(classT.from)
         }
-      }
+      })
+      // for (let i = 0; i < this.courseData.classes.length; i++) {
+      //   const classT = this.courseData.classes[i]
+      //   const pastFuture = new Date(classT.date * 1000)
+      //   const today = new Date()
+      //   if (pastFuture.valueOf() < today.valueOf()) {
+      //     this.past = true
+      //   } else if (pastFuture.valueOf() > today.valueOf()) {
+      //     this.future = true
+      //   } else if (pastFuture.valueOf() === today.valueOf()) {
+      //     this.todayStatus = true
+      //   }
+      //   if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
+      //     this.times[mapped[classT.day_id]] = getClassStartTime(classT.from)
+      //   }
+      // }
       return this.times
     },
     // Class End time
@@ -370,27 +346,36 @@ export default {
       const endDate = new Date(start)
       endDate.setDate(start.getDate() + 7)
       const mapped = this.mappedDate()
-      for (let i = 0; i < this.courseData.classes.length; i++) {
-        const classT = this.courseData.classes[i]
+      // For Each
+      this.courseData.classes.forEach(classT => {
         const pastFuture = new Date(classT.date * 1000)
         const today = new Date()
         if (pastFuture < today) {
           this.past = true
-          // this.future = false
-          // this.todayStatus = false
         } else if (pastFuture > today) {
-          // this.past = false
           this.future = true
-          // this.todayStatus = false
         } else if (pastFuture.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
           this.todayStatus = true
-          // this.past = false
-          // this.future = false
         }
         if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
           this.times[mapped[classT.day_id]] = getClassStartTime(classT.to)
         }
-      }
+      })
+      // for (let i = 0; i < this.courseData.classes.length; i++) {
+      //   const classT = this.courseData.classes[i]
+      //   const pastFuture = new Date(classT.date * 1000)
+      //   const today = new Date()
+      //   if (pastFuture < today) {
+      //     this.past = true
+      //   } else if (pastFuture > today) {
+      //     this.future = true
+      //   } else if (pastFuture.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
+      //     this.todayStatus = true
+      //   }
+      //   if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
+      //     this.times[mapped[classT.day_id]] = getClassStartTime(classT.to)
+      //   }
+      // }
       return this.times
     },
     // Acheived Course days

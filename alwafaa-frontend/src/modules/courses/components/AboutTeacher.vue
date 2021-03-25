@@ -2,8 +2,8 @@
   <div class="row col-11 teacher">
     <div class="text-h6 col-8 q-mt-xl q-mb-md"> عن المعلم</div>
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 about-teacher bg-grey-1">
-      <div class="text-h6 q-ml-lg q-mt-lg">{{courseData.teacher.name}}</div>
-      <div class="text-body1 q-ml-lg q-my-sm text-grey-4">{{courseData.teacher.sub_title}}</div>
+      <div class="text-h6 q-ml-lg q-mt-lg">{{courseData.name}}</div>
+      <div class="text-body1 q-ml-lg q-my-sm text-grey-4">{{courseData.sub_title}}</div>
       <div class="row col-10">
         <div class="col-2 q-ml-md"><img src="/images/home-imgs/shalaan.jpg" class="teacher-img"></div>
         <div class="col-9 row teacher-classes" style="margin-top:-10px;">
@@ -22,7 +22,7 @@
                   'text-caption': $q.screen.lt.sm,
                   'q-ml-md': true
                 }"
-              >   {{calcTime(courseData.teacher.duration)}} ساعة</div>
+              >   {{calcTime(courseData.duration)}} ساعة</div>
             </div>
             <div class="col-6 q-ml-md">
               <img
@@ -39,7 +39,7 @@
                   'text-caption': $q.screen.lt.sm,
                   'q-ml-md': true
                 }"
-              >   {{courseData.teacher.classes_number}} درس  </div>
+              >   {{courseData.classes_number}} درس  </div>
             </div>
             <div class="col-6 q-ml-md">
               <img
@@ -56,12 +56,12 @@
                   'text-caption': $q.screen.lt.sm,
                   'q-ml-md': true
                 }"
-              >   {{courseData.teacher.students}} طالب</div>
+              >   {{courseData.students}} طالب</div>
             </div>
         </div>
       </div>
       <div class="text-body1 q-ml-lg q-mt-lg text-grey-5 toggle-show1" :class="{'toggle-show1-no-gradient':isShowTeacherInfo}">
-        {{courseData.teacher.bio}}
+        {{courseData.bio}}
       </div>
       <div
         class="text-body1 col-12 text-center q-my-lg show-more_description text-bold"
@@ -94,7 +94,8 @@ export default {
   },
   computed: {
     courseData () {
-      return this.$store.getters['courses/getCoursePage']
+      const { teacher } = this.$store.getters['courses/getCoursePage']
+      return teacher || {}
     }
   }
 }

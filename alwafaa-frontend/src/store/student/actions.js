@@ -123,7 +123,6 @@ export default {
 
     try {
       const data = {
-        user_id: rootGetters['auth/getUser'].id,
         course_id: courseId
       }
 

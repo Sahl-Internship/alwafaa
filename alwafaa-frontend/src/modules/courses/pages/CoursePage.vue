@@ -4,7 +4,9 @@
     <div class="col-12 row justify-center blue-section">
       <div class="col-11 row q-px-sm">
 
-        <div class="col-xs-12 col-sm-12 col-md-8 col-8 row items-between q-mt-md">
+        <div
+          class="col-xs-12 col-sm-12 col-md-8 col-8 row items-between q-mt-md"
+        >
           <q-breadcrumbs
             separator=">"
             separator-color="grey-3"
@@ -25,7 +27,7 @@
               <q-avatar>
                 <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
               </q-avatar>
-              <div class="text-h6 text-white q-ml-sm" >
+              <div class="text-h6 text-white q-ml-sm" v-if="courseData.teacher">
                 {{courseData.teacher.name}}
 
               </div>
@@ -45,8 +47,8 @@
                 <img src="/images/Box/calender.png" width="18px" />
                 <div class="text-h6 text-white">
                   <!-- 12 يناير 2021 -->
-                  <!-- {{ calcDate(courseData.created_at) }} -->
-                  {{lastUpdate()}}
+                  {{ calcDate(courseData.created_at) }}
+                  <!-- {{CourseData.created_at}} -->
                 </div>
               </div>
             </div>
@@ -284,7 +286,7 @@
                     <div class="text-subtitle1 branch">الشعر</div>
                   </div>
                 </div>
-                <div class="row no-wrap q-mx-auto q-my-xl">
+                <div class="row no-wrap q-mx-auto q-my-xl" v-if="courseData.rate">
                   <div
                     class="text-grey-4"
                     :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
@@ -317,11 +319,11 @@
         </div>
 
         <!-- Start Course Classes description -->
-        <course-dates></course-dates>
+        <course-dates ></course-dates>
         <!-- Start About Teacher -->
         <about-teacher></about-teacher>
         <!-- Start About Teacher -->
-        <the-comments></the-comments>
+        <the-comments :courseData= courseData.reviews></the-comments>
     </div>
     <!-- End Course info Main Section -->
   </div>
@@ -334,13 +336,14 @@ import CourseDates from '../components/CourseDates.vue'
 import AboutTeacher from '../components/AboutTeacher.vue'
 import TheComments from '../components/TheComments.vue'
 export default {
-  components: { StarRating, CourseDates, AboutTeacher, TheComments },
+  components: { StarRating, AboutTeacher, TheComments, CourseDates },
   data () {
     return {
       date: '2019/02/01',
       dense: false,
       step: 1,
-      isShowAll: false
+      isShowAll: false,
+      courseData: {}
     }
   },
   methods: {
@@ -358,29 +361,20 @@ export default {
     calcTime (timestamp) {
       const time = calcDuration(timestamp)
       return time
-    },
-    lastUpdate () {
-      let last = []
-      for (let i = 0; i < this.courseData.classes.length; i++) {
-        const classes = this.courseData.classes[i].date
-        const today = new Date()
-        if (classes * 1000 <= today.valueOf()) {
-          last = [...last, classes * 1000]
-        }
-      }
-      const lastDate = Math.max(...last)
-      return this.calcDate(lastDate / 1000)
     }
   },
   mounted () {
     const courseId = this.$route.params.id
-    this.$store.dispatch('courses/coursePage', courseId)
+    this.$store.dispatch('courses/coursePage', courseId).then(data => {
+      this.courseData = data
+    })
   },
   computed: {
-    courseData () {
-      console.log(this.$store.getters['courses/getCoursePage'])
-      return this.$store.getters['courses/getCoursePage']
-    },
+    // courseData () {
+    //   console.log(this.$store.getters['courses/getCoursePage'])
+    //   const courseInfo = this.$store.getters['courses/getCoursePage']
+    //   return courseInfo || {}
+    // },
     isAuthed () {
       return this.$store.getters['auth/isAuthenticated']
     },
@@ -465,6 +459,7 @@ export default {
 .course-description__section{
   border-radius: 4px;
   box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 5%);
+  max-height: 787px;
   @media (max-width:480px) {
     padding-left: 25px;
     padding-right: 25px;

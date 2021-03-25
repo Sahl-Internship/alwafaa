@@ -41,8 +41,11 @@ export default {
     context.commit('courseReview', review)
   },
   async coursePage (context, courseId) {
+    Loading.show()
     const response = await handleCoursePage(courseId)
     console.log(response.data)
     context.commit('getCoursePage', response.data)
+    Loading.hide()
+    return response.data
   }
 }

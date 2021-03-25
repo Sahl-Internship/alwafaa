@@ -1,7 +1,7 @@
 export default {
   homeCover: {
     main: 'الرئيسية',
-    availableCourse: 'الكورسات المتاحة',
+    availableCourse: 'الدورات المتاحة',
     studentProfile: 'حسابي',
     lang: 'اللغة',
     signupFree: 'سجل مجاناً',
