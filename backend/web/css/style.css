@@ -18,8 +18,8 @@ body:not(.sidebar-mini-md) nav.main-header {
     background-color: #fff;
     width: 100%;
     position:sticky;
-    margin-right: 0;
-    margin-left: 0;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
     height: 58px;
 }
 
@@ -179,6 +179,11 @@ li p {
 
 .navbar-collapse .navbar-nav .dropdown-menu .user-header {
     background-color: #13A8E5 !important;
+}
+
+.dropdown-menu .user-footer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .dropdown-menu .user-footer a,
