@@ -3,6 +3,7 @@
 use edofre\fullcalendar\models\Event;
 use yii\bootstrap4\Modal;
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
 
@@ -31,6 +32,13 @@ use yii\widgets\DetailView;
                     'title',
                     'sub_title',
                     'description:html',
+//                    [
+//                            'attribute'=>'description',
+//                        'format'=>'html',
+//                        'content'=>function($model){
+//                            return StringHelper::truncateWords($model->description,7);
+//                        }
+//                    ],
                     'requirement:html',
                     'target_student:html',
                     'targeted_skills:html',
