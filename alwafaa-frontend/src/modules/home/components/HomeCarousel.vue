@@ -176,11 +176,16 @@ export default {
       this.$refs.slick.next()
     }
   },
+  watch: {
+    courses (value, old) {
+      console.log(old)
+      console.log(value)
+    }
+  },
   computed: {
     courses () {
-      const allCourses = [...this.$store.getters['courses/getCourses']]
-      const results = allCourses.sort((a, b) => b.created_at - a.created_at)
-      return results
+      const allCourses = this.$store.getters['courses/getCourses']
+      return [...allCourses].sort((a, b) => b.created_at - a.created_at)
     },
     isAuthenticated () {
       return this.$store.getters['auth/isAuthenticated']

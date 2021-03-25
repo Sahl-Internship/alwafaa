@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
-import store from '../store/index.js'
+// import store from '../store/index.js'
 
-console.log(store)
 // const token = localStorage.getItem('token')
 // const token = store()..getters['auth/getToken']
 
