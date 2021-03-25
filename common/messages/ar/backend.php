@@ -466,7 +466,7 @@ return [
     '{nFormatted} {n, plural, =1{petabyte} other{petabytes}}' => '{nFormatted} بيتابايت',
     '{nFormatted} {n, plural, =1{tebibyte} other{tebibytes}}' => '{nFormatted} تيبيبايت',
     '{nFormatted} {n, plural, =1{terabyte} other{terabytes}}' => '{nFormatted} تيرابايت',
-    'ID' => 'ID',
+    'ID' => 'رقم التعريف',
     'Created at' => 'تم الانشاء فى',
 
     'Street Name' => 'اسم الشارع',
