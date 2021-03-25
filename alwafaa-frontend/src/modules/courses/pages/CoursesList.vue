@@ -1,221 +1,287 @@
 <template>
   <div class="courses-list">
-
-    <q-separator color="grey-1" />
-
     <div class="row justify-center">
-
-      <div
-        class="col-xs-12 col-sm-11 row q-py-lg q-pr-md"
-        :class="$q.screen.lt.md ? 'q-gutter-y-lg q-pl-md' : 'q-gutter-y-xl q-pl-sm'"
-      >
-        <div class="col-12">
-          <q-breadcrumbs
-            separator=">"
-            separator-color="grey-3"
-            active-color="grey-3"
-          >
-            <q-breadcrumbs-el :label="$t('coursesList.home')" color="grey-3" to="/" />
-            <q-breadcrumbs-el :label="$t('coursesList.courses')" />
-          </q-breadcrumbs>
-        </div>
-
+      <div class="col-12 row justify-center doc-inset-shadow">
         <div
-          class="text-weight-bold text-grey-5 text-left"
-          :class="$q.screen.lt.sm ? 'text-h5' : 'text-h4'"
+          class="col-xs-12 col-sm-11 row q-py-lg q-pr-md"
+          :class="$q.screen.lt.md ? 'q-gutter-y-lg q-pl-md' : 'q-gutter-y-xl q-pl-sm'"
         >
-          {{ $t('coursesList.title') }}
-        </div>
-
-        <div class="col-12 row justify-between q-gutter-y-sm">
-          <div
-            class="col-xs-12 col-sm-8"
-            :class="!$q.screen.lt.sm ? 'q-pr-sm' : ''"
-          >
-            <q-select
-              dense borderless
-              use-input hide-dropdown-icon
-              v-model="selectedTitle"
-              :label="$t('coursesList.search')"
-              bg-color="grey-1"
-              :options="coursesOptions"
-              @filter="filterTitles"
-              @input-value="(val) => this.typing = val"
-              @input="filterCourses"
-              class="search-input ellipsis"
+          <div class="col-12">
+            <q-breadcrumbs
+              separator=">"
+              separator-color="grey-3"
+              active-color="grey-3"
             >
-              <template v-slot:append>
-                <q-btn
-                  unelevated
-                  icon="mdi-magnify"
-                  :color="typing ? 'green' : 'grey-2'"
-                  text-color="grey-5"
-                  class="full-height q-ml-md q-px-xs"
-                  @click="filterCourses"
-                />
-              </template>
-              <template v-slot:no-option>
-                <q-item>
-                  <q-item-section class="text-grey">
-                    لا يوجد
-                  </q-item-section>
-                </q-item>
-              </template>
-            </q-select>
+              <q-breadcrumbs-el :label="$t('coursesList.home')" color="grey-3" to="/" />
+              <q-breadcrumbs-el :label="$t('coursesList.courses')" />
+            </q-breadcrumbs>
           </div>
 
           <div
-            class="col-xs-12 col-sm-4 row justify-between"
-            :class="{
-              'q-pl-md': !$q.screen.lt.md,
-              'q-pl-sm': $q.screen.lt.md && !$q.screen.lt.sm,
-            }"
+            class="text-weight-bold text-grey-5 text-left"
+            :class="$q.screen.lt.sm ? 'text-h5' : 'text-h4'"
           >
-            <q-btn
-              no-caps no-wrap
-              unelevated
-              no-icon-animation
-              icon-right="mdi-chevron-down"
-              text-color="grey-5"
-              color="grey-1"
-              align="between"
-              class="filter-select"
-              :class="$q.screen.lt.md ? 'filter-select-sm' : ''"
+            {{ $t('coursesList.title') }}
+          </div>
+
+          <div class="col-12 row justify-between q-gutter-y-sm">
+            <div
+              class="col-xs-12 col-sm-8"
+              :class="!$q.screen.lt.sm ? 'q-pr-sm' : ''"
             >
-              <div
-                v-if="!selectedSection"
-                class="text-grey-3 ellipsis"
-                :class="{
-                  'text-subtitle1': !$q.screen.lt.md,
-                  'text-caption': $q.screen.lt.md
-                }"
+              <q-select
+                dense borderless
+                use-input hide-dropdown-icon
+                v-model="selectedTitle"
+                :label="$t('coursesList.search')"
+                bg-color="grey-1"
+                :options="coursesOptions"
+                @filter="filterTitles"
+                @input-value="(val) => this.typing = val"
+                @input="filterCourses"
+                class="search-input ellipsis"
               >
-                {{ $t('coursesList.section') }}
-              </div>
-
-              <div v-else class="row justify-start items-center no-wrap ellipsis">
-                <q-img
-                  v-if="!$q.screen.lt.md"
-                  :src="selectedSection.src"
-                  width="16px"
-                  class="q-mr-sm"
-                />
-                <div
-                  :class="{
-                    'text-subtitle1': !$q.screen.lt.md,
-                    'text-caption': $q.screen.lt.md
-                  }"
-                >{{ $t(`coursesList.${selectedSection.label}`) }}</div>
-              </div>
-
-              <q-menu fit>
-                <q-list
-                  class="q-pa-sm"
-                  :class="$q.screen.lt.md ? 'list-sm' : 'list-lg'"
-                >
-                  <q-item
-                    clickable v-close-popup
-                    v-for="(option, index) in sectionsOptions"
-                    :key="index"
-                    @click="selectSection(index)"
-                    :class="{
-                      'bg-grey-1': index === activeSectionIndex
-                    }"
-                  >
-                    <q-item-section>
-                      <div class="row justify-start">
-                        <img :src="option.src" class="q-mr-sm filter-icon" />
-                        <q-item-label
-                          :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
-                        >
-                          {{ $t(`coursesList.${option.label}`) }}
-                        </q-item-label>
-                      </div>
+                <template v-slot:append>
+                  <q-btn
+                    unelevated
+                    icon="mdi-magnify"
+                    :color="typing ? 'green' : 'grey-2'"
+                    text-color="grey-5"
+                    class="full-height q-ml-md q-px-xs"
+                    @click="filterCourses"
+                  />
+                </template>
+                <template v-slot:no-option>
+                  <q-item>
+                    <q-item-section class="text-grey">
+                      لا يوجد
                     </q-item-section>
                   </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
+                </template>
+              </q-select>
+            </div>
 
-            <q-btn
-              no-caps
-              no-wrap
-              unelevated
-              no-icon-animation
-              icon-right="mdi-chevron-down"
-              text-color="grey-5"
-              color="grey-1"
-              align="between"
-              class="filter-select"
-              :class="$q.screen.lt.md ? 'filter-select-sm' : ''"
+            <div
+              class="col-xs-12 col-sm-4 row justify-between"
+              :class="{
+                'q-pl-md': !$q.screen.lt.md,
+                'q-pl-sm': $q.screen.lt.md && !$q.screen.lt.sm,
+              }"
             >
-              <div
-                v-if="!selectedStatus"
-                class="text-grey-3 ellipsis"
-                :class="{
-                  'text-subtitle1': !$q.screen.lt.md,
-                  'text-caption': $q.screen.lt.md
-                }"
-              >{{ $t('coursesList.status') }}</div>
-
-              <div v-else class="row justify-start items-center no-wrap ellipsis">
-                <q-img
-                  v-if="!$q.screen.lt.md"
-                  :src="selectedStatus.src"
-                  width="16px"
-                  class="q-mr-sm"
-                />
+              <q-btn
+                no-caps no-wrap
+                unelevated
+                no-icon-animation
+                icon-right="mdi-chevron-down"
+                text-color="grey-5"
+                color="grey-1"
+                align="between"
+                class="filter-select"
+                :class="$q.screen.lt.md ? 'filter-select-sm' : ''"
+              >
                 <div
+                  v-if="!selectedSection"
+                  class="text-grey-3 ellipsis"
                   :class="{
                     'text-subtitle1': !$q.screen.lt.md,
                     'text-caption': $q.screen.lt.md
                   }"
-                >{{ $t(`coursesList.${selectedStatus.label}`) }}</div>
-              </div>
-
-              <q-menu fit>
-                <q-list
-                  class="q-pa-sm"
-                  :class="$q.screen.lt.md ? 'list-sm' : 'list-lg'"
                 >
-                  <q-item
-                    clickable v-close-popup
-                    v-for="(option, index) in statusOptions"
-                    :key="index"
-                    @click="selectStatus(index)"
+                  {{ $t('coursesList.section') }}
+                </div>
+
+                <div v-else class="row justify-start items-center no-wrap ellipsis">
+                  <q-img
+                    v-if="!$q.screen.lt.md"
+                    :src="selectedSection.src"
+                    width="16px"
+                    class="q-mr-sm"
+                  />
+                  <div
                     :class="{
-                      'bg-grey-1': index === activeStatusIndex
+                      'text-subtitle1': !$q.screen.lt.md,
+                      'text-caption': $q.screen.lt.md
                     }"
+                  >{{ $t(`coursesList.${selectedSection.label}`) }}</div>
+                </div>
+
+                <q-menu fit>
+                  <q-list
+                    class="q-pa-sm"
+                    :class="$q.screen.lt.md ? 'list-sm' : 'list-lg'"
                   >
-                    <q-item-section>
-                      <div class="row justify-start">
-                        <img :src="option.src" class="q-mr-sm filter-icon" />
-                        <q-item-label
-                          :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
-                        >
-                          {{ $t(`coursesList.${option.label}`) }}
-                        </q-item-label>
-                      </div>
-                    </q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
+                    <q-item
+                      clickable v-close-popup
+                      v-for="(option, index) in sectionsOptions"
+                      :key="index"
+                      @click="selectSection(index)"
+                      :class="{
+                        'bg-grey-1': index === activeSectionIndex
+                      }"
+                    >
+                      <q-item-section>
+                        <div class="row justify-start">
+                          <img :src="option.src" class="q-mr-sm filter-icon" />
+                          <q-item-label
+                            :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
+                          >
+                            {{ $t(`coursesList.${option.label}`) }}
+                          </q-item-label>
+                        </div>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-menu>
+              </q-btn>
 
+              <q-btn
+                no-caps
+                no-wrap
+                unelevated
+                no-icon-animation
+                icon-right="mdi-chevron-down"
+                text-color="grey-5"
+                color="grey-1"
+                align="between"
+                class="filter-select"
+                :class="$q.screen.lt.md ? 'filter-select-sm' : ''"
+              >
+                <div
+                  v-if="!selectedStatus"
+                  class="text-grey-3 ellipsis"
+                  :class="{
+                    'text-subtitle1': !$q.screen.lt.md,
+                    'text-caption': $q.screen.lt.md
+                  }"
+                >{{ $t('coursesList.status') }}</div>
+
+                <div v-else class="row justify-start items-center no-wrap ellipsis">
+                  <q-img
+                    v-if="!$q.screen.lt.md"
+                    :src="selectedStatus.src"
+                    width="16px"
+                    class="q-mr-sm"
+                  />
+                  <div
+                    :class="{
+                      'text-subtitle1': !$q.screen.lt.md,
+                      'text-caption': $q.screen.lt.md
+                    }"
+                  >{{ $t(`coursesList.${selectedStatus.label}`) }}</div>
+                </div>
+
+                <q-menu fit>
+                  <q-list
+                    class="q-pa-sm"
+                    :class="$q.screen.lt.md ? 'list-sm' : 'list-lg'"
+                  >
+                    <q-item
+                      clickable v-close-popup
+                      v-for="(option, index) in statusOptions"
+                      :key="index"
+                      @click="selectStatus(index)"
+                      :class="{
+                        'bg-grey-1': index === activeStatusIndex
+                      }"
+                    >
+                      <q-item-section>
+                        <div class="row justify-start">
+                          <img :src="option.src" class="q-mr-sm filter-icon" />
+                          <q-item-label
+                            :class="index === activeSectionIndex ? 'text-grey-5' : 'text-grey-4'"
+                          >
+                            {{ $t(`coursesList.${option.label}`) }}
+                          </q-item-label>
+                        </div>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-menu>
+              </q-btn>
+            </div>
           </div>
-
         </div>
       </div>
 
-      <div class="col-12 row justify-center bg-grey-2">
+      <div
+        v-if="!activateFilterMode"
+        class="col-12 row justify-center bg-grey-6 q-pt-lg q-pb-xl"
+      >
         <div
-          class="col-xs-12 col-sm-11 row q-gutter-y-lg q-pt-lg"
+          :class="{
+            'col-12': true,
+            'q-mb-xl': !$q.screen.lt.sm
+          }"
+        >
+          <coureses-carousel
+            title="الدورات الأعلي تصنيفا"
+            :courses="allCourses"
+            joined
+          ></coureses-carousel>
+        </div>
+      </div>
+
+      <div class="col-12 row justify-center bg-grey-1 q-pt-xl">
+        <div
+          v-if="!activateFilterMode"
+          class="col-12 text-weight-bold text-grey-5 text-center"
+          :class="$q.screen.lt.sm ? 'text-h5 q-mt-sm' : 'text-h4 q-mt-xl'"
+        > الدورات المتاحة </div>
+
+        <q-separator
+          v-if="!activateFilterMode"
+          spaced="lg" size="3px"
+          class="col-1 q-px-md"
+          color="green"
+        />
+
+        <div  v-if="!activateFilterMode" class="col-12">
+          <coureses-carousel
+            title="الدورات الأعلي تصنيفا"
+            :courses="allCourses"
+          ></coureses-carousel>
+        </div>
+
+        <div
+          v-if="!activateFilterMode"
+          class="col-12"
+          :class="$q.screen.lt.sm ? 'q-mt-sm' : 'q-mt-xl'"
+        >
+          <coureses-carousel
+            title="أكثر الدورات فاعلية"
+            :courses="allCourses"
+          ></coureses-carousel>
+        </div>
+
+        <div
+          v-if="!activateFilterMode"
+          class="col-12"
+          :class="$q.screen.lt.sm ? 'q-mt-sm' : 'q-mt-xl'"
+        >
+          <coureses-carousel
+            title="أحدث الدورات"
+            :courses="allCourses"
+          ></coureses-carousel>
+        </div>
+
+        <div
+          class="col-xs-12 col-sm-11 row q-gutter-y-lg q-mt-xl"
           :class="{
             'q-gutter-x-lg': !$q.screen.lt.md,
             'q-gutter-x-sm': $q.screen.lt.md,
             'justify-center': $q.screen.lt.sm
           }"
         >
+          <div
+            v-if="!activateFilterMode"
+            class="col-12 text-h5 text-weight-bold text-grey-5"
+            :class="{
+              'text-h5 q-mt-xl': !$q.screen.lt.md,
+              'text-h6 q-mt-xl': $q.screen.lt.md && !$q.screen.lt.sm,
+              'text-subtitle1 q-pl-md q-mt-md': $q.screen.lt.sm
+            }"
+          >ebtsam لنبدأ نتعلم</div>
+
           <course-card
             v-for="course in shownCourses"
             :key="course.id"
@@ -240,19 +306,20 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-import CourseCard from '../components/CourseCard'
+import CouresesCarousel from '../components/CouresesCarousel.vue'
+import CourseCard from '../components/CourseCard.vue'
 import { i18n } from 'src/boot/i18n'
 
 export default {
   name: 'CoursesList',
   components: {
-    CourseCard
+    CourseCard,
+    CouresesCarousel
   },
   data () {
     return {
@@ -301,9 +368,17 @@ export default {
       typing: ''
     }
   },
+  computed: {
+    activateFilterMode () {
+      return this.selectedTitle || this.selectedSection || this.selectedStatus
+    },
+    slidesToShow () {
+      return this.$q.screen.width <= 488 ? 2 : 3
+    }
+  },
   methods: {
     getShownCourses () {
-      this.shownCourses = this.filteredCourses.slice(0, this.shownCourses.length + 3)
+      this.shownCourses = this.filteredCourses.slice(0, this.shownCourses.length + this.slidesToShow)
     },
     selectSection (index) {
       this.selectedSection = this.sectionsOptions[index]
@@ -331,6 +406,7 @@ export default {
       })
     },
     filterCourses () {
+      console.log('input')
       let filtered = this.allCourses
       const { selectedTitle, selectedSection, selectedStatus } = this
 
@@ -388,6 +464,11 @@ export default {
 <style lang="scss" scoped>
 .courses-list {
   overflow-x: hidden;
+}
+
+.doc-inset-shadow {
+  border-top: 0.5px solid #eee;
+  border-bottom: 2px solid $grey-1;
 }
 
 .search-input {
