@@ -4,7 +4,6 @@
 namespace api\resources;
 
 
-use function foo\func;
 
 class CoursesList extends \common\models\Course
 {
