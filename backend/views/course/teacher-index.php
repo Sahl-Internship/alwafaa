@@ -1,5 +1,6 @@
 <?php
 
+use kartik\date\DatePicker;
 use kartik\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
@@ -37,16 +38,38 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     ['attribute'=>'start_at',
                         'format'=>'date',
-                        'contentOptions'=>['style'=>'width:60px']
+//                        'contentOptions'=>['style'=>'width:60px'],
+                        'filter' => DatePicker::widget([
+                            'model' => $searchModel,
+                            'attribute' => 'start_at',
+                            'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                            'pluginOptions' => [
+                                'format' => 'dd-mm-yyyy',
+                                'showMeridian' => true,
+                                'todayBtn' => true,
+//                                'endDate' => '0d',
+                            ]
+                        ]),
                     ],
 
                     ['attribute'=>'end_at',
                         'format'=>'date',
-                        'contentOptions'=>['style'=>'width:60px']
+//                        'contentOptions'=>['style'=>'width:60px'],
+                        'filter' => DatePicker::widget([
+                            'model' => $searchModel,
+                            'attribute' => 'end_at',
+                            'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                            'pluginOptions' => [
+                                'format' => 'dd-mm-yyyy',
+                                'showMeridian' => true,
+                                'todayBtn' => true,
+//                                'endDate' => '0d',
+                            ]
+                        ]),
                     ],
 
                     ['attribute'=>'title',
-                        'contentOptions'=>['style'=>'width:60px']
+//                        'contentOptions'=>['style'=>'width:60px']
                     ],
 
                     [
