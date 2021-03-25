@@ -60,6 +60,7 @@ class Event extends \yii\db\ActiveRecord
             'day_id' => Yii::t('backend', 'Day ID'),
             'from' => Yii::t('backend', 'From'),
             'to' => Yii::t('backend', 'To'),
+            'attachments' => Yii::t('backend', 'Attachment'),
         ];
     }
 

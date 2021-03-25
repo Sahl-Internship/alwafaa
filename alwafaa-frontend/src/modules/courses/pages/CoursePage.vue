@@ -25,7 +25,10 @@
               <q-avatar>
                 <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
               </q-avatar>
-              <div class="text-h6 text-white q-ml-sm" >{{courseData.teacher.name}}</div>
+              <div class="text-h6 text-white q-ml-sm" >
+                {{courseData.teacher.name}}
+
+              </div>
             </div>
 
             <div class="row items-center">
@@ -42,7 +45,8 @@
                 <img src="/images/Box/calender.png" width="18px" />
                 <div class="text-h6 text-white">
                   <!-- 12 يناير 2021 -->
-                  {{ calcDate(courseData.created_at) }}
+                  <!-- {{ calcDate(courseData.created_at) }} -->
+                  {{lastUpdate()}}
                 </div>
               </div>
             </div>
@@ -112,6 +116,8 @@
                 v-html="courseData.description"
               >
               </div>
+              <div
+                class="text-h6">وصف الدورة</div>
               <div
                 class="toggle-show1 text-body1 text-grey-4 q-my-none"
                 :class="{
@@ -282,11 +288,11 @@
                   <div
                     class="text-grey-4"
                     :class="$q.screen.lt.md ? 'text-caption' : 'text-subtitle1'"
-                  >{{courseData.rate.rate_average}}</div>
+                  >{{getRate}}</div>
                   <star-rating
                     read-only
                     :increment=0.5
-                    :rating='roundRate'
+                    :rating='courseData.rate.rate_average'
                     :star-size="$q.screen.lt.md ? 13 : 20"
                     :padding="$q.screen.lt.md ? 3 : 5"
                     :active-color="['#e49d1a']"
@@ -339,7 +345,6 @@ export default {
   },
   methods: {
     joinCourse () {
-      console.log(this.$router)
       const courseId = this.$route.params.id
       this.$store.dispatch('student/joinCourse', courseId)
     },
@@ -353,6 +358,18 @@ export default {
     calcTime (timestamp) {
       const time = calcDuration(timestamp)
       return time
+    },
+    lastUpdate () {
+      let last = []
+      for (let i = 0; i < this.courseData.classes.length; i++) {
+        const classes = this.courseData.classes[i].date
+        const today = new Date()
+        if (classes * 1000 <= today.valueOf()) {
+          last = [...last, classes * 1000]
+        }
+      }
+      const lastDate = Math.max(...last)
+      return this.calcDate(lastDate / 1000)
     }
   },
   mounted () {
@@ -376,9 +393,12 @@ export default {
       }
       return '/images/home-imgs/quran-icon2.png'
     },
-    roundRate () {
-      const roundedRate = (this.courseData.rate.rate_average).toFixed(1)
-      return roundedRate
+    getRate () {
+      const rate = this.courseData.rate.rate_average
+      if (rate === 0) {
+        return '5/5'
+      }
+      return rate.toFixed(1)
     }
   }
 }
@@ -444,6 +464,7 @@ export default {
 }
 .course-description__section{
   border-radius: 4px;
+  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 5%);
   @media (max-width:480px) {
     padding-left: 25px;
     padding-right: 25px;
@@ -461,6 +482,7 @@ export default {
       margin: 0px;
     }
     border-radius: 4px;
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 5%);
     background: #fff;
   }
   .course-info_title{
@@ -493,11 +515,11 @@ export default {
   }
 }
 .toggle-show1{
-    -webkit-mask-image: -webkit-gradient(linear, left top,
+    mask-image: -webkit-gradient(linear, left top,
     left bottom, from(rgba(1,1,1,1)), to(rgba(1,1,1,0)));
 }
 .toggle-show1-no-gradient{
-  -webkit-mask-image: -webkit-gradient(linear, left top,
+  mask-image: -webkit-gradient(linear, left top,
   left bottom, from(rgba(1,1,1,1)), to(rgba(1,1,1,1)));
 }
 </style>

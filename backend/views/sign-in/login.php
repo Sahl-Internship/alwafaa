@@ -30,15 +30,15 @@ $this->params['body-class'] = 'login-page';
 
       <?php echo $form->field($model, 'username', [
         'inputTemplate' => '<div class="input-group">
-            {input}
             <div class="input-group-append"><span class="input-group-text"><span class="fas fa-user"></span></span></div>
+            {input}
         </div>',
       ])->textInput(['placeholder' => "Username"])->label(false) ?>
 
       <?php echo $form->field($model, 'password', [
         'inputTemplate' => '<div class="input-group">
-            {input}
             <div class="input-group-append"><span class="input-group-text"><span class="fas fa-lock"></span></span></div>
+            {input}
           </div>',
       ])->passwordInput(['placeholder' => "Password"])->label(false) ?>
 
