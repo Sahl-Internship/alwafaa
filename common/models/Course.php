@@ -97,7 +97,7 @@ class Course extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['start_at', 'end_at', 'section_id', 'title', 'description','teacher_id'], 'required'],
+            [['start_at', 'end_at', 'section_id', 'title','teacher_id'], 'required'],
             [['section_id', 'teacher_id'], 'integer'],
             [['title', 'sub_title', 'zoom_link'], 'string', 'max' => 255],
             [['description','requirement','target_student','targeted_skills'], 'string', 'max' => 5000],
