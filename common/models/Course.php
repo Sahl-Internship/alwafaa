@@ -30,6 +30,7 @@ use yii\behaviors\TimestampBehavior;
  * @property CourseAttachment[] $courseAttachments
  * @property CourseClasses[] $courseClasses
  * @property CourseReview[] $courseReview
+ * @property Event[] $events
  * @property Section $section
  * @property User $teacher
  */
@@ -39,6 +40,7 @@ class Course extends \yii\db\ActiveRecord
     const STATUS_NOT_FINISHED = 1;
     const STATUS_FINISHED = 2;
     public $classes;
+    public $events;
     public $attachments;
     public $review;
     public $intro_video;
@@ -158,6 +160,15 @@ class Course extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CourseClasses::className(), ['course_id' => 'id']);
     }
+    /**
+     * Gets query for [[Events]].
+     *
+     * @return \yii\db\ActiveQuery|\common\models\query\EventQuery
+     */
+    public function getEvents()
+    {
+        return $this->hasMany(Event::className(), ['course_id' => 'id']);
+    }
 
     /**
      * Gets query for [[Section]].
@@ -214,6 +225,21 @@ class Course extends \yii\db\ActiveRecord
             $courseClass->from = $class['from'];
             $courseClass->to = $class['to'];
             $courseClass->save();
+        }
+    }
+
+    public function setEvents($course_id)
+    {
+        $classes = Course::find()->getClasses($course_id);
+        foreach ($classes as $class) {
+            $event = new Event();
+            $event->course_id = $this->id;
+            $event->title = "class Time";
+            $event->date = $class['date'];
+            $event->day_id = $class['day_id'];
+            $event->from = $class['from'];
+            $event->to = $class['to'];
+            $event->save();
         }
     }
 

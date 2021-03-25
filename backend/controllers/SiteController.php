@@ -83,7 +83,8 @@ class SiteController extends \yii\web\Controller
 //            'data' => $course,
 //            'data' => $status,
 //            'data' => $ownCourses,
-            'data' => $ownCourses,
+//            'data' => $ownCourses,
+            'data' => $classes,
         ]);
     }
 //
