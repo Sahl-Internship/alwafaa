@@ -5,7 +5,7 @@ use yii\bootstrap4\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var common\models\Course $model
+ * @var backend\models\search\CourseSearch $model
  * @var yii\bootstrap4\ActiveForm $form
  */
 ?>
@@ -18,8 +18,8 @@ use yii\bootstrap4\ActiveForm;
     ]); ?>
 
     <?php echo $form->field($model, 'id') ?>
-    <?php echo $form->field($model, 'time') ?>
-    <?php echo $form->field($model, 'duration') ?>
+    <?php echo $form->field($model, 'start_at') ?>
+    <?php echo $form->field($model, 'end_at') ?>
     <?php echo $form->field($model, 'title') ?>
     <?php echo $form->field($model, 'description') ?>
     <?php // echo $form->field($model, 'section_id') ?>
