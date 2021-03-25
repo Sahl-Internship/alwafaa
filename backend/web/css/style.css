@@ -552,3 +552,46 @@ a.back-to-top {
 }
 
 /* end login page */
+
+
+/* start teacher main page */
+.courses-info {
+  padding: 30px 20px !important;
+}
+
+.courses-info .card-body{
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.courses-info .info-title{
+  color: #636e7d !important;
+  margin-bottom: 10px;
+}
+
+.courses-info .card-icon{
+  color: #26c5f9;
+  margin-left: 10px;
+}
+
+.schedule-card {
+  margin-top: 50px !important;
+}
+/* end teacher main page */
+
+
+/* start teacher course page  */
+.course-attachment-section .field-event-attachments {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-attachment-section label {
+  text-align: left;
+}
+
+.course-attachment-section .upload-kit {
+  display: flex;
+  flex-direction: row-reverse;
+}
+/* end teacher course page  */
