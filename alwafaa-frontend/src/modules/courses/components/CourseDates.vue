@@ -196,9 +196,9 @@
                   :rowspan="(lecture === 'عطلة') ? 2 : undefined"
                   :class="{
                     'off': (lecture === 'عطلة'),
-                    'green-active': (today),
-                    'inactive': past && (!today || !future) ,
-                    'green-line-active': future &&  lecture !== 'عطلة' && (!today || !past),
+                    'green-active': todayStatus,
+                    'inactive': past ,
+                    'green-line-active': future &&  lecture !== 'عطلة',
 
                   }"
                 >
@@ -212,7 +212,7 @@
                   :key="lecture"
                   :class="{
                     'hidden': (lecture === 'عطلة'),
-                    'red-active': today,
+                    'red-active': todayStatus,
                     'inactive': past,
                     'red-line-active': (future && lecture !== 'عطلة' )
                   }"
@@ -315,13 +315,17 @@ export default {
 
       const endDate = new Date(start)
       endDate.setDate(start.getDate() + 7)
+      // const allDays = (endDate - startDate) / (1000 * 60 * 60 * 24)
       let dates = []
 
       // eslint-disable-next-line no-unmodified-loop-condition
       while (start < endDate) {
         dates = [...dates, new Date(start)]
         start.setDate(start.getDate() + 1)
+        console.log('start', start)
+        console.log('end', endDate)
       }
+
       return dates
     },
     // To get Class Start time
@@ -336,12 +340,21 @@ export default {
         const classT = this.courseData.classes[i]
         const pastFuture = new Date(classT.date * 1000)
         const today = new Date()
-        if (pastFuture < today) {
+        if (pastFuture.valueOf() < today.valueOf()) {
           this.past = true
-        } else if (pastFuture > today) {
+          // this.future = false
+          // this.todayStatus = false
+          console.log('past')
+        } else if (pastFuture.valueOf() > today.valueOf()) {
+          // this.past = false
           this.future = true
-        } else if (pastFuture.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
+          // this.todayStatus = false
+          console.log('future')
+        } else if (pastFuture.valueOf() === today.valueOf()) {
+          // this.past = false
+          // this.future = false
           this.todayStatus = true
+          // console.log('today')
         }
         if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
           this.times[mapped[classT.day_id]] = getClassStartTime(classT.from)
@@ -363,10 +376,16 @@ export default {
         const today = new Date()
         if (pastFuture < today) {
           this.past = true
+          // this.future = false
+          // this.todayStatus = false
         } else if (pastFuture > today) {
+          // this.past = false
           this.future = true
+          // this.todayStatus = false
         } else if (pastFuture.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
           this.todayStatus = true
+          // this.past = false
+          // this.future = false
         }
         if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
           this.times[mapped[classT.day_id]] = getClassStartTime(classT.to)

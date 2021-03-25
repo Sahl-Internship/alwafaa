@@ -25,7 +25,10 @@
               <q-avatar>
                 <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
               </q-avatar>
-              <div class="text-h6 text-white q-ml-sm" >{{courseData.teacher.name}}</div>
+              <div class="text-h6 text-white q-ml-sm" >
+                {{courseData.teacher.name}}
+
+              </div>
             </div>
 
             <div class="row items-center">
@@ -289,7 +292,7 @@
                   <star-rating
                     read-only
                     :increment=0.5
-                    :rating='roundRate'
+                    :rating='courseData.rate.rate_average'
                     :star-size="$q.screen.lt.md ? 13 : 20"
                     :padding="$q.screen.lt.md ? 3 : 5"
                     :active-color="['#e49d1a']"
@@ -389,10 +392,6 @@ export default {
         return '/images/home-imgs/global.png'
       }
       return '/images/home-imgs/quran-icon2.png'
-    },
-    roundRate () {
-      const roundedRate = (this.courseData.rate.rate_average).toFixed(1)
-      return roundedRate
     },
     getRate () {
       const rate = this.courseData.rate.rate_average
