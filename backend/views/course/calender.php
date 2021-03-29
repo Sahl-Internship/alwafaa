@@ -1,7 +1,6 @@
 <?php
 
-use yii\bootstrap4\Modal;
-
+/** @var common\models\Event $events */
 ?>
 
 <?= edofre\fullcalendar\Fullcalendar::widget([
@@ -13,34 +12,5 @@ use yii\bootstrap4\Modal;
     ],
 ]);
 ?>
-<!---->
-<?php
-//Modal::begin([
-//
-//    'toggleButton' => [
-//
-//        'label' => '<i class="glyphicon glyphicon-plus"></i> Add',
-//
-//        'class' => 'btn btn-success'
-//
-//    ],
-//
-//    'closeButton' => [
-//
-//        'label' => 'Close',
-//
-//        'class' => 'btn btn-danger btn-sm pull-right',
-//
-//    ],
-//
-//    'size' => 'modal-lg',
-//
-//]);
-//
-////    $myModel = new \common\models\Course();
-//echo $this->render('/course/calender',[]);
-//
-//Modal::end();
-//
-//?>
+
 
