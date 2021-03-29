@@ -12,6 +12,7 @@ use common\models\Course;
  */
 class CourseSearch extends Course
 {
+    public $teacherName;
     /**
      * @inheritdoc
      */
@@ -19,9 +20,10 @@ class CourseSearch extends Course
     {
         return [
 //            [['id','section_id', 'teacher_id','start_at','end_at'], 'integer'],
-            [['id','section_id', 'teacher_id'], 'integer'],
+            [['id','section_id'], 'integer'],
             [['start_at', 'end_at'], 'default', 'value' => null],
             [['title', 'description', 'zoom_link','sub_title','requirement','target_student','targeted_skills',''], 'safe'],
+            [['teacherName'], 'safe'],
         ];
     }
 
@@ -58,10 +60,6 @@ class CourseSearch extends Course
 
         $query->andFilterWhere([
             'id' => $this->id,
-//            'start_at' => $this->start_at,
-//            'end_at' => $this->end_at,
-            'section_id' => $this->section_id,
-            'teacher_id' => $this->teacher_id,
         ]);
         if ($this->start_at !== null) {
             $query->andFilterWhere(['between', 'start_at', strtotime($this->start_at), strtotime($this->start_at) + 3600 * 24]);
@@ -70,6 +68,16 @@ class CourseSearch extends Course
         if ($this->end_at !== null) {
             $query->andFilterWhere(['between', 'end_at', strtotime($this->end_at), strtotime($this->end_at) + 3600 * 24]);
         }
+        $query->joinWith(['teacher' => function ($q) {
+            $q->joinWith(['userProfile' => function ($z) {
+                $z->andFilterWhere([
+                    'or',
+                    ['like', 'lastname', $this->teacherName],
+                    ['like', 'firstname', $this->teacherName],
+                ]);
+            }]);
+        }]);
+
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'sub_title', $this->sub_title])

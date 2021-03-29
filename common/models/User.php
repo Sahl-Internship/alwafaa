@@ -351,6 +351,13 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->getPrimaryKey();
     }
+    public function getFullName()
+    {
+        if ($this->userProfile->firstname || $this->userProfile->lastname) {
+            return implode(' ', [$this->userProfile->firstname, $this->userProfile->lastname]);
+        }
+        return null;
+    }
 
     public function userRole()
     {

@@ -1,11 +1,6 @@
 <?php
 
-use common\grid\EnumColumn;
-use common\models\User;
-use kartik\date\DatePicker;
-use yii\helpers\Html;
 use yii\grid\GridView;
-use rmrevin\yii\fontawesome\FAS;
 
 /**
  * @var yii\web\View $this
@@ -36,30 +31,27 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['style' => 'width:50px']
                 ],
                 [
+                    'attribute' => 'fullName',
                     'label' => Yii::t('backend','Student Name'),
-                    'content' => function ($model) {
-                        return $model->userProfile->getFullName();
+                    'value' => function ($data) {
+                        return $data->userProfile->getFullName();
                     },
                 ],
                 'email:email',
                 [
-                    'attribute' => Yii::t('backend','phone'),
-                    'value' => function ($model) {
-                        return $model->userProfile->phone;
+                    'attribute' => 'phone',
+                    'label' => Yii::t('backend','Phone'),
+                    'value' => function ($data) {
+                        return $data->userProfile->phone;
                     },
                 ],
                 [
-                    'attribute' => Yii::t('backend','Country'),
-                    'value' => function ($model) {
-                        return $model->userProfile->country;
+                    'attribute' => 'country',
+                    'label' => Yii::t('backend','Country'),
+                    'value' => function ($data) {
+                        return $data->userProfile->country;
                     }
                 ],
-//                [
-//                    'class' => EnumColumn::class,
-//                    'attribute' => 'status',
-//                    'enum' => User::statuses(),
-//                    'filter' => User::statuses()
-//                ],
             ],
         ]); ?>
     </div>

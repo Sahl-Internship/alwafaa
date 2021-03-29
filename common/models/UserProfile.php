@@ -155,4 +155,13 @@ class UserProfile extends ActiveRecord
             ? Yii::getAlias($this->cover_base_url . '/' . $this->cover_path)
             : $default;
     }
+
+    public function gender($g)
+    {
+        if ($g == self::GENDER_MALE){
+            return Yii::t('backend','Male');
+        }else{
+            return Yii::t('backend','Female');
+        }
+    }
 }

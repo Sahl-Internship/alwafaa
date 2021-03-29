@@ -84,7 +84,11 @@ class CourseController extends Controller
         $model = new Course();
         $user = new User();
         $files = new CourseAttachment();
-        $teacher = $user->getTeacher();
+        $teachers = $user->getTeacher();
+        $teachers_name = [];
+        foreach ($teachers as $index => $teacher) {
+            $teachers_name[$teacher->id]= $teacher->userProfile->getFullName();
+        }
         $model->classes = [];
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($model->classes) {
@@ -97,7 +101,7 @@ class CourseController extends Controller
             'model' => $model,
             'files' => $files,
             'sectionList' => ArrayHelper::map(Section::find()->all(), 'id', 'title'),
-            'teacherList' => ArrayHelper::map($teacher, 'id', 'username')
+            'teacherList' =>$teachers_name
         ]);
     }
 
@@ -121,7 +125,11 @@ class CourseController extends Controller
 //        $files = CourseAttachment::find()->andWhere('course_id=:id', ['id' => $id]);
         $model = $this->findModel($id);
         $user = new User();
-        $teacher = $user->getTeacher();
+        $teachers = $user->getTeacher();
+        $teachers_name = [];
+        foreach ($teachers as $index => $teacher) {
+            $teachers_name[$teacher->id]= $teacher->userProfile->getFullName();
+        }
         $model->classes = CourseClasses::find()->where('course_id=:id', ['id' => $id])->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
@@ -135,7 +143,7 @@ class CourseController extends Controller
             'model' => $model,
 //            'files' => $files,
             'sectionList' => ArrayHelper::map(Section::find()->all(), 'id', 'title'),
-            'teacherList' => ArrayHelper::map($teacher, 'id', 'username'),
+            'teacherList' =>$teachers_name
         ]);
     }
 
@@ -167,33 +175,8 @@ class CourseController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionFileUpload()
-    {
-        $model = new CourseAttachment();
-        $image_path = Yii::getAlias('@storage/web/source/1/');
-        $image_name = Yii::$app->getSecurity()->generateRandomString();
-        if ($model->load(Yii::$app->request->post())) {
-            $model->path = UploadedFile::getInstances($model, 'attachments');
-            foreach ($model->path as $key => $file) {
-
-                $file->saveAs($image_path . $file->baseName . '.' . $file->extension);//Upload files to server
-                $model->path .= '1/' . $file->baseName . '.' . $file->extension . "**";//Save file names in database- '**' is for separating images
-                $model->base_url .= Yii::getAlias('@storageUrl');
-            }
-            $model->save();
-//            return $this->redirect(['view', 'id' => $model->id]);
-            return true;
-        } else {
-//            return $this->render('upload', [
-//                'model' => $model,
-//            ]);
-            return false;
-        }
-    }
-
     public function actionCalender($id)
     {
-//        $classes = Course::find()->getClasses($id);
         $classes = \common\models\Event::find()->andWhere('course_id=:id',['id'=>$id])->all();
         $course = Course::find()->andWhere('id=:cid', ['cid' => $id])->one();
         $events = [new Event([
@@ -207,18 +190,14 @@ class CourseController extends Controller
                 'color' => 'red',
             ]),
         ];
-//        $events = [];
         foreach ($classes as $class) {
             $event = new Event([
-//                'id' => date('z', $class['date']),
                 'id' => $class->id,
                 'title' => $class->title,
                 'start' => date('Y-m-d', $class->date) . date('\Th:i:s', $class->from),
                 'end' => date('Y-m-d', $class->date) . date('\Th:i:s', $class->to),
                 'url' => Url::to(['event-update','id'=>$class->id]),
                 'editable' => true,
-//                'startEditable' => true,
-//                'durationEditable' => true,
             ]);
             array_push($events, $event);
         }

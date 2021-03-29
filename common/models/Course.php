@@ -128,6 +128,7 @@ class Course extends \yii\db\ActiveRecord
             'targeted_skills' => Yii::t('backend', 'Targeted Skills'),
             'intro_video' => Yii::t('backend', 'Course Introduction'),
             'image' => Yii::t('backend', 'Course Image'),
+            'attachments' => Yii::t('backend', 'Attachment'),
         ];
     }
 

@@ -1,10 +1,10 @@
 <?php
 
+use common\widgets\ActionColumn;
 use kartik\date\DatePicker;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\StringHelper;
-
 /**
  * @var yii\web\View $this
  * @var backend\models\search\CourseSearch $searchModel
@@ -47,7 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'start_at',
                         'format' => 'date',
-//                        'contentOptions'=>['style'=>'width:120px'],
                         'filter' => DatePicker::widget([
                             'model' => $searchModel,
                             'attribute' => 'start_at',
@@ -56,7 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'dd-mm-yyyy',
                                 'showMeridian' => true,
                                 'todayBtn' => true,
-//                                'endDate' => '0d',
                             ]
                         ]),
                     ],
@@ -64,7 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     ['attribute' => 'end_at',
                         'format' => 'date',
-//                        'contentOptions' => ['style' => 'width:80px'],
                         'filter' => DatePicker::widget([
                             'model' => $searchModel,
                             'attribute' => 'end_at',
@@ -77,18 +74,28 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]
                         ]),
                     ],
-
                     [
-                        'attribute' => 'description',
-                        'content' => function ($model) {
-                            return StringHelper::truncateWords($model->description, 7);
+                        'attribute' => 'teacherName',
+                        'value' => function($data){
+                              return  $data->teacher->userProfile->getFullName();
+                        },
+//                        'filter'=>\backend\models\search\UserSearch::find()->all(),
+
+                    ],
+                    [
+                        'attribute' => 'section_id',
+                        'value' => function($data){
+                            return  $data->section->title;
+                        },
+                        'filter'=>ArrayHelper::map(\common\models\Section::find()->asArray()->all(), 'id', 'title'),
+                    ],
+                    [
+                        'label'=>Yii::t('backend','Students'),
+                        'content'=>function($model){
+                            return count($model->find()->getJoinedStudents($model->id));
                         }
                     ],
-                    // 'section_id',
-                    // 'teacher_id',
-                    // 'zoom_link',
-
-                    ['class' => \common\widgets\ActionColumn::class],
+                    ['class' => ActionColumn::class],
                 ],
             ]); ?>
 

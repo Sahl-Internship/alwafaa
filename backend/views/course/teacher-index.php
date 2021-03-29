@@ -35,10 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'yii\grid\SerialColumn',
                         'contentOptions'=>['style'=>'width:50px']
                     ],
-
+                    'title',
                     ['attribute'=>'start_at',
                         'format'=>'date',
-//                        'contentOptions'=>['style'=>'width:60px'],
                         'filter' => DatePicker::widget([
                             'model' => $searchModel,
                             'attribute' => 'start_at',
@@ -47,14 +46,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'dd-mm-yyyy',
                                 'showMeridian' => true,
                                 'todayBtn' => true,
-//                                'endDate' => '0d',
                             ]
                         ]),
                     ],
 
                     ['attribute'=>'end_at',
                         'format'=>'date',
-//                        'contentOptions'=>['style'=>'width:60px'],
                         'filter' => DatePicker::widget([
                             'model' => $searchModel,
                             'attribute' => 'end_at',
@@ -63,19 +60,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'dd-mm-yyyy',
                                 'showMeridian' => true,
                                 'todayBtn' => true,
-//                                'endDate' => '0d',
                             ]
                         ]),
                     ],
-
-                    ['attribute'=>'title',
-//                        'contentOptions'=>['style'=>'width:60px']
-                    ],
-
                     [
-                        'attribute'=>'description',
-                        'content'=>function($model){
-                            return StringHelper::truncateWords($model->description,7);
+                        'attribute' => 'section_id',
+                        'value' => function($data){
+                            return  $data->section->title;
                         }
                     ],
                     [
@@ -84,10 +75,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             return count($model->find()->getJoinedStudents($model->id));
                         }
                     ],
-                    // 'section_id',
-                    // 'teacher_id',
-                    // 'zoom_link',
-
                     [
                         'class' => 'kartik\grid\ExpandRowColumn',
                         'width' => '50px',
