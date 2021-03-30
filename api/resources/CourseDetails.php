@@ -32,6 +32,7 @@ class CourseDetails extends \common\models\Course
             'end_at' => function ($model) {
                 return (int)$model->end_at;
             },
+            'zoom_link',
             'requirement',
             'target_student',
             'targeted_skills',
