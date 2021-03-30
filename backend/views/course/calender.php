@@ -1,46 +1,20 @@
 <?php
-
-use yii\bootstrap4\Modal;
+/** @var common\models\Event $events */
+/** @var string $landing */
 
 ?>
-
 <?= edofre\fullcalendar\Fullcalendar::widget([
-    'events' => $events,
+    'clientOptions' => [
+        'now' => $landing,
+        'events' => $events,
+    ],
+    'options'=>[
+            'color' => '#C3D6E4'
+    ],
     'header' => [
         'center' => 'title',
-        'left' => 'prev,next, today',
+        'left' => 'prev,next',
         'right' => 'basicDay,basicWeek,month'
     ],
 ]);
 ?>
-<!---->
-<?php
-//Modal::begin([
-//
-//    'toggleButton' => [
-//
-//        'label' => '<i class="glyphicon glyphicon-plus"></i> Add',
-//
-//        'class' => 'btn btn-success'
-//
-//    ],
-//
-//    'closeButton' => [
-//
-//        'label' => 'Close',
-//
-//        'class' => 'btn btn-danger btn-sm pull-right',
-//
-//    ],
-//
-//    'size' => 'modal-lg',
-//
-//]);
-//
-////    $myModel = new \common\models\Course();
-//echo $this->render('/course/calender',[]);
-//
-//Modal::end();
-//
-//?>
-

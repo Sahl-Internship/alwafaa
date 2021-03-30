@@ -2,6 +2,9 @@
 
 namespace common\models\query;
 
+use common\models\EventAttachment;
+use Yii;
+
 /**
  * This is the ActiveQuery class for [[\common\models\Event]].
  *
@@ -30,5 +33,16 @@ class EventQuery extends \yii\db\ActiveQuery
     public function one($db = null)
     {
         return parent::one($db);
+    }
+
+    public function getAttachments($id)
+    {
+        $attached_files = EventAttachment::find()->andWhere('event_id=:id', ['id' => $id])->all();
+        $attachments = [];
+        foreach ($attached_files as $attached_file) {
+            $file = Yii::getAlias($attached_file->base_url . '/' . $attached_file->path);
+            array_push($attachments, $file);
+        }
+        return $attachments;
     }
 }

@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute'=>'teacher_id',
-                        'value'=>$model->teacher->username,
+                        'value'=>$model->teacher->userProfile->getFullName(),
                     ],
                     'zoom_link',
                     'description:html',

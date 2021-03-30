@@ -5,6 +5,7 @@ namespace api\resources;
 
 
 use common\models\Course;
+use common\models\Event;
 use common\models\User;
 use function foo\func;
 
@@ -81,9 +82,7 @@ class CourseDetails extends \common\models\Course
                 return Course::find()->getDaysNumber($model->id);
             },
             'classes' => function ($model) {
-//                $ids = Course::find()->getClasses($model->id);
-//                return Classes::find()->andWhere(['in', 'id', $ids])->all();
-              return  Course::find()->getClasses($model->id);
+              return  Classes::find()->andWhere('course_id=:id',['id'=>$model->id])->all();
             },
             'teacher' => function ($model) {
                 $teacher_portfolio = User::find()->getTeacherPortfolio($model->teacher->id);

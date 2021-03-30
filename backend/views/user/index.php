@@ -1,8 +1,6 @@
 <?php
 
-use common\grid\EnumColumn;
 use common\models\User;
-use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use rmrevin\yii\fontawesome\FAS;
@@ -57,49 +55,36 @@ if(Yii::$app->controller->action->id === 'student'){
                     'attribute' => 'id',
                     'options' => ['style' => 'width: 5%'],
                 ],
-                'username',
+                'fullName',
                 'email:email',
                 [
-                    'class' => EnumColumn::class,
-                    'attribute' => 'status',
-                    'enum' => User::statuses(),
-                    'filter' => User::statuses()
-                ],
-                [
-                    'attribute' => 'created_at',
-                    'format' => 'datetime',
-                    'filter' => DatePicker::widget([
-                        'model' => $searchModel,
-                        'attribute' => 'created_at',
-                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
-                        'pluginOptions' => [
-                            'format' => 'dd-mm-yyyy',
-                            'showMeridian' => true,
-                            'todayBtn' => true,
-                            'endDate' => '0d',
-                        ]
+                    'attribute'=>'status',
+                    'value'=>function($data){
+                        $status = User::statuses();
+                        return $status[$data->status];
+                    },
+                    'filter'=>Html::activeDropDownList($searchModel,'status',\common\models\User::statuses(),[
+                        'class'=>'form-control',
+                        'prompt'=>'All'
                     ]),
                 ],
                 [
-                    'attribute' => 'logged_at',
-                    'format' => 'datetime',
-                    'filter' => DatePicker::widget([
-                        'model' => $searchModel,
-                        'attribute' => 'logged_at',
-                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
-                        'pluginOptions' => [
-                            'format' => 'dd-mm-yyyy',
-                            'showMeridian' => true,
-                            'todayBtn' => true,
-                            'endDate' => '0d',
-                        ]
-                    ]),
+                    'attribute'=>'country',
+                    'label'=>Yii::t('backend','Country'),
+                    'value'=>function($data){
+                        return $data->userProfile->country;
+                    },
                 ],
-                // 'updated_at',
-
+                [
+                    'attribute'=>'phone',
+                    'label'=>Yii::t('backend','Phone'),
+                    'value'=>function($data){
+                        return $data->userProfile->phone;
+                    },
+                ],
                 [
                     'class' => \common\widgets\ActionColumn::class,
-                    'template' => '{login} {view} {update} {delete}',
+                    'template' => '{view} {update} {delete}',
                     'options' => ['style' => 'width: 140px'],
                     'buttons' => [
                         'login' => function ($url) {

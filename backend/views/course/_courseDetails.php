@@ -14,10 +14,10 @@
         <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-sm-4">
-        <?php echo $form->field($model, 'section_id')->dropdownList($sectionList) ?>
+        <?php echo $form->field($model, 'section_id')->dropdownList($sectionList,array('prompt'=>'')) ?>
     </div>
     <div class="col-sm-4">
-        <?php echo $form->field($model, 'teacher_id')->dropdownList($teacherList) ?>
+        <?php echo $form->field($model, 'teacher_id')->dropdownList($teacherList,array('prompt'=>'')) ?>
     </div>
 </div>
 <div class="row">

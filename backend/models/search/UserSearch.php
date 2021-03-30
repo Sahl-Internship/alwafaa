@@ -2,7 +2,6 @@
 
 namespace backend\models\search;
 
-use backend\modules\rbac\models\RbacAuthAssignment;
 use common\models\User;
 use Yii;
 use yii\base\Model;
@@ -13,6 +12,9 @@ use yii\data\ActiveDataProvider;
  */
 class UserSearch extends User
 {
+    public $fullName;
+    public $phone;
+    public $country;
     /**
      * @inheritdoc
      */
@@ -22,6 +24,7 @@ class UserSearch extends User
             [['id', 'status'], 'integer'],
             [['created_at', 'updated_at', 'logged_at'], 'default', 'value' => null],
             [['username', 'auth_key', 'password_hash', 'email'], 'safe'],
+            [['fullName','phone','country'], 'safe']
         ];
     }
 
@@ -79,10 +82,20 @@ class UserSearch extends User
             $query->andFilterWhere(['between', 'logged_at', strtotime($this->logged_at), strtotime($this->logged_at) + 3600 * 24]);
         }
 
+        $query->joinWith(['userProfile' => function ($q) {
+            $q->andFilterWhere([
+                'or',
+                ['like', 'lastname', $this->fullName],
+                ['like', 'firstname', $this->fullName],
+            ]);
+        }]);
+
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'email', $this->email]);
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'country', $this->country])
+            ->andFilterWhere(['like', 'phone', $this->phone]);
 
         return $dataProvider;
     }

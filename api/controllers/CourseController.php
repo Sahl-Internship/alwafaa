@@ -8,11 +8,11 @@ namespace api\controllers;
 use api\resources\CourseDetails;
 use api\resources\CoursesList;
 use common\models\Section;
-use yii\rest\ActiveController;
 
 class CourseController extends ApiController
 {
-    public $modelClass = 'api\resources\CoursesList';
+//    public $modelClass = 'api\resources\CoursesList';
+
 //    public function actions()
 //    {
 //        $actions = parent::actions();
@@ -40,3 +40,4 @@ class CourseController extends ApiController
     }
 
 }
+
