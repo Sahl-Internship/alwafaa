@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\models\search\CourseSearch;
 use common\models\Course;
 use common\models\CourseClasses;
+use common\models\Event;
 use common\models\query\CourseClassesQuery;
 use common\models\User;
 use Yii;
@@ -63,27 +64,9 @@ class SiteController extends \yii\web\Controller
 
     public function actionTest()
     {
-//        $classes = CourseClasses::find()->getDurationPerWeek(27);
-//        $course = Course::find()->getScheduleAndDuration(30);
-//        $course = Course::find()->getRate(5);
-//        $stusents = Course::find()->getJoinedStudents(5);
-//        $stusents = User::find()->getOwnStudents();
-//         Course::find()->getDayDuration(26);
-//        $status = Course::find()->getStatus(30);
-//        $review = Course::find()->getReview(5);
-//        $classes = Course::find()->getReview(5);
-//        $ownCourses = User::find()->getOwnCourses();
-        $ownCourses = User::find()->getTeacherPortfolio(127);
-//        $days = Course::find()->getDaysNumber(26);
-
-        $classes = Course::find()->getClasses(26);
-
-
+        $classes = Event::find()->getAttachments(11);
         return $this->render('test', [
-//            'data' => $course,
-//            'data' => $status,
-//            'data' => $ownCourses,
-//            'data' => $ownCourses,
+
             'data' => $classes,
         ]);
     }
