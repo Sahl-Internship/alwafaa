@@ -35,7 +35,7 @@
           active-color="grey-4"
           class="text-primary"
         >
-          <q-tab no-caps :ripple="false" name="public" icon="mdi-earth" :label="$t('student.setting.public')" />
+          <q-tab no-caps :ripple="true" name="public" icon="mdi-earth" :label="$t('student.setting.public')" />
           <q-tab no-caps :ripple="false" name="privacy" icon="mdi-security" :label="$t('student.setting.privacy')" />
           <q-tab no-caps :ripple="false" name="security" icon="mdi-lock" :label="$t('student.setting.security')" />
         </q-tabs>

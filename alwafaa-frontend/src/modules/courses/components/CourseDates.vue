@@ -155,7 +155,7 @@
                 <th
                   roll="gridcell"
                   class="table-head"
-                  v-for='(day,index) in getDayDates(courseData.start_at , x - 1)'
+                  v-for='(day,index) in getDayDates(courseData.start_at , x - 1 )'
                   :key='index'
                 >
                   {{getDayName(day /1000)}}
@@ -183,8 +183,8 @@
                     'green-active': todayStatus,
                     'inactive': past ,
                     'green-line-active': future &&  lecture !== 'عطلة',
-
                   }"
+                  @click="medium = true"
                 >
                   {{lecture}}
                 </td>
@@ -204,8 +204,67 @@
                   {{lecture}}
                 </td>
               </tr>
-
             </table>
+            <q-dialog v-model="medium">
+              <q-card style="width: 700px; max-width: 80vw;">
+                <q-card-section>
+                  <div class="text-h6">اسم الدرس</div>
+                </q-card-section>
+
+                <q-separator />
+                <q-card-section
+                  class="row"
+                >
+                  <div class="col-6 row">
+                    <div class="col-6 bg-grey-1 text-center q-pt-lg" style="width:130px;height:130px">
+                      <img
+                        src='/images/Box/duration.png'
+                        :class="{
+                          'icon-lg': !$q.screen.lt.sm,
+                          'icon-sm': $q.screen.lt.sm
+                         }"
+                      >
+                      <div class="text-body1">مدة الدرس</div>
+                      <div class="text-body1">03:00</div>
+                    </div>
+                    <div class="col-6 bg-grey-1 q-ml-md text-center q-pt-lg" style="width:130px;height:130px">
+                      <img src='/images/Box/path 9290.png'
+                        :class="{
+                          'icon-lg': !$q.screen.lt.sm,
+                          'icon-sm': $q.screen.lt.sm
+                        }"
+                        alt="">
+                      <div class="text-body1">واجب الدرس</div>
+                      <div class="text-body1 text-primary" style="text-decoration:underline;">ارساله الان</div>
+                    </div>
+                  </div>
+                  <div class="col-6 row">
+                    <div class="col-12 row">
+                      <div class="col-4 bg-grey-1 text-center " style="width:130px;height:30px">
+                        <div class="text-body1 q-py-xs">03:00</div>
+                      </div>
+                      <img src="images/Box/Path 9287.png"
+                        class="q-mx-md q-mt-sm"
+                        :class="{
+                          'icon-lg': !$q.screen.lt.sm,
+                          'icon-sm': $q.screen.lt.sm
+                        }"
+                        alt=""
+                      >
+                      <div class="col-4 bg-grey-1 text-center " style="width:130px;height:30px">
+                        <div class="text-body1 q-py-xs">03:00</div>
+                      </div>
+                    </div>
+                    <div class="col-12 row">
+                      <div class="col-11 bg-grey-1 text-center justify-center items-center" >
+                        <div class="text-body1 justify-center items-center q-mt-lg">Zoom Link</div>
+                      </div>
+                    </div>
+                  </div>
+                </q-card-section>
+
+              </q-card>
+            </q-dialog>
           </div>
         </q-carousel-slide>
       </q-carousel>
@@ -250,7 +309,8 @@ export default {
       times: ['عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة'],
       past: false,
       future: false,
-      todayStatus: false
+      todayStatus: false,
+      medium: false
     }
   },
   methods: {
@@ -298,6 +358,7 @@ export default {
 
       return dates
     },
+
     // To get Class Start time
     startClassTime (weekNumber) {
       const start = new Date(this.courseData.start_at * 1000)
@@ -314,28 +375,13 @@ export default {
           this.past = true
         } else if (pastFuture > today) {
           this.future = true
-        } else if (pastFuture.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
+        } else if (pastFuture === today) {
           this.todayStatus = true
         }
         if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
           this.times[mapped[classT.day_id]] = getClassStartTime(classT.from)
         }
       })
-      // for (let i = 0; i < this.courseData.classes.length; i++) {
-      //   const classT = this.courseData.classes[i]
-      //   const pastFuture = new Date(classT.date * 1000)
-      //   const today = new Date()
-      //   if (pastFuture.valueOf() < today.valueOf()) {
-      //     this.past = true
-      //   } else if (pastFuture.valueOf() > today.valueOf()) {
-      //     this.future = true
-      //   } else if (pastFuture.valueOf() === today.valueOf()) {
-      //     this.todayStatus = true
-      //   }
-      //   if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
-      //     this.times[mapped[classT.day_id]] = getClassStartTime(classT.from)
-      //   }
-      // }
       return this.times
     },
     // Class End time
@@ -354,28 +400,13 @@ export default {
           this.past = true
         } else if (pastFuture > today) {
           this.future = true
-        } else if (pastFuture.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
+        } else if (pastFuture === today) {
           this.todayStatus = true
         }
         if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
           this.times[mapped[classT.day_id]] = getClassStartTime(classT.to)
         }
       })
-      // for (let i = 0; i < this.courseData.classes.length; i++) {
-      //   const classT = this.courseData.classes[i]
-      //   const pastFuture = new Date(classT.date * 1000)
-      //   const today = new Date()
-      //   if (pastFuture < today) {
-      //     this.past = true
-      //   } else if (pastFuture > today) {
-      //     this.future = true
-      //   } else if (pastFuture.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
-      //     this.todayStatus = true
-      //   }
-      //   if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
-      //     this.times[mapped[classT.day_id]] = getClassStartTime(classT.to)
-      //   }
-      // }
       return this.times
     },
     // Acheived Course days
@@ -388,13 +419,21 @@ export default {
         acheivedDays = 0
       }
       const restDays = (endDate - startDate) / (1000 * 60 * 60 * 24) - acheivedDays
-
       return { acheivedDays, restDays }
     }
   }
 }
 </script>
 <style lang='scss' scoped>
+  .icon-lg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .icon-sm {
+    width: 10px;
+    height: 10px;
+  }
 .rounded-border{
   border-radius: 6px;
   box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 5%);

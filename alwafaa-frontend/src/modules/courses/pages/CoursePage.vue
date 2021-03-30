@@ -46,9 +46,7 @@
               <div class="row items-center q-pl-sm q-gutter-x-sm">
                 <img src="/images/Box/calender.png" width="18px" />
                 <div class="text-h6 text-white">
-                  <!-- 12 يناير 2021 -->
                   {{ calcDate(courseData.created_at) }}
-                  <!-- {{CourseData.created_at}} -->
                 </div>
               </div>
             </div>
@@ -61,9 +59,289 @@
             size='lg'
             :dense='dense'
             class="col-xs-12 col-sm-12 col-md-11 col-lg-11 text-grey-5 bg-green"
-            @click="joinCourse"
+            @click="fullWidth = true"
           ></q-btn>
+          <q-dialog
+            v-model="fullWidth"
+            full-width
+            full-height
+          >
+            <q-card class="bg-grey-1">
+              <div class='row col-11'>
+                <div class="row col-12 ">
+                  <span class="material-icons q-ml-lg q-pl-md q-mt-lg" @click="fullWidth = false">
+                    close
+                  </span>
+                </div>
+                <div
+                  class="col-xs-12 q-ml-none q-my-xl col-md-7 row "
+                  :class="{
+                    'q-px-lg': !$q.screen.lt.md,
+                    'q-pl-none': $q.screen.lt.md && $q.screen.lt.sm,
+                    'q-pr-md': $q.screen.lt.md && $q.screen.lt.sm
+                  }"
+                >
+                  <div  class='text-h5 col-8 q-ml-md'>متطلبات الدورة</div>
+                  <ul class="col-12">
+                    <li
+                      class="text-body1 text-grey-4"
+                    >
+                      لا توجد متطلبات قبل المادة, و لكن توزع على المتدربين خطة موضوعات الدور لا توجد متطلبات قبل المادة, و لكن توزع على المتدربين خطة موضوعات الدورة
+                    </li>
+                    <li
+                      class="text-body1 text-grey-4"
+                    >
+                      لا توجد متطلبات قبل المادة, و لكن توزع على المتدربين خطة موضوعات الدور لا توجد متطلبات قبل المادة, و لكن توزع على المتدربين خطة موضوعات الدورة
+                    </li>
+                    <li
+                      class="text-body1 text-grey-4"
+                    >
+                      لا توجد متطلبات قبل المادة, و لكن توزع على المتدربين خطة موضوعات الدور لا توجد متطلبات قبل المادة, و لكن توزع على المتدربين خطة موضوعات الدورة
+                    </li>
+                  </ul>
+                  <div
+                    class="fileUpload text-center flex justify-center items-center col-12"
+                    :class="{
+                      'q-mx-md': !$q.screen.lt.md,
+                      'q-ml-sm': $q.screen.lt.md && $q.screen.lt.sm
+                      }"
+                  >
+                    <div class="text-body1">يرجى تحميل الملف  و الإطلاع عليه قبل الإشتراك في الدورة</div>
+                    <a class="fileContainer text-body1 text-primary col-12">
+                      تحميل الملف
+                      <input
+                       multiple
+                       type="file"
+                       name='attachment[]'
+                       id="fileId"
+                       accept="image/*,application/pdf"
+                       @change="onFileChange"
+                      />
+                    </a>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-4 col-md-5  join-form">
+                  <ul class="tabs-list q-ml-xl">
+                    <li
+                     class="q-px-md q-py-sm q-mr-xs tab1"
+                     :class="{'active-tab': !activeTab,'inactive-tab':activeTab}"
+                     @click="changeActive1(); setUserData"
+                    >اشتراك</li>
+                    <li
+                     class="q-px-md q-py-sm  tab2"
+                     :class="{'active-tab': activeTab,'inactive-tab': !activeTab}"
+                     @click="changeActive2"
+                    >اشتراك لشخص اخر</li>
+                  </ul>
+                  <div class="bg-white q-py-xl q-mx-xl white-form">
+                    <ValidationObserver v-slot="{ handleSubmit }">
+                      <q-form
+                        @submit.prevent="handleSubmit(submitForm)"
+                        class="row q-mx-xl "
+                      >
+                        <ValidationProvider
+                          name="firstname"
+                          class="col-xs-12 col-sm-6 col-md-6 q-pb-xs"
+                          :class="!$q.screen.lt.sm ? 'q-pr-xs' : ''"
+                          rules="required"
+                          v-slot="{ errors, invalid, validated }"
+                        >
+                          <g-input
+                            outlined
+                            v-model="student.firstname"
+                            :label="$t('formFields.firstname')"
+                            :dense='true'
+                            :error="invalid && validated"
+                            :error-message="errors[0]"
+                            color='dark'
+                            prependIconName="mdi-account"
+                          />
+                        </ValidationProvider>
 
+                        <ValidationProvider
+                          name="lastname"
+                          class="col-xs-12 col-sm-6 col-md-6 q-pb-xs"
+                          rules="required"
+                          v-slot="{ errors, invalid, validated }"
+                        >
+                          <g-input
+                            outlined
+                            v-model="student.lastname"
+                            :dense='true'
+                            :label="$t('formFields.lastname')"
+                            :error="invalid && validated"
+                            :error-message="errors[0]"
+                            color='dark'
+                            prependIconName="mdi-account"
+                          />
+                        </ValidationProvider>
+                        <ValidationProvider
+                          name="email"
+                          class="col-12 q-pb-xs"
+                          rules="required|email"
+                          v-slot="{ errors, invalid, validated }"
+                        >
+                          <g-input
+                            outlined
+                            type="email"
+                            :dense='true'
+                            v-model="student.email"
+                            :label="$t('formFields.email')"
+                            :error="invalid && validated"
+                            :error-message="errors[0]"
+                            color='dark'
+                            prependIconName="mdi-email"
+                            :appendIconName="!!email && (!invalid || !validated) ? 'mdi-check' : null"
+                            appendIconColor="green"
+                            appendIconSize="sm"
+                          />
+                        </ValidationProvider>
+
+                        <ValidationProvider
+                          name="subtitle"
+                          class="col-xs-12 col-sm-12 col-md-12 q-pb-xs"
+                          :class="!$q.screen.lt.sm ? 'q-pr-xs' : ''"
+                          rules="required"
+                          v-slot="{ errors, invalid, validated }"
+                        >
+                          <g-input
+                            outlined
+                            v-model="student.subtitle"
+                            color='dark'
+                            :dense='true'
+                            :label="$t('formFields.subtitle')"
+                            :error="invalid && validated"
+                            :error-message="errors[0]"
+                            prependIconName="mdi-account"
+                          />
+                        </ValidationProvider>
+
+                        <ValidationProvider
+                          name="country"
+                          class="col-12 q-pb-xs"
+                          rules="required"
+                          v-slot="{ errors, invalid, validated }"
+                        >
+                          <g-select
+                            outlined
+                            v-model="student.country"
+                            :options="countriesNamesOptions"
+                            color='dark'
+                            :dense='true'
+                            :label="$t('formFields.country')"
+                            prependIconName="mdi-flag-variant"
+                            :flag="isoCode"
+                            :error="invalid && validated"
+                            :error-message="errors[0]"
+                          />
+                        </ValidationProvider>
+
+                        <div class="col-12 row phone"
+                        >
+                          <ValidationProvider
+                            name="phone"
+                            class="col-xs-9 col-sm-9 col-md-10 col-lg-10 q-pb-xs phone-input"
+                            rules="required|numeric"
+                            v-slot="{ errors, invalid, validated }"
+                          >
+                            <g-input
+                              outlined
+                              v-model="student.phone"
+                              color='dark'
+                              class="phone-field"
+                              :dense='true'
+                              :label="$t('formFields.phone')"
+                              :error="invalid && validated"
+                              :error-message="errors[0]"
+                              prependIconName="mdi-phone"
+                            />
+                          </ValidationProvider>
+
+                          <ValidationProvider
+                            name="phone-key"
+                            class="col-xs-3 col-sm-3 col-md-2 col-lg-2 q-pb-xs phone-select"
+                            rules="required"
+                            v-slot="{ errors, invalid, validated }"
+                          >
+                            <g-select
+                              outlined
+                              color='dark'
+                              class="select"
+                              :dense='true'
+                              v-model="student.phone_key"
+                              :options="dialCodesOPtions"
+                              :error="invalid && validated"
+                              :error-message="errors[0]"
+                            />
+                          </ValidationProvider>
+                        </div>
+                        <ValidationProvider
+                          name="fileName"
+                          class="col-xs-12 col-sm-12 col-md-12 q-pb-xs"
+                          :class="!$q.screen.lt.sm ? 'q-pr-xs' : ''"
+                          rules="required"
+                          v-slot="{ errors, invalid, validated }"
+                        >
+                          <g-input
+                            outlined
+                            color='dark'
+                            :dense='true'
+                            v-model="fileName"
+                            label="المرفقات"
+                            :error="invalid && validated"
+                            :error-message="errors[0]"
+                            prependIconName="file_upload"
+                            appendIconName='mdi-attachment'
+                          />
+                        </ValidationProvider>
+                        <ValidationProvider
+                          name="checkbox"
+                          class="col-12 q-pb-xs"
+                          rules="required"
+                          v-slot="{ errors, invalid, validated }"
+                        >
+                          <q-checkbox
+                            v-model="check"
+                            color="dark"
+                            class="text-primary"
+                            :error="invalid && validated"
+                            :error-message="errors[0]"
+                          />
+                          <label
+                            class="text-subtitle2 q-mt-sm"
+                          >
+                            اوافق على
+                            <span
+                              class="text-primary"
+                              style="text-decoration:underline;"
+                            >
+                              الشروط و الاحكام
+                            </span>
+                          </label>
+                        </ValidationProvider>
+
+                        <g-btn
+                          :dense='true'
+                          label="إشتراك"
+                          :width="!$q.screen.lt.md ? 'col-8' : 'col-9'"
+                          :margin="['q-mt-sm']"
+                        />
+                        <div
+                          class="text-body1 text-negative q-mt-md q-ml-xl q-pl-lg"
+                          style="cursor:pointer"
+                          @click="fullWidth = false"
+                        >
+                          إلغاء
+                        </div>
+                      </q-form>
+                    </ValidationObserver>
+
+                  </div>
+
+                </div>
+              </div>
+            </q-card>
+          </q-dialog>
           <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11 row justify-between q-mt-lg">
             <q-btn
               flat
@@ -99,7 +377,10 @@
         <div class="row col-11 what-learn">
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
             <div class="text-h6 col-8 q-mb-md">ماذا ستتعلم</div>
-          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 course-description__section bg-grey-1 q-pa-xl" >
+          <div
+            class="col-xs-12 col-sm-12 col-md-8 col-lg-8 course-description__section bg-grey-1 q-pa-xl "
+            :class="{'full-description': autoHeight}"
+          >
             <div class="col-11 requirment">
               <div
                 class="text-h6 q-ml-xs"
@@ -114,22 +395,30 @@
               <div
                 class="text-h6">وصف الدورة</div>
               <div
-                class="text-body1 text-grey-4"
+                class="text-body1 text-grey-4 toggle-show1"
+                :class="{'toggle-show1-no-gradient': isShowAll}"
                 v-html="courseData.description"
               >
               </div>
               <div
-                class="text-h6">وصف الدورة</div>
-              <div
-                class="toggle-show1 text-body1 text-grey-4 q-my-none"
+                class="text-h6 toggle-show1"
                 :class="{
                   'toggle-show1-no-gradient': isShowAll
                 }"
-                 v-html="courseData.targeted_skills"
+              >
+                نتائج الدورة
+              </div>
+              <div
+                class="text-body1 text-grey-4 q-my-none toggle-show1"
+                :class="{
+                  'toggle-show1-no-gradient': isShowAll
+                }"
+                v-html="courseData.targeted_skills"
               >
               </div>
               <div
                 class="text-body1 col-12 text-center q-mt-sm show-more_description text-bold"
+                :class="{'hidden': autoHeight}"
                 @click="showAll"
                 style="text-decoration:underline;cursor: pointer;"
               >عرض الكل
@@ -335,15 +624,52 @@ import StarRating from 'vue-star-rating'
 import CourseDates from '../components/CourseDates.vue'
 import AboutTeacher from '../components/AboutTeacher.vue'
 import TheComments from '../components/TheComments.vue'
+import { dialCodes, countriesNames, getSelectedCountry } from 'src/utils/countries.js'
+
 export default {
   components: { StarRating, AboutTeacher, TheComments, CourseDates },
+  props: {
+    value: File
+  },
+  watch: {
+    student: {
+      handler ({ country }) {
+        if (country) {
+          const selectedCountry = getSelectedCountry(country, this.checkLanguage)
+          this.isoCode = selectedCountry.code
+          this.user.phone_key = selectedCountry.dial_code
+        }
+      },
+      deep: true
+    }
+  },
   data () {
     return {
       date: '2019/02/01',
       dense: false,
       step: 1,
       isShowAll: false,
-      courseData: {}
+      autoHeight: false,
+      courseData: {},
+      fullWidth: false,
+      fullHeight: false,
+      firstname: '',
+      lastname: '',
+      subtitle: '',
+      gender: '',
+      country: '',
+      city: '',
+      email: '',
+      phoneNumber: '',
+      phoneKey: '',
+      fileName: [],
+      student: [],
+      emptyField: [],
+      check: false,
+      tab: 'mails',
+      dialCodesOPtions: dialCodes,
+      isoCode: '',
+      activeTab: false
     }
   },
   methods: {
@@ -353,6 +679,7 @@ export default {
     },
     showAll () {
       this.isShowAll = !this.isShowAll
+      this.autoHeight = true
     },
     calcDate (timestamp) {
       const date = dateFormat(timestamp)
@@ -361,6 +688,37 @@ export default {
     calcTime (timestamp) {
       const time = calcDuration(timestamp)
       return time
+    },
+    previewFiles () {
+      const file = this.fileName.push(event.target.files)
+      console.log(file)
+    },
+    onFileChange (event) {
+      var fileData = event.target.files[0]
+      this.fileName.push(fileData.name)
+    },
+    changeActive1 () {
+      this.student = this.$store.getters['student/getUserData']
+      this.activeTab = false
+    },
+    changeActive2 () {
+      this.student = []
+      this.activeTab = true
+    },
+    close () {
+      this.fullWidth = !this.fullWidth
+      return this.fullWidth
+    },
+    submitForm () {
+      if (this.check === false) {
+        return false
+      }
+    },
+    setUserData (student) {
+      this.student = {
+        ...student,
+        bio: student.bio ? [...student.bio] : []
+      }
     }
   },
   mounted () {
@@ -368,12 +726,27 @@ export default {
     this.$store.dispatch('courses/coursePage', courseId).then(data => {
       this.courseData = data
     })
+    let student = this.$store.getters['student/getUserData']
+
+    if (student) {
+      this.setUserData(student)
+    } else {
+      this.$store.dispatch('student/getUserData').then(() => {
+        student = this.$store.getters['student/getUserData']
+        this.setUserData(student)
+      })
+    }
   },
   computed: {
     // courseData () {
     //   console.log(this.$store.getters['courses/getCoursePage'])
     //   const courseInfo = this.$store.getters['courses/getCoursePage']
     //   return courseInfo || {}
+    // },
+    // student () {
+    //   const { studentData } = this.$store.getters['student/profileData']
+    //   console.log('student', studentData)
+    //   return studentData || {}
     // },
     isAuthed () {
       return this.$store.getters['auth/isAuthenticated']
@@ -393,6 +766,9 @@ export default {
         return '5/5'
       }
       return rate.toFixed(1)
+    },
+    countriesNamesOptions () {
+      return countriesNames(this.checkLanguage)
     }
   }
 }
@@ -418,7 +794,8 @@ export default {
 }
 .blue-section{
   background: #2B5078;
-  background-image: radial-gradient(#FAFAFA 0.7%, transparent 1%), radial-gradient(#FAFAFA 0.8%, transparent 1%);
+  background-image: radial-gradient(#FAFAFA 0.7%, transparent 1%),
+                    radial-gradient(#FAFAFA 0.8%, transparent 1%);
   background-position: 0 0, 180px 50px;
   background-size: 120px 100px;
   height: 430px;
@@ -459,7 +836,9 @@ export default {
 .course-description__section{
   border-radius: 4px;
   box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 5%);
-  max-height: 787px;
+  height: 787px;
+  overflow: hidden;
+  position: relative;
   @media (max-width:480px) {
     padding-left: 25px;
     padding-right: 25px;
@@ -470,6 +849,15 @@ export default {
   .show-hidden-item{
     display: block;
   }
+}
+.full-description{
+  height: auto !important;
+}
+.show-more_description{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-bottom: 15px;
 }
 .course-info__section{
   .course-info{
@@ -511,10 +899,125 @@ export default {
 }
 .toggle-show1{
     mask-image: -webkit-gradient(linear, left top,
-    left bottom, from(rgba(1,1,1,1)), to(rgba(1,1,1,0)));
+    left bottom, from(rgba(1,1,1,1)), to(rgba(0,0,0,0)));
 }
 .toggle-show1-no-gradient{
   mask-image: -webkit-gradient(linear, left top,
   left bottom, from(rgba(1,1,1,1)), to(rgba(1,1,1,1)));
+}
+.fileUpload {
+  background: rgb(250, 234, 212);
+  border: 1px solid rgb(230, 184, 125);
+}
+a.fileContainer {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    color: lightskyblue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+a.fileContainer > input[type=file] {
+    cursor: pointer;
+    pointer-events: auto;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: right;
+}
+.q-field{
+  &::v-deep{
+    .q-field__inner{
+      background-color: $grey-2;
+      border-radius: 7px;
+    }
+    .q-field__inner:focus{
+      outline: none;
+    }
+  }
+}
+.phone-field{
+  &::v-deep{
+    .q-field__inner{
+      border-radius: 7px 0px 0px 7px;
+    }
+
+  }
+}
+.select{
+  &::v-deep{
+    .q-field__inner{
+      border-radius: 0px 7px 7px 0px;
+    }
+    .q-select__dropdown-icon{
+      margin-top: -15px;
+      margin-right: 5px;
+    }
+  }
+}
+.join-form{
+  position: relative;
+  border-radius: 6px;
+}
+.white-form{
+  border-radius: 0px 10px 10px 10px;
+  box-shadow: 0px 0px 3px 0px #ccc;
+  margin-bottom: 48px;
+}
+.tabs-list{
+  padding: 0;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.tab1,.tab2{
+  list-style: none;
+  display: inline-block;
+  background: $grey-1
+}
+.active-tab{
+  background: #fff;
+  border-radius: 8px 8px 0px 0px;
+  box-shadow: 0px -2px 4px -1px #ccc;
+}
+.inactive-tab{
+  background: $grey-2;
+  border-radius: 8px 8px 0px 0px;
+}
+.attach-icon{
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+.attachment{
+    cursor: pointer;
+    // pointer-events: auto;
+    // filter: alpha(opacity=0);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: right;
+}
+.file-select > .select-button {
+  padding: 1rem;
+
+  color: white;
+  background-color: #2EA169;
+
+  border-radius: .3rem;
+
+  text-align: center;
+  font-weight: bold;
+}
+
+.file-select > input[type="file"] {
+  display: none;
 }
 </style>

@@ -43,7 +43,7 @@
       <div class="text-h6 col-8 q-mt-sm q-mb-md q-ml-lg student-comments">ملاحظات الطلاب للدورة</div>
 <!-- ================================================================================================ -->
       <div
-        v-for="(comment,index) in computedObj "
+        v-for="(comment,index) in courseReviews "
         :key="index"
         class="row col-10 comment-card  q-py-md q-px-lg q-mx-auto q-mb-sm"
       >
@@ -118,9 +118,10 @@
         </div>
       </div>
       <div
-        class="text-body1 col-10 text-center text-bold comment-card q-py-md q-mx-auto"
-        @click="showComments"
         style="text-decoration:underline;cursor: pointer;"
+        class="text-body1 col-10 text-center text-bold comment-card q-py-md q-mx-auto"
+        :class="{'hidden': !shownReviews}"
+        @click="shownReviews = null"
       >عرض الكل
         <img
           src="images/home-imgs/path 1234.png"
@@ -156,7 +157,6 @@ export default {
       review: ''
     }
   },
-
   computed: {
     isAuthed () {
       return this.$store.getters['auth/isAuthenticated']
@@ -168,8 +168,12 @@ export default {
     //   const { reviews } = this.$store.getters['courses/getCoursePage']
     //   return reviews.length ? reviews : []
     // },
-    computedObj () {
-      return this.shownReviews ? this.courseData.slice(0, this.shownReviews) : this.courseData
+    courseReviews () {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      const review = [...this.courseData].sort((a, b) => b.created_at - a.created_at)
+      return this.shownReviews ? review.slice(0, this.shownReviews) : review
+
+      // return this.shownReviews ? this.courseData.slice(0, this.shownReviews) : this.courseData
     }
   },
   methods: {
@@ -186,9 +190,9 @@ export default {
     //   this.thumpDown = true
     //   this.thumpUp = false
     // },
-    showComments () {
-      this.shownReviews += 4
-    },
+    // showComments () {
+    //   this.shownReviews += 4
+    // },
     sendReview () {
       // eslint-disable-next-line camelcase
       const course_id = parseInt(this.$route.params.id)
