@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\CourseAttachment;
 use common\models\CourseClasses;
+use common\models\EventAttachment;
 use common\models\Section;
 use common\models\User;
 use edofre\fullcalendar\models\Event;
@@ -83,11 +84,10 @@ class CourseController extends Controller
     {
         $model = new Course();
         $user = new User();
-        $files = new CourseAttachment();
         $teachers = $user->getTeacher();
         $teachers_name = [];
         foreach ($teachers as $index => $teacher) {
-            $teachers_name[$teacher->id]= $teacher->userProfile->getFullName();
+            $teachers_name[$teacher->id] = $teacher->userProfile->getFullName();
         }
         $model->classes = [];
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -99,9 +99,8 @@ class CourseController extends Controller
         }
         return $this->render('create', [
             'model' => $model,
-            'files' => $files,
             'sectionList' => ArrayHelper::map(Section::find()->all(), 'id', 'title'),
-            'teacherList' =>$teachers_name
+            'teacherList' => $teachers_name
         ]);
     }
 
@@ -122,13 +121,12 @@ class CourseController extends Controller
         } else {
             $view = 'view';
         }
-//        $files = CourseAttachment::find()->andWhere('course_id=:id', ['id' => $id]);
         $model = $this->findModel($id);
         $user = new User();
         $teachers = $user->getTeacher();
         $teachers_name = [];
         foreach ($teachers as $index => $teacher) {
-            $teachers_name[$teacher->id]= $teacher->userProfile->getFullName();
+            $teachers_name[$teacher->id] = $teacher->userProfile->getFullName();
         }
         $model->classes = CourseClasses::find()->where('course_id=:id', ['id' => $id])->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -141,9 +139,8 @@ class CourseController extends Controller
         }
         return $this->render('update', [
             'model' => $model,
-//            'files' => $files,
             'sectionList' => ArrayHelper::map(Section::find()->all(), 'id', 'title'),
-            'teacherList' =>$teachers_name
+            'teacherList' => $teachers_name
         ]);
     }
 
@@ -177,9 +174,10 @@ class CourseController extends Controller
 
     public function actionCalender($id)
     {
-        $classes = \common\models\Event::find()->andWhere('course_id=:id',['id'=>$id])->all();
+        $classes = \common\models\Event::find()->andWhere('course_id=:id', ['id' => $id])->all();
         $course = Course::find()->andWhere('id=:cid', ['cid' => $id])->one();
         $events = [new Event([
+            'id'=>1,
             'title' => 'Start of Course',
             'start' => date('Y-m-d', $course->start_at),
             'color' => 'green',
@@ -193,24 +191,42 @@ class CourseController extends Controller
         foreach ($classes as $class) {
             $event = new Event([
                 'id' => $class->id,
-                'title' => $class->title,
-                'start' => date('Y-m-d', $class->date) . date('\Th:i:s', $class->from),
-                'end' => date('Y-m-d', $class->date) . date('\Th:i:s', $class->to),
-                'url' => Url::to(['event-update','id'=>$class->id]),
-                'editable' => true,
+                'title' =>  $class->title,
+                'start' => date('Y-m-d', $class->date),
+                'url' => Url::to(['event-update', 'id' => $class->id]),
+//                'editable' => true,
             ]);
             array_push($events, $event);
+            $title = new Event([
+                'title' =>  date('h:i A', $class->from). ' : '.date('h:i A', $class->to),
+                'start' => date('Y-m-d', $class->date),
+                'url' => $course->zoom_link,
+                'color' => '#464643',
+            ]);
+            array_push($events, $title);
+            $classAttach = EventAttachment::find()->andWhere('event_id=:id',['id'=>$class->id])->all();
+            if($classAttach){
+                $attached = new Event([
+//                    'id' => $class->id,
+                    'title' => Yii::t('backend','Attachment'),
+                    'start' => date('Y-m-d', $class->date),
+                    'color' => 'orange',
+                    'url' => Url::to(['event-update', 'id' => $class->id]),
+                ]);
+                array_push($events, $attached);
+            }
         }
 
         return render('calender', [
             'events' => $events,
+            'landing' => date('Y-m-d', $course->start_at),
         ]);
 
     }
 
     public function actionEventUpdate($id)
     {
-        $model = \common\models\Event::find()->andWhere('id=:e_id',['e_id'=>$id])->one();
+        $model = \common\models\Event::find()->andWhere('id=:e_id', ['e_id' => $id])->one();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['calender', 'id' => $model->course_id]);
         }
