@@ -6,6 +6,8 @@ use yii\widgets\DetailView;
 /**
  * @var yii\web\View $this
  * @var common\models\Course $model
+ * @var string $tags
+
  */
 
 $this->title = $model->title;
@@ -36,6 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute'=>'section_id',
                         'value'=> $model->section->title,
+                    ],
+                    [
+                        'attribute'=>'tags',
+                        'label'=>Yii::t('backend','Tags'),
+                        'value'=> $tags,
                     ],
                     [
                         'attribute'=>'teacher_id',

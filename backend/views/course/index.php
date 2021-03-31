@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Section;
 use common\widgets\ActionColumn;
 use kartik\date\DatePicker;
 use yii\helpers\ArrayHelper;
@@ -59,7 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]),
                     ],
 
-
                     ['attribute' => 'end_at',
                         'format' => 'date',
                         'filter' => DatePicker::widget([
@@ -76,18 +76,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'teacherName',
+                        'label'=>Yii::t('backend','Teacher Name'),
                         'value' => function($data){
                               return  $data->teacher->userProfile->getFullName();
                         },
-//                        'filter'=>\backend\models\search\UserSearch::find()->all(),
-
                     ],
                     [
                         'attribute' => 'section_id',
                         'value' => function($data){
                             return  $data->section->title;
                         },
-                        'filter'=>ArrayHelper::map(\common\models\Section::find()->asArray()->all(), 'id', 'title'),
+                        'filter'=>ArrayHelper::map(Section::find()->asArray()->all(), 'id', 'title'),
                     ],
                     [
                         'label'=>Yii::t('backend','Students'),

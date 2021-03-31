@@ -31,6 +31,7 @@ use yii\bootstrap4\ActiveForm;
                                 'form' => $form,
                                 'model' => $model,
                                 'sectionList' => $sectionList,
+                                'tagList'=>$tagList,
                                 'teacherList' => $teacherList,
 //                                'course_time'=>$course_time,
 

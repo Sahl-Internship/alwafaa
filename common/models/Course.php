@@ -29,6 +29,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $created_at
  * @property CourseAttachment[] $courseAttachments
  * @property CourseClasses[] $courseClasses
+ * @property Tag[] $tags
  * @property CourseReview[] $courseReview
  * @property Event[] $events
  * @property Section $section
@@ -45,6 +46,7 @@ class Course extends \yii\db\ActiveRecord
     public $review;
     public $intro_video;
     public $image;
+    public $tag;
 
     /**
      * {@inheritdoc}
@@ -104,7 +106,7 @@ class Course extends \yii\db\ActiveRecord
             [['start_at','end_at'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => Section::className(), 'targetAttribute' => ['section_id' => 'id']],
             [['teacher_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['teacher_id' => 'id']],
-            [['attachments', 'classes','intro_video','image'], 'safe'],
+            [['attachments', 'classes','intro_video','image','tag'], 'safe'],
         ];
     }
 
@@ -129,6 +131,7 @@ class Course extends \yii\db\ActiveRecord
             'intro_video' => Yii::t('backend', 'Course Introduction'),
             'image' => Yii::t('backend', 'Course Image'),
             'attachments' => Yii::t('backend', 'Attachment'),
+            'tag' => Yii::t('backend', 'Tag'),
         ];
     }
 
@@ -189,6 +192,12 @@ class Course extends \yii\db\ActiveRecord
     public function getTeacher()
     {
         return $this->hasOne(User::className(), ['id' => 'teacher_id']);
+    }
+
+    public function getTags()
+    {
+        return $this->hasMany(Tag::class, ['id' => 'tag_id'])
+            ->viaTable(TagCourse::tableName(),['course_id'=>'id']);
     }
 
     /**
