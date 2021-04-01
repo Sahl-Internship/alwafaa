@@ -106,9 +106,9 @@
                       'q-ml-sm': $q.screen.lt.md && $q.screen.lt.sm
                       }"
                   >
-                    <div class="text-body1 q-mt-lg">يرجى تحميل الملف  و الإطلاع عليه قبل الإشتراك في الدورة</div>
+                    <div class="text-body1 q-mt-lg">يرجى ارفاق الملف  و الإطلاع عليه قبل الإشتراك في الدورة</div>
 
-                    <div class="text-body1 text-primary col-12" @click="selectImage">تحميل الملف
+                    <div class="text-body1 text-primary col-12" @click="selectImage">ارفاق الملف
                       <!-- <div
                         class="fileContainer imagePreviewWrapper "
                         :style="{ 'background-image': `url(${url})` }"
@@ -118,22 +118,26 @@
                         id="fileId"
                         ref="fileInput"
                         type="file"
+                        name="fileName"
                         accept="image/*,application/pdf"
                         style="display:none"
                         @change="pickFile"
                       >
                     </div>
-                    <a
+                    <div class="text-body1 q-pa-xl">
+                      {{fileName}}
+                    </div>
+                    <!-- <a
                       class="fileContainer imagePreviewWrapper"
                       :href="url"
                       target="_blank"
                     >
                       click
-                    </a>
+                    </a> -->
                   </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-lg-4 col-md-5  join-form">
-                  <ul class="tabs-list q-ml-xl">
+                  <!-- <ul class="tabs-list q-ml-xl">
                     <li
                      class="q-px-md q-py-sm q-mr-xs tab1"
                      :class="{'active-tab': !activeTab,'inactive-tab':activeTab}"
@@ -144,7 +148,7 @@
                      :class="{'active-tab': activeTab,'inactive-tab': !activeTab}"
                      @click="changeActive2"
                     >اشتراك لشخص اخر</li>
-                  </ul>
+                  </ul> -->
                   <div class="bg-white q-py-xl q-mx-xl white-form">
                     <ValidationObserver v-slot="{ handleSubmit }">
                       <q-form
@@ -152,6 +156,7 @@
                         class="row q-mx-xl "
                       >
                         <ValidationProvider
+                          v-if="anotherPerson"
                           name="firstname"
                           class="col-xs-12 col-sm-6 col-md-6 q-pb-xs"
                           :class="!$q.screen.lt.sm ? 'q-pr-xs' : ''"
@@ -160,7 +165,7 @@
                         >
                           <g-input
                             outlined
-                            v-model="student.firstname"
+                            v-model="firstname"
                             :label="$t('formFields.firstname')"
                             :dense='true'
                             :error="invalid && validated"
@@ -171,14 +176,15 @@
                         </ValidationProvider>
 
                         <ValidationProvider
+                          v-if="anotherPerson"
                           name="lastname"
-                          class="col-xs-12 col-sm-6 col-md-6 q-pb-xs"
+                          class="col-12 col-sm-6 col-md-6 q-pb-xs"
                           rules="required"
                           v-slot="{ errors, invalid, validated }"
                         >
                           <g-input
                             outlined
-                            v-model="student.lastname"
+                            v-model="lastname"
                             :dense='true'
                             :label="$t('formFields.lastname')"
                             :error="invalid && validated"
@@ -188,16 +194,17 @@
                           />
                         </ValidationProvider>
                         <ValidationProvider
+                          v-if="anotherPerson"
                           name="email"
                           class="col-12 q-pb-xs"
-                          rules="required|email"
+                          rules="email"
                           v-slot="{ errors, invalid, validated }"
                         >
                           <g-input
                             outlined
                             type="email"
                             :dense='true'
-                            v-model="student.email"
+                            v-model="email"
                             :label="$t('formFields.email')"
                             :error="invalid && validated"
                             :error-message="errors[0]"
@@ -210,15 +217,16 @@
                         </ValidationProvider>
 
                         <ValidationProvider
+                          v-if="anotherPerson"
                           name="subtitle"
-                          class="col-xs-12 col-sm-12 col-md-12 q-pb-xs"
+                          class="col-12 q-pb-xs"
                           :class="!$q.screen.lt.sm ? 'q-pr-xs' : ''"
-                          rules="required"
+                          rules=""
                           v-slot="{ errors, invalid, validated }"
                         >
                           <g-input
                             outlined
-                            v-model="student.subtitle"
+                            v-model="subtitle"
                             color='dark'
                             :dense='true'
                             :label="$t('formFields.subtitle')"
@@ -229,14 +237,15 @@
                         </ValidationProvider>
 
                         <ValidationProvider
+                          v-if="anotherPerson"
                           name="country"
                           class="col-12 q-pb-xs"
-                          rules="required"
+                          rules=""
                           v-slot="{ errors, invalid, validated }"
                         >
                           <g-select
                             outlined
-                            v-model="student.country"
+                            v-model="country"
                             :options="countriesNamesOptions"
                             color='dark'
                             :dense='true'
@@ -248,9 +257,10 @@
                           />
                         </ValidationProvider>
 
-                        <div class="col-12 row phone"
+                        <!-- <div class="col-12 row phone"
                         >
                           <ValidationProvider
+                            v-if="anotherPerson"
                             name="phone"
                             class="col-xs-9 col-sm-9 col-md-10 col-lg-10 q-pb-xs phone-input"
                             rules="required|numeric"
@@ -258,7 +268,7 @@
                           >
                             <g-input
                               outlined
-                              v-model="student.phone"
+                              v-model="phone"
                               color='dark'
                               class="phone-field"
                               :dense='true'
@@ -270,6 +280,7 @@
                           </ValidationProvider>
 
                           <ValidationProvider
+                            v-if="anotherPerson"
                             name="phone-key"
                             class="col-xs-3 col-sm-3 col-md-2 col-lg-2 q-pb-xs phone-select"
                             rules="required"
@@ -280,32 +291,69 @@
                               color='dark'
                               class="select"
                               :dense='true'
-                              v-model="student.phone_key"
+                              v-model="phone_key"
                               :options="dialCodesOPtions"
                               :error="invalid && validated"
                               :error-message="errors[0]"
                             />
                           </ValidationProvider>
-                        </div>
-                        <ValidationProvider
-                          name="fileName"
-                          class="col-xs-12 col-sm-12 col-md-12 q-pb-xs"
-                          :class="!$q.screen.lt.sm ? 'q-pr-xs' : ''"
-                          rules="required"
-                          v-slot="{ errors, invalid, validated }"
-                        >
-                          <g-input
-                            outlined
-                            color='dark'
-                            :dense='true'
-                            v-model="fileName"
-                            label="المرفقات"
-                            :error="invalid && validated"
-                            :error-message="errors[0]"
-                            prependIconName="file_upload"
-                            appendIconName='mdi-attachment'
-                          />
-                        </ValidationProvider>
+                        </div> -->
+              <div class="col-12 row phone"
+              >
+                <ValidationProvider
+                v-if="anotherPerson"
+                  name="phone"
+                  class="col-xs-9 col-sm-9 col-md-9 col-lg-9 q-pb-xs phone-input"
+                  rules="numeric"
+                  v-slot="{ errors, invalid, validated }"
+                >
+                  <g-input
+                    dense='true'
+                    borderless
+                    v-model="phoneNumber"
+                    :label="$t('formFields.phone')"
+                    :error="invalid && validated"
+                    :error-message="errors[0]"
+                    prependIconName="mdi-phone"
+                  />
+                </ValidationProvider>
+
+                <ValidationProvider
+                v-if="anotherPerson"
+                  name="phone-key"
+                  class="col-xs-3 col-sm-3 col-md-3 col-lg-3  phone-select"
+                  rules=""
+                  v-slot="{ errors, invalid, validated }"
+                >
+                  <g-select
+                    dense='true'
+                    borderless
+                    v-model="phoneKey"
+                    :options="dialCodesOPtions"
+                    :error="invalid && validated"
+                    :error-message="errors[0]"
+                  />
+                </ValidationProvider>
+              </div>
+                          <ValidationProvider
+                            v-if="anotherPerson"
+                            name="gender"
+                            class="col-12 q-pb-xs"
+                            rules="required"
+                            v-slot="{ errors, invalid, validated }"
+                          >
+                            <g-select
+                              outlined
+                              dense='true'
+                              v-model="gender"
+                              :options="genderOptions"
+                              :label="$t('formFields.gender')"
+                              :error="invalid && validated"
+                              :error-message="errors[0]"
+                              prependIconName="mdi-human-male-female"
+                            />
+                          </ValidationProvider>
+
                         <ValidationProvider
                           name="checkbox"
                           class="col-12 q-pb-xs"
@@ -331,12 +379,18 @@
                             </span>
                           </label>
                         </ValidationProvider>
-
+                        <q-checkbox
+                          v-model="anotherPerson"
+                          color="dark"
+                          class="text-primary"
+                          label="الاشتراك لشخص اخر"
+                        />
                         <g-btn
                           :dense='true'
                           label="إشتراك"
                           :width="!$q.screen.lt.md ? 'col-8' : 'col-9'"
                           :margin="['q-mt-sm']"
+                          @click="joinCourse"
                         />
                         <div
                           class="text-body1 text-negative q-mt-md q-ml-xl q-pl-lg"
@@ -347,13 +401,6 @@
                         </div>
                       </q-form>
                     </ValidationObserver>
-                    <q-checkbox
-                      v-model="anotherPerson"
-                      color="dark"
-                      class="text-primary"
-                      :error="invalid && validated"
-                      :error-message="errors[0]"
-                    />
                   </div>
 
                 </div>
@@ -643,7 +690,7 @@ import CourseDates from '../components/CourseDates.vue'
 import AboutTeacher from '../components/AboutTeacher.vue'
 import TheComments from '../components/TheComments.vue'
 import { dialCodes, countriesNames, getSelectedCountry } from 'src/utils/countries.js'
-
+import { i18n } from 'src/boot/i18n'
 export default {
   components: { StarRating, AboutTeacher, TheComments, CourseDates },
   props: {
@@ -659,6 +706,11 @@ export default {
         }
       },
       deep: true
+    },
+    country (newVal) {
+      const selectedCountry = getSelectedCountry(newVal, this.checkLanguage)
+      this.isoCode = selectedCountry.code
+      this.phoneKey = selectedCountry.dial_code
     }
   },
   data () {
@@ -681,10 +733,13 @@ export default {
       email: '',
       phoneNumber: '',
       phoneKey: '',
-      fileName: [],
+      fileName: '',
       student: [],
       emptyField: [],
+      parent: 0,
       check: false,
+      anotherPerson: false,
+      genderOptions: [i18n.t('signup.female'), i18n.t('signup.male')],
       tab: 'mails',
       dialCodesOPtions: dialCodes,
       isoCode: '',
@@ -709,7 +764,19 @@ export default {
     },
     joinCourse () {
       const courseId = this.$route.params.id
-      this.$store.dispatch('student/joinCourse', courseId)
+      if (this.anotherPerson === true) {
+        this.parent = 1
+      }
+      const data = {
+        course_id: courseId,
+        firstname: this.firstname,
+        lastname: this.lastname,
+        phone_key: this.phoneKey,
+        phone: this.phoneNumber,
+        gender: this.gender === i18n.t('signup.male') ? '1' : '2',
+        is_parent: this.parent
+      }
+      this.$store.dispatch('student/joinCourse', data)
     },
     showAll () {
       this.isShowAll = !this.isShowAll
@@ -723,23 +790,25 @@ export default {
       const time = calcDuration(timestamp)
       return time
     },
-    previewFiles (event) {
-      const file = this.fileName.push(event.target.files)
-      console.log(file)
-    },
+    // previewFiles (event) {
+    //   const file = event.target.files[0]
+    //   this.firstname = file.name
+    // },
     onFileChange (event) {
       var fileData = event.target.files[0]
-      this.fileName.push(fileData.name)
+      this.fileName = fileData
       this.url = URL.createObjectURL(fileData)
     },
-    changeActive1 () {
-      this.student = this.$store.getters['student/getUserData']
-      this.activeTab = false
-    },
-    changeActive2 () {
-      this.student = []
-      this.activeTab = true
-    },
+    // changeActive1 () {
+    //   this.student = this.$store.getters['student/getUserData']
+    //   this.activeTab = false
+    // },
+    // changeActive2 () {
+    //   if (this.anotherPerson === true) {
+    //     this.student = []
+    //     this.activeTab = true
+    //   }
+    // },
     close () {
       this.fullWidth = !this.fullWidth
       return this.fullWidth
@@ -893,7 +962,7 @@ export default {
 }
 .show-more_description{
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   left: 50%;
   margin-bottom: 15px;
 }
@@ -972,32 +1041,82 @@ a.fileContainer > input[type=file] {
   &::v-deep{
     .q-field__inner{
       background-color: $grey-2;
-      border-radius: 7px;
+      // border-radius: 7px;
     }
     .q-field__inner:focus{
       outline: none;
     }
   }
 }
-.phone-field{
-  &::v-deep{
-    .q-field__inner{
-      border-radius: 7px 0px 0px 7px;
-    }
+// .phone-field{
+//   &::v-deep{
+//     .q-field__inner{
+//       border-radius: 7px 0px 0px 7px;
+//       border-right: 0;
+//       outline: none;
+//     }
 
-  }
-}
-.select{
-  &::v-deep{
-    .q-field__inner{
-      border-radius: 0px 7px 7px 0px;
+//   }
+// }
+// .select{
+//   &::v-deep{
+//     .q-field__inner{
+//       border-radius: 0px 7px 7px 0px;
+//     }
+//     .q-select__dropdown-icon{
+//       margin-top: -15px;
+//       margin-right: 5px;
+//     }
+//   }
+// }
+  .phone-input .q-input {
+    &::v-deep {
+      .q-field__inner {
+        border: solid 1px $grey-3;
+        border-right: none;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+      .q-field__inner:hover {
+        border-color: $grey-5;
+      }
+      .q-field__prepend {
+        padding-left: 12px;
+      }
     }
-    .q-select__dropdown-icon{
-      margin-top: -15px;
-      margin-right: 5px;
+  }
+
+  .phone-select .q-select {
+    &::v-deep {
+      .q-field__inner {
+        border: 1px solid  $grey-3;
+        border-left-color: $grey-3;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+      .q-field__control-container {
+        padding-top: 5px;
+      }
+      .q-field__native {
+        direction: rtl;
+      }
+      .q-field__append {
+        padding-left: 5px;
+      }
+      .q-select__dropdown-icon{
+        margin-right: 10px;
+      }
     }
   }
-}
+
+  .phone:hover {
+    &::v-deep {
+      .q-select .q-field__inner {
+        border-color: $grey-5;
+        border-left-color: $grey-2;
+      }
+    }
+  }
 .join-form{
   position: relative;
   border-radius: 6px;
