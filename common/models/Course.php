@@ -86,7 +86,6 @@ class Course extends \yii\db\ActiveRecord
             ],
             [
                 'class'=>TimestampBehavior::class,
-                'updatedAtAttribute' => false
             ],
 
         ];

@@ -80,6 +80,7 @@ class CourseDetails extends Course
                 return count($course);
             },
             'created_at',
+            'updated_at',
             'days_number' => function ($model) {
                 return Course::find()->getDaysNumber($model->id);
             },
