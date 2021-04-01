@@ -63,55 +63,6 @@ $days = [
     </div>
 </div>
 <br><br>
-
-<?php
-//foreach ($days as $index => $day): ?>
-<!--<div class="card">-->
-    <!--
-    <input type="checkbox" id="<?php //echo 'day_' . $index ?>" onclick="myFunction('<?php //echo $index;?>')">
-    -->
- <!--  <label for="myCheck"><?php //echo $day ?></label>-->
-<!--</div>-->
-<!---->
-<!--    <div class="row" id="--><?php //echo 'class_' . $index ?><!--" style="display: none" >-->
-<!--        <div class="col-sm-6">-->
-<!--            --><?php //echo $form->field($model, 'from')->widget(TimePicker::classname(), [
-//                'options' => [
-//                    'placeholder' => 'From ...',
-//                    'id' => 'from_' . $index,
-//                    'name'=>'courseForm[classes]['.$index.'][from]'
-//                ],
-//                'pluginOptions'=>[
-//                    'defaultTime' =>false,
-//                ]
-//            ])->label(false)?>
-<!--        </div>-->
-<!--        <div class="col-sm-6">-->
-<!--            --><?php //echo $form->field($model, 'to')->widget(TimePicker::classname(), [
-//                'options' => [
-//                    'placeholder' => 'To ...',
-//                    'id' => 'to_' . $index,
-//                    'name'=>'courseForm[classes]['.$index.'][to]'
-//                ],
-//                'pluginOptions'=>[
-//                       'defaultTime' =>false,
-//                ]
-//            ])->label(false)?>
-<!--        </div>-->
-<!--    </div>-->
-<?php //endforeach; ?>
-<!---->
-<!---->
-<!-- Try To Remove Option from Select-->
-<!--<label for="cars">Choose a car:</label>-->
-<!--<select name="cars" id="cars" onchange="yfun(--><?php //echo $days ?>
-   <?php
-//    foreach ($days as $day) :?>
-<!--    <option value="--><?php //echo $day ?><!--">--><?php //echo $day ?><!--</option>-->
-<!--    --><?php //endforeach; ?>
-<!--</select>-->
-<!---->
-
 <?php echo $form -> field($model, 'classes') -> widget(MultipleInput ::className(), [
     'max' => 7,
     'columns' => [

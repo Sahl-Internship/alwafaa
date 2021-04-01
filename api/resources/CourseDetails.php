@@ -3,13 +3,11 @@
 
 namespace api\resources;
 
-
 use common\models\Course;
-use common\models\Event;
 use common\models\User;
-use function foo\func;
+use Yii;
 
-class CourseDetails extends \common\models\Course
+class CourseDetails extends Course
 {
 
     public function fields()
@@ -26,6 +24,9 @@ class CourseDetails extends \common\models\Course
             'section' => function ($model) {
                 return $model->section->title;
             },
+            'tags' => function ($model) {
+                return $model->tags;
+            },
             'start_at' => function ($model) {
                 return (int)$model->start_at;
             },
@@ -37,7 +38,7 @@ class CourseDetails extends \common\models\Course
             'target_student',
             'targeted_skills',
             'image' => function ($model) {
-                return $model->picture ?: \Yii::getAlias('@backendUrl') . "/img/logo.png";
+                return $model->picture ?: Yii::getAlias('@backendUrl') . "/img/logo.png";
             },
             'rate' => function ($model) {
                 $course = Course::find()->getRate($model->id);
@@ -79,18 +80,19 @@ class CourseDetails extends \common\models\Course
                 return count($course);
             },
             'created_at',
+            'updated_at',
             'days_number' => function ($model) {
                 return Course::find()->getDaysNumber($model->id);
             },
             'classes' => function ($model) {
-              return  Classes::find()->andWhere('course_id=:id',['id'=>$model->id])->all();
+                return Classes::find()->andWhere('course_id=:id', ['id' => $model->id])->all();
             },
             'teacher' => function ($model) {
                 $teacher_portfolio = User::find()->getTeacherPortfolio($model->teacher->id);
                 return [
                     'name' => $model->teacher->userProfile->getFullName(),
                     'sub_title' => $model->teacher->userProfile->sub_title,
-                    'avatar' => $model->teacher->userProfile->avatar?: \Yii::getAlias('@backendUrl'). "/img/anonymous.jpg",
+                    'avatar' => $model->teacher->userProfile->avatar ?: Yii::getAlias('@backendUrl') . "/img/anonymous.jpg",
                     'students' => $teacher_portfolio['student_number'],
                     'duration' => $teacher_portfolio['duration'],
                     'classes_number' => $teacher_portfolio['classes'],

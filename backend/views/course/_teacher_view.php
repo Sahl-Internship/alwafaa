@@ -1,21 +1,11 @@
 <?php
-
-use edofre\fullcalendar\models\Event;
-use yii\bootstrap4\Modal;
 use yii\helpers\Html;
-use yii\helpers\StringHelper;
-use yii\helpers\Url;
 use yii\widgets\DetailView;
-
 /**
  * @var yii\web\View $this
  * @var common\models\Course $model
+ * @var string $tags
  */
-
-//$this->title = $model->title;
-//$this->params['breadcrumbs'][] = ['label' => ' / '.Yii::t('backend','Courses'),
-//    'url' => ['index']];
-//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="course-view">
     <div class="card">
@@ -49,6 +39,11 @@ use yii\widgets\DetailView;
                     [
                         'attribute' => 'section_id',
                         'value' => $model->section->title,
+                    ],
+                    [
+                        'attribute'=>'tags',
+                        'label'=>Yii::t('backend','Tags'),
+                        'value'=> $tags,
                     ],
                     'zoom_link',
 

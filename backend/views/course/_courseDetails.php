@@ -7,6 +7,8 @@
  * @var common\models\User $teacherList
  */
 
+use kartik\widgets\Select2;
+
 ?>
 <?php //echo $form->errorSummary($model); ?>
 <div class="row">
@@ -14,18 +16,34 @@
         <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-sm-4">
-        <?php echo $form->field($model, 'section_id')->dropdownList($sectionList,array('prompt'=>'')) ?>
+        <?php echo $form->field($model, 'section_id')->dropdownList($sectionList, array('prompt' => '')) ?>
     </div>
     <div class="col-sm-4">
-        <?php echo $form->field($model, 'teacher_id')->dropdownList($teacherList,array('prompt'=>'')) ?>
+        <?php echo $form->field($model, 'teacher_id')->dropdownList($teacherList, array('prompt' => '')) ?>
     </div>
 </div>
 <div class="row">
-        <div class="col-sm-4">
+    <div class="col-sm-4">
         <?php echo $form->field($model, 'sub_title')->textInput() ?>
-        </div>
+    </div>
     <div class="col-sm-4">
         <?php echo $form->field($model, 'zoom_link')->textInput(['maxlength' => true]) ?>
+    </div>
+    <div class="col-sm-4">
+        <?php
+        $model->tag = $model->tags;
+        echo $form->field($model, 'tag')->widget(Select2::classname(), [
+            'data' => $tagList,
+            'maintainOrder' => true,
+            'size' => 'sm',
+            'options' => ['placeholder' => 'Select a tag ...', 'multiple' => true],
+            'pluginOptions' => [
+                'tags' => true,
+                'tokenSeparators' => [',', ' '],
+                'maximumInputLength' => 10
+            ],
+        ]);
+        ?>
     </div>
 </div>
 

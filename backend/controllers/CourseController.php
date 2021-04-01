@@ -6,6 +6,8 @@ use common\models\CourseAttachment;
 use common\models\CourseClasses;
 use common\models\EventAttachment;
 use common\models\Section;
+use common\models\Tag;
+use common\models\TagCourse;
 use common\models\User;
 use edofre\fullcalendar\models\Event;
 use Yii;
@@ -70,8 +72,19 @@ class CourseController extends Controller
         } elseif (Yii::$app->user->can('teacher')) {
             $view = '_teacher_view';
         }
+        $model = $this->findModel($id);
+        if($model->tags){
+            foreach ($model->tags as $tag) {
+                $tags[]=$tag->title;
+            }
+            $tags =  implode(' , ', $tags);
+        }else{
+            $tags = Yii::t('backend','(not set)');
+        }
+
         return $this->render($view, [
-            'model' => $this->findModel($id),
+            'model' =>$model,
+            'tags' => $tags,
         ]);
     }
 
@@ -90,16 +103,24 @@ class CourseController extends Controller
             $teachers_name[$teacher->id] = $teacher->userProfile->getFullName();
         }
         $model->classes = [];
+        $model->tag = [];
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($model->classes) {
                 $model->classSchedule($model->classes);
                 $model->setEvents($model->id);
+            }
+            if($model->tag){
+                foreach ($model->tag as $item) {
+                    $tag = Tag::findOne(['id'=>$item]);
+                    $model->link('tags',$tag);
+                }
             }
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('create', [
             'model' => $model,
             'sectionList' => ArrayHelper::map(Section::find()->all(), 'id', 'title'),
+            'tagList' => ArrayHelper::map(Tag::find()->all(), 'id', 'title'),
             'teacherList' => $teachers_name
         ]);
     }
@@ -135,11 +156,19 @@ class CourseController extends Controller
                 CourseClasses::deleteAll(['course_id' => $model->id]);
                 $model->classSchedule($model->classes);
             }
+            if($model->tag){
+                TagCourse::deleteAll(['course_id' => $model->id]);
+                foreach ($model->tag as $item) {
+                    $tag = Tag::findOne(['id'=>$item]);
+                    $model->link('tags',$tag);
+                }
+            }
             return $this->redirect([$view, 'id' => $model->id]);
         }
         return $this->render('update', [
             'model' => $model,
             'sectionList' => ArrayHelper::map(Section::find()->all(), 'id', 'title'),
+            'tagList' => ArrayHelper::map(Tag::find()->all(), 'id', 'title'),
             'teacherList' => $teachers_name
         ]);
     }

@@ -68,6 +68,13 @@ echo MainSidebarMenu::widget([
             'visible' => Yii::$app->user->can('administrator'),
         ],
         [
+            'label' => Yii::t('backend', 'Tags'),
+            'icon' => FAS::icon('fas fa-tags', ['class' => ['nav-icon']]),
+            'url' => ['/tag/index'],
+            'active' => Yii::$app->controller->id === 'tag',
+            'visible' => Yii::$app->user->can('administrator'),
+        ],
+        [
             'label' => Yii::t('backend', 'Courses'),
             'icon' => FAS::icon('fas fa-book-open', ['class' => ['nav-icon']]),
             'url' => ['/course/index'],

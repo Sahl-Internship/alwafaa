@@ -65,7 +65,8 @@
     "kartik-v/yii2-field-range": "*",
     "ext-json": "*",
     "edofre/yii2-fullcalendar": "V1.0.11",
-    "edofre/yii2-fullcalendar-scheduler": "V1.1.12"
+    "edofre/yii2-fullcalendar-scheduler": "V1.1.12",
+    "kartik-v/yii2-widget-select2": "dev-master"
   },
   "require-dev": {
     "yiisoft/yii2-gii": "^2.0.0",
