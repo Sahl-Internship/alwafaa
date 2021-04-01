@@ -182,11 +182,76 @@
                     'off': (lecture === 'عطلة'),
                     'green-active': todayStatus,
                     'inactive': past ,
-                    'green-line-active': future &&  lecture !== 'عطلة',
+                    'green-line-active': future &&  lecture !== 'عطلة'
                   }"
                   @click="medium = true"
                 >
                   {{lecture}}
+            <q-dialog v-model="medium">
+              <q-card style="width: 700px; max-width: 80vw;" v-for="(info,i) in classInfo (x-1)" :key="i">
+                <q-card-section  v-if="info.to && info.from">
+                  <div class="text-h6">{{info.title}}</div>
+                </q-card-section>
+
+                <q-separator v-if="info.to && info.from"/>
+                <q-card-section
+                  class="row"
+                   v-if="info.to && info.from"
+                >
+                  <div class="col-6 row" v-if="info.to && info.from">
+                    <div class="col-6 bg-grey-1 text-center q-pt-lg" style="width:130px;height:130px">
+                      <img
+                        src='/images/Box/duration.png'
+                        :class="{
+                          'icon-lg': !$q.screen.lt.sm,
+                          'icon-sm': $q.screen.lt.sm
+                         }"
+                      >
+                      <div class="text-body1">مدة الدرس</div>
+                      <div class="text-body1">{{handleDuration(info.to - info.from)}}</div>
+                    </div>
+                    <div class="col-6 bg-grey-1 q-ml-md text-center q-pt-lg" style="width:130px;height:130px"  >
+                      <img src='/images/Box/path 9290.png'
+                        :class="{
+                          'icon-lg': !$q.screen.lt.sm,
+                          'icon-sm': $q.screen.lt.sm
+                        }"
+                        alt="">
+                      <div class="text-body1">واجب الدرس</div>
+                      <div class="text-body1 text-primary" style="text-decoration:underline;">ارساله الان</div>
+                    </div>
+                  </div>
+                  <div class="col-6 row">
+                    <div class="col-12 row">
+                      <div class="col-4 bg-grey-1 text-center " style="width:130px;height:30px">
+                        <div class="text-body1 q-py-xs">{{handleDuration(info.from)}}</div>
+                      </div>
+                      <img src="images/Box/Path 9287.png"
+                        class="q-mx-md q-mt-sm"
+                        :class="{
+                          'icon-lg': !$q.screen.lt.sm,
+                          'icon-sm': $q.screen.lt.sm
+                        }"
+                        alt=""
+                      >
+                      <div class="col-4 bg-grey-1 text-center " style="width:130px;height:30px">
+                        <div class="text-body1 q-py-xs">{{handleDuration(info.to)}}</div>
+                      </div>
+                    </div>
+                    <div class="col-12 row">
+                      <div class="col-11 bg-grey-1 text-center justify-center items-center" >
+                        <div
+                          class="text-body1 justify-center items-center q-mt-lg"
+                          style="overflow:hidden"
+                        >
+                          {{courseData.zoom_link}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </q-card-section>
+              </q-card>
+            </q-dialog>
                 </td>
               </tr>
               <tr>
@@ -202,69 +267,11 @@
                   }"
                 >
                   {{lecture}}
+
                 </td>
               </tr>
             </table>
-            <q-dialog v-model="medium">
-              <q-card style="width: 700px; max-width: 80vw;">
-                <q-card-section>
-                  <div class="text-h6">اسم الدرس</div>
-                </q-card-section>
 
-                <q-separator />
-                <q-card-section
-                  class="row"
-                >
-                  <div class="col-6 row">
-                    <div class="col-6 bg-grey-1 text-center q-pt-lg" style="width:130px;height:130px">
-                      <img
-                        src='/images/Box/duration.png'
-                        :class="{
-                          'icon-lg': !$q.screen.lt.sm,
-                          'icon-sm': $q.screen.lt.sm
-                         }"
-                      >
-                      <div class="text-body1">مدة الدرس</div>
-                      <div class="text-body1">03:00</div>
-                    </div>
-                    <div class="col-6 bg-grey-1 q-ml-md text-center q-pt-lg" style="width:130px;height:130px">
-                      <img src='/images/Box/path 9290.png'
-                        :class="{
-                          'icon-lg': !$q.screen.lt.sm,
-                          'icon-sm': $q.screen.lt.sm
-                        }"
-                        alt="">
-                      <div class="text-body1">واجب الدرس</div>
-                      <div class="text-body1 text-primary" style="text-decoration:underline;">ارساله الان</div>
-                    </div>
-                  </div>
-                  <div class="col-6 row">
-                    <div class="col-12 row">
-                      <div class="col-4 bg-grey-1 text-center " style="width:130px;height:30px">
-                        <div class="text-body1 q-py-xs">03:00</div>
-                      </div>
-                      <img src="images/Box/Path 9287.png"
-                        class="q-mx-md q-mt-sm"
-                        :class="{
-                          'icon-lg': !$q.screen.lt.sm,
-                          'icon-sm': $q.screen.lt.sm
-                        }"
-                        alt=""
-                      >
-                      <div class="col-4 bg-grey-1 text-center " style="width:130px;height:30px">
-                        <div class="text-body1 q-py-xs">03:00</div>
-                      </div>
-                    </div>
-                    <div class="col-12 row">
-                      <div class="col-11 bg-grey-1 text-center justify-center items-center" >
-                        <div class="text-body1 justify-center items-center q-mt-lg">Zoom Link</div>
-                      </div>
-                    </div>
-                  </div>
-                </q-card-section>
-
-              </q-card>
-            </q-dialog>
           </div>
         </q-carousel-slide>
       </q-carousel>
@@ -307,6 +314,7 @@ export default {
       maximizedToggle: true,
       slide: 1,
       times: ['عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة'],
+      info: ['عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة', 'عطلة'],
       past: false,
       future: false,
       todayStatus: false,
@@ -314,6 +322,9 @@ export default {
     }
   },
   methods: {
+    clicked (e) {
+      console.log(e)
+    },
     mappedDate () {
       const x = {}
       const startDate = parseInt(this.courseData.classes[0].day_id)
@@ -381,8 +392,33 @@ export default {
         if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
           this.times[mapped[classT.day_id]] = getClassStartTime(classT.from)
         }
+        // const classInfo = [{
+        //   from: classT.from,
+        //   to: classT.to,
+        //   title: classT.title
+        // }]
       })
       return this.times
+    },
+    classInfo (weekNumber) {
+      const start = new Date(this.courseData.start_at * 1000)
+      start.setDate(start.getDate() + weekNumber * 7)
+
+      const endDate = new Date(start)
+      endDate.setDate(start.getDate() + 7)
+      const mapped = this.mappedDate()
+      // For Each
+      this.courseData.classes.forEach(classT => {
+        if (classT.date * 1000 >= start.valueOf() && classT.date * 1000 < endDate.valueOf()) {
+          this.info[mapped[classT.day_id]] = {
+            from: classT.from,
+            to: classT.to,
+            title: classT.title
+          }
+        }
+      })
+      console.log(this.info)
+      return this.info
     },
     // Class End time
     endClassTime (weekNumber) {
@@ -420,6 +456,11 @@ export default {
       }
       const restDays = (endDate - startDate) / (1000 * 60 * 60 * 24) - acheivedDays
       return { acheivedDays, restDays }
+    },
+    handleDuration (time) {
+      // const duration = calcDuration(time)
+      const duration = getClassStartTime(time)
+      return duration
     }
   }
 }

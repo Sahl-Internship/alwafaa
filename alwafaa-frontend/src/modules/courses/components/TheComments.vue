@@ -51,7 +51,7 @@
           class="col-1 q-ml-md q-mr-sm"
         >
           <img
-            src="images/home-imgs/omar.jpg"
+            :src="comment.student_photo"
             style="width:45px;height:45px;border-radius:50%;margin-top:4px"
           >
         </div>

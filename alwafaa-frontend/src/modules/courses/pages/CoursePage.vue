@@ -100,23 +100,35 @@
                     </li>
                   </ul>
                   <div
-                    class="fileUpload text-center flex justify-center items-center col-12"
+                    class="fileUpload text-center self-center col-12"
                     :class="{
                       'q-mx-md': !$q.screen.lt.md,
                       'q-ml-sm': $q.screen.lt.md && $q.screen.lt.sm
                       }"
                   >
-                    <div class="text-body1">يرجى تحميل الملف  و الإطلاع عليه قبل الإشتراك في الدورة</div>
-                    <a class="fileContainer text-body1 text-primary col-12">
-                      تحميل الملف
+                    <div class="text-body1 q-mt-lg">يرجى تحميل الملف  و الإطلاع عليه قبل الإشتراك في الدورة</div>
+
+                    <div class="text-body1 text-primary col-12" @click="selectImage">تحميل الملف
+                      <!-- <div
+                        class="fileContainer imagePreviewWrapper "
+                        :style="{ 'background-image': `url(${url})` }"
+                      >
+                      </div> -->
                       <input
-                       multiple
-                       type="file"
-                       name='attachment[]'
-                       id="fileId"
-                       accept="image/*,application/pdf"
-                       @change="onFileChange"
-                      />
+                        id="fileId"
+                        ref="fileInput"
+                        type="file"
+                        accept="image/*,application/pdf"
+                        style="display:none"
+                        @change="pickFile"
+                      >
+                    </div>
+                    <a
+                      class="fileContainer imagePreviewWrapper"
+                      :href="url"
+                      target="_blank"
+                    >
+                      click
                     </a>
                   </div>
                 </div>
@@ -335,7 +347,13 @@
                         </div>
                       </q-form>
                     </ValidationObserver>
-
+                    <q-checkbox
+                      v-model="anotherPerson"
+                      color="dark"
+                      class="text-primary"
+                      :error="invalid && validated"
+                      :error-message="errors[0]"
+                    />
                   </div>
 
                 </div>
@@ -645,7 +663,8 @@ export default {
   },
   data () {
     return {
-      date: '2019/02/01',
+      url: null,
+      // date: '2019/02/01',
       dense: false,
       step: 1,
       isShowAll: false,
@@ -673,6 +692,21 @@ export default {
     }
   },
   methods: {
+    selectImage () {
+      this.$refs.fileInput.click()
+    },
+    pickFile () {
+      const input = this.$refs.fileInput
+      const file = input.files
+      if (file && file[0]) {
+        const reader = new FileReader()
+        reader.onload = e => {
+          this.url = e.target.result
+        }
+        reader.readAsDataURL(file[0])
+        this.$emit('input', file[0])
+      }
+    },
     joinCourse () {
       const courseId = this.$route.params.id
       this.$store.dispatch('student/joinCourse', courseId)
@@ -689,13 +723,14 @@ export default {
       const time = calcDuration(timestamp)
       return time
     },
-    previewFiles () {
+    previewFiles (event) {
       const file = this.fileName.push(event.target.files)
       console.log(file)
     },
     onFileChange (event) {
       var fileData = event.target.files[0]
       this.fileName.push(fileData.name)
+      this.url = URL.createObjectURL(fileData)
     },
     changeActive1 () {
       this.student = this.$store.getters['student/getUserData']
@@ -766,6 +801,9 @@ export default {
         return '5/5'
       }
       return rate.toFixed(1)
+    },
+    checkLanguage () {
+      return this.$q.lang.rtl ? 'ar' : 'en'
     },
     countriesNamesOptions () {
       return countriesNames(this.checkLanguage)
@@ -1019,5 +1057,12 @@ a.fileContainer > input[type=file] {
 
 .file-select > input[type="file"] {
   display: none;
+}
+.imagePreviewWrapper {
+    display: block;
+    cursor: pointer;
+    margin: 0 auto 0px;
+    background-size: cover;
+    background-position: center center;
 }
 </style>
