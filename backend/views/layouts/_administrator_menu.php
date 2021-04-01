@@ -55,7 +55,7 @@ echo MainSidebarMenu::widget([
         ],
         [
             'label' => Yii::t('backend', 'Teachers'),
-            'icon' => FAS::icon('fas fa-chalkboard-teacher', ['class' => ['nav-icon']]),
+            'icon' => FAS::icon('fas fa-user-tie', ['class' => ['nav-icon']]),
             'url' => ['/user/teacher'],
             'active' => Yii::$app->controller->action->id === 'teacher',
             'visible' => Yii::$app->user->can('administrator'),
@@ -79,6 +79,13 @@ echo MainSidebarMenu::widget([
             'icon' => FAS::icon('fas fa-book-open', ['class' => ['nav-icon']]),
             'url' => ['/course/index'],
             'active' => Yii::$app->controller->id === 'course',
+            'visible' => Yii::$app->user->can('administrator'),
+        ],
+        [
+            'label' => Yii::t('backend', 'Join Requests'),
+            'icon' => FAS::icon('fas fa-user-clock', ['class' => ['nav-icon']]),
+            'url' => ['/student-request/index'],
+            'active' => Yii::$app->controller->id === 'student-request',
             'visible' => Yii::$app->user->can('administrator'),
         ],
 
