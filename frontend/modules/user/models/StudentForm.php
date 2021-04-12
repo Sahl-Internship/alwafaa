@@ -95,6 +95,7 @@ class StudentForm extends Model
 
             $user->afterSignup();
             //fill profile data
+            //todo check signup cycle =>the following code is duplicated
             $user->userProfile->firstname = $this->firstname;
             $user->userProfile->middlename = $this->middlename ?? "";
             $user->userProfile->lastname = $this->lastname;
@@ -107,8 +108,6 @@ class StudentForm extends Model
 //            $user->userProfile->city = $this->city;
             $user->userProfile->birthdate = $this->birthdate;
             $user->userProfile->save(false);
-            //link to parent account
-//            $this->LinkParentAccount($user->userProfile);
 
             if ($shouldBeActivated) {
                 $token = UserToken::create(
