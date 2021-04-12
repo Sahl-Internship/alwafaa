@@ -152,7 +152,7 @@
                   <div class="bg-white q-py-xl q-mx-xl white-form">
                     <ValidationObserver v-slot="{ handleSubmit }">
                       <q-form
-                        @submit.prevent="handleSubmit(submitForm)"
+                        @submit.prevent="handleSubmit(joinCourse)"
                         class="row q-mx-xl "
                       >
                         <ValidationProvider
@@ -167,7 +167,7 @@
                             outlined
                             v-model="firstname"
                             :label="$t('formFields.firstname')"
-                            :dense='true'
+                            :dense='formDense'
                             :error="invalid && validated"
                             :error-message="errors[0]"
                             color='dark'
@@ -185,7 +185,7 @@
                           <g-input
                             outlined
                             v-model="lastname"
-                            :dense='true'
+                            :dense='formDense'
                             :label="$t('formFields.lastname')"
                             :error="invalid && validated"
                             :error-message="errors[0]"
@@ -203,7 +203,7 @@
                           <g-input
                             outlined
                             type="email"
-                            :dense='true'
+                            :dense='formDense'
                             v-model="email"
                             :label="$t('formFields.email')"
                             :error="invalid && validated"
@@ -228,7 +228,7 @@
                             outlined
                             v-model="subtitle"
                             color='dark'
-                            :dense='true'
+                            :dense='formDense'
                             :label="$t('formFields.subtitle')"
                             :error="invalid && validated"
                             :error-message="errors[0]"
@@ -248,7 +248,7 @@
                             v-model="country"
                             :options="countriesNamesOptions"
                             color='dark'
-                            :dense='true'
+                            :dense='formDense'
                             :label="$t('formFields.country')"
                             prependIconName="mdi-flag-variant"
                             :flag="isoCode"
@@ -308,7 +308,7 @@
                   v-slot="{ errors, invalid, validated }"
                 >
                   <g-input
-                    dense='true'
+                    :dense='formDense'
                     borderless
                     v-model="phoneNumber"
                     :label="$t('formFields.phone')"
@@ -326,7 +326,7 @@
                   v-slot="{ errors, invalid, validated }"
                 >
                   <g-select
-                    dense='true'
+                    :dense='formDense'
                     borderless
                     v-model="phoneKey"
                     :options="dialCodesOPtions"
@@ -344,7 +344,7 @@
                           >
                             <g-select
                               outlined
-                              dense='true'
+                              :dense='formDense'
                               v-model="gender"
                               :options="genderOptions"
                               :label="$t('formFields.gender')"
@@ -386,7 +386,7 @@
                           label="الاشتراك لشخص اخر"
                         />
                         <g-btn
-                          :dense='true'
+                          :dense='formDense'
                           label="إشتراك"
                           :width="!$q.screen.lt.md ? 'col-8' : 'col-9'"
                           :margin="['q-mt-sm']"
@@ -663,9 +663,9 @@
                 <q-btn
                   :label='buttonTitleState'
                   size='lg'
-                  :dense='dense'
+                  :dense='formDense'
                   class="text-grey-5 bg-green q-mx-auto q-my-lg"
-                  @click="joinCourse"
+                  @click="fullWidth = true"
                   style="width:85%"
                 ></q-btn>
             </div>
@@ -718,6 +718,7 @@ export default {
       url: null,
       // date: '2019/02/01',
       dense: false,
+      formDense: true,
       step: 1,
       isShowAll: false,
       autoHeight: false,

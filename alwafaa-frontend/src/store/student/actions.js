@@ -118,13 +118,20 @@ export default {
     }
   },
 
-  async joinCourse ({ rootGetters, dispatch }, courseId) {
+  // async joinCourse ({ rootGetters, dispatch }, courseId) {
+  async joinCourse ({ rootGetters, dispatch }, data) {
     Loading.show()
 
     try {
-      const data = {
-        course_id: courseId
-      }
+      // const data = {
+      //   course_id: courseId,
+      //   firstname: this.firstname,
+      //   lastname: this.lastname,
+      //   phone_key: this.phoneKey,
+      //   phone: this.phoneNumber,
+      //   gender: this.gender === i18n.t('signup.male') ? '1' : '2',
+      //   is_parent: this.parent
+      // }
 
       const response = await handleJoinCourse(data)
       dispatch('getProfileData')
