@@ -1,10 +1,8 @@
 <?php
 
-use common\grid\CustomActionColumn;
 use common\widgets\ActionColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\Url;
 
 /**
  * @var yii\web\View $this
