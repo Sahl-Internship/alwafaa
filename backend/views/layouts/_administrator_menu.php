@@ -40,26 +40,38 @@ echo MainSidebarMenu::widget([
             'badgeBgClass' => 'badge-success',
         ],
         [
-            'label' => Yii::t('backend', 'All Users'),
+            'label' => Yii::t('backend', 'Users'),
+            'url' => '#',
             'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
-            'url' => ['/user/index'],
-            'active' => Yii::$app->controller->id === 'user' && Yii::$app->controller->action->id === 'index',
+            'options' => ['class' => 'nav-item has-treeview'],
             'visible' => Yii::$app->user->can('administrator'),
+            'active' =>
+                ('user' === Yii::$app->controller->id || 'student' === Yii::$app->controller->id),
+            'items' => [
+                [
+                    'label' => Yii::t('backend', 'All'),
+                    'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
+                    'url' => ['/user/index'],
+                    'active' => Yii::$app->controller->id === 'user' && Yii::$app->controller->action->id === 'index',
+                ],
+                [
+                    'label' => Yii::t('backend', 'Students'),
+                    'icon' => FAS::icon('fas fa-user-graduate', ['class' => ['nav-icon']]),
+                    'url' => ['/user/student'],
+                    'active' => Yii::$app->controller->action->id === 'student',
+
+                ],
+                [
+                    'label' => Yii::t('backend', 'Teachers'),
+                    'icon' => FAS::icon('fas fa-user-tie', ['class' => ['nav-icon']]),
+                    'url' => ['/user/teacher'],
+                    'active' => Yii::$app->controller->action->id === 'teacher',
+                ],
+            ],
         ],
-        [
-            'label' => Yii::t('backend', 'Students'),
-            'icon' => FAS::icon('fas fa-user-graduate', ['class' => ['nav-icon']]),
-            'url' => ['/user/student'],
-            'active' => Yii::$app->controller->action->id === 'student',
-            'visible' => Yii::$app->user->can('administrator'),
-        ],
-        [
-            'label' => Yii::t('backend', 'Teachers'),
-            'icon' => FAS::icon('fas fa-user-tie', ['class' => ['nav-icon']]),
-            'url' => ['/user/teacher'],
-            'active' => Yii::$app->controller->action->id === 'teacher',
-            'visible' => Yii::$app->user->can('administrator'),
-        ],
+
+
+
         [
             'label' => Yii::t('backend', 'Sections'),
             'icon' => FAS::icon('fad fa-stream', ['class' => ['nav-icon']]),
