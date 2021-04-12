@@ -79,7 +79,7 @@ return [
     "Student Requests"=>"طلبات الإلتحاق",
     "Requested Refused Successfully"=>"تم رفض الطلب بنجاح",
     "All"=>"الجميع",
-    ""=>"",
+    "Here"=>"من هنا",
     ""=>"",
     ""=>"",
     ""=>"",

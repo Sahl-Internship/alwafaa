@@ -51,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'label' => Yii::t('backend', 'Request status'),
                         'value' => $model->getStatus($model->status),
+                        'format' => 'html'
                     ],
 //                    'is_parent',
                     'created_by',
@@ -59,9 +60,22 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => $course = \common\models\User::findOne(['id' => $model->created_by])->userProfile->getFullName() .
                             ' ( ' . \common\models\User::findOne(['id' => $model->created_by])->email . " )",
                     ],
-
                 ],
             ]) ?>
+
+
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2><?php echo Yii::t('backend','Attachment') ?></h2>
+        </div>
+        <div class="card-body">
+            <?php foreach ($files as $file): ?>
+            <iframe src="<?php echo $file?>" style="width:450px; height:500px;" frameborder="1"></iframe>
+            <?php endforeach; ?>
+
         </div>
     </div>
 </div>

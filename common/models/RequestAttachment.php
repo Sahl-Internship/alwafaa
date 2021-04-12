@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%request_attachment}}".
@@ -18,7 +20,7 @@ use Yii;
  * @property int|null $updated_at
  * @property int|null $created_by
  *
- * @property StudentRequests $request
+ * @property StudentRequest $request
  */
 class RequestAttachment extends \yii\db\ActiveRecord
 {
@@ -30,6 +32,19 @@ class RequestAttachment extends \yii\db\ActiveRecord
         return '{{%request_attachment}}';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class'=>TimestampBehavior::class,
+            ],
+            [
+                'class'=>BlameableBehavior::class,
+                'updatedByAttribute' => false
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -38,7 +53,7 @@ class RequestAttachment extends \yii\db\ActiveRecord
         return [
             [['request_id', 'size', 'created_at', 'updated_at', 'created_by'], 'integer'],
             [['path', 'base_url', 'type', 'name'], 'string', 'max' => 255],
-            [['request_id'], 'exist', 'skipOnError' => true, 'targetClass' => StudentRequests::className(), 'targetAttribute' => ['request_id' => 'id']],
+            [['request_id'], 'exist', 'skipOnError' => true, 'targetClass' => StudentRequest::className(), 'targetAttribute' => ['request_id' => 'id']],
         ];
     }
 
@@ -68,6 +83,7 @@ class RequestAttachment extends \yii\db\ActiveRecord
      */
     public function getRequest()
     {
-        return $this->hasOne(StudentRequests::className(), ['id' => 'request_id']);
+        return $this->hasOne(StudentRequest::className(), ['id' => 'request_id']);
     }
+
 }

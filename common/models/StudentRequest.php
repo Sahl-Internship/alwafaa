@@ -37,7 +37,7 @@ class StudentRequest extends \yii\db\ActiveRecord
     const GENDER_MALE = 1;
     const GENDER_FEMALE = 2;
 
-
+    public $attachments;
     /**
      * {@inheritdoc}
      */
@@ -137,5 +137,4 @@ class StudentRequest extends \yii\db\ActiveRecord
             self::REQUEST_REFUSED => Yii::t('backend', 'Refused')
         ];
     }
-
 }
