@@ -1,7 +1,8 @@
 import { axiosInstance as axios } from 'src/boot/axios'
 
 export const handleGetCourses = () => {
-  return axios.get('http://endpoints.alwafaa.localhost/course/index')
+  // return axios.get('http://endpoints.alwafaa.localhost/course/index')
+  return axios.get('http://endpoints.alwafaa.localhost/course')
 }
 
 export const handleCourseReview = (review) => {
@@ -9,5 +10,5 @@ export const handleCourseReview = (review) => {
 }
 
 export const handleCoursePage = (courseId) => {
-  return axios.post(`http://endpoints.alwafaa.localhost/course/view?id=${courseId}`)
+  return axios.get(`http://endpoints.alwafaa.localhost/course/view?id=${courseId}`)
 }
