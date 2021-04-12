@@ -49,7 +49,6 @@ class ApController extends Controller
     public static function allowedDomains()
     {
         return [
-            //  '*', // star allows all domains
             'http://localhost:4000',
             'http://localhost:4001',
             'https://jquery.com',

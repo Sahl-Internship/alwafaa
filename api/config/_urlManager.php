@@ -2,6 +2,7 @@
 return [
     'class' => 'yii\web\UrlManager',
     'enablePrettyUrl' => true,
+    'enableStrictParsing' => true,
     'showScriptName' => false,
     'rules' => [
         // Api
@@ -28,19 +29,19 @@ return [
         ['class' => 'yii\rest\UrlRule', 'controller' => 'signup'
             , 'only' => ['create']
             , 'extraPatterns' => [
-            'Post create' => 'create',
+            'POST create' => 'create',
 
 
         ]
             , 'pluralize' => false
         ],
         ['class' => 'yii\rest\UrlRule', 'controller' => 'profile'
-            , 'only' => ['update', 'upload-picture','data']
+            , 'only' => ['data','update', 'upload-picture','delete-cover','joined-courses']
             , 'extraPatterns' => [
             'GET data' => 'data',
             'PUT update' => 'update',
-            'POST upload-picture' => 'upload-picture',
-            'POST delete-cover' => 'delete-cover',
+            'PATCH upload-picture' => 'upload-picture',
+            'DELETE delete-cover' => 'delete-cover',
             'GET joined-courses' => 'joined-courses',
         ]
             , 'pluralize' => false
@@ -52,14 +53,15 @@ return [
             'GET index' => 'index',
             'GET view' => 'view',
             'GET section' => 'section',
-        ]
-            , 'pluralize' => false
         ],
-        ['class' => 'yii\rest\UrlRule', 'controller' => 'join-course'
-            , 'only' => ['review', 'join-course']
-            , 'extraPatterns' => [
-            'Post review' => 'review',
-            'Post join-course' => 'join-course'
+            'pluralize' => false
+        ],
+
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'join-course',
+            'only' => ['review', 'join-course'],
+            'extraPatterns' => [
+            'POST review' => 'review',
+            'POST join-course' => 'join-course',
         ]
             , 'pluralize' => false
         ],

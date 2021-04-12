@@ -69,7 +69,7 @@ class ProfileController extends ApController
 
     public function actionDeleteCover()
     {
-        $params = \Yii::$app->request->post();
+//        $params = \Yii::$app->request->post();
         $user = Profile::findOne(['id' => \Yii::$app->user->identity->getId()]);
         $profile = UserProfile::findOne(['user_id' => \Yii::$app->user->identity->getId()]);
         $image_path = \Yii::getAlias('@storage/web/source/');

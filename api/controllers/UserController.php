@@ -53,25 +53,4 @@ class UserController extends ActiveController
 
     }
 
-
-
-//    public function actionSignup()
-//    {
-//        $params = \Yii::$app->request->post();
-//        \Yii::$app->language = 'ar';
-//
-//        $model = new StudentSignup();
-//
-//        $model->load(['ParentSignup' => $params]);
-//        $model->phone = myConvertNumbers($model->phone);
-//        if ($model->validate() and $registerUser = $model->signup()) {
-//            $user = User::find()->where(['id'=>$registerUser->id])->one();
-//            User::CheckProfile($user);
-//            EmailHelper::instance()->SendParentWelcomeEmail($user);
-//            return ResponseHelper::sendSuccessResponse(['message' => Yii::t('common', 'Request Sent Successfully'),'data'=> $user ]);
-//        } else {
-//            return ResponseHelper::sendFailedResponse($model->errors, 400);
-//        }
-//    }
-
 }
