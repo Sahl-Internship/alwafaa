@@ -156,9 +156,9 @@ class UserProfile extends ActiveRecord
             : $default;
     }
 
-    public function gender($g)
+    public function getGender($gender)
     {
-        if ($g == self::GENDER_MALE){
+        if ($gender == self::GENDER_MALE){
             return Yii::t('backend','Male');
         }else{
             return Yii::t('backend','Female');

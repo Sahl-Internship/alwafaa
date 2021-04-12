@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\JoinCourses;
 use Yii;
 use common\models\StudentRequest;
 use backend\models\search\StudentRequestSearch;
@@ -90,15 +91,35 @@ class StudentRequestController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing StudentRequest model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
+
+    public function actionRefuse($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->status = $model::REQUEST_REFUSED;
+        if($model->save()){
+            Yii::$app->session->setFlash('flashMsg', Yii::t('backend','Requested Refused Successfully'));
+        }else{
+            Yii::$app->session->setFlash('flashMsg', Yii::t('backend','There is an error !! Plz try again'));
+
+        }
+
+        return $this->redirect(['index']);
+    }
+
+
+    public function actionAccept($id)
+    {
+        $model = $this->findModel($id);
+        $model->status = $model::REQUEST_ACCEPTED;
+        $join = new JoinCourses();
+        $join->course_id = $model->course_id;
+        $join->user_id = $model->created_by;
+        if ($model->save() && $join->validate() && $join->save()) {
+            Yii::$app->session->setFlash('flashMsg', Yii::t('backend','Requested Accepted Successfully'));
+        } elseif ($join->errors) {
+            Yii::$app->session->setFlash('flashMsg', Yii::t('backend','There is an error !! Plz try again'));
+        }
+
 
         return $this->redirect(['index']);
     }

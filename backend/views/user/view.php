@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => Yii::t('backend','Gender'),
-                        'value' => $model->userProfile->gender($model->userProfile->gender),
+                        'value' => $model->userProfile->getGender($model->userProfile->gender),
                     ],
                     [
                         'attribute' => Yii::t('backend','Address'),

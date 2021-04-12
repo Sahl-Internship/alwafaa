@@ -65,7 +65,7 @@ if(Yii::$app->controller->action->id === 'student'){
                     },
                     'filter'=>Html::activeDropDownList($searchModel,'status',\common\models\User::statuses(),[
                         'class'=>'form-control',
-                        'prompt'=>'All'
+                        'prompt'=>Yii::t('backend','All')
                     ]),
                 ],
                 [

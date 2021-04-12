@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%student_requests}}".
@@ -92,4 +93,49 @@ class StudentRequest extends \yii\db\ActiveRecord
     {
         return $this->hasMany(RequestAttachment::className(), ['request_id' => 'id']);
     }
+
+
+    /**
+     * @return null|string
+     */
+    public function getFullName()
+    {
+        if ($this->firstname || $this->lastname) {
+            return implode(' ', [$this->firstname, $this->lastname]);
+        }
+        return null;
+    }
+
+    public function getGender($gender)
+    {
+        if ($gender == self::GENDER_MALE){
+            return Yii::t('backend','Male');
+        }else{
+            return Yii::t('backend','Female');
+        }
+    }
+
+    public function getStatus($status)
+    {
+        if ($status == self::REQUEST_ACCEPTED){
+            $msg= Yii::t('backend','Accepted');
+            return Html::tag('span', $msg, ['class' => 'badge badge-success']);
+        }elseif($status == self::REQUEST_REFUSED){
+            $msg= Yii::t('backend','Refused');
+            return Html::tag('span', $msg, ['class' => 'badge badge-danger']);
+        }else{
+            $msg= Yii::t('backend','Waiting');
+            return Html::tag('span', $msg, ['class' => 'badge badge-warning']);
+        }
+    }
+
+    public static function statuses()
+    {
+        return [
+            self::REQUEST_WAITING => Yii::t('backend', 'Waiting'),
+            self::REQUEST_ACCEPTED => Yii::t('backend', 'Accepted'),
+            self::REQUEST_REFUSED => Yii::t('backend', 'Refused')
+        ];
+    }
+
 }
