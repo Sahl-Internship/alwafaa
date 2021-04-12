@@ -5,7 +5,7 @@
       <div class="text-h6 q-ml-lg q-mt-lg">{{courseData.name}}</div>
       <div class="text-body1 q-ml-lg q-my-sm text-grey-4">{{courseData.sub_title}}</div>
       <div class="row col-10">
-        <div class="col-2 q-ml-md"><img src="/images/home-imgs/shalaan.jpg" class="teacher-img"></div>
+        <div class="col-2 q-ml-md"><img :src="courseData.avatar" class="teacher-img"></div>
         <div class="col-9 row teacher-classes" style="margin-top:-10px;">
             <div class="col-6 q-mt-lg q-ml-md">
               <img
