@@ -66,7 +66,8 @@
     "ext-json": "*",
     "edofre/yii2-fullcalendar": "V1.0.11",
     "edofre/yii2-fullcalendar-scheduler": "V1.1.12",
-    "kartik-v/yii2-widget-select2": "dev-master"
+    "kartik-v/yii2-widget-select2": "dev-master",
+    "kreait/firebase-php": "^5.17"
   },
   "require-dev": {
     "yiisoft/yii2-gii": "^2.0.0",
