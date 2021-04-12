@@ -8,20 +8,20 @@ use yii\widgets\DetailView;
  * @var common\models\StudentRequest $model
  */
 
-$this->title = $model->id;
+$this->title = $model->getFullName();
 $this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Student Requests'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="student-request-view">
     <div class="card">
         <div class="card-header">
-            <?php echo Html::a(Yii::t('backend', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?php echo Html::a(Yii::t('backend', 'Delete'), ['delete', 'id' => $model->id], [
+            <?php echo Html::a(Yii::t('backend', 'Accept'), ['accept', 'id' => $model->id], [
+                'class' => 'btn btn-success',
+                'data' => ['method' => 'post']
+            ]) ?>
+            <?php echo Html::a(Yii::t('backend', 'Refuse'), ['refuse', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => Yii::t('backend', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
+                'data' => ['method' => 'post']
             ]) ?>
         </div>
         <div class="card-body">
@@ -29,19 +29,37 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'course_id',
-                    'firstname',
-                    'lastname',
+                    [
+                        'attribute' => Yii::t('backend', 'Full Name'),
+                        'value' => $model->getFullName(),
+                    ],
                     'email:email',
                     'sub_title',
                     'country',
-                    'gender',
-                    'phone_key',
-                    'phone',
-                    'status',
-                    'is_parent',
+                    [
+                        'attribute' => Yii::t('backend', 'Gender'),
+                        'value' => $model->getGender($model->gender),
+                    ],
+                    [
+                        'attribute' => Yii::t('backend', 'Phone'),
+                        'value' => "(" . $model->phone_key . ")" . $model->phone,
+                    ],
+                    [
+                        'label' => Yii::t('backend', 'Requested Course'),
+                        'value' => $course = \common\models\Course::findOne(['id' => $model->course_id])->title,
+                    ],
+                    [
+                        'label' => Yii::t('backend', 'Request status'),
+                        'value' => $model->getStatus($model->status),
+                    ],
+//                    'is_parent',
                     'created_by',
-                    
+                    [
+                        'label' => Yii::t('backend', 'applicant'),
+                        'value' => $course = \common\models\User::findOne(['id' => $model->created_by])->userProfile->getFullName() .
+                            ' ( ' . \common\models\User::findOne(['id' => $model->created_by])->email . " )",
+                    ],
+
                 ],
             ]) ?>
         </div>

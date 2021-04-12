@@ -12,6 +12,8 @@ use common\models\StudentRequest;
  */
 class StudentRequestSearch extends StudentRequest
 {
+    public $fullName;
+
     /**
      * @inheritdoc
      */
@@ -20,6 +22,8 @@ class StudentRequestSearch extends StudentRequest
         return [
             [['id', 'course_id', 'gender', 'status', 'is_parent', 'created_by'], 'integer'],
             [['firstname', 'lastname', 'email', 'sub_title', 'country', 'phone_key', 'phone'], 'safe'],
+            [['fullName'], 'safe']
+
         ];
     }
 
@@ -60,9 +64,13 @@ class StudentRequestSearch extends StudentRequest
             'created_by' => $this->created_by,
         ]);
 
-        $query->andFilterWhere(['like', 'firstname', $this->firstname])
-            ->andFilterWhere(['like', 'lastname', $this->lastname])
-            ->andFilterWhere(['like', 'email', $this->email])
+        $query->andFilterWhere([
+            'or',
+            ['like', 'lastname', $this->fullName],
+            ['like', 'firstname', $this->fullName],
+        ]);
+
+        $query->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'sub_title', $this->sub_title])
             ->andFilterWhere(['like', 'country', $this->country])
             ->andFilterWhere(['like', 'phone_key', $this->phone_key])
