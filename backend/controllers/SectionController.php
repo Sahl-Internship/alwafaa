@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
 use common\models\Section;
 use backend\models\search\SectionSearch;
@@ -63,12 +64,17 @@ class SectionController extends Controller
     public function actionCreate()
     {
         $model = new Section();
-
+        $managers = User::find()->getManager()->all();
+        foreach ($managers as $index => $manager) {
+            $managers_name[$manager->id] = $manager->userProfile->getFullName();
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('create', [
             'model' => $model,
+            'managerList' => $managers_name
+
         ]);
     }
 
@@ -81,12 +87,16 @@ class SectionController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $managers = User::find()->getManager()->all();
+        foreach ($managers as $manager) {
+            $managers_name[$manager->id] = $manager->userProfile->getFullName();
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('update', [
             'model' => $model,
+            'managerList' => $managers_name
         ]);
     }
 
