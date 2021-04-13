@@ -44,28 +44,35 @@ echo MainSidebarMenu::widget([
             'url' => '#',
             'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
             'options' => ['class' => 'nav-item has-treeview'],
-            'visible' => Yii::$app->user->can('administrator'),
-            'active' =>
-                ('user' === Yii::$app->controller->id || 'student' === Yii::$app->controller->id),
+            'visible' => Yii::$app->user->can('administrator') ||  Yii::$app->user->can('manager'),
+            'active' => ('user' === Yii::$app->controller->id || 'student' === Yii::$app->controller->id),
             'items' => [
                 [
                     'label' => Yii::t('backend', 'All'),
-                    'icon' => FAS::icon('users', ['class' => ['nav-icon']]),
+                    'icon' => FAS::icon('users', ['class' => ['nav-icon mx-3']]),
                     'url' => ['/user/index'],
+                    'visible' => Yii::$app->user->can('administrator'),
                     'active' => Yii::$app->controller->id === 'user' && Yii::$app->controller->action->id === 'index',
                 ],
                 [
                     'label' => Yii::t('backend', 'Students'),
-                    'icon' => FAS::icon('fas fa-user-graduate', ['class' => ['nav-icon']]),
+                    'icon' => FAS::icon('fas fa-user-graduate', ['class' => ['nav-icon mx-3']]),
                     'url' => ['/user/student'],
                     'active' => Yii::$app->controller->action->id === 'student',
 
                 ],
                 [
                     'label' => Yii::t('backend', 'Teachers'),
-                    'icon' => FAS::icon('fas fa-user-tie', ['class' => ['nav-icon']]),
+                    'icon' => FAS::icon('fas fa-user-tie', ['class' => ['nav-icon mx-3']]),
                     'url' => ['/user/teacher'],
                     'active' => Yii::$app->controller->action->id === 'teacher',
+                ],
+                [
+                    'label' => Yii::t('backend', 'Managers'),
+                    'icon' => FAS::icon('fas fa-user-cog', ['class' => ['nav-icon mx-3']]),
+                    'url' => ['/user/manager'],
+                    'active' => Yii::$app->controller->action->id === 'manager',
+                    'visible' => Yii::$app->user->can('administrator'),
                 ],
             ],
         ],
@@ -77,30 +84,31 @@ echo MainSidebarMenu::widget([
             'icon' => FAS::icon('fad fa-stream', ['class' => ['nav-icon']]),
             'url' => ['/section/index'],
             'active' => Yii::$app->controller->id === 'section',
-            'visible' => Yii::$app->user->can('administrator'),
+            'visible' => Yii::$app->user->can('administrator') ||  Yii::$app->user->can('manager'),
         ],
         [
             'label' => Yii::t('backend', 'Tags'),
             'icon' => FAS::icon('fas fa-tags', ['class' => ['nav-icon']]),
             'url' => ['/tag/index'],
             'active' => Yii::$app->controller->id === 'tag',
-            'visible' => Yii::$app->user->can('administrator'),
+            'visible' => Yii::$app->user->can('administrator') ||  Yii::$app->user->can('manager'),
         ],
         [
             'label' => Yii::t('backend', 'Courses'),
             'icon' => FAS::icon('fas fa-book-open', ['class' => ['nav-icon']]),
             'url' => ['/course/index'],
             'active' => Yii::$app->controller->id === 'course',
-            'visible' => Yii::$app->user->can('administrator'),
+            'visible' => Yii::$app->user->can('administrator') ||  Yii::$app->user->can('manager'),
         ],
         [
             'label' => Yii::t('backend', 'Join Requests'),
             'icon' => FAS::icon('fas fa-user-clock', ['class' => ['nav-icon']]),
             'url' => ['/student-request/index'],
             'active' => Yii::$app->controller->id === 'student-request',
-            'visible' => Yii::$app->user->can('administrator'),
+            'visible' => Yii::$app->user->can('administrator') ||  Yii::$app->user->can('manager'),
         ],
 
+                                /*
                                 [
                                     'label' => Yii::t('backend', 'Content'),
                                     'options' => ['class' => 'nav-header'],
@@ -249,7 +257,7 @@ echo MainSidebarMenu::widget([
                                     'badge' => SystemLog::find()->count(),
                                     'badgeBgClass' => 'badge-danger',
                                 ],
-
+*/
 
     ],
 ]) ;

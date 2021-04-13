@@ -44,7 +44,9 @@ class UserSearch extends User
     public function search($params, $qry = null)
     {
         if ($qry == "student") {
-            if(\Yii::$app->user->can('manager')){
+            if(\Yii::$app->user->can('administrator')){
+                $query = User::find()->getStudent();
+            }elseif(\Yii::$app->user->can('manager')){
                 $query = User::find()->getStudent();
             }else{
                 $ids = User::find()->getTeacherPortfolio(Yii::$app->user->id);
@@ -52,7 +54,9 @@ class UserSearch extends User
             }
         } elseif ($qry == "teacher") {
             $query = User::find()->getTeacher();
-        } else {
+        } elseif($qry == "manager") {
+            $query = User::find()->getManager();
+        }else{
             $query = User::find();
         }
 

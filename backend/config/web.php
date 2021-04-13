@@ -112,6 +112,12 @@ $config = [
                 'roles' => ['teacher'],
             ],
             [
+                'controllers' => ['user'],
+                'allow' => false,
+                'actions' => ['index', 'create','delete'],
+                'roles' => ['manager'],
+            ],
+            [
                 'controllers' => ['course'],
                 'allow' => true,
                 'roles' => ['administrator'],

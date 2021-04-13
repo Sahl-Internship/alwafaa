@@ -2,6 +2,7 @@
 
 namespace backend\models\search;
 
+use common\models\Section;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -45,8 +46,10 @@ class CourseSearch extends Course
      */
     public function search($params)
     {
-       if(Yii::$app->user->can('manager')){
+       if(Yii::$app->user->can('administrator')) {
            $query = Course::find();
+       }elseif(Yii::$app->user->can('manager')){
+           $query = Section::find()->getCourses();
        }elseif(Yii::$app->user->can('teacher')){
            $query = Course::findOwnCourses();
        }

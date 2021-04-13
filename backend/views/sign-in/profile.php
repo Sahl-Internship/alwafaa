@@ -101,28 +101,12 @@ if ($model->birthdate)
       </div>
     </div>
 
-
-    <!--            --><?php //echo $form->field($model, 'picture')->widget(\trntv\filekit\widget\Upload::class, [
-                        //                'url' => ['avatar-upload']
-                        //            ]) 
-                        ?>
-    <!-- <input id="image" type="file" accept="image/*"> -->
-    <!--        <img src="" alt="">-->
-    <!-- <img id="img" src="<?php echo (isset($model->avatar)) ? $model->avatar : '' ?>" height="200" alt="Image preview..."
-      style="<?php echo (isset($model->avatar)) ? '' : 'display: none' ?>"> -->
-
-
   </div>
   <div class="card-footer">
     <?php echo Html::submitButton(FAS::icon('save') . ' ' . Yii::t('backend', 'Save Changes'), ['class' => 'btn btn-primary']) ?>
   </div>
 </div>
 <?php ActiveForm::end() ?>
-<!---->
-<?php //Yii::$app->user->id;
-//
-//
-?>
 
 <script>
 const fileInput = document.getElementById('image'); //get input of img
@@ -149,16 +133,17 @@ function handleUploadImage() { // convert to base 64 and call endpoint
 // Example POST method implementation:
 async function postData(data = {}) {
   console.log(JSON.stringify(data));
+  console.log(JSON.stringify(data));
   // Default options are marked with *
   const url = "http://endpoints.alwafaa.localhost/profile/upload-picture"
   const response = await fetch(url, {
-    method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+    method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
     // mode: 'cors', // no-cors, *cors, same-origin
     // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
     // credentials: 'same-origin', // include, *same-origin, omit
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer L3IggvwP1IlkCvvhOszxiMlDfm4e087tuuMpEx2Y'
+      'Authorization': 'Bearer <?php echo $model->user->access_token ?>'
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     // redirect: 'follow', // manual, *follow, error

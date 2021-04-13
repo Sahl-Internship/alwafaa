@@ -7,6 +7,7 @@ use common\models\Course;
 use common\models\CourseClasses;
 use common\models\Event;
 use common\models\query\CourseClassesQuery;
+use common\models\Section;
 use common\models\User;
 use Yii;
 
@@ -64,10 +65,11 @@ class SiteController extends \yii\web\Controller
 
     public function actionTest()
     {
-        $classes = Event::find()->getAttachments(11);
-        return $this->render('test', [
+//        $classes = Event::find()->getAttachments(11);
+        $courses = Section::find()->getCourses(4);
 
-            'data' => $classes,
+        return $this->render('test', [
+            'data' => $courses,
         ]);
     }
 //

@@ -179,4 +179,14 @@ class UserController extends Controller
             'title' =>Yii::t('backend', 'Teachers') ,
         ]);
     }
+    public function actionManager()
+    {
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,'manager');
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'title' =>Yii::t('backend', 'Managers') ,
+        ]);
+    }
 }

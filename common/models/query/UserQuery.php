@@ -59,6 +59,15 @@ class UserQuery extends ActiveQuery
         }
         return User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',', array_map('intval', $user_ids)) . ")");
     }
+    public function getManager()
+    {
+        $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'manager'])->all();
+        foreach ($role_user as $index =>$value){
+            $manager_ids[] = $value['user_id'];
+        }
+        return User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',',array_map('intval',$manager_ids)) . ")");
+
+    }
 
     public function getTeacherPortfolio($id)
     {

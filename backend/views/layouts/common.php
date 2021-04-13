@@ -212,11 +212,8 @@ $logEntries[] = [
         <!-- sidebar menu -->
         <nav class="mt-2">
           <?php
-          if (Yii::$app->user->can('administrator')) {
+          if (Yii::$app->user->can('administrator') || Yii::$app->user->can('manager') ) {
             $this->beginContent('@app/views/layouts/_administrator_menu.php');
-            $this->endContent();
-          } elseif (Yii::$app->user->can('manager')) {
-            $this->beginContent('@app/views/layouts/_manager_menu.php');
             $this->endContent();
           } elseif (Yii::$app->user->can('teacher')) {
             $this->beginContent('@app/views/layouts/_teacher_menu.php');
