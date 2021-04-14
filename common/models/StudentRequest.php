@@ -84,6 +84,16 @@ class StudentRequest extends \yii\db\ActiveRecord
         ];
     }
 
+
+    /**
+     * {@inheritdoc}
+     * @return \common\models\query\StudentRequestQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new \common\models\query\StudentRequestQuery(get_called_class());
+    }
+
     /**
      * Gets query for [[RequestAttachments]].
      *

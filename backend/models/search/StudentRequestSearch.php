@@ -2,6 +2,7 @@
 
 namespace backend\models\search;
 
+use common\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -45,7 +46,19 @@ class StudentRequestSearch extends StudentRequest
      */
     public function search($params)
     {
-        $query = StudentRequest::find();
+
+        if(Yii::$app->user->can('administrator')){
+            $query = StudentRequest::find();
+        }elseif(Yii::$app->user->can('manager')){
+            $courses_ids = User::find()->getOwnCoursesIds();
+            $query = StudentRequest::findBySql("SELECT * FROM student_requests WHERE course_id IN (" . implode(',', array_map('intval', $courses_ids)) . ")");
+
+        }else{
+            $courses_ids = User::find()->getOwnCoursesIds();
+            $query = StudentRequest::findBySql("SELECT * FROM student_requests WHERE course_id IN (" . implode(',', array_map('intval', $courses_ids)) . ")");
+
+        }
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

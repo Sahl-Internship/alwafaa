@@ -67,11 +67,16 @@ class CourseController extends Controller
      */
     public function actionView($id)
     {
-        if (Yii::$app->user->can('administrator') || Yii::$app->user->can('manager')) {
+        if($this->isOwnCourse($id)){
+            if (Yii::$app->user->can('manager')) {
+                $view = 'view';
+            } elseif (Yii::$app->user->can('teacher')) {
+                $view = '_teacher_view';
+            }
+        }else{
             $view = 'view';
-        } elseif (Yii::$app->user->can('teacher')) {
-            $view = '_teacher_view';
         }
+
         $model = $this->findModel($id);
         if($model->tags){
             foreach ($model->tags as $tag) {
@@ -102,6 +107,12 @@ class CourseController extends Controller
         foreach ($teachers as $index => $teacher) {
             $teachers_name[$teacher->id] = $teacher->userProfile->getFullName();
         }
+        if(Yii::$app->user->can('administrator')){
+            $sections = ArrayHelper::map(Section::find()->all(), 'id', 'title');
+        }else{
+            $section = Section::find()->andWhere(['manager_id'=>Yii::$app->user->id])->all();
+            $sections = ArrayHelper::map($section, 'id', 'title');
+        }
         $model->classes = [];
         $model->tag = [];
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -119,7 +130,7 @@ class CourseController extends Controller
         }
         return $this->render('create', [
             'model' => $model,
-            'sectionList' => ArrayHelper::map(Section::find()->all(), 'id', 'title'),
+            'sectionList' => $sections,
             'tagList' => ArrayHelper::map(Tag::find()->all(), 'id', 'title'),
             'teacherList' => $teachers_name
         ]);
@@ -133,13 +144,9 @@ class CourseController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (!Yii::$app->user->can('administrator') || !Yii::$app->user->can('manager')) {
-            $courses_id = User::find()->getOwnCoursesIds(Yii::$app->user->id);
-            if (!in_array($id, $courses_id)) {
-                throw new \yii\web\HttpException(403, 'You are not allowed to perform this action.');
-            }
+        if($this->isOwnCourse($id)){
             $view = 'index';
-        } else {
+        }else{
             $view = 'view';
         }
         $model = $this->findModel($id);
@@ -149,12 +156,20 @@ class CourseController extends Controller
         foreach ($teachers as $index => $teacher) {
             $teachers_name[$teacher->id] = $teacher->userProfile->getFullName();
         }
+        if(Yii::$app->user->can('administrator')){
+            $sections = ArrayHelper::map(Section::find()->all(), 'id', 'title');
+        }else{
+            $section = Section::find()->andWhere(['manager_id'=>Yii::$app->user->id])->all();
+            $sections = ArrayHelper::map($section, 'id', 'title');
+        }
         $model->classes = CourseClasses::find()->where('course_id=:id', ['id' => $id])->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             if ($model->classes) {
                 CourseClasses::deleteAll(['course_id' => $model->id]);
                 $model->classSchedule($model->classes);
+                \common\models\Event::deleteAll(['>','date',time()]);
+                $model->setEvents($model->id);
             }
             if($model->tag){
                 TagCourse::deleteAll(['course_id' => $model->id]);
@@ -167,7 +182,7 @@ class CourseController extends Controller
         }
         return $this->render('update', [
             'model' => $model,
-            'sectionList' => ArrayHelper::map(Section::find()->all(), 'id', 'title'),
+            'sectionList' => $sections,
             'tagList' => ArrayHelper::map(Tag::find()->all(), 'id', 'title'),
             'teacherList' => $teachers_name
         ]);
@@ -181,6 +196,8 @@ class CourseController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->isOwnCourse($id);
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -199,6 +216,18 @@ class CourseController extends Controller
             return $model;
         }
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected function isOwnCourse($id){
+        if (!Yii::$app->user->can('administrator')) {
+            $courses_id = User::find()->getOwnCoursesIds();
+            if (!in_array($id, $courses_id)) {
+                throw new \yii\web\HttpException(403, 'You are not allowed to perform this action.');
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function actionCalender($id)
@@ -263,6 +292,8 @@ class CourseController extends Controller
             'model' => $model,
         ]);
     }
+
+
 }
 
 

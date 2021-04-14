@@ -72,9 +72,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2><?php echo Yii::t('backend','Attachment') ?></h2>
         </div>
         <div class="card-body">
+            <?php if(isset($files)): ?>
             <?php foreach ($files as $file): ?>
             <iframe src="<?php echo $file?>" style="width:450px; height:500px;" frameborder="1"></iframe>
             <?php endforeach; ?>
+            <?php else : ?>
+            <h3><?php echo Yii::t('backend','There are no Attachments') ?></h3>
+            <?php endif; ?>
 
         </div>
     </div>

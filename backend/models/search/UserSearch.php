@@ -47,13 +47,19 @@ class UserSearch extends User
             if(\Yii::$app->user->can('administrator')){
                 $query = User::find()->getStudent();
             }elseif(\Yii::$app->user->can('manager')){
-                $query = User::find()->getStudent();
+                $ids = User::find()->getManagerPortfolio(Yii::$app->user->id);
+                $query = User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',', array_map('intval', $ids['students'])) . ")");
             }else{
                 $ids = User::find()->getTeacherPortfolio(Yii::$app->user->id);
                 $query = User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',', array_map('intval', $ids['students'])) . ")");
             }
         } elseif ($qry == "teacher") {
-            $query = User::find()->getTeacher();
+            if(\Yii::$app->user->can('administrator')){
+                $query = User::find()->getTeacher();
+            }elseif(\Yii::$app->user->can('manager')){
+                $ids = User::find()->getManagerPortfolio(Yii::$app->user->id);
+                $query = User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',', array_map('intval', $ids['teachers'])) . ")");
+            }
         } elseif($qry == "manager") {
             $query = User::find()->getManager();
         }else{

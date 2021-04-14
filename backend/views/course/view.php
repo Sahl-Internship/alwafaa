@@ -64,12 +64,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <table class="table table-sm">
         <thead>
         <tr>
-            <th>Day</th>
-            <th>From</th>
-            <th>To</th>
-<!--            <th>title</th>-->
-<!--            <th>Duration</th>-->
-            <th>Teacher name</th>
+            <th><?php echo Yii::t('backend', 'Day') ?></th>
+            <th><?php echo Yii::t('backend', 'From') ?></th>
+            <th><?php echo Yii::t('backend', 'To') ?></th>
+            <th><?php echo Yii::t('backend', 'Teacher Name') ?></th>
         </tr>
         </thead>
         <tbody>
@@ -87,6 +85,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php endforeach; ?>
         </tbody>
     </table>
+    <div class="card-header">
+        <?php echo Html::a(Yii::t('backend', 'More Details'), ['calender', 'id' => $model->id], ['class' => 'btn btn-primary modalButton']) ?>
+    </div>
 
 
 </div>

@@ -80,7 +80,7 @@ return [
     "Requested Refused Successfully"=>"تم رفض الطلب بنجاح",
     "All"=>"الجميع",
     "Here"=>"من هنا",
-    ""=>"",
+    "There are no Attachments"=>"لا توجد مرفقات",
     ""=>"",
     ""=>"",
     ""=>"",

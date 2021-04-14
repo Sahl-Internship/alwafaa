@@ -6,6 +6,7 @@ use backend\modules\rbac\models\RbacAuthAssignment;
 use common\models\Course;
 use common\models\CourseReview;
 use common\models\JoinCourses;
+use common\models\Section;
 use common\models\User;
 use Yii;
 use yii\db\ActiveQuery;
@@ -59,49 +60,86 @@ class UserQuery extends ActiveQuery
         }
         return User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',', array_map('intval', $user_ids)) . ")");
     }
+
     public function getManager()
     {
         $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'manager'])->all();
-        foreach ($role_user as $index =>$value){
+        foreach ($role_user as $index => $value) {
             $manager_ids[] = $value['user_id'];
         }
-        return User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',',array_map('intval',$manager_ids)) . ")");
+        return User::findBySql("SELECT * FROM user WHERE id IN (" . implode(',', array_map('intval', $manager_ids)) . ")");
 
     }
 
     public function getTeacherPortfolio($id)
     {
-        $courses = Course::find()->andWhere('teacher_id=:id',['id'=>$id])->all();
+        $courses = Course::find()->andWhere('teacher_id=:id', ['id' => $id])->all();
         $students_ids = [];
         $sessions = [];
         $duration = [];
         foreach ($courses as $course) {
             $joined_students = Course::find()->getJoinedStudents($course->id);
             $classes = Course::find()->getScheduleAndDuration($course->id);
-            array_push($students_ids,$joined_students);
-            array_push($sessions,count($classes['classes_number']));
-            array_push($duration,$classes['total_time']);
+            array_push($students_ids, $joined_students);
+            array_push($sessions, count($classes['classes_number']));
+            array_push($duration, $classes['total_time']);
         }
         $all_students = call_user_func_array('array_merge', $students_ids);
         $students_number = count($all_students);
         $students = array_unique($all_students);
-        $total_duration =array_sum($duration);
-        $sessions_number =array_sum($sessions);
+        $total_duration = array_sum($duration);
+        $sessions_number = array_sum($sessions);
         return [
-            'students'=>$students,
-            'student_number'=>$students_number,
-            'classes'=>$sessions_number,
-            'duration'=>$total_duration
+            'students' => $students,
+            'student_number' => $students_number,
+            'classes' => $sessions_number,
+            'duration' => $total_duration
         ];
 
     }
 
-    public function getOwnCoursesIds($id)
+    public function getManagerPortfolio($manager_id)
     {
-        $courses = Course::find()->andWhere('teacher_id=:id',['id'=>$id])->all();
+        $section = Section::findOne(['manager_id' => $manager_id]);
+        $courses = Course::find()->andWhere('section_id=:id', ['id' => $section->id])->all();
+        $students_ids = [];
+        $teachers_ids = [];
+        $sessions = [];
+        $duration = [];
+        foreach ($courses as $course) {
+            $joined_students = Course::find()->getJoinedStudents($course->id);
+            $classes = Course::find()->getScheduleAndDuration($course->id);
+            array_push($students_ids, $joined_students);
+            array_push($sessions, count($classes['classes_number']));
+            array_push($duration, $classes['total_time']);
+            $teachers_ids[]=$course->teacher_id;
+        }
+        $all_students = call_user_func_array('array_merge', $students_ids);
+        $students_number = count($all_students);
+        $students = array_unique($all_students);
+        $total_duration = array_sum($duration);
+        $sessions_number = array_sum($sessions);
+        $teachers = array_unique($teachers_ids);
+        return [
+            'students' => $students,
+            'student_number' => $students_number,
+            'classes' => $sessions_number,
+            'duration' => $total_duration,
+            'teachers' => $teachers
+        ];
+
+    }
+
+    public function getOwnCoursesIds()
+    {
+        if(Yii::$app->user->can('manager')){
+            $courses = Section::find()->getCourses()->all();
+        }else{
+            $courses = Course::find()->andWhere('teacher_id=:id', ['id' => Yii::$app->user->id])->all();
+        }
         $courses_ids = [];
         foreach ($courses as $course) {
-            array_push($courses_ids,$course->id);
+            array_push($courses_ids, $course->id);
         }
         return $courses_ids;
     }
@@ -113,20 +151,20 @@ class UserQuery extends ActiveQuery
 
     public function getStudentCourses()
     {
-        $joined = JoinCourses::findBySql("SELECT course_id FROM join_courses WHERE user_id=:id",['id'=>Yii::$app->user->id])->all();
+        $joined = JoinCourses::findBySql("SELECT course_id FROM join_courses WHERE user_id=:id", ['id' => Yii::$app->user->id])->all();
         $courses_status = [];
         foreach ($joined as $item) {
             array_push($courses_status, $item->course_id);
         }
-return $courses_status;
+        return $courses_status;
     }
 
     public function getReview($id)
     {
-        $reviews = CourseReview::find()->andWhere('created_by=:id',['id'=>$id])->all();
+        $reviews = CourseReview::find()->andWhere('created_by=:id', ['id' => $id])->all();
         $review_ids = [];
         foreach ($reviews as $review) {
-            array_push($review_ids,$review->id);
+            array_push($review_ids, $review->id);
         }
         return $review_ids;
     }

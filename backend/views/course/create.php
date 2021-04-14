@@ -5,6 +5,7 @@
  * @var common\models\Course $model
  * @var common\models\Section $sectionList
  * @var common\models\User $teacherList
+ * @var common\models\Tag $tagList
  */
 
 $this->title = Yii::t('backend','Create Course');

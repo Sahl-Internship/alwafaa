@@ -118,6 +118,24 @@ $config = [
                 'roles' => ['manager'],
             ],
             [
+                'controllers' => ['section'],
+                'allow' => true,
+                'roles' => ['administrator'],
+
+            ],
+            [
+                'controllers' => ['section'],
+                'allow' => false,
+                'actions' => ['create','delete','update'],
+                'roles' => ['manager'],
+            ],
+            [
+                'controllers' => ['section'],
+                'allow' => false,
+                'actions' => ['create','delete','update','view','index'],
+                'roles' => ['teacher'],
+            ],
+            [
                 'controllers' => ['course'],
                 'allow' => true,
                 'roles' => ['administrator'],

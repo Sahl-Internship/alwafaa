@@ -41,7 +41,12 @@ class SectionSearch extends Section
      */
     public function search($params)
     {
-        $query = Section::find();
+
+        if(Yii::$app->user->can('administrator')){
+            $query = Section::find();
+        }else{
+            $query = Section::find()->andWhere(['manager_id'=>Yii::$app->user->id]);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

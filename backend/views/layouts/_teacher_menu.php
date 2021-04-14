@@ -62,5 +62,12 @@ echo MainSidebarMenu::widget([
 //            'active' => Yii::$app->controller->action->id === 'student',
             'visible' => Yii::$app->user->can('teacher'),
         ],
+        [
+            'label' => Yii::t('backend', 'Join Requests'),
+            'icon' => FAS::icon('fas fa-user-clock', ['class' => ['nav-icon']]),
+            'url' => ['/student-request/index'],
+            'active' => Yii::$app->controller->id === 'student-request',
+            'visible' => Yii::$app->user->can('teacher'),
+        ],
     ],
 ]) ;

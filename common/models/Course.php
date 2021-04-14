@@ -241,14 +241,16 @@ class Course extends \yii\db\ActiveRecord
     {
         $classes = Course::find()->getClasses($course_id);
         foreach ($classes as $class) {
-            $event = new Event();
-            $event->course_id = $this->id;
-            $event->title = "class Time";
-            $event->date = $class['date'];
-            $event->day_id = $class['day_id'];
-            $event->from = $class['from'];
-            $event->to = $class['to'];
-            $event->save();
+            if($class['date'] >= time()){
+                $event = new Event();
+                $event->course_id = $this->id;
+                $event->title = "class Time";
+                $event->date = $class['date'];
+                $event->day_id = $class['day_id'];
+                $event->from = $class['from'];
+                $event->to = $class['to'];
+                $event->save();
+            }
         }
     }
 

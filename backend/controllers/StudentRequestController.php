@@ -51,14 +51,12 @@ class StudentRequestController extends Controller
      */
     public function actionView($id)
     {
+        $this->isOwnRequest($id);
         $model = $this->findModel($id);
         $attachments = $model->requestAttachments;
         foreach ($attachments as $attachment) {
             $attachFiles[]= Yii::getAlias($attachment->base_url . '/' . $attachment->path);
         }
-//        var_dump($attachFiles);
-//        die();
-
         return $this->render('view', [
             'model' =>$model,
             'files' =>$attachFiles
@@ -68,6 +66,7 @@ class StudentRequestController extends Controller
 
     public function actionRefuse($id)
     {
+        $this->isOwnRequest($id);
         $model = $this->findModel($id);
         $model->status = $model::REQUEST_REFUSED;
         if($model->save()){
@@ -83,6 +82,7 @@ class StudentRequestController extends Controller
 
     public function actionAccept($id)
     {
+        $this->isOwnRequest($id);
         $model = $this->findModel($id);
         $model->status = $model::REQUEST_ACCEPTED;
         $join = new JoinCourses();
@@ -111,5 +111,14 @@ class StudentRequestController extends Controller
             return $model;
         }
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected function isOwnRequest($id){
+        if (!Yii::$app->user->can('administrator')){
+            $request_id = StudentRequest::find()->getOwnRequestsIds();
+            if (!in_array($id, $request_id)) {
+                throw new \yii\web\HttpException(403, 'You are not allowed to perform this action.');
+            }
+        }
     }
 }

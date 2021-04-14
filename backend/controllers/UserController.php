@@ -44,7 +44,7 @@ class UserController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'title' =>Yii::t('backend', 'All Users') ,
+            'title' => Yii::t('backend', 'All Users'),
         ]);
     }
 
@@ -55,6 +55,7 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        $this->isOwnUser($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -106,11 +107,12 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->isOwnUser($id);
         $model = new UserForm();
         $model->setModel($this->findModel($id));
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->render('view',[
-                'id'=>$id,
+            return $this->render('view', [
+                'id' => $id,
                 'model' => $this->findModel($id),
             ]);
         }
@@ -154,39 +156,53 @@ class UserController extends Controller
 
     public function actionStudent()
     {
-        if(Yii::$app->user->can('administrator') || Yii::$app->user->can('manager')){
+        if (Yii::$app->user->can('administrator') || Yii::$app->user->can('manager')) {
             $view = 'index';
-        }elseif(Yii::$app->user->can('teacher')){
+        } elseif (Yii::$app->user->can('teacher')) {
             $view = '_teacher_index';
-        }else{
+        } else {
             $view = '_teacher_index';
         }
         $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,'student');
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'student');
         return $this->render($view, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'title' =>Yii::t('backend', 'Students') ,
+            'title' => Yii::t('backend', 'Students'),
         ]);
     }
+
     public function actionTeacher()
     {
         $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,'teacher');
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'teacher');
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'title' =>Yii::t('backend', 'Teachers') ,
+            'title' => Yii::t('backend', 'Teachers'),
         ]);
     }
+
     public function actionManager()
     {
         $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,'manager');
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'manager');
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'title' =>Yii::t('backend', 'Managers') ,
+            'title' => Yii::t('backend', 'Managers'),
         ]);
+    }
+
+    protected function isOwnUser($id)
+    {
+
+        if (!Yii::$app->user->can('administrator')) {
+            $ids = User::find()->getManagerPortfolio(Yii::$app->user->id);
+            $user_ids = array_merge($ids['students'],$ids['teachers']);
+            if (!in_array($id, $user_ids)) {
+                throw new \yii\web\HttpException(403, 'You are not allowed to perform this action.');
+            }
+        }
     }
 }

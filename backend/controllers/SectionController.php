@@ -51,6 +51,7 @@ class SectionController extends Controller
      */
     public function actionView($id)
     {
+        $this->isOwnSection($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -126,5 +127,14 @@ class SectionController extends Controller
             return $model;
         }
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected function isOwnSection($id){
+        if (!Yii::$app->user->can('administrator')) {
+            $section = Section::findOne(['manager_id'=>Yii::$app->user->id]);
+            if ($id != $section->id) {
+                throw new \yii\web\HttpException(403, 'You are not allowed to perform this action.');
+            }
+        }
     }
 }
