@@ -168,7 +168,7 @@ class CourseController extends Controller
             if ($model->classes) {
                 CourseClasses::deleteAll(['course_id' => $model->id]);
                 $model->classSchedule($model->classes);
-                \common\models\Event::deleteAll(['>','date',time()]);
+                \common\models\Event::deleteAll(['AND', 'course_id = :cid', ['>', 'date', time()]], [':cid' => $model->id]);
                 $model->setEvents($model->id);
             }
             if($model->tag){
@@ -251,10 +251,18 @@ class CourseController extends Controller
                 'id' => $class->id,
                 'title' =>  $class->title,
                 'start' => date('Y-m-d', $class->date),
-                'url' => Url::to(['event-update', 'id' => $class->id]),
+                'url' => Url::to(['event-update','id' => $class->id]),
 //                'editable' => true,
             ]);
             array_push($events, $event);
+            $homework = new Event([
+                'id' => $class->id,
+                'title' =>  Yii::t('backend','Homework'),
+                'start' => date('Y-m-d', $class->date),
+                'url' => Url::to(['/homework/index', 'event_id' => $class->id]),
+                'color' => '#6AAC11',
+                ]);
+            array_push($events, $homework);
             $title = new Event([
                 'title' =>  date('h:i A', $class->from). ' : '.date('h:i A', $class->to),
                 'start' => date('Y-m-d', $class->date),
