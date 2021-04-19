@@ -15,7 +15,10 @@ $this->params['breadcrumbs'][] = ' / '.$this->title;
 <div class="section-index">
     <div class="card">
         <div class="card-header">
-            <?php echo Html::a(Yii::t('backend','Create Section')
+
+            <?php
+            if(Yii::$app->user->can('administrator'))
+            echo Html::a(Yii::t('backend','Create Section')
                 , ['create'], ['class' => 'btn success-btn']) ?>
         </div>
 
