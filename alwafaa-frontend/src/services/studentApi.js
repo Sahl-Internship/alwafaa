@@ -13,7 +13,7 @@ export const handleEditData = (data) => {
 }
 
 export const handleEditImgs = (data) => {
-  return axios.put('http://endpoints.alwafaa.localhost/profile/upload-picture', data)
+  return axios.patch('http://endpoints.alwafaa.localhost/profile/upload-picture', data)
 }
 
 export const handleJoinCourse = (data) => {
