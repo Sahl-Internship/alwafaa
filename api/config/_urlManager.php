@@ -58,10 +58,11 @@ return [
         ],
 
         ['class' => 'yii\rest\UrlRule', 'controller' => 'join-course',
-            'only' => ['review', 'join-course'],
+            'only' => ['review', 'join-course','upload-homework'],
             'extraPatterns' => [
             'POST review' => 'review',
             'POST join-course' => 'join-course',
+            'POST upload-homework' => 'upload-homework',
         ]
             , 'pluralize' => false
         ],
