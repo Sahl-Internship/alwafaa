@@ -30,6 +30,7 @@ class BackendArabic extends AssetBundle
         '/css/super-dashboard.css',
         'https://use.fontawesome.com/releases/v5.7.2/css/all.css',
         'css/ar/style.css',
+        'css/ar/chat.css',
     ];
     /**
      * @var array
