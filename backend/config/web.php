@@ -2,7 +2,7 @@
 $config = [
     'homeUrl' => Yii::getAlias('@backendUrl'),
     'controllerNamespace' => 'backend\controllers',
-    'defaultRoute' => 'timeline-event/index',
+    'defaultRoute' => 'site/index',
     'components' => [
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -31,6 +31,19 @@ $config = [
         ],
         'system' => [
             'class' => backend\modules\system\Module::class,
+            'as access' => [
+                'class' => 'yii\filters\AccessControl',
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['Administrator'],
+                    ],
+                    [
+                        'allow' => false,
+                        'roles' => ['teacher'],
+                    ]
+                ]
+            ],
         ],
         'translation' => [
             'class' => backend\modules\translation\Module::class,
@@ -39,6 +52,14 @@ $config = [
             'class' => backend\modules\rbac\Module::class,
             'defaultRoute' => 'rbac-auth-item/index',
         ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+            // enter optional module parameters below - only if you need to
+            // use your own export download action or custom translation
+            // message source
+            // 'downloadAction' => 'gridview/export/download',
+            // 'i18n' => []
+        ]
     ],
     'as globalAccess' => [
         'class' => common\behaviors\GlobalAccessBehavior::class,
@@ -67,17 +88,68 @@ $config = [
                 'roles' => ['?'],
             ],
             [
+                'controllers' => ['timeline-event'],
+                'allow' => true,
+                'roles' => ['administrator'],
+
+            ],
+            [
+                'controllers' => ['timeline-event'],
+                'allow' => false,
+                'roles' => ['teacher'],
+
+            ],
+            [
                 'controllers' => ['user'],
                 'allow' => true,
                 'roles' => ['administrator'],
+
             ],
             [
                 'controllers' => ['user'],
                 'allow' => false,
+                'actions' => ['index', 'create', 'update','view','delete','teacher'],
+                'roles' => ['teacher'],
+            ],
+            [
+                'controllers' => ['user'],
+                'allow' => false,
+                'actions' => ['index', 'create','delete'],
+                'roles' => ['manager'],
+            ],
+            [
+                'controllers' => ['section'],
+                'allow' => true,
+                'roles' => ['administrator'],
+
+            ],
+            [
+                'controllers' => ['section'],
+                'allow' => false,
+                'actions' => ['create','delete','update'],
+                'roles' => ['manager'],
+            ],
+            [
+                'controllers' => ['section'],
+                'allow' => false,
+                'actions' => ['create','delete','update','view','index'],
+                'roles' => ['teacher'],
+            ],
+            [
+                'controllers' => ['course'],
+                'allow' => true,
+                'roles' => ['administrator'],
+
+            ],
+            [
+                'controllers' => ['course'],
+                'allow' => false,
+                'actions' => ['create','view','delete'],
+                'roles' => ['teacher'],
             ],
             [
                 'allow' => true,
-                'roles' => ['manager', 'administrator'],
+                'roles' => ['manager', 'administrator','teacher'],
             ],
         ],
     ],

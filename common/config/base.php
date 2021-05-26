@@ -1,6 +1,6 @@
 <?php
 $config = [
-    'name' => 'Yii2 Starter Kit',
+    'name' => 'Iqraa Academy',
     'vendorPath' => __DIR__ . '/../../vendor',
     'extensions' => require(__DIR__ . '/../../vendor/yiisoft/extensions.php'),
     'sourceLanguage' => 'en-US',
@@ -50,11 +50,41 @@ $config = [
 
         'mailer' => [
             'class' => yii\swiftmailer\Mailer::class,
+            'viewPath'=>Yii::getAlias('@frontend') . '/mail',
             'messageConfig' => [
                 'charset' => 'UTF-8',
                 'from' => env('ADMIN_EMAIL')
             ]
         ],
+
+//        'mail' => [
+//            'class' => 'yii\swiftmailer\Mailer',
+//            'transport' => [
+//                'class' => 'Swift_SmtpTransport',
+//                'host' => 'smtp.mailtrap.io',
+//                'username' => 'b59ad7fa075e5f',
+//                'password' => '309659d7bd3270',
+//                'port' => '2525',
+//                'encryption' => 'tls',
+//            ],
+//        ],
+
+//        'mailer' => [
+//            'class' => 'yii\swiftmailer\Mailer',
+//            'viewPath' => '@frontend/mail',
+//            'transport' => [
+//                'class' => 'Swift_SmtpTransport',
+//                'host' => 'smtp.mailtrap.io',
+//                'username' => 'b59ad7fa075e5f',
+//                'password' => '309659d7bd3270',
+//                'port' => '2525',
+//                'encryption' => 'tls',
+//            ],
+//            // send all mails to a file by default. You have to set
+//            // 'useFileTransport' to false and configure a transport
+//            // for the mailer to send real emails.
+//            'useFileTransport' => false,
+//        ],
 
         'db' => [
             'class' => yii\db\Connection::class,
@@ -157,15 +187,8 @@ $config = [
         'robotEmail' => env('ROBOT_EMAIL'),
         'availableLocales' => [
             'en-US' => 'English (US)',
-            'ru-RU' => 'Русский (РФ)',
-            'uk-UA' => 'Українська (Україна)',
-            'es' => 'Español',
-            'fr' => 'Français',
-            'vi' => 'Tiếng Việt',
-            'zh-CN' => '简体中文',
-            'pl-PL' => 'Polski (PL)',
-            'id-ID' => 'Indonesian (Bahasa)',
-            'hu-HU' => 'Magyar',
+            'ar-AR' => 'Arabic (EG)',
+
         ],
         'bsVersion' => '4.x', // bootstrap version
     ],
@@ -179,7 +202,15 @@ if (YII_ENV_PROD) {
         'message' => ['from' => env('ROBOT_EMAIL'), 'to' => env('ADMIN_EMAIL')]
     ];
 }
-
+//always send emails
+$config['components']['mailer']['transport'] = [
+    'class' => 'Swift_SmtpTransport',
+    'host' => 'smtp.gmail.com',
+    'port' => '587',
+    'username' => 'tvvunion@gmail.com',
+    'password' => 'Door@#2020',
+    'encryption' => 'tls',
+];
 if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
@@ -189,11 +220,12 @@ if (YII_ENV_DEV) {
     $config['components']['cache'] = [
         'class' => yii\caching\DummyCache::class
     ];
-    $config['components']['mailer']['transport'] = [
-        'class' => 'Swift_SmtpTransport',
-        'host' => env('SMTP_HOST'),
-        'port' => env('SMTP_PORT'),
-    ];
+
+//    $config['components']['mailer']['transport'] = [
+//        'class' => 'Swift_SmtpTransport',
+//        'host' => env('SMTP_HOST'),
+//        'port' => env('SMTP_PORT'),
+//    ];
 }
 
 return $config;

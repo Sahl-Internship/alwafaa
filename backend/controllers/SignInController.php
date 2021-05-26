@@ -10,6 +10,7 @@ namespace backend\controllers;
 
 use backend\models\AccountForm;
 use backend\models\LoginForm;
+use common\models\Countries;
 use Intervention\Image\ImageManagerStatic;
 use trntv\filekit\actions\DeleteAction;
 use trntv\filekit\actions\UploadAction;
@@ -81,6 +82,7 @@ class SignInController extends Controller
     public function actionProfile()
     {
         $model = Yii::$app->user->identity->userProfile;
+        $countries = Countries::find()->all();
         if ($model->load($_POST) && $model->save()) {
             Yii::$app->session->setFlash('alert', [
                 'options' => ['class' => 'alert-success'],
@@ -88,7 +90,10 @@ class SignInController extends Controller
             ]);
             return $this->refresh();
         }
-        return $this->render('profile', ['model' => $model]);
+        return $this->render('profile', [
+            'model' => $model,
+            'countries' => $model,
+        ]);
     }
 
     public function actionAccount()

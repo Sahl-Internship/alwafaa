@@ -1,8 +1,6 @@
 <?php
 
-use common\grid\EnumColumn;
 use common\models\User;
-use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use rmrevin\yii\fontawesome\FAS;
@@ -11,16 +9,34 @@ use rmrevin\yii\fontawesome\FAS;
  * @var yii\web\View $this
  * @var backend\models\search\UserSearch $searchModel
  * @var yii\data\ActiveDataProvider $dataProvider
+ * @var $title
  */
-$this->title = Yii::t('backend', 'Users');
+$this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
+?>
+<?php
+if(Yii::$app->controller->action->id === 'student'){
+    $createMsg = 'Create New Student';
+}elseif(Yii::$app->controller->action->id === 'teacher'){
+    $createMsg = 'Create New Teacher';
+}elseif(Yii::$app->controller->action->id === 'manager'){
+    $createMsg = 'Create New Manager';
+}else{
+    $createMsg = 'Create New User';
+}
+
 ?>
 
 <div class="card">
     <div class="card-header">
-        <?php echo Html::a(FAS::icon('user-plus').' '.Yii::t('backend', 'Add New {modelClass}', [
-            'modelClass' => 'User',
-        ]), ['create'], ['class' => 'btn btn-success']) ?>
+
+        <?php
+        if(Yii::$app->controller->id === 'user' && Yii::$app->controller->action->id === 'index') {
+            echo Html::a(FAS::icon('user-plus').' '.Yii::t('backend', $createMsg, [
+                    'modelClass' => 'User',
+                ]), ['create'], ['class' => 'btn success-btn']);
+        }
+         ?>
     </div>
 
     <div class="card-body p-0">
@@ -39,49 +55,36 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'id',
                     'options' => ['style' => 'width: 5%'],
                 ],
-                'username',
+                'fullName',
                 'email:email',
                 [
-                    'class' => EnumColumn::class,
-                    'attribute' => 'status',
-                    'enum' => User::statuses(),
-                    'filter' => User::statuses()
-                ],
-                [
-                    'attribute' => 'created_at',
-                    'format' => 'datetime',
-                    'filter' => DatePicker::widget([
-                        'model' => $searchModel,
-                        'attribute' => 'created_at',
-                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
-                        'pluginOptions' => [
-                            'format' => 'dd-mm-yyyy',
-                            'showMeridian' => true,
-                            'todayBtn' => true,
-                            'endDate' => '0d',
-                        ]
+                    'attribute'=>'status',
+                    'value'=>function($data){
+                        $status = User::statuses();
+                        return $status[$data->status];
+                    },
+                    'filter'=>Html::activeDropDownList($searchModel,'status',\common\models\User::statuses(),[
+                        'class'=>'form-control',
+                        'prompt'=>Yii::t('backend','All')
                     ]),
                 ],
                 [
-                    'attribute' => 'logged_at',
-                    'format' => 'datetime',
-                    'filter' => DatePicker::widget([
-                        'model' => $searchModel,
-                        'attribute' => 'logged_at',
-                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
-                        'pluginOptions' => [
-                            'format' => 'dd-mm-yyyy',
-                            'showMeridian' => true,
-                            'todayBtn' => true,
-                            'endDate' => '0d',
-                        ]
-                    ]),
+                    'attribute'=>'country',
+                    'label'=>Yii::t('backend','Country'),
+                    'value'=>function($data){
+                        return $data->userProfile->country;
+                    },
                 ],
-                // 'updated_at',
-
+                [
+                    'attribute'=>'phone',
+                    'label'=>Yii::t('backend','Phone'),
+                    'value'=>function($data){
+                        return $data->userProfile->phone;
+                    },
+                ],
                 [
                     'class' => \common\widgets\ActionColumn::class,
-                    'template' => '{login} {view} {update} {delete}',
+                    'template' => '{view} {update} {delete}',
                     'options' => ['style' => 'width: 140px'],
                     'buttons' => [
                         'login' => function ($url) {

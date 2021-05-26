@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\modules\rbac\models\RbacAuthAssignment;
 use common\commands\AddToTimelineCommand;
 use common\models\query\UserQuery;
 use Yii;
@@ -33,11 +34,12 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public $profile;
     const STATUS_NOT_ACTIVE = 1;
     const STATUS_ACTIVE = 2;
     const STATUS_DELETED = 3;
 
-    const ROLE_USER = 'user';
+    const ROLE_STUDENT = 'student';
     const ROLE_MANAGER = 'manager';
     const ROLE_ADMINISTRATOR = 'administrator';
     const ROLE_TEACHER = 'teacher';
@@ -60,8 +62,8 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function init()
     {
-        $this->on(self::EVENT_AFTER_INSERT, [$this, 'notifySignup']);
-        $this->on(self::EVENT_AFTER_DELETE, [$this, 'notifyDeletion']);
+//        $this->on(self::EVENT_AFTER_INSERT, [$this, 'notifySignup']);
+//        $this->on(self::EVENT_AFTER_DELETE, [$this, 'notifyDeletion']);
         parent::init();
     }
 
@@ -170,11 +172,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email'], 'unique'],
+            [['username'], 'unique'],
+            [['email'], 'unique'],
             [['email'], 'email'],
             ['status', 'default', 'value' => self::STATUS_NOT_ACTIVE],
             ['status', 'in', 'range' => array_keys(self::statuses())],
-            [['username'], 'filter', 'filter' => '\yii\helpers\Html::encode']
+            [['username'], 'filter', 'filter' => '\yii\helpers\Html::encode'],
+            [['password_hash'],'string']
         ];
     }
 
@@ -201,6 +205,7 @@ class User extends ActiveRecord implements IdentityInterface
             'email' => Yii::t('common', 'E-mail'),
             'status' => Yii::t('common', 'Status'),
             'access_token' => Yii::t('common', 'API access token'),
+            'auth_key' => Yii::t('common', 'Auth Key'),
             'created_at' => Yii::t('common', 'Created at'),
             'updated_at' => Yii::t('common', 'Updated at'),
             'logged_at' => Yii::t('common', 'Last login'),
@@ -213,6 +218,16 @@ class User extends ActiveRecord implements IdentityInterface
     public function getUserProfile()
     {
         return $this->hasOne(UserProfile::class, ['user_id' => 'id']);
+    }
+
+    public function getHomework()
+    {
+        return $this->hasMany(Homework::class,['created_by'=>'id']);
+    }
+
+    public function getCourses()
+    {
+        return $this->hasMany(Course::class, ['teacher_id' => 'id']);
     }
 
     /**
@@ -260,7 +275,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->refresh();
         Yii::$app->commandBus->handle(new AddToTimelineCommand([
-            'category' => 'user',
+            'category' => 'student',
             'event' => 'signup',
             'data' => [
                 'public_identity' => $this->getPublicIdentity(),
@@ -275,14 +290,14 @@ class User extends ActiveRecord implements IdentityInterface
         $this->trigger(self::EVENT_AFTER_SIGNUP);
         // Default role
         $auth = Yii::$app->authManager;
-        $auth->assign($auth->getRole(User::ROLE_USER), $this->getId());
+        $auth->assign($auth->getRole(User::ROLE_STUDENT), $this->getId());
     }
 
     public function TeacherSignup(array $profileData = [])
     {
         $this->refresh();
         Yii::$app->commandBus->handle(new AddToTimelineCommand([
-            'category' => 'user',
+            'category' => 'teacher',
             'event' => 'signup',
             'data' => [
                 'public_identity' => $this->getPublicIdentity(),
@@ -302,9 +317,10 @@ class User extends ActiveRecord implements IdentityInterface
 //        die;
 
         //add user based on the comming request role
-        // $auth->assign($auth->getRole(User::ROLE_USER), $this->getId());
+        // $auth->assign($auth->getRole(User::ROLE_STUDENT), $this->getId());
         $auth->assign($auth->getRole(User::ROLE_TEACHER), $this->getId());
     }
+
 
     public function notifyDeletion($event)
     {
@@ -340,4 +356,32 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->getPrimaryKey();
     }
+    public function getFullName()
+    {
+        if ($this->userProfile->firstname || $this->userProfile->lastname) {
+            return implode(' ', [$this->userProfile->firstname, $this->userProfile->lastname]);
+        }
+        return null;
+    }
+
+    public function userRole()
+    {
+        return $this->hasOne(RbacAuthAssignment::class, ['user_id' => 'id']);
+    }
+
+    public function getTeacher()
+    {
+        $role_user = RbacAuthAssignment::find()->andWhere(['item_name' => 'teacher'])->all();
+        $teacher_ids = [];
+        foreach ($role_user as $index =>$value){
+            $id = $value['user_id'];
+            array_push($teacher_ids,$id);
+        }
+       return $this::findBySql("SELECT * FROM user WHERE id IN (" . implode(',',array_map('intval',$teacher_ids)) . ")")->all();
+
+    }
+
+
+
+
 }

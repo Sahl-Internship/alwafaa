@@ -27,7 +27,7 @@
     "source": "https://github.com/yii2-starter-kit/yii2-starter-kit"
   },
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.2.5",
     "ext-intl": "*",
     "ext-gd": "*",
     "yiisoft/yii2": "^2.0.13",
@@ -58,7 +58,16 @@
     "yii2mod/yii2-swagger": "^1.1",
     "rmrevin/yii2-fontawesome": "^3.4",
     "kartik-v/yii2-widgets": "^3.4",
-    "yiisoft/yii2-composer": "^2.0"
+    "yiisoft/yii2-composer": "^2.0",
+    "unclead/yii2-multiple-input": "~2.0",
+    "kartik-v/yii2-grid": "dev-master",
+    "kartik-v/yii2-widget-timepicker": "dev-master",
+    "kartik-v/yii2-field-range": "*",
+    "ext-json": "*",
+    "edofre/yii2-fullcalendar": "V1.0.11",
+    "edofre/yii2-fullcalendar-scheduler": "V1.1.12",
+    "kartik-v/yii2-widget-select2": "dev-master",
+    "kreait/firebase-php": "^5.17"
   },
   "require-dev": {
     "yiisoft/yii2-gii": "^2.0.0",

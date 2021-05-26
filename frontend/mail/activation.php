@@ -3,5 +3,26 @@
  * @var $this \yii\web\View
  * @var $url \common\models\User
  */
+
+use yii\bootstrap4\Html;
+
 ?>
-<?php echo Yii::t('frontend', 'Your activation link: {url}', ['url' => Yii::$app->formatter->asUrl($url)]) ?>
+<?php //echo Yii::t('frontend', 'Your activation link: {url}', ['url' => Yii::$app->formatter->asUrl($url)]) ?>
+<?php //echo Yii::t('frontend', 'Your activation link: {url}', ['url' => $url]) ?>
+<?php //echo Yii::$app->formatter->asUrl($url) ?>
+<?php //echo $url ?>
+
+
+
+        <div class="content">
+            <h4>تأكيد البريد الإلكتروني</h4>
+            <h5> اهلا بك في اكاديمية اقرأ</h5>
+            <p>من فضلك اضغط على الزر التالي لتاكيد بريدك الإلكتروني</p>
+            <div class="link"><a href=" <?php echo substr($url,1) ?>">تأكيد</a></div>
+            <p> إذا لم تقم بالتسجيل في اكاديمية اقرأ من فضلك تجاهل هذا البريد الإلكتروني</p>
+            <p>شكراً لك.</p>
+            <hr>
+            <p class="p-footer">فريق دعم اقرأ <span>&copy;٢٠٢١</span></p>
+        </div>
+
+

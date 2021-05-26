@@ -1,107 +1,71 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
+    <the-header
+      v-if="!checkHomeRoute"
+      @ToggleSearchDialog="handleToggleSearch"
+    ></the-header>
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+    <search-dialog
+      v-if="searchMode"
+      class="full-width absolute search-dialog"
+      @closeDialog="handleToggleSearch"
+    ></search-dialog>
 
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
+    <q-page-container :class="searchMode ? 'dimmed' : ''">
       <router-view />
     </q-page-container>
+
+    <q-dialog v-model="editMode" full-width>
+      <setting-dialog></setting-dialog>
+    </q-dialog>
+
+    <the-footer></the-footer>
   </q-layout>
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksData = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
+import TheHeader from '../components/layout/TheHeader'
+import TheFooter from '../components/layout/TheFooter'
+import SettingDialog from '../components/layout/SettingDialog'
+import SearchDialog from '../components/layout/SearchDialog'
 
 export default {
   name: 'MainLayout',
-  components: { EssentialLink },
+  components: {
+    TheHeader,
+    TheFooter,
+    SettingDialog,
+    SearchDialog
+  },
   data () {
     return {
-      leftDrawerOpen: false,
-      essentialLinks: linksData
+      searchMode: false
+    }
+  },
+  computed: {
+    checkHomeRoute () {
+      return this.$route.path === '/' || this.$route.path === '/home'
+    },
+    editMode () {
+      return this.$store.getters['student/checkEditMode']
+    }
+  },
+  methods: {
+    handleToggleSearch () {
+      this.searchMode = !this.searchMode
+    }
+  },
+  watch: {
+    $route () {
+      this.searchMode = false
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.search-dialog {
+  z-index: 500;
+  top:68px;
+}
+</style>

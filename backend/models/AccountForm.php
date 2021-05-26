@@ -22,7 +22,7 @@ class AccountForm extends Model
     {
         return [
             ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'required'],
+//            ['username', 'required'],
             ['username', 'unique',
                 'targetClass' => '\common\models\User',
                 'message' => Yii::t('backend', 'This username has already been taken.'),

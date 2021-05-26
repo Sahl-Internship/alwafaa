@@ -1,1 +1,15 @@
 // app global css in SCSS form
+
+
+body {
+  font-family: "Almarai", sans-serif;
+}
+
+body .q-menu {
+  &::v-deep {
+    margin-top: 20px;
+  }
+}
+
+@import 'node_modules/slick-carousel/slick/slick';
+@import "./node_modules/slither-slider/plugin-dist/slither-slider"

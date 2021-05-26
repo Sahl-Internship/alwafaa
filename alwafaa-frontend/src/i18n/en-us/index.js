@@ -1,7 +1,11 @@
-// This is just an example,
-// so you can safely delete all default props below
+import authEn from 'src/modules/authentication/i18n/en'
+import studentEn from 'src/modules/student/i18n/en'
+import HomeEn from 'src/modules/home/i18n/en'
+import coursesEn from 'src/modules/courses/i18n/en'
 
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  ...authEn,
+  ...studentEn,
+  ...HomeEn,
+  ...coursesEn
 }

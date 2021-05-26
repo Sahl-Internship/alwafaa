@@ -1,0 +1,597 @@
+body {
+  background-color: #f4f6f9;
+}
+
+/* Start Main Section Nav && Sidebar */
+.btn,
+.btn-primary {
+    border-radius: 30px;
+}
+
+button:focus,
+button:hover {
+    outline: none;
+}
+
+body:not(.sidebar-mini-md) nav.main-header {
+    /* background-color: #13A8E5; */
+    background-color: #fff;
+    width: 100%;
+    position:sticky;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    height: 58px;
+}
+
+.second-nav {
+    margin-left: auto;
+}
+
+nav.main-header .navbar-nav .nav-item a:hover,
+nav.main-header .navbar-nav .nav-item a:focus {
+    /* background-color: #13A8E5;
+    border-color: #13A8E5; */
+    background-color: #fff;
+}
+
+.user-name{
+  color: #383d47;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+nav.main-header .navbar-nav .nav-item .fa-bell {
+  color: #383d47;
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+nav.main-header .navbar-nav .nav-item .fa-bars {
+  color: #383d47;
+  font-size: 20px;
+  /* margin-top: 5px; */
+}
+
+nav.main-header .navbar-nav .nav-item .navbar-badge {
+  background-color: #26c5f9;
+}
+
+.nav-logo {
+  width: 50px;
+}
+
+.body-content {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+/* Start Sidebar */
+.body-content .custom-sidebar {
+  background-color: #fff !important;
+  height: 100% !important;
+  position: absolute !important;
+  /* margin-top: 58px !important; */
+  top: 0 !important;
+  z-index: 1038 !important;
+  padding-top: 0 !important;
+  overflow-y: hidden !important;
+}
+
+.display-sidebar {
+  display: block !important;
+}
+
+.hide-sidebar {
+  display: none !important;
+}
+
+
+.body-content .custom-sidebar .sidebar {
+  height: 100%;
+}
+
+:not(.layout-fixed) aside.main-sidebar {
+  /* background-color: #fff;
+  height: 100%; */
+  /* min-height: 100%; */
+  /* position: absolute;
+  margin-top: 58px;
+  top: 0;
+  z-index: 1038;
+  padding-top: 0 !important;
+  overflow: hidden; */
+}
+
+:not(.layout-fixed) .main-sidebar {
+  /* min-height: inherit !important; */
+}
+
+aside.main-sidebar {
+    /* background-color: #13A8E5; */
+    /* background-color: #fff;
+    overflow-y: hidden;
+    z-index: 1038;
+    margin-top: 58px;
+    padding-top: 0 !important; */
+}
+
+aside[class*=sidebar-dark] .user-panel {
+    border-bottom: none !important;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.sidebar .user-panel .info>a {
+    color: #4f5564;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sidebar .nav .nav-header {
+  font-size: larger;
+  font-weight: bold;
+  color: #b3b3b3;
+  text-align: left;
+  border-top: solid 1px #d9d9d9;
+  margin: 0;
+  padding-top: 10px;
+}
+
+.sidebar .nav>li {
+    color: #383d47;
+}
+
+li p {
+    color: #383d47;
+    padding-right: 10px;
+}
+
+.nav-sidebar .nav-item>.nav-link {
+    position: relative;
+    width: 230px;
+
+}
+
+.sidebar nav .nav-sidebar .nav-item .nav-link:hover,
+.sidebar nav .nav-sidebar .nav-item .nav-link.active {
+    background-color: #d9d9d9;
+}
+
+.sidebar .nav-item i {
+    color: #26c5f9;
+}
+
+.sidebar .nav-item p>span {
+    background-color: #fff;
+    color: #000;
+}
+
+/* End Sidebar */
+
+
+
+.card-body {
+    padding-bottom: 0px !important;
+}
+
+.navbar-collapse .navbar-nav .dropdown-menu .user-header {
+    background-color: #13A8E5 !important;
+}
+
+.dropdown-menu .user-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown-menu .user-footer a,
+.dropdown-menu .user-footer a:hover {
+    outline: none;
+    border-radius: 25px;
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+.card-footer {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+.card-footer button.btn-primary,
+.card-footer button.btn-primary:focus {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    padding: 7px 30px;
+    text-align: center;
+}
+
+/* .card-footer button.btn-primary:hover,
+.card-footer button.btn-primary:focus,
+.card-footer button.btn-primary:active {
+    background-color: #383d47;
+    border-color: #383d47;
+} */
+
+
+.content-wrapper {
+  /* height: 100%; */
+  /* padding-bottom: 70px !important; */
+  min-height: 900px !important;
+}
+
+.content-header {
+  width: 90%;
+  margin: auto;
+}
+
+.content {
+  width: 90%;
+  box-shadow: 0px 3px 8px rgb(100,100,100);
+  border-radius: 4px;
+  /* padding-bottom: 30px; */
+  padding: 0 !important;
+  margin: auto !important;
+  margin-bottom: 20px !important;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.container-fluid .breadcrumb {
+  float: right;
+}
+
+.box-body {
+  padding: 0 !important;
+}
+
+.box-body form .card {
+  margin: 0 ;
+}
+
+.card {
+  margin-bottom: 0 !important;
+}
+
+
+.content div.alert-success {
+    background-color: #636e7d !important;
+    border-color: #383d47;
+}
+
+.container-fluid .box {
+  border-top: solid 3px #26c5f9 !important;
+}
+
+.container-fluid button.close {
+    color: #fff;
+    opacity: 0.8;
+}
+
+.form-group input[type=file]::-webkit-file-upload-button {
+    border: 1px solid #13A8E5;
+    background-color: #13A8E5;
+    color: #fff;
+
+    border-radius: 7px;
+    outline: none;
+}
+
+.form-group input[type=file]::-webkit-file-upload-button:hover {
+    background-color: #383d47;
+}
+
+
+/* End Main Section */
+/* Start Timeline Event */
+.timeline {
+    width: 550px;
+}
+
+.content div.timeline>div>.timeline-item {
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+    border-radius: .25rem;
+    background: #fff;
+
+    width: 500px;
+}
+
+.timeline .time-label>span.bg-blue {
+    background-color: #2acc7b !important;
+}
+
+.content div.timeline>div>.fas {
+    border-radius: 50%;
+    font-size: 15px;
+    line-height: 30px;
+    position: absolute;
+    text-align: center;
+    background: #636e7d !important;
+    width: 30px;
+}
+
+/* End Timeline */
+/* Start All Users */
+.content .box-body .success-btn,
+.primary-btn {
+    color: #fff;
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    box-shadow: none;
+    border-radius: 25px;
+}
+
+.content .table>thead>tr>th {
+    text-align: center;
+    background-color: #13A8E5;
+    color: #fff;
+}
+
+.content .table>thead>tr>th a {
+    color: #fff;
+}
+
+.content .table-bordered>tbody>tr>td {
+    text-align: center;
+}
+
+.submit-btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    color: #fff;
+    padding: 7px 30px;
+}
+
+.submit-btn:hover {
+    background-color: #2acc7b;
+}
+
+/* user creation */
+.user-create .card-footer .submit-btn {
+    background-color: #2acc7b !important;
+    border-color: #2acc7b !important;
+    padding: 7px 30px;
+}
+
+/* End All Users */
+
+
+
+/* Start Sections */
+.section-create button.btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    color: #fff;
+    font-weight: bold;
+    padding: 7px 30px;
+}
+
+/* section view */
+.section-view .primary-btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    color: #fff;
+    padding: 7px 30px;
+}
+
+.section-create .card .primary-btn {
+    padding: 7px 30px;
+    outline: none;
+    border: none;
+}
+
+.section-view .btn-danger {
+    color: #fff;
+    padding: 7px 30px;
+}
+
+/* End Sections */
+/* Start Courses */
+.course-index .index-success-btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    color: #fff;
+    font-weight: bold;
+    padding: 7px 30px;
+}
+
+/* * * Course Creation * * */
+
+.course-create .card-footer .success-btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    padding: 7px 60px;
+    font-weight: bold;
+}
+
+/*     Course view */
+.course-view .view-btn {
+    background-color: #2acc7b;
+    border-color: #2acc7b;
+    padding: 7px 30px;
+    color: #fff;
+}
+
+div.datepicker {
+    z-index: 1100 !important;
+}
+
+/* End Courses */
+
+
+/* start user profile */
+.user-avatar label {
+  text-align: left;
+  margin: 0;
+  height: 20px;
+}
+
+.user-avatar div {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+/* end user profile */
+
+
+/* Start Footer */
+
+.main-footer {
+  /* position: sticky; */
+  margin: 0 !important;
+  /* padding: 0 !important;
+  bottom: 0; */
+  height: 64px;
+  /* z-index: 2000; */
+}
+
+a.back-to-top {
+    background-color: #13A8E5;
+    border-color: #13A8E5;
+    bottom: 0.1rem;
+    border-radius: 25px;
+}
+
+/* End Footer  */
+
+
+/* start login page */
+.login-container {
+  width: 100%;
+  height: inherit;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.logo-section {
+  height: 100%;
+  background-image: url('/img/second-section-auth.png'), linear-gradient(#26c5f9, #51e69b);
+  background-size: cover;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.auth-page-img {
+  width: 40%;
+}
+
+.form-section {
+  height: 100%;
+  background-color: #fff;
+  /* margin-left: 12px; */
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.form-section .title-separator {
+  border-top: solid 2px #f2f2f2;
+  width: 50px;
+}
+
+.form-section .login-logo h2 {
+  font-weight: bold;
+  color: #383d47;
+}
+
+#loginform-username,
+#loginform-password {
+  background-color: #f2f2f2;
+  height: 44px;
+}
+
+.form-section .login-box-msg {
+  margin-top: 35px;
+  color: #636e7d;
+}
+
+.form-section .custom-control-label {
+  color: #636e7d;
+  font-weight: normal !important;
+}
+
+.custom-control-label::after {
+  /* color: #51e69b; */
+}
+
+.form-section form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-section .form-group {
+  width: 100%;
+}
+
+.form-section button {
+  height: 40px;
+  width: 50%;
+  background-color: #51e69b;
+  border: none;
+  font-size: larger;
+  margin-top: 30px;
+  color: #383d47;
+}
+
+.form-section button:hover,
+.form-section button:focus {
+  background-color: #51e69b;
+}
+
+@media (max-width: 600px) {
+  .logo-section {
+    display: none;
+  }
+}
+
+/* end login page */
+
+
+/* start teacher main page */
+.courses-info {
+  padding: 30px 20px !important;
+}
+
+.courses-info .card-body{
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.courses-info .info-title{
+  color: #636e7d !important;
+  margin-bottom: 10px;
+}
+
+.courses-info .card-icon{
+  color: #26c5f9;
+  margin-left: 10px;
+}
+
+.schedule-card {
+  margin-top: 50px !important;
+}
+/* end teacher main page */
+
+
+/* start teacher course page  */
+.course-attachment-section .field-event-attachments {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-attachment-section label {
+  text-align: left;
+}
+
+.course-attachment-section .upload-kit {
+  display: flex;
+  flex-direction: row-reverse;
+}
+/* end teacher course page  */
